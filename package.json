@@ -1,0 +1,49 @@
+{
+  "name": "flash",
+  "version": "1.0.0",
+  "description": "Rapid Prototyping",
+  "repository": "https://bitbucket.org/branclon/flash",
+  "main": "main.js",
+  "dependencies": {
+    "extract-text-webpack-plugin": "^3.0.1",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "webpack": "^3.7.1",
+    "webpack-dev-server": "^2.9.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-dynamic-import-webpack": "^1.0.1",
+    "babel-preset-es2015": "^6.18.0",
+    "browser-sync": "^2.18.13",
+    "css-loader": "^0.26.1",
+    "del": "^3.0.0",
+    "eslint": "^3.19.0",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-html-extend": "^1.1.6",
+    "gulp-inline-source": "^3.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-svgstore": "^6.1.0",
+    "node-sass": "^4.0.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.13.1",
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.5.0",
+    "webpack-stream": "^4.0.0"
+  },
+  "scripts": {
+    "app": "electron .",
+    "build-app": "NODE_ENV='production' webpack -p --optimize-minimize",
+    "build": "./node_modules/.bin/gulp build",
+    "start": "./node_modules/.bin/gulp serve",
+    "start-app": "./node_modules/.bin/webpack-dev-server --open --inline -d"
+  },
+  "author": "Brandon Pereira",
+  "license": "ISC"
+}

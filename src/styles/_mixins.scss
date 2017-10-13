@@ -1,0 +1,37 @@
+/**
+ * Flash mixins to be used in your project.
+ */
+
+/*
+ * Mixins for screen sizes.
+ * @include medium() {property: value} to add a property with a value to medium, or
+ * @include large() {property: value} to do the same for large.
+ * Please design mobile first.
+ */
+@mixin medium {
+  @media only screen and (min-width: 40em) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media only screen and (min-width: 60em) {
+    @content;
+  }
+}
+
+/**
+ * Map Deep Get function to get n level deep from a
+ * object. 
+ * 
+ * @author Hugo Giraudel
+ * @param {Map} $map - Map
+ * @param {Arglist} $keys - Key chain
+ * @return {*} - Desired value
+ */
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+    @return $map;
+}
