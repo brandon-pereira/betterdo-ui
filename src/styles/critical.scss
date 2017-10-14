@@ -4,3 +4,6 @@
 body {
   background: map-deep-get($config, body, background);
 }
+svg {
+  height: 100px;
+}
