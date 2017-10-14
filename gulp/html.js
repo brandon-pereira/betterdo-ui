@@ -1,12 +1,14 @@
 module.exports = function(config, gulp) {
 	
-	const extender = require('gulp-html-extend');
+	const nunjucks = require('gulp-nunjucks-render');
 	const inlinesource = require('gulp-inline-source');
 	const browserSync = require('browser-sync').get("server");
 	
 	gulp.task('html', () =>
 		gulp.src(config.paths.src.html)
-			.pipe(extender())
+			.pipe(nunjucks({
+				path: ['./src']
+			}))
 			.pipe(inlinesource({
 				rootpath: config.paths.dist
 			}))
