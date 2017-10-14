@@ -1,13 +1,6 @@
-html.app {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-	body {
-		min-height: 100%;
-		margin: 0;
-		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;  
-	}
+@import 'mixins';
+@import 'config';
+
+body {
+  background: map-deep-get($config, body, background);
 }
