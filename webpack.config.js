@@ -1,6 +1,5 @@
 const config = require('./config');
 const webpack = require('webpack');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
 	entry: config.paths.src.scripts,
@@ -31,10 +30,6 @@ module.exports = {
 			},
 			{
 				test: /\.scss$/,
-				// use: ExtractTextPlugin.extract({
-				// 	fallback: 'style-loader',
-				// 	use: ['css-loader', 'sass-loader']
-				// })
 				use: ["style-loader", "css-loader", "sass-loader"]
 			}
 		]
@@ -45,9 +40,8 @@ module.exports = {
 			sourceMap: true
 		}),
 		new webpack.optimize.MinChunkSizePlugin({
-			minChunkSize: 50000
+			minChunkSize: 10000
 		}),
     new webpack.optimize.ModuleConcatenationPlugin(), // scope hoisting
-    // new ExtractTextPlugin('critical.css')
 	]
 }
