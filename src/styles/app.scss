@@ -12,6 +12,7 @@ html.app {
 		display: flex;
 		align-items: center;
 		justify-content: center;  
+    background: map-deep-get($config, body, background);
 	}
 }
 

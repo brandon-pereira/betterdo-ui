@@ -8,10 +8,13 @@ module.exports = function(config, gulp) {
 	gulp.task('html', () =>
 		gulp.src(config.paths.src.html)
 			.pipe(nunjucks({
-				path: ['./src']
-			}))
+				path: ['./src/html', './src']
+			})).on('error', function(err) {
+				console.log('\x1b[31m', 'nunjucksRender error: ', err.message, '\x1b[0m');
+				this.emit('end');
+			})
 			.pipe(inlinesource({
-				rootpath: config.paths.dist
+				rootpath: config.paths.src.root
 			}))
 			.pipe(htmlmin({collapseWhitespace: true}))
 			.pipe(gulp.dest(config.paths.dist))
