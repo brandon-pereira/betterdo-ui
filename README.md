@@ -18,7 +18,7 @@ The benefit to the three files is page load. That's the main goal of Flash.
 
 
 # TODO
-- Critical css
-- JS can import css OR index OR critical
-- minify html
-- move to better html templater
+- Generate app manifest
+- Rename `media` to `static`
+- Add more useful sass mixins
+- Unit Testing (not sure if this should be up to the consumable to implement)
