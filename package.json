@@ -32,6 +32,9 @@
     "start": "./node_modules/.bin/gulp serve",
     "test": "./node_modules/.bin/eslint test"
   },
+  "engines": {
+    "node": ">=8.7.0"
+  },
   "author": "Brandon Pereira",
   "license": "ISC"
 }
