@@ -35,3 +35,60 @@
     }
     @return $map;
 }
+
+/**
+ * @author Eduardo Boucas (@eduardoboucas)
+ * @param {Number}   $responsive  - Viewport-based size
+ * @param {Number}   $min         - Minimum font size (px)
+ * @param {Number}   $max         - Maximum font size (px)
+ *                                 (optional)
+ * @param {Number}   $fallback    - Fallback for viewport-
+ *                                 based units (optional)
+ * @example scss - 5vw font size (with 50px fallback), 
+ *                minumum of 35px and maximum of 150px
+ * @include responsive-font(5vw, 35px, 150px, 50px);
+ */
+@mixin responsive-font($responsive, $min, $max: false, $fallback: false) {
+  $responsive-unitless: $responsive / ($responsive - $responsive + 1);
+  $dimension: if(unit($responsive) == 'vh', 'height', 'width');
+  $min-breakpoint: $min / $responsive-unitless * 100;
+  
+  @media (max-#{$dimension}: #{$min-breakpoint}) {
+    font-size: $min;
+  }
+  
+  @if $max {
+    $max-breakpoint: $max / $responsive-unitless * 100;
+    
+    @media (min-#{$dimension}: #{$max-breakpoint}) {
+      font-size: $max;
+    }
+  }
+  
+  @if $fallback {
+    font-size: $fallback;
+  }
+  
+  font-size: $responsive;
+}
+
+/**
+ * Function to make an element maintain an aspect ratio.
+ * Ex @include aspect-ratio(1,1) would make a square box.
+ */
+ @mixin aspect-ratio($width, $height) {
+   position: relative;
+   &:before {
+     display: block;
+     content: "";
+     width: 100%;
+     padding-top: ($height / $width) * 100%;
+   }
+   > .content {
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+   }
+ }
