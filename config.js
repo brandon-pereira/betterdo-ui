@@ -5,14 +5,14 @@ module.exports = {
 			scripts: './src/scripts/app.js',
 			html: './src/html/*.html',
 			svg: './src/svgs/*.svg',
-			media: './src/media/**/*'
+			static: './src/static/**/*'
 		},
 		dist: './dist',
 		watch: {
 			scripts: ['./src/scripts/*.js', './src/styles/*.scss'],
 			html: ['./src/html/**/*.html', './src/styles/critical.css'],
 			svg: './src/svgs/*.svg',
-			media: './src/media/**/*'
+			static: './src/static/**/*'
 		}
 	},
 	naming: {
