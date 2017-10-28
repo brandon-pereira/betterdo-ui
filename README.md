@@ -19,6 +19,4 @@ The benefit to the three files is page load. That's the main goal of Flash.
 
 # TODO
 - Generate app manifest
-- Rename `media` to `static`
-- Add more useful sass mixins
-- Unit Testing (not sure if this should be up to the consumable to implement)
+- Documentation
