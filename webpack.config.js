@@ -1,9 +1,30 @@
 const config = require('./config');
 const webpack = require('webpack');
 
+const getPlugins = () => {
+	const plugins = [
+		new webpack.optimize.MinChunkSizePlugin({
+			minChunkSize: 10000
+		}),
+		new webpack.optimize.ModuleConcatenationPlugin(), // scope hoisting
+	]
+	
+	if(process.env.NODE_ENV === 'production') {
+		console.log("check");
+		plugins.push(
+			new webpack.optimize.UglifyJsPlugin({
+				minimize: true,
+				sourceMap: true
+			})
+		);
+	}
+	
+	return plugins;
+}
+
+
 module.exports = {
 	entry: config.paths.src.scripts,
-	devtool: 'source-map',
 	output: {
 		publicPath: '/scripts/',
 		filename: config.naming.scripts
@@ -36,24 +57,4 @@ module.exports = {
 		]
 	},
 	plugins: getPlugins()
-}
-
-const getPlugins = () => {
-	const plugins = [
-		new webpack.optimize.MinChunkSizePlugin({
-			minChunkSize: 10000
-		}),
-		new webpack.optimize.ModuleConcatenationPlugin(), // scope hoisting
-	]
-	
-	if(process.env.NODE_ENV === 'production') {
-		plugins.push(
-			new webpack.optimize.UglifyJsPlugin({
-				minimize: true,
-				sourceMap: true
-			})
-		);
-	}
-	
-	return plugins;
 }
