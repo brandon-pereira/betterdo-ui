@@ -23,7 +23,8 @@ module.exports = {
 						}]],
 						plugins: [
 							"add-module-exports", // export default will allow you to import without typing .default
-							"dynamic-import-webpack"
+							"dynamic-import-webpack",
+							"transform-react-jsx"
 						]
 					}
 				}]
@@ -34,14 +35,25 @@ module.exports = {
 			}
 		]
 	},
-	plugins: [
-		new webpack.optimize.UglifyJsPlugin({
-			minimize: true,
-			sourceMap: true
-		}),
+	plugins: getPlugins()
+}
+
+const getPlugins = () => {
+	const plugins = [
 		new webpack.optimize.MinChunkSizePlugin({
 			minChunkSize: 10000
 		}),
-    new webpack.optimize.ModuleConcatenationPlugin(), // scope hoisting
+		new webpack.optimize.ModuleConcatenationPlugin(), // scope hoisting
 	]
+	
+	if(process.env.NODE_ENV === 'production') {
+		plugins.push(
+			new webpack.optimize.UglifyJsPlugin({
+				minimize: true,
+				sourceMap: true
+			})
+		);
+	}
+	
+	return plugins;
 }

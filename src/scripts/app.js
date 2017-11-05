@@ -1,21 +1,18 @@
 const requiredDependencies = [ // Dependencies which are required before app ready
-	import('./lib/animate')
+	import('react'),
+	import('react-dom'),
+	import('react-redux'),
 ];
 const optionalDependencies = [ // Dependencies which can be loaded async
 	import('../styles/app.scss')
 ];
 
 Promise.all(requiredDependencies)
-	.then(([animate]) => {
-		console.info("Application Ready");
-		animate(document.querySelector('svg'), [
-			{opacity: 0},
-			{opacity: 1}
-		], {
-			duration: 1000,
-			iterations: Infinity,
-			direction: 'alternate'
-		});
+	.then(([React, reactDOM]) => {
+		reactDOM.render(
+			<h1>Hello, world!</h1>,
+			document.querySelector('#app')
+		);
 	})
 	.catch((err) => console.error("Failed to load dependencies.", err))
 	
