@@ -2,9 +2,9 @@ const requiredDependencies = [ // Dependencies which are required before app rea
 	// TODO: Turn this into an Object
 	// that way you can require like .then({react})
 	// import('dep1')
+	import('../styles/app.scss')
 ];
 const optionalDependencies = [ // Dependencies which can be loaded async
-	import('../styles/app.scss')
 ];
 
 Promise.all(requiredDependencies)
