@@ -1,5 +1,8 @@
-export default (React, reactDOM) =>
+ import Greeting from './components/greeting';
+ 
+ export default (React, reactDOM) => {
 	reactDOM.render(
-		<h1>Hello, world!</h1>,
+		<Greeting />,
 		document.querySelector('#app')
 	);
+}
