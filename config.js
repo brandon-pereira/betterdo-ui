@@ -2,7 +2,7 @@ module.exports = {
 	paths: {
 		src: {
 			root: './src',
-			scripts: './src/scripts/app.js',
+			scripts: './src/scripts/index.js',
 			html: './src/html/*.html',
 			svg: './src/svgs/*.svg',
 			static: './src/static/**/*'
