@@ -9,6 +9,7 @@ const optionalDependencies = [ // Dependencies which can be loaded async
 
 Promise.all(requiredDependencies)
 	.then(([React, reactDOM]) => {
+		document.body.classList.add('loaded')
 		reactDOM.render(
 			<h1>Hello, world!</h1>,
 			document.querySelector('#app')

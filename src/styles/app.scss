@@ -9,11 +9,13 @@ html.app {
 		min-height: 100%;
 		margin: 0;
 		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;  
-    background: map-deep-get($config, body, background);
-	}
+  }
+  .loaded {
+    
+    .loader {
+      display: none;
+    }
+  }
 }
 
 svg {
