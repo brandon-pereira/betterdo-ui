@@ -6,9 +6,20 @@
  * This is also why I've deliberately made this a CSS file instead of
  * an SCSS file (to avoid nesting).
  */
-body {
-  background: red;
+.loader {
+  background: #4B4B4B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 9999;
 }
-svg {
-  height: 100px;
+.loader svg {
+  align-self: center;
+  height: 200px;
+  fill: #f1d518;
 }
