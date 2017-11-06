@@ -16,6 +16,10 @@ Flash works on the principle of two types of stylesheets. Critical stylesheets (
 
 The benefit to the three files is page load. That's the main goal of Flash.
 
+# Pre-loader
+Flash has a built in pre-loader. This is what is shown after the dom is rendered, but before the required styles and javascript have been loaded. 
+
+Using a pre-loader can improve the perceived load time drastically.
 
 # TODO
 - Generate app manifest
