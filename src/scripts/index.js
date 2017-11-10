@@ -2,7 +2,8 @@ const requiredDependencies = [ // Dependencies which are required before app rea
 	import('./app'),
 	import('react'),
 	import('react-dom'),
-	// import('react-redux'),
+	import('react-redux'),
+	import('redux')
 ];
 const optionalDependencies = [ // Dependencies which can be loaded async
 	import('../styles/app.scss')
@@ -11,7 +12,7 @@ const optionalDependencies = [ // Dependencies which can be loaded async
 Promise.all(requiredDependencies)
 	.then(([app, React, reactDOM]) => {
 		console.log("Loaded");
-		document.body.classList.add('loaded')
+		document.body.classList.add('loaded');
 		app(React, reactDOM);
 	})
 	.catch((err) => console.error("Failed to load dependencies.", err))

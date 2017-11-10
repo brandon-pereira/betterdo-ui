@@ -10,7 +10,6 @@ const getPlugins = () => {
 	]
 	
 	if(process.env.NODE_ENV === 'production') {
-		console.log("check");
 		plugins.push(
 			new webpack.optimize.UglifyJsPlugin({
 				minimize: true,
