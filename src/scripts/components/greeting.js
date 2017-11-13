@@ -6,13 +6,13 @@ import '../../styles/components/greeting.scss';
 class Greeting extends Component {
   render() {
     console.log(this.props);
-    return <h1 onClick={this.props.click}>{this.props.navigation.title}Hello World</h1>;
+    return <h1 onClick={this.props.click}>{this.props.currentList.title}</h1>;
   }
 }
  
 export default connect(
   (state) => ({
-    navigation: state.navigation
+    currentList: state.currentList
   }),
   (dispatch) => ({
     click: () => dispatch(actions.click())

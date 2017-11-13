@@ -1,9 +1,11 @@
 import {combineReducers, createStore} from 'redux';
 import initialState from './initialState';
-import navigationReducer from './reducers/navigation'
+import currentList from './reducers/currentList'
+import lists from './reducers/lists'
 
 const rootReducer = combineReducers({
-  navigation: navigationReducer
+  currentList,
+  lists
 });
 
 export default createStore(rootReducer, initialState())

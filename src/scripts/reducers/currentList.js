@@ -1,4 +1,4 @@
-import constants from '../constants';
+// import constants from '../constants';
 import initialState from '../initialState';
 
 export default (state, action) => {
@@ -10,7 +10,7 @@ export default (state, action) => {
 			newState.title = Date.now();
 			return newState;
 		default:
-			return state || initialState().navigation;
+			return state || initialState().currentList;
 	}
 	
 } //https://babeljs.io/docs/plugins/transform-object-rest-spread/
