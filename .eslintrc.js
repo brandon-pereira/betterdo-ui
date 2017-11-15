@@ -3,7 +3,16 @@
  */
 module.exports = {
   "ecmaFeatures": {
-    "modules": true
+    "modules": true,
+    "jsx": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "env": {
     "node": true,
@@ -13,6 +22,8 @@ module.exports = {
   "parser": "babel-eslint",
   "extends": "eslint:recommended",
   "rules": {
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
     "no-console": 0,
     "accessor-pairs": 2,
     "array-bracket-spacing": 0,

@@ -10,7 +10,6 @@ const getPlugins = () => {
 	]
 	
 	if(process.env.NODE_ENV === 'production') {
-		console.log("check");
 		plugins.push(
 			new webpack.optimize.UglifyJsPlugin({
 				minimize: true,
@@ -44,7 +43,8 @@ module.exports = {
 						}]],
 						plugins: [
 							"add-module-exports", // export default will allow you to import without typing .default
-							"dynamic-import-webpack"
+							"dynamic-import-webpack",
+							"transform-react-jsx"
 						]
 					}
 				}]

@@ -1,19 +1,18 @@
-const requiredDependencies = [ // Dependencies which are required before app ready
-	// TODO: Turn this into an Object
-	// that way you can require like .then({react})
-	// import('dep1')
-	import('../styles/app.scss')
-];
-const optionalDependencies = [ // Dependencies which can be loaded async
-];
+import Header from './components/header';
+import Navigation from './components/navigation';
+import Logo from './components/logo';
+import {Provider} from 'react-redux';
+import store from './store';
 
-Promise.all(requiredDependencies)
-	.then(() => { // .then(([dep1, dep2]) =>
-		// all requiredDependencies imported
-		document.body.classList.add('loaded')
-		
-	})
-	.catch((err) => console.error("Failed to load dependencies.", err))
-	
-Promise.all(optionalDependencies)
-	.catch((err) => console.error("Failed to load dependencies.", err));
+export default (React, reactDOM) => {
+  reactDOM.render(
+    <Provider store={store}>
+      <div className="app">
+        <Logo />
+        <Header />
+        <Navigation />
+      </div>
+    </Provider>,
+    document.querySelector('.container')
+  );
+}
