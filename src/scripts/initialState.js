@@ -13,7 +13,8 @@ export default () => ({
       title: "aaa"
     },
     {
-      title: "test"
+      title: "test",
+      color: 'blue'
     },
     {
       title: "test"

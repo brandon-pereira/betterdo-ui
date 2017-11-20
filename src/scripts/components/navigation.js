@@ -6,7 +6,7 @@ import Search from './search';
 import styled from 'styled-components';
 import ListItem from './listItem';
 
-const Container = styled.header`
+const Container = styled.nav`
   grid-row: 2 / 3;
   grid-column: 1 / 1;
   background: #202020;
@@ -24,7 +24,8 @@ class Navigation extends Component {
     return <Container>
       <Search />
       <ListsContainer>
-        {this.props.lists.map((item, i) => <ListItem key={i}>{item.title}</ListItem>)}
+        {this.props.lists.map((item, i) => <ListItem key={i} title={item.title} color={item.color}></ListItem>)}
+        <ListItem newList />
       </ListsContainer>
     </Container>
   }
