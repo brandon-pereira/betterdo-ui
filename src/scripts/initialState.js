@@ -10,6 +10,12 @@ export default () => ({
   },
   lists: [
     {
+      title: "aaa"
+    },
+    {
+      title: "test"
+    },
+    {
       title: "test"
     }
   ]
