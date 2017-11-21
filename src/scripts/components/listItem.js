@@ -16,7 +16,9 @@ const Li = styled.li`
 const Icon = styled.div`
 	height: 10px;
 	width: 10px;
-	background: ${props => props.color ? props.color : 'red'};
+	background-color: ${props => props.color ? props.color : '#585858'};
+	background-image: linear-gradient(transparent, rgba(0,0,0,.2));
+	box-shadow: inset 0 0 0 1px rgba(0,0,0,.8), 0 1px 10px rgba(0,0,0,.8);
 	margin-right: 0.5rem;
 	border-radius: 50%;
 `

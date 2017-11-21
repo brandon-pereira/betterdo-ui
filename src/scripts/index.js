@@ -2,8 +2,8 @@ const requiredDependencies = [ // Dependencies which are required before app rea
 	import('./app'),
 	import('react'),
 	import('react-dom'),
-	import('react-redux'),
-	import('redux')
+	// import('react-redux'),
+	// import('redux')
 ];
 const optionalDependencies = [ // Dependencies which can be loaded async
 	import('../styles/app.scss')

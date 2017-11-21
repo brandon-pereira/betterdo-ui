@@ -19,5 +19,6 @@ export default () => ({
     {
       title: "test"
     }
-  ]
+  ],
+  newListModalVisible: false
 });
