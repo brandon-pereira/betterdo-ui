@@ -21,11 +21,12 @@ const ListsContainer= styled.ul`
 `;
 class Navigation extends Component {
   render() {
+    console.log(this.props.openNewListModal);
     return <Container>
       <Search />
       <ListsContainer>
         {this.props.lists.map((item, i) => <ListItem key={i} title={item.title} color={item.color}></ListItem>)}
-        <ListItem newList />
+        <ListItem onClick={this.props.openNewListModal} newList />
       </ListsContainer>
     </Container>
   }
@@ -36,7 +37,7 @@ export default connect(
     lists: state.lists
   }),
   (dispatch) => ({
-    click: () => dispatch(actions.click())
+    openNewListModal: () => dispatch(actions.openNewListModal())
   })
 
 )(Navigation)

@@ -20,5 +20,15 @@ export default () => ({
       title: "test"
     }
   ],
-  newListModalVisible: false
+  modals: {
+    newList: {
+      visible: false,
+    },
+    appSettings: {
+      visible: false,
+    },
+    listSettings: {
+      visible: false,
+    }
+  }
 });

@@ -4,7 +4,7 @@ import actions from '../actions';
 import styled from 'styled-components';
 
 const Overlay = styled.div`
-  display: ${props => props.newListModalVisible ? 'block' : 'none'};
+  display: ${props => props.visible ? 'flex' : 'none'};
   position: fixed;
   top: 0;
   left: 0;
@@ -12,37 +12,48 @@ const Overlay = styled.div`
   bottom: 0;
   z-index: 1000;
   background: rgba(0,0,0,.5);
-  display: flex;
   justify-content: center;
   align-items: center;
 `;
 const Modal = styled.div`
+  display: block;
   background: #fff;
   width: 60%;
   max-width: 600px;
   padding: 1rem;
 `;
 const NewListModal = Modal.extend`
+
 `;
 const ListSettingsModal = Modal.extend`
+
 `;
 const AppSettingsModal = Modal.extend`
 `;
+
 class Header extends Component {
   
   render() {
-    console.log(this.props.newListModalVisible)
+    const props = this.props;
+    let visibleModal = null;
+    if(props.modals.newList.visible) {
+      visibleModal = <NewListModal visible>
+        <h1>NewListModal</h1>
+      </NewListModal>
+    } else if (props.modals.listSettings.visible) {
+      visibleModal = <ListSettingsModal visible>
+        <h1>ListSettingsModal</h1>
+      </ListSettingsModal>
+    } else if (props.modals.appSettings.visible) {
+      visibleModal = <AppSettingsModal visible>
+        <h1>App Settings</h1>
+      </AppSettingsModal>
+    }
+
+    
     return (
-      <Overlay>
-        <NewListModal>
-          <h1>NewListModal</h1>
-        </NewListModal>
-        <ListSettingsModal>
-          <h1>ListSettingsModal</h1>
-        </ListSettingsModal>
-        <AppSettingsModal>
-          <h1>AppSettingsModal</h1>
-        </AppSettingsModal>
+      <Overlay {...({visible: this.props.isModalVisible})} onClick={this.props.closeModal}>
+        {visibleModal}
       </Overlay>
     )
   }
@@ -51,11 +62,11 @@ class Header extends Component {
  
 export default connect(
   (state) => ({
-    newListModalVisible: state.newListModalVisible,
+    isModalVisible: (state.modals.newList.visible || state.modals.appSettings.visible || state.modals.listSettings.visible),
+    modals: state.modals
   }),
   (dispatch) => ({
-    backButtonClick: () => dispatch(actions.click()),
-    settingsButtonClick: () => dispatch(actions.click())
+    closeModal: () => dispatch(actions.closeModals())
   })
 
 )(Header)

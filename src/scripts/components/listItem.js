@@ -33,7 +33,7 @@ class ListItem extends Component {
 		if(this.props.newList) {
 			title = 'New List';
 		}
-		return <Li>
+		return <Li onClick={this.props.onClick}>
 			<Icon color={this.props.color}></Icon>
 			<Title>{title}</Title>
 		</Li>
