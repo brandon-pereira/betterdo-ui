@@ -1,3 +1,4 @@
 export default {
-	TITLE: "TITLE"
+	TITLE: "TITLE",
+	SWITCH_LISTS: "SWITCH_LISTS"
 }

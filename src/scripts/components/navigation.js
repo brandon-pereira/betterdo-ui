@@ -25,7 +25,8 @@ class Navigation extends Component {
     return <Container>
       <Search />
       <ListsContainer>
-        {this.props.lists.map((item, i) => <ListItem key={i} title={item.title} color={item.color}></ListItem>)}
+        {this.props.lists.map((item, i) => 
+          <ListItem key={i} title={item.title} color={item.color} onClick={this.props.switchLists.bind(this, item)}></ListItem>)}
         <ListItem onClick={this.props.openNewListModal} newList />
       </ListsContainer>
     </Container>
@@ -37,7 +38,9 @@ export default connect(
     lists: state.lists
   }),
   (dispatch) => ({
-    openNewListModal: () => dispatch(actions.openNewListModal())
+    openNewListModal: () => dispatch(actions.openNewListModal()),
+    switchLists: (list) => dispatch(actions.switchList(list))
   })
+  
 
 )(Navigation)
