@@ -7,7 +7,9 @@ const Container = styled.div`
 	grid-row: 1 / 1;
 	grid-column: 1 / 1;
 	cursor: pointer;
-	background: linear-gradient(transparent, rgba(0,0,0,.1)), #343434;
+	background: linear-gradient(transparent, rgba(0,0,0,.3)), #222;
+  border: none;
+  box-shadow: inset 0 -1px rgba(0,0,0,.9);
 	color: #fff;
 	display: flex;
 	align-items: center;

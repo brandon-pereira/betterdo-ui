@@ -23,9 +23,10 @@ const Container = styled.div`
 class Search extends Component {
 	
   render() {
-    return <Container>
-			<input placeholder="Search..." />
-		</Container>;
+    // return <Container>
+	// 		<input placeholder="Search..." />
+	// 	</Container>;
+	return null;
   }
 	
 }

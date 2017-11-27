@@ -8,6 +8,7 @@ const Container = styled.header`
   grid-column: 2 / 3;
   background-color: #2177BD;
   background-image: linear-gradient(transparent, rgba(0,0,0,.2));
+  box-shadow: inset 0 -1px rgba(0,0,0,.3);
   color: #fff;
   display: flex;
   align-items: center;
@@ -15,12 +16,14 @@ const Container = styled.header`
 `;
 const Button = styled.button`
   appearance: none;
-  background: linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.4));
-  border: 1px solid rgba(0,0,0,.6);
-  box-shadow: inset 0 1px rgba(255,255,255,.2);
-  border-radius: 5px;
+  background: linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.3));
+  border: none;
+  box-shadow: 0 1px rgba(255,255,255,.1);
+  border-radius: 3px;
   padding: 0.8rem;
   color: #fff;
+  outline: none;
+  cursor: pointer;
 `;
 const Title = styled.h2`
   flex: 1;

@@ -7,9 +7,10 @@ const Li = styled.li`
 	padding: 1rem;
 	display: flex;
 	align-items: center;
+	background: ${props => props.selected ? 'linear-gradient(#eee, transparent)' : 'transparent'};
 	box-shadow: 0 1px rgba(255,255,255,.15);
 		&:first-of-type {
-			box-shadow: 0 -1px rgba(255,255,255,.15),
+			box-shadow: inset 0 1px rgba(255,255,255,.15),
 								0 1px rgba(255,255,255,.15);
 		}
 `;
@@ -33,7 +34,7 @@ class ListItem extends Component {
 		if(this.props.newList) {
 			title = 'New List';
 		}
-		return <Li onClick={this.props.onClick}>
+		return <Li {...({selected: this.props.selected})} onClick={this.props.onClick}>
 			<Icon color={this.props.color}></Icon>
 			<Title>{title}</Title>
 		</Li>

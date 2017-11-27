@@ -10,7 +10,8 @@ export default () => ({
   },
   lists: [
     {
-      title: "aaa"
+      title: "aaa",
+      selected: true
     },
     {
       title: "test",

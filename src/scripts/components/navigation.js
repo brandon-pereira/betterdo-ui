@@ -25,8 +25,8 @@ class Navigation extends Component {
     return <Container>
       <Search />
       <ListsContainer>
-        {this.props.lists.map((item, i) => 
-          <ListItem key={i} title={item.title} color={item.color} onClick={this.props.switchLists.bind(this, item)}></ListItem>)}
+        {this.props.lists.map((item, i) =>
+          <ListItem {...({ selected: item.selected }) } key={i} title={item.title} color={item.color} onClick={this.props.switchLists.bind(this, item)}></ListItem>)}
         <ListItem onClick={this.props.openNewListModal} newList />
       </ListsContainer>
     </Container>
