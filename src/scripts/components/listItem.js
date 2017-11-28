@@ -7,19 +7,15 @@ const Li = styled.li`
 	padding: 1rem;
 	display: flex;
 	align-items: center;
-	background: ${props => props.selected ? 'linear-gradient(#eee, transparent)' : 'transparent'};
-	box-shadow: 0 1px rgba(255,255,255,.15);
-		&:first-of-type {
-			box-shadow: inset 0 1px rgba(255,255,255,.15),
-								0 1px rgba(255,255,255,.15);
-		}
+	background: ${props => props.selected ? 'linear-gradient(#006EFF, #004DB4)' : 'transparent'};
+	box-shadow: ${props => props.selected ? 'inset 0 -1px rgba(0,0,0,.5)' : '0 1px rgba(255,255,255,.15)'};
 `;
 const Icon = styled.div`
 	height: 10px;
 	width: 10px;
 	background-color: ${props => props.color ? props.color : '#585858'};
 	background-image: linear-gradient(transparent, rgba(0,0,0,.2));
-	box-shadow: inset 0 0 0 1px rgba(0,0,0,.8), 0 1px 10px rgba(0,0,0,.8);
+	box-shadow: inset 0 0 0 1px rgba(0,0,0,.3), 0 1px 10px rgba(0,0,0,.4);
 	margin-right: 0.5rem;
 	border-radius: 50%;
 `

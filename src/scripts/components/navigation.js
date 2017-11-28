@@ -12,6 +12,7 @@ const Container = styled.nav`
   background: #202020;
   display: flex;
   flex-direction: column;
+  box-shadow: inset 0 1px rgba(255,255,255,.15)
 `;
 const ListsContainer= styled.ul`
   list-style: none;
