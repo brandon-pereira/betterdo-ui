@@ -1,8 +1,8 @@
 {
-    "name": "flash",
+    "name": "betterdo-ui",
     "version": "1.0.0",
-    "description": "Rapid Prototyping",
-    "repository": "https://github.com/brandon-pereira/flash",
+    "description": "Frontend for BetterDo v4",
+    "repository": "https://github.com/brandon-pereira/betterdo-ui",
     "dependencies": {
         "babel-polyfill": "^6.26.0",
         "mobx": "^5.5.0",
