@@ -7,19 +7,48 @@
  * an SCSS file (to avoid nesting).
  */
 .loader {
-  background: #4B4B4B;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 9999;
+    background: #4285f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9999;
 }
 .loader svg {
-  align-self: center;
-  height: 200px;
-  fill: #f1d518;
+    animation: --critical-loader-rotate 2s linear infinite;
+}
+
+.loader svg .path {
+    stroke-dasharray: 184;
+    stroke-dashoffset: 0;
+    transform-origin: center;
+    stroke: #fff;
+    animation: --critical-loader-dashoffset 2s ease-in-out infinite;
+}
+
+@keyframes --critical-loader-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(270deg);
+    }
+}
+
+@keyframes --critical-loader-dashoffset {
+    0% {
+        stroke-dashoffset: 184;
+    }
+    50% {
+        stroke-dashoffset: 46;
+        transform: rotate(135deg);
+    }
+    100% {
+        stroke-dashoffset: 184;
+        transform: rotate(450deg);
+    }
 }

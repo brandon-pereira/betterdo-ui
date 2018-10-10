@@ -1,48 +1,53 @@
 {
-  "name": "flash",
-  "version": "1.0.0",
-  "description": "Rapid Prototyping",
-  "repository": "https://github.com/brandon-pereira/flash",
-  "dependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
-    "styled-components": "^2.2.3"
-  },
-  "devDependencies": {
-    "babel-core": "^6.23.1",
-    "babel-eslint": "^8.0.1",
-    "babel-loader": "^7.1.1",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-dynamic-import-webpack": "^1.0.1",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-env": "^1.6.0",
-    "browser-sync": "^2.18.13",
-    "css-loader": "^0.28.7",
-    "del": "^3.0.0",
-    "eslint": "^4.11.0",
-    "eslint-plugin-react": "^7.4.0",
-    "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-htmlmin": "^3.0.0",
-    "gulp-inline-source": "^3.1.0",
-    "gulp-nunjucks-render": "^2.2.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-svgstore": "^6.1.0",
-    "node-sass": "^4.0.0",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.19.0",
-    "webpack": "^3.7.1",
-    "webpack-stream": "^4.0.0"
-  },
-  "scripts": {
-    "build": "./node_modules/.bin/gulp build",
-    "start": "./node_modules/.bin/gulp serve",
-    "test": "./node_modules/.bin/eslint test"
-  },
-  "engines": {
-    "node": ">=8.7.0"
-  },
-  "author": "Brandon Pereira",
-  "license": "ISC"
+    "name": "flash",
+    "version": "1.0.0",
+    "description": "Rapid Prototyping",
+    "repository": "https://github.com/brandon-pereira/flash",
+    "dependencies": {
+        "babel-polyfill": "^6.26.0",
+        "mobx": "^5.5.0",
+        "mobx-react": "^5.2.8",
+        "react": "^16.5.2",
+        "react-dom": "^16.5.2",
+        "styled-components": "^3.4.10"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.1.2",
+        "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+        "@babel/preset-env": "^7.1.0",
+        "@babel/preset-react": "^7.0.0",
+        "babel-eslint": "^8.2.3",
+        "babel-loader": "^8.0.4",
+        "babel-plugin-add-module-exports": "^1.0.0",
+        "babel-plugin-dynamic-import-webpack": "^1.0.1",
+        "babel-plugin-transform-custom-element-classes": "^0.1.0",
+        "babel-plugin-transform-es2015-classes": "^6.24.1",
+        "babel-preset-mobx": "^2.0.0",
+        "browser-sync": "^2.24.4",
+        "css-loader": "^0.28.7",
+        "del": "^3.0.0",
+        "eslint": "^4.19.1",
+        "eslint-plugin-react": "^7.11.1",
+        "gulp": "github:gulpjs/gulp#4.0",
+        "gulp-htmlmin": "^4.0.0",
+        "gulp-inline-source": "^3.1.0",
+        "gulp-nunjucks-render": "^2.2.2",
+        "gulp-rename": "^1.2.2",
+        "gulp-svgstore": "^6.1.0",
+        "node-sass": "^4.9.0",
+        "sass-loader": "^7.0.3",
+        "style-loader": "^0.21.0",
+        "webpack": "^4.20.2",
+        "webpack-stream": "^4.0.0"
+    },
+    "scripts": {
+        "build": "NODE_ENV='production' ./node_modules/.bin/gulp build",
+        "start": "./node_modules/.bin/gulp serve",
+        "test": "./node_modules/.bin/eslint test"
+    },
+    "engines": {
+        "node": ">=8.7.0"
+    },
+    "author": "Brandon Pereira",
+    "license": "ISC"
 }

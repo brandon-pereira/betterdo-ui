@@ -1,20 +1,25 @@
+import React from 'react';
+import { render } from 'react-dom';
+
+// State
+import Store from './services/store';
+import { Provider } from 'mobx-react';
+const store = new Store();
+
+// Components
 import Header from './components/header';
 import Navigation from './components/navigation';
-import Modals from './components/modals';
 import Logo from './components/logo';
-import {Provider} from 'react-redux';
-import store from './store';
 
-export default (React, reactDOM) => {
-  reactDOM.render(
-    <Provider store={store}>
-      <div className="app">
-        <Logo />
-        <Header />
-        <Navigation />
-        <Modals />
-      </div>
-    </Provider>,
-    document.querySelector('.container')
-  );
-}
+export default () => {
+    render(
+        <Provider state={store}>
+            <div className="app">
+                <Logo />
+                <Header />
+                <Navigation />
+            </div>
+        </Provider>,
+        document.querySelector('.main-container')
+    );
+};
