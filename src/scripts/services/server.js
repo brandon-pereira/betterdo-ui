@@ -9,9 +9,14 @@ export default class Server {
     }
 
     async getInbox() {
-        const inbox = await this.get('lists/inbox');
-        console.log(inbox);
+        const inbox = await this.getList('inbox');
         return inbox;
+    }
+
+    async getList(id) {
+        const list = await this.get(`lists/${id}`);
+        console.log(list);
+        return list;
     }
 
     async get(url) {

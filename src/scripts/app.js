@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 
 // State
@@ -10,6 +10,7 @@ const store = new Store();
 import Header from './components/header';
 import Navigation from './components/navigation';
 import Logo from './components/logo';
+import Body from './components/Body';
 
 export default () => {
     render(
@@ -18,10 +19,7 @@ export default () => {
                 <Logo />
                 <Header />
                 <Navigation />
-                <Fragment>
-                    {/* <AddTask />
-                    <Lists /> */}
-                </Fragment>
+                <Body />
             </div>
         </Provider>,
         document.querySelector('.main-container')
