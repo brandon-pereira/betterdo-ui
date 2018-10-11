@@ -11,6 +11,7 @@ import Header from './components/header';
 import Navigation from './components/navigation';
 import Logo from './components/logo';
 import Body from './components/Body';
+import Modals from './components/Modals';
 
 export default () => {
     render(
@@ -20,6 +21,7 @@ export default () => {
                 <Header />
                 <Navigation />
                 <Body />
+                <Modals />
             </div>
         </Provider>,
         document.querySelector('.main-container')

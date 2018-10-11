@@ -14,6 +14,19 @@ class Store {
     @observable
     loading = true;
 
+    @observable
+    modals = {
+        newList: {
+            visible: false
+        },
+        listSettings: {
+            visible: false
+        },
+        appSettings: {
+            visible: false
+        }
+    };
+
     constructor() {
         this.server = new Server();
         const lists = this.server
@@ -59,6 +72,14 @@ class Store {
         );
         this.currentList.tasks.push(task);
         this.loading = false;
+    }
+
+    openNewListModal() {
+        this.modals.newList.visible = true;
+    }
+
+    closeModal() {
+        this.modals.newList.visible = false;
     }
 }
 

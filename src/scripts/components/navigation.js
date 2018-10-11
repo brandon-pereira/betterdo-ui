@@ -40,7 +40,10 @@ class Navigation extends Component {
                             onClick={() => this.props.state.switchLists(item)}
                         />
                     ))}
-                    <ListItem onClick={this.props.openNewListModal} newList />
+                    <ListItem
+                        onClick={() => this.props.state.openNewListModal()}
+                        newList
+                    />
                 </ListsContainer>
             </Container>
         );
