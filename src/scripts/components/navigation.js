@@ -29,7 +29,11 @@ class Navigation extends Component {
                 <ListsContainer>
                     {this.props.state.lists.map((item, i) => (
                         <ListItem
-                            {...{ selected: item.selected }}
+                            {...{
+                                selected:
+                                    item._id ===
+                                    this.props.state.currentList._id
+                            }}
                             key={i}
                             title={item.title}
                             color={item.color}
