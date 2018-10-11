@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
 
-const Container = styled.div`
+const Container = styled.form`
     padding: 1rem;
 `;
 
@@ -20,10 +20,33 @@ const Input = styled.input`
 @inject('state')
 @observer
 export default class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            inputValue: ''
+        };
+    }
+
+    createTask(e) {
+        e.preventDefault();
+        this.props.state.createTask(this.state.inputValue);
+        this.updateInputValue('');
+    }
+
+    updateInputValue(value) {
+        this.setState({
+            inputValue: value
+        });
+    }
+
     render() {
         return (
-            <Container>
-                <Input placeholder="Add Task" />
+            <Container onSubmit={e => this.createTask(e, 'blah')}>
+                <Input
+                    value={this.state.inputValue}
+                    onChange={evt => this.updateInputValue(evt.target.value)}
+                    placeholder="Add Task"
+                />
             </Container>
         );
     }

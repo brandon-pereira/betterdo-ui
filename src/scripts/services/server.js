@@ -19,6 +19,13 @@ export default class Server {
         return list;
     }
 
+    createTask(taskName, listId) {
+        return this.put(`tasks`, {
+            title: taskName,
+            listId
+        });
+    }
+
     async get(url) {
         const response = await fetch(`${this.baseUrl}/${url}`);
         return await response.json();
@@ -30,7 +37,18 @@ export default class Server {
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
             },
-            referrer: 'no-referrer',
+            body: JSON.stringify(data)
+        });
+        return await response.json();
+    }
+
+    async put(url, data = {}) {
+        const response = await fetch(`${this.baseUrl}/${url}`, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(data)
         });
         return await response.json();

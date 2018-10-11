@@ -50,6 +50,16 @@ class Store {
         this.currentList = await this.server.getList(list._id);
         this.loading = false;
     }
+
+    async createTask(taskName) {
+        this.loading = true;
+        const task = await this.server.createTask(
+            taskName,
+            this.currentList._id
+        );
+        this.currentList.tasks.push(task);
+        this.loading = false;
+    }
 }
 
 export default Store;
