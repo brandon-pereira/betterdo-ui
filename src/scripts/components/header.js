@@ -35,13 +35,12 @@ const Title = styled.h2`
 @observer
 export default class Header extends Component {
     render() {
+        const state = this.props.state;
         return (
             <Container>
-                <Button onClick={this.props.backButtonClick}>Back</Button>
-                <Title>{this.props.state.currentList.title}</Title>
-                <Button onClick={this.props.settingsButtonClick}>
-                    Settings
-                </Button>
+                <Button onClick={state.backButtonClick}>Back</Button>
+                <Title>{state.currentList.title}</Title>
+                <Button onClick={state.settingsButtonClick}>Settings</Button>
             </Container>
         );
     }

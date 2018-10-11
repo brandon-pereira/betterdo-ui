@@ -14,7 +14,7 @@ export default class Body extends Component {
                 <AddTask />
                 {this.props.state.currentList.tasks.map((task, i) => {
                     console.log(task);
-                    return <h1>{task.title}</h1>;
+                    return <h1 key={i}>{task.title}</h1>;
                 })}
             </Container>
         );
