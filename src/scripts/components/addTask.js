@@ -10,6 +10,7 @@ const Input = styled.input`
     appearance: none;
     background: #fff;
     width: 100%;
+    box-sizing: border-box;
     padding: 1rem;
     border: none;
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
