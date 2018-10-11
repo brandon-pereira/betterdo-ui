@@ -25,7 +25,6 @@ class Store {
         });
 
         Promise.all([lists, currentList]).then(() => {
-            this.lists[0].selected = true;
             this.loading = false;
         });
     }
