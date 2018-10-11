@@ -1,11 +1,16 @@
 module.exports = function(config, gulp) {
     const browserSync = require('browser-sync').get('server');
+    const proxyMiddleware = require('http-proxy-middleware');
 
-    gulp.task('server', () =>
-        browserSync.init({
+    gulp.task('server', () => {
+        const proxy = proxyMiddleware('/api', {
+            target: 'http://localhost:8000'
+        });
+        return browserSync.init({
             server: {
-                baseDir: config.paths.dist
+                baseDir: config.paths.dist,
+                middleware: [proxy]
             }
-        })
-    );
+        });
+    });
 };

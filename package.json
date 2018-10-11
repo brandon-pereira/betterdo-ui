@@ -34,6 +34,7 @@
         "gulp-nunjucks-render": "^2.2.2",
         "gulp-rename": "^1.2.2",
         "gulp-svgstore": "^6.1.0",
+        "http-proxy-middleware": "^0.19.0",
         "node-sass": "^4.9.0",
         "sass-loader": "^7.0.3",
         "style-loader": "^0.21.0",
