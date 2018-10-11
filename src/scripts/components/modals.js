@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
+import AddList from './addList';
 
 const Overlay = styled.div`
     display: ${props => (props.visible ? 'flex' : 'none')};
@@ -35,6 +36,7 @@ export default class Header extends Component {
             visibleModal = (
                 <NewListModal visible>
                     <h1>NewListModal</h1>
+                    <AddList />
                 </NewListModal>
             );
         } else if (props.modals.listSettings.visible) {
