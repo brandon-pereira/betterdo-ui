@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { render } from 'react-dom';
 
 // State
@@ -18,6 +18,10 @@ export default () => {
                 <Logo />
                 <Header />
                 <Navigation />
+                <Fragment>
+                    {/* <AddTask />
+                    <Lists /> */}
+                </Fragment>
             </div>
         </Provider>,
         document.querySelector('.main-container')

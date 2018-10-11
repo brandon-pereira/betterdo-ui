@@ -33,7 +33,7 @@ class Navigation extends Component {
                             key={i}
                             title={item.title}
                             color={item.color}
-                            // onClick={this.props.switchLists.bind(this, item)}
+                            onClick={() => this.props.state.switchLists(item)}
                         />
                     ))}
                     <ListItem onClick={this.props.openNewListModal} newList />
