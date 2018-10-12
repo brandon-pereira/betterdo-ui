@@ -87,6 +87,14 @@ class Store {
         this.loading = false;
     }
 
+    async createList(title, color) {
+        this.loading = true;
+        const list = await this.server.createList({ title, color });
+        this.lists.push(list);
+        this.currentList = list;
+        this.loading = false;
+    }
+
     openNewListModal() {
         this.modals.newList.visible = true;
     }

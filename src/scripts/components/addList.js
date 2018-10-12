@@ -14,10 +14,22 @@ const Input = styled.input`
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     outline: none;
+    font: inherit;
+    font-size: 1rem;
 `;
 
-const Color = styled.button`
-    background: ${props => props.color};
+const Button = styled.button`
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    padding: 1rem;
+    font: inherit;
+    background-color: ${props => props.color};
+    background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.6);
+    font-size: 1rem;
+    margin-top: 1rem;
 `;
 
 @inject('state')
@@ -33,9 +45,7 @@ export default class Header extends Component {
 
     async componentDidMount() {
         this._randomColor = (await import('randomcolor')).randomColor;
-        this.setState({
-            color: this.randomColor
-        });
+        this.randomizeColor();
     }
 
     get randomColor() {
@@ -46,10 +56,16 @@ export default class Header extends Component {
         }
     }
 
+    randomizeColor() {
+        this.setState({
+            color: this.randomColor
+        });
+    }
+
     createList(e) {
         e.preventDefault();
         this.props.state.closeModal();
-        this.props.state.createList(this.state.title);
+        this.props.state.createList(this.state.title, this.state.color);
     }
 
     render() {
@@ -60,7 +76,7 @@ export default class Header extends Component {
                     onChange={evt => this.setState({ title: evt.target.value })}
                     placeholder="Add List"
                 />
-                <Color color={this.state.color}>LOL</Color>
+                <Button color={this.state.color}>Submit</Button>
             </Container>
         );
     }

@@ -34,6 +34,9 @@ export default class Server {
             listId
         });
     }
+    createList(list) {
+        return this.put(`lists`, list);
+    }
 
     updateTask(taskId, props) {
         return this.post(`tasks/${taskId}`, props);

@@ -23,33 +23,28 @@ const Modal = styled.div`
     padding: 1rem;
 `;
 const NewListModal = styled(Modal)``;
-const ListSettingsModal = styled(Modal)``;
-const AppSettingsModal = styled(Modal)``;
+// const ListSettingsModal = styled(Modal)``;
+// const AppSettingsModal = styled(Modal)``;
 
 @inject('state')
 @observer
 export default class Header extends Component {
+    closeModal(e) {
+        // e.preventDefault();
+        if (e.currentTarget === e.target) {
+            this.props.state.closeModal();
+        }
+    }
+
     render() {
-        const props = this.props.state;
+        const state = this.props.state;
         let visibleModal = null;
-        if (props.modals.newList.visible) {
+        if (state.modals.newList.visible) {
             visibleModal = (
                 <NewListModal visible>
                     <h1>NewListModal</h1>
                     <AddList />
                 </NewListModal>
-            );
-        } else if (props.modals.listSettings.visible) {
-            visibleModal = (
-                <ListSettingsModal visible>
-                    <h1>ListSettingsModal</h1>
-                </ListSettingsModal>
-            );
-        } else if (props.modals.appSettings.visible) {
-            visibleModal = (
-                <AppSettingsModal visible>
-                    <h1>App Settings</h1>
-                </AppSettingsModal>
             );
         }
 
@@ -57,25 +52,14 @@ export default class Header extends Component {
             <Overlay
                 {...{
                     visible:
-                        props.modals.newList.visible ||
-                        props.modals.appSettings.visible ||
-                        props.modals.listSettings.visible
+                        state.modals.newList.visible ||
+                        state.modals.appSettings.visible ||
+                        state.modals.listSettings.visible
                 }}
-                onClick={() => props.closeModal()}
+                onClick={e => this.closeModal(e)}
             >
                 {visibleModal}
             </Overlay>
         );
     }
 }
-
-// export default connect(
-//   (state) => ({
-//     isModalVisible: (state.modals.newList.visible || state.modals.appSettings.visible || state.modals.listSettings.visible),
-//     modals: state.modals
-//   }),
-//   (dispatch) => ({
-//     closeModal: () => dispatch(actions.closeModals())
-//   })
-
-// )(Header)
