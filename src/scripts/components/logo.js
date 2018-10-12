@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { observer, inject } from 'mobx-react';
 
 const Container = styled.div`
     grid-row: 1 / 1;
@@ -20,11 +21,13 @@ const Container = styled.div`
         font-weight: 600;
     }
 `;
-
+@inject('state')
+@observer
 export default class Logo extends Component {
     render() {
+        const state = this.props.state;
         return (
-            <Container>
+            <Container onClick={() => state.switchLists({ _id: 'inbox' })}>
                 <h1>
                     Better
                     <span>Do.</span>
