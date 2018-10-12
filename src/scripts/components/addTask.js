@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
 
 const Container = styled.form`
-    padding: 1rem;
+    padding: 1rem 1rem 0;
 `;
 
 const Input = styled.input`
