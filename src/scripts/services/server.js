@@ -35,6 +35,10 @@ export default class Server {
         });
     }
 
+    updateTask(taskId, props) {
+        return this.post(`tasks/${taskId}`, props);
+    }
+
     async get(url) {
         const response = await fetch(`${this.baseUrl}/${url}`);
         return await response.json();

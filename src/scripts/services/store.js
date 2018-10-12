@@ -68,6 +68,15 @@ class Store {
         this.loading = false;
     }
 
+    async updateTask(task) {
+        this.loading = true;
+        const updatedTask = await this.server.updateTask(task._id, task);
+        this.currentList.tasks.map(
+            _task => (task._id === _task._id ? updatedTask : _task)
+        );
+        this.loading = false;
+    }
+
     async createTask(taskName) {
         this.loading = true;
         const task = await this.server.createTask(
