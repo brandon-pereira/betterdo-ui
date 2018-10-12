@@ -58,7 +58,11 @@ class Store {
     }
 
     async switchLists(list) {
-        this.currentList = this.lists.find(_list => _list._id === list._id);
+        // Load cached list till server loads
+        const _cachedList = this.lists.find(_list => _list._id === list._id);
+        if (_cachedList) {
+            this.currentList = _cachedList;
+        }
         this.loading = true;
         this.currentList = await this.server.getList(list._id);
         this.loading = false;

@@ -5,7 +5,7 @@ export default class Server {
 
     async getLists() {
         const lists = await this.get('lists');
-        return lists.lists;
+        return lists.lists || [];
     }
 
     async getInbox() {
@@ -14,9 +14,18 @@ export default class Server {
     }
 
     async getList(id) {
-        const list = await this.get(`lists/${id}`);
-        console.log(list);
-        return list;
+        try {
+            return this.get(`lists/${id}`);
+        } catch (err) {
+            console.error('Failed to fetch list', id, err);
+            return {
+                title: '',
+                tasks: [],
+                _id: null,
+                color: 'red',
+                isError: true
+            };
+        }
     }
 
     createTask(taskName, listId) {
