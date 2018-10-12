@@ -27,6 +27,7 @@ const getPlugins = () => {
 
 module.exports = {
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+    devtool: process.env.NODE_ENV === 'production' ? false : 'eval-source-map',
     entry: config.paths.src.scripts,
     output: {
         publicPath: '/scripts/',
