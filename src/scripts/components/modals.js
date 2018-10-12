@@ -22,9 +22,9 @@ const Modal = styled.div`
     max-width: 600px;
     padding: 1rem;
 `;
-const NewListModal = Modal.extend``;
-const ListSettingsModal = Modal.extend``;
-const AppSettingsModal = Modal.extend``;
+const NewListModal = styled(Modal)``;
+const ListSettingsModal = styled(Modal)``;
+const AppSettingsModal = styled(Modal)``;
 
 @inject('state')
 @observer
