@@ -30,7 +30,7 @@ module.exports = {
     devtool: process.env.NODE_ENV === 'production' ? false : 'eval-source-map',
     entry: config.paths.src.scripts,
     output: {
-        publicPath: '/scripts/',
+		publicPath: 'scripts/',
         filename: config.naming.scripts
     },
     node: {
