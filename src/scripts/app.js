@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { render } from 'react-dom';
 
 // State
@@ -16,13 +16,13 @@ import Modals from './components/Modals';
 export default () => {
     render(
         <Provider state={store}>
-            <div className="app">
+            <Fragment>
                 <Logo />
                 <Header />
                 <Navigation />
                 <Body />
                 <Modals />
-            </div>
+            </Fragment>
         </Provider>,
         document.querySelector('.main-container')
     );

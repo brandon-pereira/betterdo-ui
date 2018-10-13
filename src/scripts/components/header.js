@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Container = styled.header`
     grid-row: 1 / 1;
     grid-column: 2 / 3;
-    background-color: #2177bd;
+    background-color: ${props => props.color};
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.2));
     box-shadow: inset 0 -1px rgba(0, 0, 0, 0.3);
     color: #fff;
@@ -25,6 +25,9 @@ const Button = styled.button`
     color: #fff;
     outline: none;
     cursor: pointer;
+    &.hidden {
+        display: none;
+    }
 `;
 const Title = styled.h2`
     flex: 1;
@@ -37,10 +40,9 @@ export default class Header extends Component {
     render() {
         const state = this.props.state;
         return (
-            <Container>
-                <Button onClick={state.backButtonClick}>Back</Button>
+            <Container color={state.currentList.color}>
                 <Title>{state.currentList.title}</Title>
-                <Button onClick={state.settingsButtonClick}>Settings</Button>
+                <Button className={state.currentList.type !== 'default' ? 'hidden' : ''} onClick={state.settingsButtonClick}>Settings</Button>
             </Container>
         );
     }
