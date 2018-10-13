@@ -10,8 +10,8 @@ const store = new Store();
 import Header from './components/header';
 import Navigation from './components/navigation';
 import Logo from './components/logo';
-import Body from './components/Body';
-import Modals from './components/Modals';
+import Body from './components/body';
+import Modals from './components/modals';
 
 export default () => {
     render(
