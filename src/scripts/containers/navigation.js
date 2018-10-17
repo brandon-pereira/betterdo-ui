@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
 import Search from '../components/search';
 import ListItem from '../components/list';
+import AddListModal from './addListModal';
 
 const Container = styled.nav`
     grid-row: 2 / 3;
@@ -40,10 +41,11 @@ class Navigation extends Component {
                         />
                     ))}
                     <ListItem
-                        onClick={() => state.openNewListModal()}
+                        onClick={() => (state.modalVisibility.newList = true)}
                         newList
                     />
                 </ListsContainer>
+                <AddListModal />
             </Container>
         );
     }

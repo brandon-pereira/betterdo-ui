@@ -9,14 +9,13 @@ const getPlugins = () => {
         new webpack.optimize.ModuleConcatenationPlugin(), // scope hoisting
         new webpack.DefinePlugin({
             PRODUCTION: JSON.stringify(config.isProduction)
-        }),
-        
+        })
     ];
 
-    if(!config.isProduction) {
+    if (!config.isProduction) {
         plugins.push(new webpack.SourceMapDevToolPlugin());
     }
-    
+
     return plugins;
 };
 
@@ -25,7 +24,7 @@ module.exports = {
     devtool: config.isProduction ? false : 'eval-source-map',
     entry: config.paths.src.scripts,
     output: {
-		publicPath: 'scripts/',
+        publicPath: 'scripts/',
         filename: config.naming.scripts
     },
     node: {

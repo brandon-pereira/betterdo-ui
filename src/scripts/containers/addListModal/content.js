@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
-import Modal from '../components/modal';
-
-const Container = styled.form``;
+import randomColor from 'randomcolor';
 const Input = styled.input`
     appearance: none;
     background: #fff;
@@ -31,52 +28,38 @@ const Button = styled.button`
     margin-top: 1rem;
 `;
 
-@inject('state')
-@observer
-export default class Header extends Component {
+export default class AddListModalContent extends Component {
     constructor(props) {
         super(props);
         this.state = {
             title: '',
-            color: this.randomColor
+            color: randomColor()
         };
     }
 
-    async componentDidMount() {
-        this._randomColor = (await import('randomcolor')).randomColor;
-        this.randomizeColor();
-    }
-
-    get randomColor() {
-        if (this._randomColor) {
-            return this._randomColor();
-        } else {
-            return '#EEEEEE';
-        }
-    }
-
     randomizeColor() {
-        this.setState({
-            color: this.randomColor
-        });
+        this.setState({ color: randomColor() });
     }
 
-    createList(e) {
+    async onSubmit(e) {
         e.preventDefault();
-        this.props.state.closeModal();
-        this.props.state.createList(this.state.title, this.state.color);
+        const state = this.props.state;
+        if (this.props.closeModal) {
+            this.props.closeModal();
+        }
+        state.createList(this.state.title, this.state.color);
     }
 
     render() {
         return (
-            <Container onSubmit={e => this.createList(e)}>
+            <form onSubmit={e => this.createList(e)}>
                 <Input
                     value={this.state.title}
                     onChange={evt => this.setState({ title: evt.target.value })}
                     placeholder="Add List"
                 />
                 <Button color={this.state.color}>Submit</Button>
-            </Container>
+            </form>
         );
     }
 }

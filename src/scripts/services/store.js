@@ -93,13 +93,6 @@ class Store {
         this.loading = false;
     }
 
-    openNewListModal() {
-        this.modals.newList.visible = true;
-    }
-
-    closeModal() {
-        this.modals.newList.visible = false;
-    }
 }
 
 export default Store;

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { observer, inject } from 'mobx-react';
-import AddList from '../containers/addListModal';
 
 const Overlay = styled.div`
-    display: ${props => (props.visible ? 'flex' : 'none')};
+    display: ${({ visible }) => (visible ? 'flex' : 'none')};
     position: fixed;
     top: 0;
     left: 0;
@@ -22,40 +20,64 @@ const Modal = styled.div`
     max-width: 600px;
     padding: 1rem;
 `;
-const NewListModal = styled(Modal)``;
-// const ListSettingsModal = styled(Modal)``;
-// const AppSettingsModal = styled(Modal)``;
 
-@inject('state')
-@observer
 export default class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: true,
+            content: null
+        };
+    }
+
     closeModal(e) {
-        // e.preventDefault();
-        if (e.currentTarget === e.target) {
-            this.props.state.closeModal();
+        const isBackgroundClick = e.currentTarget === e.target;
+        if (isBackgroundClick) {
+            this.props.onRequestClose();
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.asyncContent && this.props.visible) {
+            this.loadContent();
+        }
+    }
+
+    componentDidUpdate() {
+        if (
+            !this.state.content &&
+            this.props.asyncContent &&
+            this.props.visible
+        ) {
+            this.loadContent();
+        }
+    }
+
+    async loadContent() {
+        const content = await this.props.asyncContent();
+        this.setState({
+            content: content.default,
+            loading: false
+        });
+    }
+
+    getModalContent() {
+        if (this.state.loading) {
+            return <span>Loading...</span>;
+        } else if (this.state.content) {
+            return <this.state.content />;
+        } else {
+            return this.props.children;
         }
     }
 
     render() {
-        const state = this.props.state;
-        let visibleModal = null;
-        if (state.modalVisibility.newList) {
-            visibleModal = (
-                <NewListModal visible>
-                    <h1>NewListModal</h1>
-                    <AddList />
-                </NewListModal>
-            );
-        }
-
         return (
             <Overlay
-                {...{
-                    visible: this.visible
-                }}
+                visible={this.props.visible}
                 onClick={e => this.closeModal(e)}
             >
-                {visibleModal}
+                <Modal>{this.getModalContent()}</Modal>
             </Overlay>
         );
     }
