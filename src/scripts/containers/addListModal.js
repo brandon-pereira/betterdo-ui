@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
+import Modal from '../components/modal';
 
 const Container = styled.form``;
-
 const Input = styled.input`
     appearance: none;
     background: #fff;
@@ -17,7 +17,6 @@ const Input = styled.input`
     font: inherit;
     font-size: 1rem;
 `;
-
 const Button = styled.button`
     border: none;
     color: #fff;

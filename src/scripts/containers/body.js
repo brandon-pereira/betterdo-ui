@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
-import AddTask from './addTask';
-import Task from './task';
+import AddTask from '../components/addTask';
+import Task from '../components/task';
 
 const Container = styled.div``;
 

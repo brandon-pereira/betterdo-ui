@@ -11,20 +11,17 @@ class Store {
         tasks: []
     };
 
+    @observable 
+    currentTask = null;
+
     @observable
     loading = true;
 
     @observable
-    modals = {
-        newList: {
-            visible: false
-        },
-        listSettings: {
-            visible: false
-        },
-        appSettings: {
-            visible: false
-        }
+    modalVisibility = {
+        newList: false,
+        listSettings: false,
+        editTask: true
     };
 
     constructor() {
@@ -43,6 +40,7 @@ class Store {
             .getInbox()
             .then(response => {
                 this.currentList = response;
+                // this.currentTask = response[0].tasks[0];
             })
             .catch(err => {
                 console.error('Failed to fetch current list', err);

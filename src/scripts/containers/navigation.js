@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
-import Search from './search';
-import ListItem from './listItem';
+import Search from '../components/search';
+import ListItem from '../components/list';
 
 const Container = styled.nav`
     grid-row: 2 / 3;

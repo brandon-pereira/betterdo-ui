@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
-import AddList from './addList';
+import AddList from '../containers/addListModal';
 
 const Overlay = styled.div`
     display: ${props => (props.visible ? 'flex' : 'none')};
@@ -39,7 +39,7 @@ export default class Header extends Component {
     render() {
         const state = this.props.state;
         let visibleModal = null;
-        if (state.modals.newList.visible) {
+        if (state.modalVisibility.newList) {
             visibleModal = (
                 <NewListModal visible>
                     <h1>NewListModal</h1>
@@ -51,10 +51,7 @@ export default class Header extends Component {
         return (
             <Overlay
                 {...{
-                    visible:
-                        state.modals.newList.visible ||
-                        state.modals.appSettings.visible ||
-                        state.modals.listSettings.visible
+                    visible: this.visible
                 }}
                 onClick={e => this.closeModal(e)}
             >

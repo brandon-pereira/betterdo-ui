@@ -7,11 +7,10 @@ import { Provider } from 'mobx-react';
 const store = new Store();
 
 // Components
-import Header from './components/header';
-import Navigation from './components/navigation';
+import Header from './containers/header';
+import Navigation from './containers/navigation';
 import Logo from './components/logo';
-import Body from './components/body';
-import Modals from './components/modals';
+import Body from './containers/body';
 
 export default () => {
     render(
@@ -21,7 +20,6 @@ export default () => {
                 <Header />
                 <Navigation />
                 <Body />
-                <Modals />
             </Fragment>
         </Provider>,
         document.querySelector('.main-container')
