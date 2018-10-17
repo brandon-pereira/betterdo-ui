@@ -7,15 +7,22 @@ const getPlugins = () => {
             minChunkSize: 10000
         }),
         new webpack.optimize.ModuleConcatenationPlugin(), // scope hoisting
-        new webpack.SourceMapDevToolPlugin()
+        new webpack.DefinePlugin({
+            PRODUCTION: JSON.stringify(config.isProduction)
+        }),
+        
     ];
+
+    if(!config.isProduction) {
+        plugins.push(new webpack.SourceMapDevToolPlugin());
+    }
     
     return plugins;
 };
 
 module.exports = {
-    mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-    devtool: process.env.NODE_ENV === 'production' ? false : 'eval-source-map',
+    mode: config.isProduction ? 'production' : 'development',
+    devtool: config.isProduction ? false : 'eval-source-map',
     entry: config.paths.src.scripts,
     output: {
 		publicPath: 'scripts/',
