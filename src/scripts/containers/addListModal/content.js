@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import styled from 'styled-components';
 import randomColor from 'randomcolor';
+import Button from '../../components/button';
+
 const Input = styled.input`
     appearance: none;
     background: #fff;
@@ -13,19 +15,6 @@ const Input = styled.input`
     outline: none;
     font: inherit;
     font-size: 1rem;
-`;
-const Button = styled.button`
-    border: none;
-    color: #fff;
-    border-radius: 5px;
-    padding: 1rem;
-    font: inherit;
-    background-color: ${props => props.color};
-    background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
-    text-shadow: 1px 1px rgba(0, 0, 0, 0.6);
-    font-size: 1rem;
-    margin-top: 1rem;
 `;
 
 export default class AddListModalContent extends Component {
@@ -48,18 +37,24 @@ export default class AddListModalContent extends Component {
             this.props.closeModal();
         }
         state.createList(this.state.title, this.state.color);
+        this.randomizeColor();
     }
 
     render() {
         return (
-            <form onSubmit={e => this.createList(e)}>
-                <Input
-                    value={this.state.title}
-                    onChange={evt => this.setState({ title: evt.target.value })}
-                    placeholder="Add List"
-                />
-                <Button color={this.state.color}>Submit</Button>
-            </form>
+            <Fragment>
+                <h1>Form</h1>
+                <form onSubmit={e => this.createList(e)}>
+                    <Input
+                        value={this.state.title}
+                        onChange={evt =>
+                            this.setState({ title: evt.target.value })
+                        }
+                        placeholder="Add List"
+                    />
+                    <Button color={this.state.color}>Submit</Button>
+                </form>
+            </Fragment>
         );
     }
 }
