@@ -20,7 +20,7 @@ const Input = styled.input`
 
 @inject('state')
 @observer
-export default class Header extends Component {
+export default class addTask extends Component {
     constructor(props) {
         super(props);
         this.state = {
