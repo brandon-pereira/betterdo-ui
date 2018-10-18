@@ -14,7 +14,7 @@ import Body from './containers/body';
 
 export default () => {
     render(
-        <Provider state={store}>
+        <Provider store={store}>
             <Fragment>
                 <Logo />
                 <Header />

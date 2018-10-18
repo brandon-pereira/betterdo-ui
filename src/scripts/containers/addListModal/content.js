@@ -24,7 +24,7 @@ export default class AddListModalContent extends Component {
         if (this.state.submitting) {
             return;
         }
-        const state = this.props.state;
+        const state = this.props.store;
         if (this.state.title && this.state.title.length) {
             this.setState({ submitting: true, isInvalid: false });
             await state.createList(this.state.title, this.state.color);

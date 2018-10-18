@@ -38,7 +38,7 @@ const Checkbox = styled.input`
 const Title = styled.span`
     flex: 1;
 `;
-@inject('state')
+@inject('store')
 @observer
 class Task extends Component {
     constructor(props) {
@@ -51,7 +51,7 @@ class Task extends Component {
     updateTask(updatedTask) {
         // this.props.task.isCompleted = true;
         Object.assign(this.props.task, updatedTask);
-        return this.props.state.updateTask(this.props.task);
+        return this.props.store.updateTask(this.props.task);
     }
 
     render() {

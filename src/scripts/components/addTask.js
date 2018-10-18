@@ -18,7 +18,7 @@ const Input = styled.input`
     outline: none;
 `;
 
-@inject('state')
+@inject('store')
 @observer
 export default class addTask extends Component {
     constructor(props) {
@@ -30,7 +30,7 @@ export default class addTask extends Component {
 
     createTask(e) {
         e.preventDefault();
-        this.props.state.createTask(this.state.inputValue);
+        this.props.store.createTask(this.state.inputValue);
         this.updateInputValue('');
     }
 

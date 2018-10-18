@@ -34,15 +34,22 @@ const Title = styled.h2`
     text-align: center;
 `;
 
-@inject('state')
+@inject('store')
 @observer
 export default class Header extends Component {
     render() {
-        const state = this.props.state;
+        const state = this.props.store;
         return (
             <Container color={state.currentList.color}>
                 <Title>{state.currentList.title}</Title>
-                <Button className={state.currentList.type !== 'default' ? 'hidden' : ''} onClick={state.settingsButtonClick}>Settings</Button>
+                <Button
+                    className={
+                        state.currentList.type !== 'default' ? 'hidden' : ''
+                    }
+                    onClick={state.settingsButtonClick}
+                >
+                    Settings
+                </Button>
             </Container>
         );
     }

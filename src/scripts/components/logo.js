@@ -21,11 +21,11 @@ const Container = styled.div`
         font-weight: 600;
     }
 `;
-@inject('state')
+@inject('store')
 @observer
 export default class Logo extends Component {
     render() {
-        const state = this.props.state;
+        const state = this.props.store;
         return (
             <Container onClick={() => state.switchLists({ _id: 'inbox' })}>
                 <h1>

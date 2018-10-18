@@ -20,11 +20,11 @@ const ListsContainer = styled.ul`
     flex: 1;
 `;
 
-@inject('state')
+@inject('store')
 @observer
 class Navigation extends Component {
     render() {
-        const state = this.props.state;
+        const state = this.props.store;
         return (
             <Container>
                 <Search />
