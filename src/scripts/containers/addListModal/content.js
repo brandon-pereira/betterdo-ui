@@ -1,21 +1,8 @@
 import React, { Fragment, Component } from 'react';
-import styled from 'styled-components';
 import randomColor from 'randomcolor';
 import Button from '../../components/button';
-
-const Input = styled.input`
-    appearance: none;
-    background: #fff;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 1rem;
-    border: none;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    outline: none;
-    font: inherit;
-    font-size: 1rem;
-`;
+import { Body, Header } from '../../components/copy';
+import { Form, Label, Input } from '../../components/forms';
 
 export default class AddListModalContent extends Component {
     constructor(props) {
@@ -37,23 +24,29 @@ export default class AddListModalContent extends Component {
             this.props.closeModal();
         }
         state.createList(this.state.title, this.state.color);
-        this.randomizeColor();
     }
 
     render() {
         return (
             <Fragment>
-                <h1>Form</h1>
-                <form onSubmit={e => this.createList(e)}>
+                <Header>Create List</Header>
+                <Body>
+                    Lists allow you to organize your tasks with even more
+                    detail. You can create lists for almost anything.
+                </Body>
+                <Form onSubmit={e => this.onSubmit(e)}>
+                    <Label htmlFor="name">List Name</Label>
                     <Input
                         value={this.state.title}
+                        name="name"
+                        id="name"
                         onChange={evt =>
                             this.setState({ title: evt.target.value })
                         }
-                        placeholder="Add List"
+                        placeholder="ex. Groceries"
                     />
                     <Button color={this.state.color}>Submit</Button>
-                </form>
+                </Form>
             </Fragment>
         );
     }
