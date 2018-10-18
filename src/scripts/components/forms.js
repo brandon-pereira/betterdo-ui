@@ -8,7 +8,7 @@ const _input = styled.input`
     box-sizing: border-box;
     padding: 0.8rem 1rem;
     border: none;
-    box-shadow: inset 0 0 0 2px #ccc;
+    box-shadow: inset 0 0 0 2px ${props => (props.invalid ? '#e57373' : '#ccc')};
     border-radius: 3px;
     outline: none;
     font: inherit;

@@ -35,6 +35,20 @@ const Container = styled.button`
     &:hover:before {
         opacity: 1;
     }
+    ${props =>
+        props.loading &&
+        `
+            font-size: 0;
+            pointer-events: none;
+            &:before {
+                opacity: 1;
+                background: rgba(255, 255, 255, 0.3);
+            }
+            &:after {
+                content: "Loading...";
+                font-size: 1rem;
+            }
+        `};
 `;
 
 const Button = ({ children, ...props }) => (

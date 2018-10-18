@@ -8,6 +8,8 @@ export default class AddListModalContent extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            submitting: false,
+            isInvalid: false,
             title: '',
             color: randomColor()
         };
@@ -19,11 +21,20 @@ export default class AddListModalContent extends Component {
 
     async onSubmit(e) {
         e.preventDefault();
-        const state = this.props.state;
-        if (this.props.closeModal) {
-            this.props.closeModal();
+        if (this.state.submitting) {
+            return;
         }
-        state.createList(this.state.title, this.state.color);
+        const state = this.props.state;
+        if (this.state.title && this.state.title.length) {
+            this.setState({ submitting: true, isInvalid: false });
+            await state.createList(this.state.title, this.state.color);
+            this.setState({ submitting: false });
+            if (this.props.closeModal) {
+                this.props.closeModal();
+            }
+        } else {
+            this.setState({ isInvalid: true });
+        }
     }
 
     render() {
@@ -40,12 +51,18 @@ export default class AddListModalContent extends Component {
                         value={this.state.title}
                         name="name"
                         id="name"
+                        invalid={Boolean(this.state.isInvalid)}
                         onChange={evt =>
                             this.setState({ title: evt.target.value })
                         }
                         placeholder="ex. Groceries"
                     />
-                    <Button color={this.state.color}>Submit</Button>
+                    <Button
+                        loading={this.state.submitting}
+                        color={this.state.color}
+                    >
+                        Submit
+                    </Button>
                 </Form>
             </Fragment>
         );
