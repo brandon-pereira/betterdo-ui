@@ -24,24 +24,24 @@ const ListsContainer = styled.ul`
 @observer
 class Navigation extends Component {
     render() {
-        const state = this.props.store;
+        const store = this.props.store;
         return (
             <Container>
                 <Search />
                 <ListsContainer>
-                    {state.lists.map((item, i) => (
+                    {store.lists.map((item, i) => (
                         <ListItem
                             {...{
-                                selected: item._id === state.currentList._id
+                                selected: item._id === store.currentList._id
                             }}
                             key={i}
                             title={item.title}
                             color={item.color}
-                            onClick={() => state.switchLists(item)}
+                            onClick={() => store.switchLists(item)}
                         />
                     ))}
                     <ListItem
-                        onClick={() => (state.modalVisibility.newList = true)}
+                        onClick={() => (store.modalVisibility.newList = true)}
                         newList
                     />
                 </ListsContainer>
