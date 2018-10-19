@@ -66,13 +66,13 @@ export default class ColorPicker extends Component {
         return (
             <Fragment>
                 <Label>List Colour</Label>
-                <button onClick={e => this.refreshPalette(e)}>Refresh</button>
-                <button
+                <a onClick={e => this.refreshPalette(e)}>Refresh</a>
+                <a
                     style={{ display: 'none' }}
                     onClick={e => this.launchPicker(e)}
                 >
                     Picker
-                </button>
+                </a>
                 <input
                     ref={this.inputColorRef}
                     value={this.state.palette[this.state.currentColor]}

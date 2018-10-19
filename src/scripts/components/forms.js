@@ -8,14 +8,20 @@ const _input = styled.input`
     box-sizing: border-box;
     padding: 0.8rem 1rem;
     border: none;
-    box-shadow: inset 0 0 0 2px ${props => (props.invalid ? '#e57373' : '#ccc')};
+    box-shadow: inset 0 0 0 2px #ccc;
     border-radius: 3px;
     outline: none;
     font: inherit;
     font-size: 1rem;
+    margin-bottom: 1rem;
     &:focus {
         box-shadow: inset 0 0 0 2px #2196f3;
     }
+    ${({ invalid }) =>
+        invalid &&
+        `
+    box-shadow: inset 0 0 0 2px #e57373 !important
+    `};
 `;
 
 const _label = styled.label`

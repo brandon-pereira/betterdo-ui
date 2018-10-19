@@ -13,10 +13,11 @@ const Container = styled.button`
         inset 0 2px rgba(255, 255, 255, 0.5), 0 4px 6px rgba(0, 0, 0, 0.2);
     text-shadow: 1px 1px rgba(0, 0, 0, 0.6);
     font-size: 1rem;
-    margin-top: 1rem;
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    outline: none;
+    display: ${({ hidden }) => (hidden ? 'none' : 'inline-block')};
     span {
         position: relative;
         z-index: 1;

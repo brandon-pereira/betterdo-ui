@@ -11,7 +11,7 @@ class Store {
         tasks: []
     };
 
-    @observable 
+    @observable
     currentTask = null;
 
     @observable
@@ -20,8 +20,7 @@ class Store {
     @observable
     modalVisibility = {
         newList: false,
-        listSettings: false,
-        editTask: true
+        editList: true
     };
 
     constructor() {
