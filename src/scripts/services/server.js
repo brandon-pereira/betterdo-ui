@@ -50,31 +50,34 @@ export default class Server {
         return this.delete(`lists/${listId}`);
     }
 
-    async get(url) {
-        const response = await fetch(`${this.baseUrl}/${url}`);
-        return await response.json();
+    throwError(message = 'An unexpected error ocurred', error = null) {
+        const err = new Error(error || message);
+        err.formattedMessage = message;
+        throw err;
     }
 
-    async delete(url) {
-        const response = await fetch(`${this.baseUrl}/${url}`, {
+    get(url) {
+        return this.fetch(`${this.baseUrl}/${url}`);
+    }
+
+    delete(url) {
+        return this.fetch(`${this.baseUrl}/${url}`, {
             method: 'DELETE'
         });
-        return await response.json();
     }
 
-    async post(url, data = {}) {
-        const response = await fetch(`${this.baseUrl}/${url}`, {
+    post(url, data = {}) {
+        return this.fetch(`${this.baseUrl}/${url}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
             },
             body: JSON.stringify(data)
         });
-        return await response.json();
     }
 
-    async put(url, data = {}) {
-        const response = await fetch(`${this.baseUrl}/${url}`, {
+    put(url, data = {}) {
+        return this.fetch(`${this.baseUrl}/${url}`, {
             method: 'PUT',
             headers: {
                 Accept: 'application/json',
@@ -82,6 +85,19 @@ export default class Server {
             },
             body: JSON.stringify(data)
         });
+    }
+
+    async fetch(url, data) {
+        let response;
+        try {
+            response = await fetch(url, data);
+        } catch (err) {
+            await this.throwError(undefined, err);
+        }
+        if (!response.ok) {
+            const message = (await response.json()).error;
+            this.throwError(message);
+        }
         return await response.json();
     }
 }

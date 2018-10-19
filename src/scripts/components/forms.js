@@ -24,6 +24,14 @@ const _input = styled.input`
     `};
 `;
 
+const _error = styled.div`
+    background: #d32f2f;
+    color: #fff;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    border-radius: 3px;
+`;
+
 const _label = styled.label`
     color: #666;
     margin: 0 0 0.4rem;
@@ -33,9 +41,17 @@ const _label = styled.label`
 const Input = ({ children, ...props }) => (
     <_input {...props}>{children}</_input>
 );
-const Form = ({ children, ...props }) => <form {...props}>{children}</form>;
+const Error = ({ children, ...props }) => (
+    <_error {...props}>{children}</_error>
+);
+const Form = ({ children, errorMessage, ...props }) => (
+    <form {...props}>
+        {errorMessage ? <Error>{errorMessage}</Error> : null}
+        {children}
+    </form>
+);
 const Label = ({ children, ...props }) => (
     <_label {...props}>{children}</_label>
 );
 
-export { Input, Label, Form };
+export { Input, Label, Form, Error };

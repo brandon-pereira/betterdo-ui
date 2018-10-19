@@ -1,7 +1,6 @@
 import React, { Fragment, Component } from 'react';
-import randomColor from 'randomcolor';
 import Button from '../../components/button';
-import { Body, Header } from '../../components/copy';
+import { Header } from '../../components/copy';
 import { Form, Label, Input } from '../../components/forms';
 import ColorPicker from '../../components/colorPicker';
 import { observer, inject } from 'mobx-react';
@@ -15,6 +14,7 @@ export default class AddListModalContent extends Component {
         this.state = {
             submitting: false,
             isInvalid: false,
+            serverError: null,
             title: currentList.title,
             color: currentList.color
         };
@@ -34,10 +34,18 @@ export default class AddListModalContent extends Component {
         const store = this.props.store;
         if (this.state.title && this.state.title.length) {
             this.setState({ submitting: true, isInvalid: false });
-            await store.updateList(store.currentList._id, {
-                title: this.state.title,
-                color: this.state.color
-            });
+            try {
+                await store.updateList(store.currentList._id, {
+                    title: this.state.title,
+                    color: this.state.color
+                });
+            } catch (err) {
+                this.setState({
+                    submitting: false,
+                    serverError: err.formattedMessage
+                });
+                return;
+            }
             this.setState({ submitting: false });
             if (this.props.closeModal) {
                 this.props.closeModal();
@@ -51,7 +59,10 @@ export default class AddListModalContent extends Component {
         return (
             <Fragment>
                 <Header>Edit List</Header>
-                <Form onSubmit={e => this.onSubmit(e)}>
+                <Form
+                    onSubmit={e => this.onSubmit(e)}
+                    errorMessage={this.state.serverError}
+                >
                     <Label htmlFor="name">List Name</Label>
                     <Input
                         value={this.state.title}
