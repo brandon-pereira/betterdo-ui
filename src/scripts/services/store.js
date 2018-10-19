@@ -58,6 +58,8 @@ class Store {
         // Load cached list till server loads
         const _cachedList = this.lists.find(_list => _list._id === list._id);
         if (_cachedList) {
+            // don't load cached tasks, usually just the ids
+            _cachedList.tasks = [];
             this.currentList = _cachedList;
         }
         this.loading = true;
