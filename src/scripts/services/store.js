@@ -92,7 +92,6 @@ class Store {
         this.currentList = list;
         this.loading = false;
     }
-
 }
 
 export default Store;

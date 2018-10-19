@@ -31,7 +31,7 @@ export default class Header extends Component {
     }
 
     closeModal(e) {
-        const isBackgroundClick = e.currentTarget === e.target;
+        const isBackgroundClick = !e || e.currentTarget === e.target;
         if (isBackgroundClick) {
             this.setState({ content: null });
             this.props.onRequestClose();
@@ -66,7 +66,7 @@ export default class Header extends Component {
         if (this.state.loading) {
             return <span>Loading...</span>;
         } else if (this.state.content) {
-            return <this.state.content />;
+            return <this.state.content closeModal={e => this.closeModal(e)} />;
         } else {
             return this.props.children;
         }

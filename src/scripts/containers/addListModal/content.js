@@ -3,7 +3,11 @@ import randomColor from 'randomcolor';
 import Button from '../../components/button';
 import { Body, Header } from '../../components/copy';
 import { Form, Label, Input } from '../../components/forms';
+import ColorPicker from '../../components/colorPicker';
+import { observer, inject } from 'mobx-react';
 
+@inject('store')
+@observer
 export default class AddListModalContent extends Component {
     constructor(props) {
         super(props);
@@ -56,6 +60,12 @@ export default class AddListModalContent extends Component {
                             this.setState({ title: evt.target.value })
                         }
                         placeholder="ex. Groceries"
+                    />
+                    <ColorPicker
+                        currentColor={this.state.color}
+                        onChange={color => {
+                            this.setState({ color });
+                        }}
                     />
                     <Button
                         loading={this.state.submitting}
