@@ -42,8 +42,23 @@ export default class Server {
         return this.post(`tasks/${taskId}`, props);
     }
 
+    updateList(listId, props) {
+        return this.post(`lists/${listId}`, props);
+    }
+
+    deleteList(listId) {
+        return this.delete(`lists/${listId}`);
+    }
+
     async get(url) {
         const response = await fetch(`${this.baseUrl}/${url}`);
+        return await response.json();
+    }
+
+    async delete(url) {
+        const response = await fetch(`${this.baseUrl}/${url}`, {
+            method: 'DELETE'
+        });
         return await response.json();
     }
 

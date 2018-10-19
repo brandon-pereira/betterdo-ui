@@ -11,16 +11,19 @@ import { observer, inject } from 'mobx-react';
 export default class AddListModalContent extends Component {
     constructor(props) {
         super(props);
+        const currentList = this.props.store.currentList;
         this.state = {
             submitting: false,
             isInvalid: false,
-            title: '',
-            color: randomColor()
+            title: currentList.title,
+            color: currentList.color
         };
     }
 
-    randomizeColor() {
-        this.setState({ color: randomColor() });
+    async deleteList() {
+        this.setState({ submitting: true, isInvalid: false });
+        await this.props.store.deleteList(this.props.store.currentList._id);
+        this.setState({ submitting: false });
     }
 
     async onSubmit(e) {
@@ -28,10 +31,13 @@ export default class AddListModalContent extends Component {
         if (this.state.submitting) {
             return;
         }
-        const state = this.props.store;
+        const store = this.props.store;
         if (this.state.title && this.state.title.length) {
             this.setState({ submitting: true, isInvalid: false });
-            await state.createList(this.state.title, this.state.color);
+            await store.updateList(store.currentList._id, {
+                title: this.state.title,
+                color: this.state.color
+            });
             this.setState({ submitting: false });
             if (this.props.closeModal) {
                 this.props.closeModal();
@@ -45,10 +51,6 @@ export default class AddListModalContent extends Component {
         return (
             <Fragment>
                 <Header>Edit List</Header>
-                <Body>
-                    Lists allow you to organize your tasks with even more
-                    detail. You can create lists for almost anything.
-                </Body>
                 <Form onSubmit={e => this.onSubmit(e)}>
                     <Label htmlFor="name">List Name</Label>
                     <Input
@@ -71,7 +73,15 @@ export default class AddListModalContent extends Component {
                         loading={this.state.submitting}
                         color={this.state.color}
                     >
-                        Submit
+                        Modify
+                    </Button>
+                    <Button
+                        loading={this.state.submitting}
+                        color={this.state.color}
+                        onClick={() => this.deleteList()}
+                        type="button"
+                    >
+                        Delete
                     </Button>
                 </Form>
             </Fragment>

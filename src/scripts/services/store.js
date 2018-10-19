@@ -91,6 +91,24 @@ class Store {
         this.currentList = list;
         this.loading = false;
     }
+
+    async updateList(listId, updatedProps) {
+        this.loading = true;
+        const updatedList = await this.server.updateList(listId, updatedProps);
+        this.currentList = updatedList;
+        this.lists = this.lists.map(
+            _list => (listId === _list._id ? updatedList : _list)
+        );
+        this.loading = false;
+    }
+
+    async deleteList(listId) {
+        this.loading = true;
+        await this.server.deleteList(listId);
+        const removedIndex = this.lists.findIndex(curr => curr._id === listId);
+        this.lists.splice(removedIndex, 1);
+        this.loading = false;
+    }
 }
 
 export default Store;
