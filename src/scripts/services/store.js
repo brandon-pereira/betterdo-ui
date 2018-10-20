@@ -20,7 +20,7 @@ class Store {
     @observable
     modalVisibility = {
         newList: false,
-        editList: true
+        editList: false
     };
 
     constructor() {
