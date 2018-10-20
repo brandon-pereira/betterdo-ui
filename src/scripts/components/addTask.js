@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
+import { Input } from './forms';
 
 const Container = styled.form`
     padding: 1rem 1rem 0;
-`;
-
-const Input = styled.input`
-    appearance: none;
-    background: #fff;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 1rem;
-    border: none;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    outline: none;
+    input {
+        margin: 0;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+    }
 `;
 
 @inject('store')
@@ -24,27 +17,34 @@ export default class addTask extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            inputValue: ''
+            value: ''
         };
     }
 
-    createTask(e) {
+    async createTask(e) {
         e.preventDefault();
-        this.props.store.createTask(this.state.inputValue);
-        this.updateInputValue('');
+        if (!this.state.value) {
+            this.setState({ isInvalid: true });
+            return;
+        }
+        this.setState({ isInvalid: false, submitting: true });
+        await this.props.store.createTask(this.state.value);
+        this.setState({ isInvalid: false, submitting: false, value: '' });
     }
 
     updateInputValue(value) {
         this.setState({
-            inputValue: value
+            isInvalid: Boolean(this.state.value),
+            value
         });
     }
 
     render() {
         return (
-            <Container onSubmit={e => this.createTask(e, 'blah')}>
+            <Container onSubmit={e => this.createTask(e)}>
                 <Input
-                    value={this.state.inputValue}
+                    invalid={this.state.isInvalid}
+                    value={this.state.value}
                     onChange={evt => this.updateInputValue(evt.target.value)}
                     placeholder="Add Task"
                 />
