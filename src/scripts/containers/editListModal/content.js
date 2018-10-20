@@ -29,7 +29,15 @@ export default class EditListModalContent extends Component {
 
     async deleteList() {
         this.setState({ submitting: true, isInvalid: false });
-        await this.props.store.deleteList(this.props.store.currentList._id);
+        try {
+            await this.props.store.deleteList(this.props.store.currentList._id);
+        } catch (err) {
+            this.setState({
+                submitting: false,
+                serverError: err.formattedMessage
+            });
+            return;
+        }
         this.setState({ submitting: false });
     }
 
