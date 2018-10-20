@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import randomColor from 'randomcolor';
 import styled from 'styled-components';
 import { Label } from './forms';
+import Button from './button';
 
 const Container = styled.div`
     display: flex;
@@ -11,14 +12,36 @@ const Container = styled.div`
     border-radius: 5px;
 `;
 
-const Color = styled.div`
+const Color = styled.div.attrs({
+    style: ({ color }) => ({
+        backgroundColor: color
+    })
+})`
     flex: 1;
-    background: ${props => props.color};
+    background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
     ${props =>
         props.isCurrent &&
         `
+        box-shadow: none;
         border: 5px solid #2979ff;
     `};
+`;
+
+const LabelContainer = styled.div`
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 0.5rem;
+    label {
+        margin-bottom: 0;
+        flex: 1;
+    }
+    button {
+        background-color: #aaa;
+    }
+    button:not(:last-of-type) {
+        margin-right: 0.2rem;
+    }
 `;
 
 export default class ColorPicker extends Component {
@@ -46,6 +69,15 @@ export default class ColorPicker extends Component {
         });
     }
 
+    changeColorFromPicker(color) {
+        this.props.onChange(color);
+        this.setState({
+            palette: this.state.palette.map(
+                (curr, i) => (this.state.currentColor === i ? color : curr)
+            )
+        });
+    }
+
     refreshPalette(e) {
         e.preventDefault();
         const currentColor = this.state.palette[this.state.currentColor];
@@ -65,14 +97,15 @@ export default class ColorPicker extends Component {
     render() {
         return (
             <Fragment>
-                <Label>List Colour</Label>
-                <a onClick={e => this.refreshPalette(e)}>Refresh</a>
-                <a
-                    style={{ display: 'none' }}
-                    onClick={e => this.launchPicker(e)}
-                >
-                    Picker
-                </a>
+                <LabelContainer>
+                    <Label>List Colour</Label>
+                    <Button small onClick={e => this.refreshPalette(e)}>
+                        Refresh
+                    </Button>
+                    <Button small onClick={e => this.launchPicker(e)}>
+                        Picker
+                    </Button>
+                </LabelContainer>
                 <input
                     ref={this.inputColorRef}
                     value={this.state.palette[this.state.currentColor]}
@@ -81,7 +114,9 @@ export default class ColorPicker extends Component {
                             this.inputColorRef.current &&
                             this.inputColorRef.current.value
                         ) {
-                            this.changeColor(this.inputColorRef.current.value);
+                            this.changeColorFromPicker(
+                                this.inputColorRef.current.value
+                            );
                         }
                     }}
                     type="color"

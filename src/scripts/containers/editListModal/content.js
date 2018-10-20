@@ -4,10 +4,17 @@ import { Header } from '../../components/copy';
 import { Form, Label, Input } from '../../components/forms';
 import ColorPicker from '../../components/colorPicker';
 import { observer, inject } from 'mobx-react';
+import styled from 'styled-components';
+
+const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+`;
 
 @inject('store')
 @observer
-export default class AddListModalContent extends Component {
+export default class EditListModalContent extends Component {
     constructor(props) {
         super(props);
         const currentList = this.props.store.currentList;
@@ -80,20 +87,23 @@ export default class AddListModalContent extends Component {
                             this.setState({ color });
                         }}
                     />
-                    <Button
-                        loading={this.state.submitting}
-                        color={this.state.color}
-                    >
-                        Modify
-                    </Button>
-                    <Button
-                        loading={this.state.submitting}
-                        color={this.state.color}
-                        onClick={() => this.deleteList()}
-                        type="button"
-                    >
-                        Delete
-                    </Button>
+                    <ButtonContainer>
+                        <Button
+                            loading={this.state.submitting}
+                            color={this.state.color}
+                            type="submit"
+                        >
+                            Modify
+                        </Button>
+                        <Button
+                            loading={this.state.submitting}
+                            color={this.state.color}
+                            onClick={() => this.deleteList()}
+                            type="button"
+                        >
+                            Delete
+                        </Button>
+                    </ButtonContainer>
                 </Form>
             </Fragment>
         );

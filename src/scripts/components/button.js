@@ -1,18 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Container = styled.button`
+const Container = styled.button.attrs({
+    style: ({ color }) => ({
+        backgroundColor: color
+    })
+})`
     border: none;
     color: #fff;
     border-radius: 5px;
-    padding: 0.8rem 1rem;
+    padding: ${props => (props.small ? '0.4rem 0.5rem' : '0.8rem 1rem')};
     font: inherit;
-    background-color: ${props => props.color || '#1E88E5'};
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5),
         inset 0 2px rgba(255, 255, 255, 0.5), 0 4px 6px rgba(0, 0, 0, 0.2);
     text-shadow: 1px 1px rgba(0, 0, 0, 0.6);
-    font-size: 1rem;
+    font-size: ${props => (props.small ? '0.6rem' : '1rem')};
     cursor: pointer;
     position: relative;
     overflow: hidden;
@@ -52,8 +55,8 @@ const Container = styled.button`
         `};
 `;
 
-const Button = ({ children, ...props }) => (
-    <Container {...props}>
+const Button = ({ children, type, ...props }) => (
+    <Container type={type || 'button'} {...props}>
         <span>{children}</span>
     </Container>
 );

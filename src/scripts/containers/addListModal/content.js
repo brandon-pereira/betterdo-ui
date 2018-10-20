@@ -68,6 +68,7 @@ export default class AddListModalContent extends Component {
                         }}
                     />
                     <Button
+                        type="submit"
                         loading={this.state.submitting}
                         color={this.state.color}
                     >
