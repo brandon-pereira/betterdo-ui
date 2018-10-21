@@ -5,6 +5,11 @@ import { Body, Header } from '../../components/copy';
 import { Form, Label, Input } from '../../components/forms';
 import ColorPicker from '../../components/colorPicker';
 import { observer, inject } from 'mobx-react';
+import styled from 'styled-components';
+
+const ButtonContainer = styled.div`
+    margin-top: 1.5rem;
+`;
 
 @inject('store')
 @observer
@@ -79,13 +84,15 @@ export default class AddListModalContent extends Component {
                             this.setState({ color });
                         }}
                     />
-                    <Button
-                        type="submit"
-                        loading={this.state.submitting}
-                        color={this.state.color}
-                    >
-                        Submit
-                    </Button>
+                    <ButtonContainer>
+                        <Button
+                            type="submit"
+                            loading={this.state.submitting}
+                            color={this.state.color}
+                        >
+                            Submit
+                        </Button>
+                    </ButtonContainer>
                 </Form>
             </Fragment>
         );
