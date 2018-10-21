@@ -28,7 +28,7 @@ const Container = styled.div`
     width: ${props => props.size || '1rem'};
     transform: scale(0);
     opacity: 0;
-    transition: all 0.5s 1s;
+    transition: all 0.5s 0.2s;
     svg {
         height: 100%;
         width: 100%;
