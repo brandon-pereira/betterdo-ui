@@ -37,6 +37,9 @@ export default class EditListModalContent extends Component {
             });
             return;
         }
+        if (this.props.closeModal) {
+            this.props.closeModal();
+        }
         this.setState({ submitting: false });
     }
 
