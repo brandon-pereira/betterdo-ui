@@ -14,6 +14,7 @@ export default class AddListModalContent extends Component {
         this.state = {
             submitting: false,
             isInvalid: false,
+            serverError: null,
             title: '',
             color: randomColor()
         };
@@ -31,7 +32,15 @@ export default class AddListModalContent extends Component {
         const state = this.props.store;
         if (this.state.title && this.state.title.length) {
             this.setState({ submitting: true, isInvalid: false });
-            await state.createList(this.state.title, this.state.color);
+            try {
+                await state.createList(this.state.title, this.state.color);
+            } catch (err) {
+                this.setState({
+                    submitting: false,
+                    serverError: err.formattedMessage
+                });
+                return;
+            }
             this.setState({ submitting: false });
             if (this.props.closeModal) {
                 this.props.closeModal();
@@ -49,7 +58,10 @@ export default class AddListModalContent extends Component {
                     Lists allow you to organize your tasks with even more
                     detail. You can create lists for almost anything.
                 </Body>
-                <Form onSubmit={e => this.onSubmit(e)}>
+                <Form
+                    errorMessage={this.state.serverError}
+                    onSubmit={e => this.onSubmit(e)}
+                >
                     <Label htmlFor="name">List Name</Label>
                     <Input
                         value={this.state.title}
