@@ -34,11 +34,7 @@ export default class Logo extends Component {
                     Better
                     <span>Do.</span>
                 </h1>
-                <Loader
-                    height="2rem"
-                    width="2rem"
-                    loading={this.props.store.loading}
-                />
+                <Loader size="2rem" loading={this.props.store.loading} />
             </Container>
         );
     }

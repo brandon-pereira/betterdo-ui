@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Header } from './copy';
+import Loader from './loader';
 
 const Overlay = styled.div`
     display: ${({ visible }) => (visible ? 'flex' : 'none')};
@@ -30,6 +31,12 @@ const HeaderContainer = styled.div`
     h2 {
         margin-bottom: 0;
     }
+`;
+const LoaderContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10rem;
 `;
 
 export default class Modal extends Component {
@@ -75,7 +82,13 @@ export default class Modal extends Component {
 
     getModalContent() {
         if (this.state.loading) {
-            return <span>Loading...</span>;
+            return (
+                <LoaderContainer>
+                    <Loader color="#006fb0" size="4rem" loading={true}>
+                        Loading...
+                    </Loader>
+                </LoaderContainer>
+            );
         } else if (this.state.content) {
             return <this.state.content closeModal={e => this.closeModal(e)} />;
         } else {

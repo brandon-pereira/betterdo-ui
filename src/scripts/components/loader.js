@@ -24,8 +24,8 @@ const dashoffset = keyframes`
     }
 `;
 const Container = styled.div`
-    height: ${props => props.height || '1rem'};
-    width: ${props => props.width || '1rem'};
+    height: ${props => props.size || '1rem'};
+    width: ${props => props.size || '1rem'};
     transform: scale(0);
     opacity: 0;
     transition: all 0.5s 1s;
