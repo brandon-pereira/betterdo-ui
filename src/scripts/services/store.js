@@ -29,7 +29,6 @@ class Store {
             .getLists()
             .then(response => {
                 this.lists = response;
-                this.ready = true;
             })
             .catch(err => {
                 console.error('Failed to fetch lists', err);

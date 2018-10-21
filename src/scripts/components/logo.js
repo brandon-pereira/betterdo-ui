@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
-
+import Loader from './loader';
 const Container = styled.div`
     grid-row: 1 / 1;
     grid-column: 1 / 1;
@@ -12,7 +12,9 @@ const Container = styled.div`
     color: #fff;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 1rem;
     h1 {
         font-size: 1.8rem;
         font-weight: 200;
@@ -32,6 +34,11 @@ export default class Logo extends Component {
                     Better
                     <span>Do.</span>
                 </h1>
+                <Loader
+                    height="2rem"
+                    width="2rem"
+                    loading={this.props.store.loading}
+                />
             </Container>
         );
     }

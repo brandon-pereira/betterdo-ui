@@ -26,6 +26,9 @@ const dashoffset = keyframes`
 const Container = styled.div`
     height: ${props => props.height || '1rem'};
     width: ${props => props.width || '1rem'};
+    transform: scale(0);
+    opacity: 0;
+    transition: all 0.5s 1s;
     svg {
         height: 100%;
         width: 100%;
@@ -39,6 +42,13 @@ const Container = styled.div`
         stroke: ${props => props.color || '#fff'};
         animation: ${dashoffset} 2s ease-in-out infinite;
     }
+    ${({ loading }) =>
+        loading &&
+        `
+        transition: all 0s 0s !important;
+        transform: scale(1);
+        opacity: 1;
+    `};
 `;
 
 const Button = props => (
