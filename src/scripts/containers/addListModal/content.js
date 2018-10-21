@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import randomColor from 'randomcolor';
 import Button from '../../components/button';
-import { Body, Header } from '../../components/copy';
+import { Body } from '../../components/copy';
 import { Form, Label, Input } from '../../components/forms';
 import ColorPicker from '../../components/colorPicker';
 import { observer, inject } from 'mobx-react';
@@ -58,7 +58,6 @@ export default class AddListModalContent extends Component {
     render() {
         return (
             <Fragment>
-                <Header>Create List</Header>
                 <Body>
                     Lists allow you to organize your tasks with even more
                     detail. You can create lists for almost anything.

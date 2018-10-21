@@ -18,6 +18,7 @@ export default class AddListModalContainer extends Component {
             <Modal
                 onRequestClose={() => (this.visible = false)}
                 visible={this.visible}
+                title="Create List"
                 asyncContent={() => import('./content')}
             />
         );

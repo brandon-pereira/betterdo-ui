@@ -5,7 +5,7 @@ const _header = styled.h2`
     color: #006fb0;
     font-weight: 100;
     font-size: 2rem;
-    margin: 0.3rem 0 0;
+    margin: 0 0 1rem;
     padding: 0;
 `;
 

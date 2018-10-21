@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Header } from './copy';
 
 const Overlay = styled.div`
     display: ${({ visible }) => (visible ? 'flex' : 'none')};
@@ -13,15 +14,25 @@ const Overlay = styled.div`
     justify-content: center;
     align-items: center;
 `;
-const Modal = styled.div`
+const _Modal = styled.div`
     display: block;
     background: #fff;
     width: 60%;
     max-width: 600px;
     padding: 1rem;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+`;
+const HeaderContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    h2 {
+        margin-bottom: 0;
+    }
 `;
 
-export default class Header extends Component {
+export default class Modal extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -78,7 +89,13 @@ export default class Header extends Component {
                 visible={this.props.visible}
                 onClick={e => this.closeModal(e)}
             >
-                <Modal>{this.getModalContent()}</Modal>
+                <_Modal>
+                    <HeaderContainer>
+                        <Header>{this.props.title || ''}</Header>
+                        <button onClick={() => this.closeModal()}>close</button>
+                    </HeaderContainer>
+                    {this.getModalContent()}
+                </_Modal>
             </Overlay>
         );
     }

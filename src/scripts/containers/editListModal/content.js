@@ -1,6 +1,5 @@
 import React, { Fragment, Component } from 'react';
 import Button from '../../components/button';
-import { Header } from '../../components/copy';
 import { Form, Label, Input } from '../../components/forms';
 import ColorPicker from '../../components/colorPicker';
 import { observer, inject } from 'mobx-react';
@@ -73,7 +72,6 @@ export default class EditListModalContent extends Component {
     render() {
         return (
             <Fragment>
-                <Header>Edit List</Header>
                 <Form
                     onSubmit={e => this.onSubmit(e)}
                     errorMessage={this.state.serverError}
