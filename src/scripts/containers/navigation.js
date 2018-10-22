@@ -35,6 +35,7 @@ class Navigation extends Component {
                                 selected: item._id === store.currentList._id
                             }}
                             key={i}
+                            type={item.type}
                             title={item.title}
                             color={item.color}
                             onClick={() => store.switchLists(item)}

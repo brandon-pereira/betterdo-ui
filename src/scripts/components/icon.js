@@ -8,6 +8,8 @@ const IconContainer = styled.div`
     position: relative;
     svg {
         position: absolute;
+        left: 0;
+        top: 0;
         fill: ${props => props.color || '#000'}
         height: 100%;
         width: 100%;
