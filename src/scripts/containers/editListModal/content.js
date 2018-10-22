@@ -40,7 +40,6 @@ export default class EditListModalContent extends Component {
         if (this.props.closeModal) {
             this.props.closeModal();
         }
-        this.setState({ submitting: false });
     }
 
     async onSubmit(e) {

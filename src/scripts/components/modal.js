@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Header } from './copy';
 import Loader from './loader';
+import Icon from './icon';
 
 const Overlay = styled.div`
     display: ${({ visible }) => (visible ? 'flex' : 'none')};
@@ -28,6 +29,7 @@ const HeaderContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    margin-bottom: 1rem;
     h2 {
         margin-bottom: 0;
     }
@@ -105,7 +107,14 @@ export default class Modal extends Component {
                 <_Modal>
                     <HeaderContainer>
                         <Header>{this.props.title || ''}</Header>
-                        <button onClick={() => this.closeModal()}>close</button>
+                        <Icon
+                            icon="x"
+                            color="#a9a9a9"
+                            size="1rem"
+                            onClick={() => this.closeModal()}
+                        >
+                            Close
+                        </Icon>
                     </HeaderContainer>
                     {this.getModalContent()}
                 </_Modal>
