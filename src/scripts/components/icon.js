@@ -31,15 +31,19 @@ export default class Icon extends Component {
 
     render() {
         const Icon = this.state.icon;
-        const { onClick, ...props } = this.props;
+        const { onClick, className, ...props } = this.props;
         if (Icon) {
             return (
-                <IconContainer {...props} onClick={e => onClick(e)}>
-                    <Icon />
+                <IconContainer
+                    {...props}
+                    className={`${className} icon`}
+                    onClick={e => onClick(e)}
+                >
+                    <Icon aria-describedby={this.props.children} />
                 </IconContainer>
             );
         } else {
-            return <span onClick={e => onClick(e)}>Loading...</span>;
+            return <div onClick={e => onClick(e)}>{this.props.children}</div>;
         }
     }
 }

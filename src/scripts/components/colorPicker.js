@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import randomColor from 'randomcolor';
 import styled from 'styled-components';
 import { Label } from './forms';
-import Button from './button';
+import Icon from './icon';
 
 const Container = styled.div`
     display: flex;
@@ -30,17 +30,12 @@ const Color = styled.div.attrs({
 
 const LabelContainer = styled.div`
     display: flex;
-    align-items: flex-end;
     margin-bottom: 0.5rem;
     label {
         margin-bottom: 0;
-        flex: 1;
     }
-    button {
-        background-color: #aaa;
-    }
-    button:not(:last-of-type) {
-        margin-right: 0.2rem;
+    .icon {
+        margin-left: 0.3rem;
     }
 `;
 
@@ -99,12 +94,22 @@ export default class ColorPicker extends Component {
             <Fragment>
                 <LabelContainer>
                     <Label>List Colour</Label>
-                    <Button small onClick={e => this.refreshPalette(e)}>
-                        Refresh
-                    </Button>
-                    <Button small onClick={e => this.launchPicker(e)}>
-                        Picker
-                    </Button>
+                    <Icon
+                        size="1rem"
+                        icon="refresh"
+                        color="#505050"
+                        onClick={e => this.refreshPalette(e)}
+                    >
+                        Refresh Palette
+                    </Icon>
+                    <Icon
+                        size="1rem"
+                        icon="eyedropper"
+                        color="#505050"
+                        onClick={e => this.launchPicker(e)}
+                    >
+                        Pick a colour
+                    </Icon>
                 </LabelContainer>
                 <input
                     ref={this.inputColorRef}
