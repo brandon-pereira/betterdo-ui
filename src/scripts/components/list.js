@@ -15,18 +15,20 @@ const Li = styled.li`
             : '0 1px rgba(255,255,255,.15)'};
 `;
 const DotIcon = styled.div`
-    height: 10px;
-    width: 10px;
+    height: 1rem;
+    width: 1rem;
     background-color: ${props => (props.color ? props.color : '#585858')};
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.2));
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3),
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5),
         0 1px 10px rgba(0, 0, 0, 0.4);
     border-radius: 50%;
 `;
 const Title = styled.span`
     flex: 1;
-    padding: 1rem 0;
+    padding: 1rem 1rem 1rem 0;
     text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 `;
 const IconContainer = styled.div`
     width: 50px;
