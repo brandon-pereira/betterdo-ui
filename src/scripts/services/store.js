@@ -109,7 +109,7 @@ class Store {
         const removedIndex = this.lists.findIndex(curr => curr._id === listId);
         this.lists.splice(removedIndex, 1);
         if (this.currentList._id === listId) {
-            this.currentList = this.switchLists({ _id: 'inbox' });
+            await this.switchLists({ _id: 'inbox' });
         }
         this.loading = false;
     }
