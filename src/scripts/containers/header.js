@@ -14,7 +14,9 @@ const Container = styled.header`
     display: flex;
     align-items: center;
     padding: 0 0.8rem;
+    overflow: hidden;
     .button {
+        margin-left: 0.8rem;
         font-size: 0.8rem;
         padding: 0.8rem;
         box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5),
@@ -25,6 +27,9 @@ const Container = styled.header`
 const Title = styled.h2`
     flex: 1;
     text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 `;
 
 @inject('store')
