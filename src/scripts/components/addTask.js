@@ -34,7 +34,7 @@ export default class addTask extends Component {
 
     updateInputValue(value) {
         this.setState({
-            isInvalid: Boolean(this.state.value),
+            isInvalid: !value,
             value
         });
     }
