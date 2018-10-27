@@ -30,6 +30,10 @@ export default class Body extends Component {
     }
 
     onSortEnd = ({ oldIndex, newIndex }) => {
+        // Indexes match, no change
+        if (oldIndex === newIndex) {
+            return;
+        }
         this.currentList.tasks = arrayMove(
             this.currentList.tasks,
             oldIndex,
