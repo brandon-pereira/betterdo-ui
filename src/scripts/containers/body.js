@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { computed } from 'mobx';
+import styled from 'styled-components';
 import AddTask from '../components/addTask';
 import Task from '../components/task';
 import {
@@ -9,6 +10,11 @@ import {
     arrayMove
 } from 'react-sortable-hoc';
 
+const Container = styled.div`
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+    overflow-y: scroll;
+`;
 const SortableItem = SortableElement(({ value }) => <Task task={value} />);
 
 const SortableList = SortableContainer(({ items }) => {
@@ -50,13 +56,14 @@ export default class Body extends Component {
 
     render() {
         return (
-            <div>
+            <Container>
                 <AddTask />
                 <SortableList
+                    distance={10}
                     items={this.currentList.tasks.map(task => task)}
                     onSortEnd={this.onSortEnd}
                 />
-            </div>
+            </Container>
         );
     }
 }
