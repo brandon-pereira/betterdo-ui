@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const _input = styled.input`
+const Input = styled.input`
     appearance: none;
     background: #fff;
     width: ${props => props.width || '100%'};
@@ -24,7 +24,7 @@ const _input = styled.input`
     `};
 `;
 
-const _error = styled.div`
+const Error = styled.div`
     background: #d32f2f;
     color: #fff;
     padding: 0.5rem;
@@ -32,26 +32,17 @@ const _error = styled.div`
     border-radius: 3px;
 `;
 
-const _label = styled.label`
+const Label = styled.label`
     color: #666;
     margin: 0 0 0.4rem;
     display: block;
 `;
 
-const Input = ({ children, ...props }) => (
-    <_input {...props}>{children}</_input>
-);
-const Error = ({ children, ...props }) => (
-    <_error {...props}>{children}</_error>
-);
 const Form = ({ children, errorMessage, ...props }) => (
     <form {...props}>
         {errorMessage ? <Error>{errorMessage}</Error> : null}
         {children}
     </form>
-);
-const Label = ({ children, ...props }) => (
-    <_label {...props}>{children}</_label>
 );
 
 export { Input, Label, Form, Error };
