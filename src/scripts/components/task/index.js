@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
 import Checkbox from './checkbox';
+import EditBody from './editBody';
 import { Input } from '../forms';
 import Icon from '../icon';
 const Header = styled.header`
@@ -82,7 +83,12 @@ class Task extends Component {
                         <Title>{task.title}</Title>
                     )}
                 </Header>
-                {isEditing ? <div>Lorem Ipsum</div> : null}
+                {isEditing ? (
+                    <EditBody
+                        updateTask={this.updateTask.bind(this)}
+                        task={task}
+                    />
+                ) : null}
             </Container>
         );
     }
