@@ -87,6 +87,7 @@ class Task extends Component {
                     <EditBody
                         updateTask={this.updateTask.bind(this)}
                         task={task}
+                        lists={this.props.store.lists}
                     />
                 ) : null}
             </Container>

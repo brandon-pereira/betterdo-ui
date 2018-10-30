@@ -5,6 +5,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Label, Input } from '../forms';
 import Dropdown from '../dropdown';
+import Icon from '../icon';
+
 const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -16,49 +18,91 @@ const Block = styled.div`
         margin-right: 0;
     }
 `;
+const Icons = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 100%;
+`;
 class EditBody extends Component {
-    render() {
+    constructor(props) {
+        super(props);
         const { task } = this.props;
+        this.state = {
+            priority: task.priority,
+            dueDate: task.dueDate,
+            list: task.list,
+            iconProps: {
+                color: 'red',
+                size: '2rem'
+            }
+        };
+        this.priorities = [
+            { value: 'low', label: 'Low' },
+            { value: 'normal', label: 'Normal' },
+            { value: 'high', label: 'High' }
+        ];
+        this.lists = this.props.lists.map(list => ({
+            value: list._id,
+            label: list.title
+        }));
+        this.updatePriority = this.updatePriority.bind(this);
+        this.updateList = this.updateList.bind(this);
+    }
+
+    updatePriority(priority) {
+        this.updateTask({ priority });
+    }
+
+    updateList(list) {
+        this.updateTask({ list });
+    }
+
+    updateTask(updatedProperties = {}) {
+        this.setState(updatedProperties);
+        this.props.updateTask(updatedProperties);
+    }
+
+    render() {
+        const state = this.state;
+        console.log(this.state.task);
         return (
             <Container>
                 <Block>
                     <Label>Priority</Label>
                     <Dropdown
-                        values={[
-                            { value: 'low', label: 'Low' },
-                            { value: 'normal', label: 'Normal' },
-                            { value: 'high', label: 'High' }
-                        ]}
-                        onSelect={v => {
-                            this.props.updateTask({
-                                priority: v
-                            });
-                        }}
-                        value={task.priority}
+                        values={this.priorities}
+                        onSelect={this.updatePriority}
+                        value={state.priority}
                     />
                 </Block>
                 <Block>
                     <Label>Due Date</Label>
-                    <Input type="date" value={task.dueDate || ''} />
+                    <Input type="date" value={state.dueDate || ''} />
                 </Block>
                 <Block>
                     <Label>List</Label>
                     <Dropdown
-                        values={[
-                            { value: task.list, label: task.list }
-                            // { value: 'normal', label: 'Normal' },
-                            // { value: 'high', label: 'High' }
-                        ]}
-                        // onSelect={v => {
-                        //     this.props.updateTask({
-                        //         priority: v
-                        //     });
-                        // }}
-                        value={task.list}
+                        values={this.lists}
+                        onSelect={this.updateList}
+                        value={state.list}
                     />
                 </Block>
                 <Block>
-                    <button>delete</button>
+                    <Icons>
+                        <Icon {...this.state.iconProps} icon="refresh">
+                            Subtasks
+                        </Icon>
+                        <Icon {...this.state.iconProps} icon="refresh">
+                            Notes
+                        </Icon>
+                        <Icon {...this.state.iconProps} icon="refresh">
+                            Delete
+                        </Icon>
+                        <Icon {...this.state.iconProps} icon="refresh">
+                            Save
+                        </Icon>
+                    </Icons>
                 </Block>
             </Container>
         );
