@@ -1,6 +1,3 @@
-// Priority   |  Due Date
-// List       | [subtask] | [notes] | [delete] | [save]
-
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Label, Input } from '../forms';
@@ -11,10 +8,14 @@ const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
 `;
+const Header = styled.div`
+    width: 100%;
+    display: flex;
+`;
 const Block = styled.div`
     width: calc(50% - 0.5rem);
     margin-right: 1rem;
-    &:nth-child(2n) {
+    &:nth-of-type(2n) {
         margin-right: 0;
     }
 `;
@@ -29,6 +30,7 @@ class EditBody extends Component {
         super(props);
         const { task } = this.props;
         this.state = {
+            title: task.title,
             priority: task.priority,
             dueDate: task.dueDate,
             list: task.list,
@@ -68,6 +70,20 @@ class EditBody extends Component {
         console.log(this.state.task);
         return (
             <Container>
+                <Header>
+                    <Input value={state.title} />
+                    <Icon
+                        icon="chevron"
+                        size="2rem"
+                        color="#565656"
+                        onClick={e => {
+                            this.setState({ isEditing: false });
+                            e.stopPropagation();
+                        }}
+                    >
+                        Close
+                    </Icon>
+                </Header>
                 <Block>
                     <Label>Priority</Label>
                     <Dropdown
