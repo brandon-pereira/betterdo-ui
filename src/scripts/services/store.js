@@ -18,6 +18,9 @@ class Store {
     loading = true;
 
     @observable
+    user = null;
+
+    @observable
     modalVisibility = {
         newList: false,
         editList: false
@@ -25,32 +28,19 @@ class Store {
 
     constructor() {
         this.server = new Server();
-        const lists = this.server
-            .getLists()
-            .then(response => {
-                this.lists = response;
-            })
-            .catch(err => {
-                console.error('Failed to fetch lists', err);
-            });
+        this.init();
+    }
 
-        const currentList = this.server
-            .getInbox()
-            .then(response => {
-                this.currentList = response;
-                // this.currentTask = response[0].tasks[0];
-            })
-            .catch(err => {
-                console.error('Failed to fetch current list', err);
-            });
-
-        Promise.all([lists, currentList])
-            .then(() => {
-                this.loading = false;
-            })
-            .catch(err => {
-                console.error('Failed to initialize', err);
-            });
+    async init() {
+        try {
+            const response = await this.server.init(); // TODO: pass in listId if not on inbox
+            this.lists = response.lists;
+            this.currentList = response.currentList;
+            this.user = response.user;
+        } catch (err) {
+            console.error('Failed to initialize', err);
+        }
+        this.loading = false;
     }
 
     async switchLists(list) {

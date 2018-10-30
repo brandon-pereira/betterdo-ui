@@ -3,6 +3,11 @@ export default class Server {
         this.baseUrl = '/api';
     }
 
+    async init(listId) {
+        const response = await this.get('init' + (listId ? `/${listId}` : ''));
+        return response;
+    }
+
     async getLists() {
         const lists = await this.get('lists');
         return lists.lists || [];
