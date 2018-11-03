@@ -34,6 +34,7 @@ class Task extends Component {
             return (
                 <EditTask
                     updateTask={this.updateTask.bind(this)}
+                    onClose={() => this.setState({ isEditing: false })}
                     task={task}
                     lists={lists}
                 />

@@ -100,7 +100,7 @@ class EditBody extends Component {
                         size="2.5rem"
                         color="#565656"
                         onClick={e => {
-                            this.setState({ isEditing: false });
+                            this.props.onClose();
                             e.stopPropagation();
                         }}
                     >
