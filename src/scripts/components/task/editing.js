@@ -50,6 +50,7 @@ class EditBody extends Component {
         }));
         this.updatePriority = this.updatePriority.bind(this);
         this.updateList = this.updateList.bind(this);
+        this.onKeyPress = this.onKeyPress.bind(this);
     }
 
     updatePriority(priority) {
@@ -65,13 +66,30 @@ class EditBody extends Component {
         this.props.updateTask(updatedProperties);
     }
 
+    onKeyPress(e) {
+        if (e.key === 'Enter') {
+            this.updateTask({
+                dueDate: this.state.dueDate,
+                title: this.state.title
+            });
+        }
+    }
+
     render() {
         const state = this.state;
-        console.log(this.state.task);
         return (
             <Container>
                 <Header>
-                    <Input value={state.title} />
+                    <Input
+                        value={state.title}
+                        placeholder="Enter a title"
+                        onKeyPress={this.onKeyPress}
+                        onChange={evt =>
+                            this.setState({
+                                title: evt.target.value
+                            })
+                        }
+                    />
                     <Icon
                         icon="chevron"
                         size="2rem"
@@ -94,7 +112,16 @@ class EditBody extends Component {
                 </Block>
                 <Block>
                     <Label>Due Date</Label>
-                    <Input type="date" value={state.dueDate || ''} />
+                    <Input
+                        type="date"
+                        value={state.dueDate || ''}
+                        onChange={evt =>
+                            this.setState({
+                                dueDate: evt.target.value
+                            })
+                        }
+                        onKeyPress={this.onKeyPress}
+                    />
                 </Block>
                 <Block>
                     <Label>List</Label>
