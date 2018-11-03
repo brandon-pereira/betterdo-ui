@@ -11,12 +11,17 @@ const Container = styled.div`
 const Header = styled.div`
     width: 100%;
     display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    ${Input} {
+        margin: 0 0.5rem 0 0;
+    }
 `;
 const Block = styled.div`
     width: calc(50% - 0.5rem);
-    margin-right: 1rem;
+    margin-left: 1rem;
     &:nth-of-type(2n) {
-        margin-right: 0;
+        margin-left: 0;
     }
 `;
 const Icons = styled.div`
@@ -92,7 +97,7 @@ class EditBody extends Component {
                     />
                     <Icon
                         icon="chevron"
-                        size="2rem"
+                        size="2.5rem"
                         color="#565656"
                         onClick={e => {
                             this.setState({ isEditing: false });
