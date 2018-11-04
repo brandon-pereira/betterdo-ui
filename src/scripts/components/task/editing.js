@@ -30,7 +30,7 @@ const Icons = styled.div`
     align-items: flex-end;
     height: 100%;
     ${IconContainer} {
-        background: red;
+        margin-bottom: 0.5rem;
     }
 `;
 class EditBody extends Component {
@@ -42,10 +42,7 @@ class EditBody extends Component {
             priority: task.priority,
             dueDate: task.dueDate,
             list: task.list,
-            iconProps: {
-                color: 'red',
-                size: '2rem'
-            }
+            iconProps: { color: '#565656', size: '2rem' }
         };
         this.priorities = [
             { value: 'low', label: 'Low' },
