@@ -144,7 +144,11 @@ class EditBody extends Component {
                         <Icon {...this.state.iconProps} icon="book">
                             Notes
                         </Icon>
-                        <Icon {...this.state.iconProps} icon="bin">
+                        <Icon
+                            {...this.state.iconProps}
+                            onClick={this.props.deleteTask}
+                            icon="bin"
+                        >
                             Delete
                         </Icon>
                         <Icon {...this.state.iconProps} icon="floppy-disk">

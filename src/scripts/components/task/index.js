@@ -22,6 +22,17 @@ class Task extends Component {
         };
     }
 
+    deleteTask() {
+        const result = confirm(
+            `Are you sure you want to delete the task "${
+                this.props.task.title
+            }"? This can't be undone.`
+        );
+        if (result) {
+            return this.props.store.deleteTask(this.props.task._id);
+        }
+    }
+
     updateTask(updatedTask) {
         Object.assign(this.props.task, updatedTask);
         return this.props.store.updateTask(this.props.task);
@@ -34,6 +45,7 @@ class Task extends Component {
             return (
                 <EditTask
                     updateTask={this.updateTask.bind(this)}
+                    deleteTask={this.deleteTask.bind(this)}
                     onClose={() => this.setState({ isEditing: false })}
                     task={task}
                     lists={lists}

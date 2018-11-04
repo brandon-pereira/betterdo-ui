@@ -51,6 +51,10 @@ export default class Server {
         return this.post(`lists/${listId}`, props);
     }
 
+    deleteTask(taskId) {
+        return this.delete(`tasks/${taskId}`);
+    }
+
     deleteList(listId) {
         return this.delete(`lists/${listId}`);
     }

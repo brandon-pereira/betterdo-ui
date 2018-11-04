@@ -103,6 +103,16 @@ class Store {
         }
         this.loading = false;
     }
+
+    async deleteTask(taskId) {
+        this.loading = true;
+        await this.server.deleteTask(taskId);
+        const removedIndex = this.currentList.tasks.findIndex(
+            curr => curr._id === taskId
+        );
+        this.currentList.tasks.splice(removedIndex, 1);
+        this.loading = false;
+    }
 }
 
 export default Store;
