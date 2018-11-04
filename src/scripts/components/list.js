@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import SvgIcon from './icon';
+import SvgIcon, { IconContainer } from './icon';
 
 const Li = styled.li`
     cursor: pointer;
@@ -30,13 +30,13 @@ const Title = styled.span`
     overflow: hidden;
     white-space: nowrap;
 `;
-const IconContainer = styled.div`
+const IconHolder = styled.div`
     width: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    .icon {
+    ${IconContainer} {
         filter: drop-shadow(0 1px #000);
     }
 `;
@@ -60,7 +60,7 @@ class ListItem extends Component {
                 {...{ selected: this.props.selected }}
                 onClick={this.props.onClick}
             >
-                <IconContainer>{Icon}</IconContainer>
+                <IconHolder>{Icon}</IconHolder>
                 <Title>{title}</Title>
             </Li>
         );

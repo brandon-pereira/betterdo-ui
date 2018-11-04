@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import randomColor from 'randomcolor';
 import styled from 'styled-components';
 import { Label } from './forms';
-import Icon from './icon';
+import Icon, { IconContainer } from './icon';
 
 const Container = styled.div`
     display: flex;
@@ -34,7 +34,7 @@ const LabelContainer = styled.div`
     label {
         margin-bottom: 0;
     }
-    .icon {
+    ${IconContainer} {
         margin-left: 0.3rem;
     }
 `;

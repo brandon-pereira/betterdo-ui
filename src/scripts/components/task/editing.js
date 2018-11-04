@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Label, Input } from '../forms';
 import Dropdown from '../dropdown';
-import Icon from '../icon';
+import Icon, { IconContainer } from '../icon';
 
 const Container = styled.div`
     display: flex;
@@ -29,6 +29,9 @@ const Icons = styled.div`
     justify-content: space-between;
     align-items: flex-end;
     height: 100%;
+    ${IconContainer} {
+        background: red;
+    }
 `;
 class EditBody extends Component {
     constructor(props) {
@@ -138,16 +141,16 @@ class EditBody extends Component {
                 </Block>
                 <Block>
                     <Icons>
-                        <Icon {...this.state.iconProps} icon="refresh">
+                        <Icon {...this.state.iconProps} icon="subtasks">
                             Subtasks
                         </Icon>
-                        <Icon {...this.state.iconProps} icon="refresh">
+                        <Icon {...this.state.iconProps} icon="book">
                             Notes
                         </Icon>
-                        <Icon {...this.state.iconProps} icon="refresh">
+                        <Icon {...this.state.iconProps} icon="bin">
                             Delete
                         </Icon>
-                        <Icon {...this.state.iconProps} icon="refresh">
+                        <Icon {...this.state.iconProps} icon="floppy-disk">
                             Save
                         </Icon>
                     </Icons>
