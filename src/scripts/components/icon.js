@@ -38,7 +38,7 @@ export default class Icon extends Component {
             return (
                 <IconContainer
                     {...props}
-                    className={`${className} icon`}
+                    className={`${className || ''} icon`}
                     onClick={e => onClick(e)}
                 >
                     <Icon aria-describedby={this.props.children} />
@@ -49,3 +49,5 @@ export default class Icon extends Component {
         }
     }
 }
+
+export { IconContainer };
