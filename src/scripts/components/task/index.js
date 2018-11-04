@@ -15,13 +15,6 @@ const Container = styled.div`
 @inject('store')
 @observer
 class Task extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isEditing: false
-        };
-    }
-
     deleteTask() {
         const result = confirm(
             `Are you sure you want to delete the task "${
