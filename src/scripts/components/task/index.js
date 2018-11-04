@@ -38,15 +38,23 @@ class Task extends Component {
         return this.props.store.updateTask(this.props.task);
     }
 
+    openEditView() {
+        this.props.store.currentTask = this.props.task._id;
+    }
+
+    closeEditView() {
+        this.props.store.currentTask = null;
+    }
+
     getChildren() {
         const task = this.props.task;
         const lists = this.props.store.lists;
-        if (this.state.isEditing) {
+        if (this.props.store.currentTask === task._id) {
             return (
                 <EditTask
                     updateTask={this.updateTask.bind(this)}
                     deleteTask={this.deleteTask.bind(this)}
-                    onClose={() => this.setState({ isEditing: false })}
+                    onClose={this.closeEditView.bind(this)}
                     task={task}
                     lists={lists}
                 />
@@ -57,11 +65,7 @@ class Task extends Component {
 
     render() {
         return (
-            <Container
-                onClick={() => {
-                    this.setState({ isEditing: true });
-                }}
-            >
+            <Container onClick={this.openEditView.bind(this)}>
                 {this.getChildren()}
             </Container>
         );

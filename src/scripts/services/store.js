@@ -43,25 +43,29 @@ class Store {
         this.loading = false;
     }
 
-    async switchLists(list) {
+    async switchLists(listId) {
         // Load cached list till server loads
-        const _cachedList = this.lists.find(_list => _list._id === list._id);
+        const _cachedList = this.lists.find(_list => _list._id === listId);
         if (_cachedList) {
             // don't load cached tasks, usually just the ids
             _cachedList.tasks = [];
             this.currentList = _cachedList;
         }
         this.loading = true;
-        this.currentList = await this.server.getList(list._id);
+        this.currentList = await this.server.getList(listId);
         this.loading = false;
     }
 
     async updateTask(task) {
         this.loading = true;
         const updatedTask = await this.server.updateTask(task._id, task);
-        this.currentList.tasks.map(
-            _task => (task._id === _task._id ? updatedTask : _task)
-        );
+        if (task.list && task.list === this.currentList._id) {
+            this.currentList.tasks.map(
+                _task => (task._id === _task._id ? updatedTask : _task)
+            );
+        } else {
+            this.switchLists(task.list);
+        }
         this.loading = false;
     }
 
@@ -99,7 +103,7 @@ class Store {
         const removedIndex = this.lists.findIndex(curr => curr._id === listId);
         this.lists.splice(removedIndex, 1);
         if (this.currentList._id === listId) {
-            await this.switchLists({ _id: 'inbox' });
+            await this.switchLists('inbox');
         }
         this.loading = false;
     }

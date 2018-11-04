@@ -38,7 +38,7 @@ class Navigation extends Component {
                             type={item.type}
                             title={item.title}
                             color={item.color}
-                            onClick={() => store.switchLists(item)}
+                            onClick={() => store.switchLists(item._id)}
                         />
                     ))}
                     <ListItem
