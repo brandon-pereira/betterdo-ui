@@ -37,7 +37,10 @@ export default class Icon extends Component {
         if (Icon) {
             return (
                 <IconContainer {...props} onClick={e => onClick(e)}>
-                    <Icon aria-describedby={this.props.children} />
+                    <Icon
+                        title={this.props.children}
+                        aria-describedby={this.props.children}
+                    />
                 </IconContainer>
             );
         } else {
