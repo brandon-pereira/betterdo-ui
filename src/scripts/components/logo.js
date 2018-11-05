@@ -29,7 +29,7 @@ export default class Logo extends Component {
     render() {
         const state = this.props.store;
         return (
-            <Container onClick={() => state.switchLists({ _id: 'inbox' })}>
+            <Container onClick={() => state.switchLists('inbox')}>
                 <h1>
                     Better
                     <span>Do.</span>
