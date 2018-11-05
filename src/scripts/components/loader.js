@@ -35,7 +35,8 @@ const Container = styled.div`
         animation: ${rotate} 2s linear infinite;
     }
 
-    svg .path {
+    svg circle {
+        stroke-width: 5px;
         stroke-dasharray: 184;
         stroke-dashoffset: 0;
         transform-origin: center;
