@@ -44,6 +44,11 @@ const LoaderContainer = styled.div`
 export default class Modal extends Component {
     constructor(props) {
         super(props);
+        this._resizer = null;
+        this.dimensions = {
+            height: 0,
+            width: 0
+        };
         this.state = {
             loading: true,
             content: null
@@ -61,7 +66,12 @@ export default class Modal extends Component {
     componentDidMount() {
         if (this.props.asyncContent && this.props.visible) {
             this.loadContent();
+            this.initializeResizer();
         }
+    }
+
+    componentWillUnmount() {
+        this.destroyResizer();
     }
 
     componentDidUpdate() {
@@ -71,7 +81,23 @@ export default class Modal extends Component {
             this.props.visible
         ) {
             this.loadContent();
+            this.initializeResizer();
         }
+
+        if (!this.props.visible) {
+            this.destroyResizer();
+        }
+    }
+
+    initializeResizer() {
+        this._resizer = e => {
+            console.log(e);
+        };
+        window.addEventListener('resize', this._resizer);
+    }
+
+    destroyResizer() {
+        window.removeEventListener('resize', this._resizer);
     }
 
     async loadContent() {
