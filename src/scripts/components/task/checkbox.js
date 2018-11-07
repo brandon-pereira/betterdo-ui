@@ -15,6 +15,7 @@ const Container = styled.input`
     justify-content: center;
     outline: none;
     cursor: pointer;
+    flex-shrink: 0;
     &:checked:before {
         content: '';
         border-radius: 50%;

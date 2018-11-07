@@ -8,6 +8,8 @@ const Container = styled.div`
 `;
 const Title = styled.span`
     flex: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
 `;
 
 const Header = props => (
