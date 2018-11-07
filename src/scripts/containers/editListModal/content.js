@@ -27,18 +27,27 @@ export default class EditListModalContent extends Component {
     }
 
     async deleteList() {
-        this.setState({ submitting: true, isInvalid: false });
-        try {
-            await this.props.store.deleteList(this.props.store.currentList._id);
-        } catch (err) {
-            this.setState({
-                submitting: false,
-                serverError: err.formattedMessage
-            });
-            return;
-        }
-        if (this.props.closeModal) {
-            this.props.closeModal();
+        const result = confirm(
+            `Are you sure you want to delete the list "${
+                this.state.title
+            }"? This can't be undone.`
+        );
+        if (result) {
+            this.setState({ submitting: true, isInvalid: false });
+            try {
+                await this.props.store.deleteList(
+                    this.props.store.currentList._id
+                );
+            } catch (err) {
+                this.setState({
+                    submitting: false,
+                    serverError: err.formattedMessage
+                });
+                return;
+            }
+            if (this.props.closeModal) {
+                this.props.closeModal();
+            }
         }
     }
 
