@@ -4,6 +4,11 @@ import Modal from '../../components/modal';
 @inject('store')
 @observer
 export default class AddListModalContainer extends Component {
+    constructor(props) {
+        super(props);
+        this.ref = React.createRef();
+    }
+
     get visible() {
         return this.props.store.modalVisibility.newList;
     }
@@ -13,9 +18,16 @@ export default class AddListModalContainer extends Component {
         return bool;
     }
 
+    calculatePosition() {
+        console.log(this.ref.current); // TODO: this doesn't work
+        console.log('Resize');
+    }
+
     render() {
         return (
             <Modal
+                ref={this.ref}
+                onResize={this.calculatePosition.bind(this)}
                 onRequestClose={() => (this.visible = false)}
                 visible={this.visible}
                 title="Create List"

@@ -90,8 +90,10 @@ export default class Modal extends Component {
     }
 
     initializeResizer() {
-        this._resizer = e => {
-            console.log(e);
+        this._resizer = () => {
+            if (this.props.onResize) {
+                this.props.onResize();
+            }
         };
         window.addEventListener('resize', this._resizer);
     }
