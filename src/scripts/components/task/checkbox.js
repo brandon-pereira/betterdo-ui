@@ -29,6 +29,7 @@ const Container = styled.input`
 const Checkbox = ({ checked, onChange }) => (
     <Container
         type="checkbox"
+        onClick={e => e.stopPropagation()}
         onChange={onChange.bind(this)}
         checked={checked}
     />

@@ -15,11 +15,10 @@ const Title = styled.span`
 const Header = props => (
     <Container>
         <Checkbox
-            onChange={e => {
-                this.updateTask({
+            onChange={() => {
+                props.updateTask({
                     isCompleted: !props.isCompleted
                 });
-                e.stopPropagation();
             }}
             checked={props.isCompleted}
         />

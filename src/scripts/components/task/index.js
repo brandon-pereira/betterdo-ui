@@ -53,7 +53,13 @@ class Task extends Component {
                 />
             );
         }
-        return <Header title={task.title} isComplete={task.isComplete} />;
+        return (
+            <Header
+                title={task.title}
+                isComplete={task.isComplete}
+                updateTask={this.updateTask.bind(this)}
+            />
+        );
     }
 
     render() {
