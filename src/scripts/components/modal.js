@@ -53,6 +53,7 @@ export default class Modal extends Component {
             loading: true,
             content: null
         };
+        this.ref = React.createRef();
     }
 
     closeModal(e) {
@@ -91,8 +92,8 @@ export default class Modal extends Component {
 
     initializeResizer() {
         this._resizer = () => {
-            if (this.props.onResize) {
-                this.props.onResize();
+            if (this.props.onResize && this.ref.current) {
+                this.props.onResize(this.ref.current.getBoundingClientRect());
             }
         };
         window.addEventListener('resize', this._resizer);
@@ -132,7 +133,7 @@ export default class Modal extends Component {
                 visible={this.props.visible}
                 onClick={e => this.closeModal(e)}
             >
-                <_Modal>
+                <_Modal innerRef={this.ref}>
                     <HeaderContainer>
                         <Header>{this.props.title || ''}</Header>
                         <Icon

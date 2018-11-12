@@ -18,9 +18,8 @@ export default class AddListModalContainer extends Component {
         return bool;
     }
 
-    calculatePosition() {
-        console.log(this.ref.current); // TODO: this doesn't work
-        console.log('Resize');
+    calculatePosition(coords) {
+        console.log(coords);
     }
 
     render() {
