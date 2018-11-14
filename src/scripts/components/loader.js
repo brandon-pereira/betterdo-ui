@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import Loader from '../../svgs/loader.svg';
+import LoaderSvg from '../../svgs/loader.svg';
 
 const rotate = keyframes`
     0% {
@@ -52,10 +52,10 @@ const Container = styled.div`
     `};
 `;
 
-const Button = props => (
+const Loader = props => (
     <Container {...props}>
-        <Loader />
+        <LoaderSvg />
     </Container>
 );
 
-export default Button;
+export default Loader;
