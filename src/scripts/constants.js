@@ -5,3 +5,5 @@ export const QUERIES = {
     medium: `(min-width: ${MEDIUM}px)`,
     large: `(min-width: ${LARGE}px)`
 };
+
+export const COLORS = { defaultList: '#666666' };

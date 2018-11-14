@@ -1,6 +1,7 @@
 import { observable } from 'mobx';
 import Server from './server';
 import ServiceWorkerRegistrar from './sw-registrar';
+import { COLORS } from '../constants';
 
 class Store {
     @observable
@@ -9,6 +10,7 @@ class Store {
     @observable
     currentList = {
         title: '',
+        color: COLORS.defaultList,
         tasks: []
     };
 
