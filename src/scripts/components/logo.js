@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
 import Loader from './loader';
+
 const Container = styled.div`
-    overflow: hidden;
     grid-row: 1 / 1;
     grid-column: 1 / 1;
+    overflow: hidden;
     cursor: pointer;
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.3)), #222;
     border: none;
@@ -15,8 +16,9 @@ const Container = styled.div`
     align-items: center;
     justify-content: space-between;
     position: relative;
-    padding: 0 1rem;
+    padding: 0;
     h1 {
+        margin: 0 1rem;
         font-size: 1.8rem;
         font-weight: 200;
     }
