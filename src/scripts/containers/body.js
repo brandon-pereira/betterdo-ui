@@ -57,7 +57,9 @@ export default class Body extends Component {
     render() {
         return (
             <Container>
-                <AddTask />
+                <AddTask
+                    hidden={this.props.store.currentList.type === 'loading'}
+                />
                 <SortableList
                     distance={10}
                     items={this.currentList.tasks.map(task => task)}
