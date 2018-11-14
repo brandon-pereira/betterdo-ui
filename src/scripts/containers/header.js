@@ -3,6 +3,8 @@ import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
 import Button from '../components/button';
 import EditListModal from './editListModal';
+import Loader from '../components/loader';
+import { QUERIES } from '../constants';
 
 const Container = styled.header`
     grid-row: 1 / 1;
@@ -23,6 +25,11 @@ const Container = styled.header`
             inset 0 2px rgba(255, 255, 255, 0.1);
         background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3));
     }
+    @media ${QUERIES.medium} {
+        .header-loader {
+            display: none;
+        }
+    }
 `;
 const Title = styled.h2`
     flex: 1;
@@ -40,6 +47,11 @@ export default class Header extends Component {
         return (
             <Container color={store.currentList.color}>
                 <Title>{store.currentList.title}</Title>
+                <Loader
+                    className="header-loader"
+                    loading={this.props.store.loading}
+                    size="2rem"
+                />
                 <Button
                     color="rgba(0,0,0,.2)"
                     hidden={store.currentList.type !== 'default'}
