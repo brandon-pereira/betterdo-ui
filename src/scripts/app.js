@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 
 // State
@@ -7,6 +7,7 @@ import { Provider } from 'mobx-react';
 const store = new Store();
 
 // Components
+import Container from './containers/container';
 import Header from './containers/header';
 import Navigation from './containers/navigation';
 import Logo from './components/logo';
@@ -15,12 +16,12 @@ import Body from './containers/body';
 export default () => {
     render(
         <Provider store={store}>
-            <Fragment>
+            <Container>
                 <Logo />
                 <Header />
                 <Navigation />
                 <Body />
-            </Fragment>
+            </Container>
         </Provider>,
         document.querySelector('.main-container')
     );

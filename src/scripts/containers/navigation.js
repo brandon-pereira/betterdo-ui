@@ -6,12 +6,13 @@ import ListItem from '../components/list';
 import AddListModal from './addListModal';
 
 const Container = styled.nav`
-    grid-row: 2 / 3;
-    grid-column: 1 / 1;
     background: #202020;
     display: flex;
     flex-direction: column;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.15);
+    grid-row: 2 / 3;
+    grid-column: 1 / 1;
+    overflow: hidden;
 `;
 const ListsContainer = styled.ul`
     list-style: none;

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
 import Loader from './loader';
 const Container = styled.div`
+    overflow: hidden;
     grid-row: 1 / 1;
     grid-column: 1 / 1;
     cursor: pointer;
