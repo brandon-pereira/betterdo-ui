@@ -1,5 +1,6 @@
 import { observable } from 'mobx';
 import Server from './server';
+import ServiceWorkerRegistrar from './sw-registrar';
 
 class Store {
     @observable
@@ -26,12 +27,22 @@ class Store {
         editList: false
     };
 
+    @observable
+    appUpdateAvailable = false;
+
     constructor() {
         this.server = new Server();
         this.init();
     }
 
     async init() {
+        // Listen for update events
+        ServiceWorkerRegistrar.onUpdateAvailable(() => {
+            console.log('Update Available');
+            this.appUpdateAvailable = true;
+        });
+
+        // Fetch data from server
         try {
             const response = await this.server.init(); // TODO: pass in listId if not on inbox
             this.lists = response.lists;
@@ -60,8 +71,8 @@ class Store {
         this.loading = true;
         const updatedTask = await this.server.updateTask(task._id, task);
         if (task.list && task.list === this.currentList._id) {
-            this.currentList.tasks.map(
-                _task => (task._id === _task._id ? updatedTask : _task)
+            this.currentList.tasks.map(_task =>
+                task._id === _task._id ? updatedTask : _task
             );
         } else {
             this.switchLists(task.list);
@@ -91,8 +102,8 @@ class Store {
         this.loading = true;
         const updatedList = await this.server.updateList(listId, updatedProps);
         this.currentList = updatedList;
-        this.lists = this.lists.map(
-            _list => (listId === _list._id ? updatedList : _list)
+        this.lists = this.lists.map(_list =>
+            listId === _list._id ? updatedList : _list
         );
         this.loading = false;
     }

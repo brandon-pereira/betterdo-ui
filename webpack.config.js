@@ -1,5 +1,6 @@
 const config = require('./config');
 const webpack = require('webpack');
+const OfflinePlugin = require('offline-plugin');
 
 const getPlugins = () => {
     const plugins = [
@@ -9,11 +10,28 @@ const getPlugins = () => {
         new webpack.optimize.ModuleConcatenationPlugin(), // scope hoisting
         new webpack.DefinePlugin({
             PRODUCTION: JSON.stringify(config.isProduction)
+        }),
+        new OfflinePlugin({
+            ServiceWorker: {
+                output: '../sw.js',
+                events: true
+            },
+            externals: ['/']
         })
     ];
 
     if (!config.isProduction) {
         plugins.push(new webpack.SourceMapDevToolPlugin());
+    } else {
+        plugins.push(
+            new OfflinePlugin({
+                ServiceWorker: {
+                    output: '../sw.js',
+                    events: true
+                },
+                externals: ['/']
+            })
+        );
     }
 
     return plugins;

@@ -7,6 +7,7 @@
         "babel-polyfill": "^6.26.0",
         "mobx": "^5.5.0",
         "mobx-react": "^5.2.8",
+        "offline-plugin": "^5.0.5",
         "randomcolor": "^0.5.3",
         "react": "^16.5.2",
         "react-dom": "^16.5.2",
