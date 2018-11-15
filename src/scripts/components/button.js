@@ -61,4 +61,4 @@ const Button = ({ children, type, ...props }) => (
     </Container>
 );
 
-export default Button;
+export default styled(Button)``;

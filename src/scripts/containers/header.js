@@ -18,7 +18,7 @@ const Container = styled.header`
     align-items: center;
     padding: 0 0.8rem;
     overflow: hidden;
-    .button {
+    ${Button} {
         margin-left: 0.8rem;
         font-size: 0.8rem;
         padding: 0.8rem;
@@ -60,7 +60,6 @@ export default class Header extends Component {
                 <Button
                     color="rgba(0,0,0,.2)"
                     hidden={store.currentList.type !== 'default'}
-                    className="button"
                     onClick={() => (store.modalVisibility.editList = true)}
                 >
                     Settings
