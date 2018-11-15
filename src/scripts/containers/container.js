@@ -16,9 +16,9 @@ const Div = styled.div`
     `}
     @media ${QUERIES.medium} {
         grid-template-columns: 10rem 1fr;
+        grid-template-rows: 4rem 1fr;
     }
     @media ${QUERIES.large} {
-        display: grid;
         grid-template-columns: 14rem 1fr;
     }
 `;
