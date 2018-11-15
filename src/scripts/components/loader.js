@@ -58,4 +58,4 @@ const Loader = props => (
     </Container>
 );
 
-export default Loader;
+export default styled(Loader)``;

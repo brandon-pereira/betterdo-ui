@@ -25,7 +25,7 @@ const Container = styled.div`
     span {
         font-weight: 600;
     }
-    .logo-loader {
+    ${Loader} {
         margin-right: 1rem;
     }
 `;
@@ -40,11 +40,7 @@ export default class Logo extends Component {
                     Better
                     <span>Do.</span>
                 </h1>
-                <Loader
-                    className="logo-loader"
-                    size="2rem"
-                    loading={this.props.store.loading}
-                />
+                <Loader size="2rem" loading={this.props.store.loading} />
             </Container>
         );
     }

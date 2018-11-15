@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Button from '../components/button';
 import EditListModal from './editListModal';
 import Loader from '../components/loader';
+import Hamburger from '../components/hamburger';
 import { QUERIES } from '../constants';
 
 const Container = styled.header`
@@ -26,7 +27,10 @@ const Container = styled.header`
         background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3));
     }
     @media ${QUERIES.medium} {
-        .header-loader {
+        ${Loader} {
+            display: none;
+        }
+        ${Hamburger} {
             display: none;
         }
     }
@@ -46,12 +50,13 @@ export default class Header extends Component {
         const store = this.props.store;
         return (
             <Container color={store.currentList.color}>
-                <Title>{store.currentList.title}</Title>
-                <Loader
-                    className="header-loader"
-                    loading={this.props.store.loading}
-                    size="2rem"
+                <Hamburger
+                    onClick={() => {
+                        console.log('HI');
+                    }}
                 />
+                <Title>{store.currentList.title}</Title>
+                <Loader loading={this.props.store.loading} size="2rem" />
                 <Button
                     color="rgba(0,0,0,.2)"
                     hidden={store.currentList.type !== 'default'}
