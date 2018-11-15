@@ -52,7 +52,7 @@ export default class Header extends Component {
             <Container color={store.currentList.color}>
                 <Hamburger
                     onClick={() => {
-                        console.log('HI');
+                        this.props.store.modalVisibility.listsView = true;
                     }}
                 />
                 <Title>{store.currentList.title}</Title>
