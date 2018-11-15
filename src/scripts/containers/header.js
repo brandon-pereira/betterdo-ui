@@ -26,7 +26,13 @@ const Container = styled.header`
             inset 0 2px rgba(255, 255, 255, 0.1);
         background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3));
     }
+    ${props =>
+        props.mobileNavVisible &&
+        `
+        grid-row: 3;
+    `}
     @media ${QUERIES.medium} {
+        grid-row: 1;
         ${Loader} {
             display: none;
         }
@@ -49,7 +55,10 @@ export default class Header extends Component {
     render() {
         const store = this.props.store;
         return (
-            <Container color={store.currentList.color}>
+            <Container
+                mobileNavVisible={this.props.store.modalVisibility.listsView}
+                color={store.currentList.color}
+            >
                 <Hamburger
                     onClick={() => {
                         this.props.store.modalVisibility.listsView = true;

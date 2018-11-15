@@ -12,7 +12,7 @@ const Div = styled.div`
     ${props =>
         props.mobileNavVisible &&
         `
-          grid-template-rows: 4rem 80% 1fr;  
+          grid-template-rows: 4rem 60% 4rem 1fr;  
     `}
     @media ${QUERIES.medium} {
         grid-template-columns: 10rem 1fr;

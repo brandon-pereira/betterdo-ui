@@ -12,7 +12,7 @@ const NavigationModalOverlay = styled.div`
     top: 100%;
     left: 0;
     right: 0;
-    height: 20%;
+    height: calc(40% + 4rem);
 `;
 const Container = styled.nav`
     background: #202020;
@@ -33,6 +33,9 @@ const Container = styled.nav`
         transform: none;
         grid-row: 2 / 3;
         grid-column: 1 / 1;
+        ${NavigationModalOverlay} {
+            display: none;
+        }
     }
 `;
 const ListsContainer = styled.ul`

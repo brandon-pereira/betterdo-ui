@@ -67,6 +67,7 @@ class Store {
             this.currentList = _cachedList;
         }
         this.loading = true;
+        this.modalVisibility.listsView = false;
         this.currentList = await this.server.getList(listId);
         this.loading = false;
     }

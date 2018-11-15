@@ -4,6 +4,7 @@ import { computed } from 'mobx';
 import styled from 'styled-components';
 import AddTask from '../components/addTask';
 import Task from '../components/task';
+import { QUERIES } from '../constants';
 import {
     SortableContainer,
     SortableElement,
@@ -14,6 +15,14 @@ const Container = styled.div`
     grid-row: 2 / 3;
     grid-column: 2 / 3;
     overflow-y: scroll;
+    ${props =>
+        props.mobileNavVisible &&
+        `
+        grid-row: 4;
+    `}
+    @media ${QUERIES.medium} {
+        grid-row: 2 / 3;
+    }
 `;
 const SortableItem = SortableElement(({ value }) => <Task task={value} />);
 
@@ -56,7 +65,9 @@ export default class Body extends Component {
 
     render() {
         return (
-            <Container>
+            <Container
+                mobileNavVisible={this.props.store.modalVisibility.listsView}
+            >
                 <AddTask
                     hidden={this.props.store.currentList.type === 'loading'}
                 />
