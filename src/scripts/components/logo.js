@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
 import Loader from './loader';
+import Icon from './hamburger';
 import { QUERIES } from '../constants';
 const Container = styled.div`
     overflow: hidden;
@@ -14,27 +15,32 @@ const Container = styled.div`
     align-items: center;
     justify-content: space-between;
     position: relative;
-    padding: 0;
+    padding: 0 1rem;
+    transform: translateY(-100%);
+    transition: transform .2s;
     h1 {
-        margin: 0 1rem;
+        margin: 0;
         font-size: 1.8rem;
         font-weight: 200;
     }
     span {
         font-weight: 600;
     }
-    ${Loader} {
-        margin-right: 1rem;
-    }
     ${props =>
         props.visibleOnMobile &&
         `
+        transform: translateY(0%);
         grid-row: 1 / 1;
         grid-column: 2 / 3;
     `}
     @media ${QUERIES.medium} {
+        transform: none;
         grid-row: 1 / 1;
         grid-column: 1 / 1;
+        ${Icon} {
+            display: none;
+        }
+
     }
 `;
 @inject('store')
@@ -47,6 +53,12 @@ export default class Logo extends Component {
                 visibleOnMobile={this.props.store.modalVisibility.listsView}
                 onClick={() => state.switchLists('inbox')}
             >
+                <Icon
+                    open={this.props.store.modalVisibility.listsView}
+                    onClick={() => {
+                        this.props.store.modalVisibility.listsView = false;
+                    }}
+                />
                 <h1>
                     Better
                     <span>Do.</span>

@@ -60,6 +60,8 @@ export default class Header extends Component {
                 color={store.currentList.color}
             >
                 <Hamburger
+                    open={this.props.store.modalVisibility.listsView}
+                    hidden={this.props.store.modalVisibility.listsView}
                     onClick={() => {
                         this.props.store.modalVisibility.listsView = true;
                     }}

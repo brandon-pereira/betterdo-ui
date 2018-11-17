@@ -15,12 +15,13 @@ const Container = styled.div`
     grid-row: 2 / 3;
     grid-column: 2 / 3;
     overflow-y: scroll;
-    ${props =>
-        props.mobileNavVisible &&
-        `
+    background: #e4e4e4;
+        ${props =>
+            props.mobileNavVisible &&
+            `
         grid-row: 4;
     `}
-    @media ${QUERIES.medium} {
+        @media ${QUERIES.medium} {
         grid-row: 2 / 3;
     }
 `;

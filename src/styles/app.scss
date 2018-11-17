@@ -5,7 +5,7 @@ html {
     overflow: hidden;
 }
 body {
-    background: map-deep-get($config, body, background);
+    background: #000;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
         Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     margin: 0;
