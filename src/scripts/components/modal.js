@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Header } from './copy';
 import Loader from './loader';
 import Icon from './icon';
+import { QUERIES } from '../constants';
 
 const Overlay = styled.div`
     display: ${({ visible }) => (visible ? 'flex' : 'none')};
@@ -19,11 +20,14 @@ const Overlay = styled.div`
 const _Modal = styled.div`
     display: block;
     background: #fff;
-    width: 60%;
+    width: 100%;
     max-width: 600px;
     padding: 1rem;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
+    @media ${QUERIES.medium} {
+        max-width: 60%;
+        border-radius: 5px;
+    }
 `;
 const HeaderContainer = styled.div`
     display: flex;

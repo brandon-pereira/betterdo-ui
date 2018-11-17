@@ -3,7 +3,6 @@ import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
 import Search from '../components/search';
 import ListItem from '../components/list';
-import AddListModal from './addListModal';
 import { QUERIES } from '../constants';
 
 const NavigationModalOverlay = styled.div`
@@ -81,7 +80,6 @@ class Navigation extends Component {
                         this.props.store.modalVisibility.listsView = false;
                     }}
                 />
-                <AddListModal />
             </Container>
         );
     }

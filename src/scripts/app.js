@@ -12,7 +12,7 @@ import Header from './containers/header';
 import Navigation from './containers/navigation';
 import Logo from './components/logo';
 import Body from './containers/body';
-
+import AddListModal from './containers/addListModal';
 export default () => {
     render(
         <Provider store={store}>
@@ -21,6 +21,7 @@ export default () => {
                 <Header />
                 <Navigation />
                 <Body />
+                <AddListModal />
             </Container>
         </Provider>,
         document.querySelector('.main-container')
