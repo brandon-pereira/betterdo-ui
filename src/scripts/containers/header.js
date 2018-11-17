@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
 import Button from '../components/button';
-import EditListModal from './editListModal';
 import Loader from '../components/loader';
 import Hamburger from '../components/hamburger';
 import { QUERIES } from '../constants';
@@ -78,7 +77,6 @@ export default class Header extends Component {
                 >
                     Settings
                 </Button>
-                <EditListModal />
             </Container>
         );
     }

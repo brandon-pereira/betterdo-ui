@@ -55,8 +55,9 @@ export default class Logo extends Component {
             >
                 <Icon
                     open={this.props.store.modalVisibility.listsView}
-                    onClick={() => {
+                    onClick={e => {
                         this.props.store.modalVisibility.listsView = false;
+                        e.stopPropagation();
                     }}
                 />
                 <h1>

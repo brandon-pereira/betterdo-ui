@@ -13,6 +13,8 @@ import Navigation from './containers/navigation';
 import Logo from './components/logo';
 import Body from './containers/body';
 import AddListModal from './containers/addListModal';
+import EditListModal from './containers/editListModal';
+
 export default () => {
     render(
         <Provider store={store}>
@@ -22,6 +24,7 @@ export default () => {
                 <Navigation />
                 <Body />
                 <AddListModal />
+                <EditListModal />
             </Container>
         </Provider>,
         document.querySelector('.main-container')
