@@ -21,6 +21,8 @@ const Container = styled.nav`
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.15), 0 1px 2px rgba(0,0,0,.9);
     transform: translateY(-100%);
     transition: transform 0s;
+    position: relative;
+    z-index: 1;
      ${props =>
          props.visibleOnMobile &&
          `
