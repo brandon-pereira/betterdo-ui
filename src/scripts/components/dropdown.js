@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Icon, { IconContainer } from './icon';
+import Icon from './icon';
 
 const SelectContainer = styled.label`
     position: relative;
     display: block;
-    ${IconContainer} {
+    ${Icon} {
         pointer-events: none;
         position: absolute;
         top: 50%;

@@ -15,7 +15,7 @@ const IconContainer = styled.div`
         width: 100%;
     }
 `;
-export default class Icon extends Component {
+class Icon extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -49,4 +49,4 @@ export default class Icon extends Component {
     }
 }
 
-export { IconContainer };
+export default styled(Icon)``;

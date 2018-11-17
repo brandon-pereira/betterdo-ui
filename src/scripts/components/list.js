@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import SvgIcon, { IconContainer } from './icon';
+import SvgIcon from './icon';
 
 const Li = styled.li`
     cursor: pointer;
@@ -36,7 +36,7 @@ const IconHolder = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
-    ${IconContainer} {
+    ${SvgIcon} {
         filter: drop-shadow(0 1px #000);
     }
 `;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Label, Input } from '../forms';
 import Dropdown from '../dropdown';
-import Icon, { IconContainer } from '../icon';
+import Icon from '../icon';
 
 const Container = styled.div`
     display: flex;
@@ -29,7 +29,7 @@ const Icons = styled.div`
     justify-content: space-between;
     align-items: flex-end;
     height: 100%;
-    ${IconContainer} {
+    ${Icon} {
         margin-bottom: 0.5rem;
     }
 `;

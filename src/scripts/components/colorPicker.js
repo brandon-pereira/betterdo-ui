@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import randomColor from 'randomcolor';
 import styled from 'styled-components';
 import { Label } from './forms';
-import Icon, { IconContainer } from './icon';
+import Icon from './icon';
 
 const Container = styled.div`
     display: flex;
@@ -34,7 +34,7 @@ const LabelContainer = styled.div`
     label {
         margin-bottom: 0;
     }
-    ${IconContainer} {
+    ${Icon} {
         margin-left: 0.3rem;
     }
 `;
@@ -58,8 +58,8 @@ export default class ColorPicker extends Component {
         this.props.onChange(color);
         this.setState({
             currentColor: this.state.palette.findIndex(curr => color === curr),
-            palette: this.state.palette.map(
-                curr => (curr === color ? color : curr)
+            palette: this.state.palette.map(curr =>
+                curr === color ? color : curr
             )
         });
     }
@@ -67,8 +67,8 @@ export default class ColorPicker extends Component {
     changeColorFromPicker(color) {
         this.props.onChange(color);
         this.setState({
-            palette: this.state.palette.map(
-                (curr, i) => (this.state.currentColor === i ? color : curr)
+            palette: this.state.palette.map((curr, i) =>
+                this.state.currentColor === i ? color : curr
             )
         });
     }
@@ -78,8 +78,8 @@ export default class ColorPicker extends Component {
         const currentColor = this.state.palette[this.state.currentColor];
         this.setState({
             currentColor: 0,
-            palette: this.state.palette.map(
-                (curr, i) => (i === 0 ? currentColor : randomColor())
+            palette: this.state.palette.map((curr, i) =>
+                i === 0 ? currentColor : randomColor()
             )
         });
     }
