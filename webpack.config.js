@@ -10,13 +10,6 @@ const getPlugins = () => {
         new webpack.optimize.ModuleConcatenationPlugin(), // scope hoisting
         new webpack.DefinePlugin({
             PRODUCTION: JSON.stringify(config.isProduction)
-        }),
-        new OfflinePlugin({
-            ServiceWorker: {
-                output: '../sw.js',
-                events: true
-            },
-            externals: ['/']
         })
     ];
 
@@ -29,7 +22,7 @@ const getPlugins = () => {
                     output: '../sw.js',
                     events: true
                 },
-                externals: ['/']
+                externals: ['/', '/app']
             })
         );
     }
