@@ -24,7 +24,7 @@ class Search extends Component {
     render() {
         return (
             <Container>
-                <input placeholder="Search..." />
+                <input aria-labelledby="Search" placeholder="Search..." />
             </Container>
         );
     }

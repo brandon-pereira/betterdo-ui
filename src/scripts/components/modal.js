@@ -100,7 +100,7 @@ export default class Modal extends Component {
                 this.props.onResize(this.ref.current.getBoundingClientRect());
             }
         };
-        window.addEventListener('resize', this._resizer);
+        window.addEventListener('resize', this._resizer, { passive: true });
     }
 
     destroyResizer() {

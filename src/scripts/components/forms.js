@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Input = styled.input`
+const _Input = styled.input`
     appearance: none;
     background: #fff;
     width: ${props => props.width || '100%'};
@@ -44,5 +44,9 @@ const Form = ({ children, errorMessage, ...props }) => (
         {children}
     </form>
 );
+
+const Input = styled(props => (
+    <_Input {...props} aria-describedby={props.placeholder} />
+))``;
 
 export { Input, Label, Form, Error };
