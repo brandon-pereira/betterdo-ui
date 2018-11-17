@@ -55,7 +55,7 @@ class Store {
         } catch (err) {
             console.error('Failed to initialize', err);
         }
-        // this.loading = false;
+        this.loading = false;
     }
 
     async switchLists(listId) {
