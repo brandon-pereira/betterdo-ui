@@ -2,7 +2,7 @@ import { observable } from 'mobx';
 import Server from './server';
 import ServiceWorkerRegistrar from './sw-registrar';
 import { COLORS } from '../constants';
-
+import Router from './router';
 class Store {
     @observable
     lists = [];
@@ -48,7 +48,7 @@ class Store {
 
         // Fetch data from server
         try {
-            const response = await this.server.init(); // TODO: pass in listId if not on inbox
+            const response = await this.server.init(Router.getCurrentRoute());
             this.lists = response.lists;
             this.currentList = response.currentList;
             this.user = response.user;
@@ -69,6 +69,11 @@ class Store {
         this.loading = true;
         this.modalVisibility.listsView = false;
         this.currentList = await this.server.getList(listId);
+        Router.setCurrentRoute(
+            this.currentList.type === 'default'
+                ? this.currentList._id
+                : this.currentList.type
+        );
         this.loading = false;
     }
 
