@@ -46,7 +46,7 @@ const Form = ({ children, errorMessage, ...props }) => (
 );
 
 const Input = styled(props => (
-    <_Input {...props} aria-describedby={props.placeholder} />
+    <_Input {...props} aria-label={props.placeholder} />
 ))``;
 
 export { Input, Label, Form, Error };
