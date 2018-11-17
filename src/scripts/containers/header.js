@@ -18,6 +18,9 @@ const Container = styled.header`
     align-items: center;
     padding: 0 0.8rem;
     overflow: hidden;
+    ${Hamburger} {
+        margin-right: 1rem;
+    }
     ${Button} {
         margin-left: 0.8rem;
         font-size: 0.8rem;
