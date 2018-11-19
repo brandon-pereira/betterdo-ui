@@ -56,7 +56,7 @@ class Task extends Component {
         return (
             <Header
                 title={task.title}
-                isComplete={task.isComplete}
+                isCompleted={task.isCompleted}
                 updateTask={this.updateTask.bind(this)}
             />
         );
