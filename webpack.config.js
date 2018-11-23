@@ -22,7 +22,7 @@ const getPlugins = () => {
                     output: '../sw.js',
                     events: true
                 },
-                externals: ['/', '/app']
+                externals: ['/', '/app', '/app/manifest.json']
             })
         );
     }
