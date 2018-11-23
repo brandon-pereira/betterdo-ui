@@ -21,7 +21,7 @@ const Container = styled.nav`
     transform: translateY(-100%);
     transition: transform 0s;
     position: relative;
-    z-index: 1;
+    z-index: 5;
      ${props =>
          props.visibleOnMobile &&
          `
