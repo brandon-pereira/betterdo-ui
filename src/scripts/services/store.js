@@ -49,9 +49,13 @@ class Store {
             this.appUpdateAvailable = true;
         });
 
-        ServiceWorkerRegistrar.onAddToHomeScreenAvailable(() => {
-            console.log('Add to homescreen available');
-            this.addToHomeScreenAvailable = true;
+        ServiceWorkerRegistrar.onAddToHomeScreenAvailable(bool => {
+            if (bool) {
+                console.log('Add to homescreen available');
+            } else {
+                console.log('Added to homescreen :)');
+            }
+            this.addToHomeScreenAvailable = bool;
         });
 
         // Fetch data from server

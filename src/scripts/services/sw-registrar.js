@@ -24,9 +24,11 @@ class ServiceWorkerRegistrar {
                 // Store event for later use
                 this.installPrompt = e;
                 // Notify listeners
-                this.addToHomeScreenAvailableCallbacks.forEach(cb => {
-                    cb();
-                });
+                this._whenHomescreenStateChanges(true);
+            });
+
+            window.addEventListener('appinstalled', () => {
+                this._whenHomescreenStateChanges(false);
             });
         }
     }
@@ -90,6 +92,12 @@ class ServiceWorkerRegistrar {
     _whenUpdateAvailable() {
         this.onUpdateAvailableCallbacks.forEach(cb => {
             cb();
+        });
+    }
+
+    _whenHomescreenStateChanges(state) {
+        this.addToHomeScreenAvailableCallbacks.forEach(cb => {
+            cb(state);
         });
     }
 
