@@ -1,7 +1,9 @@
 class ServiceWorkerRegistrar {
     constructor() {
         this.OfflinePluginRuntime = null;
+        this.installPrompt = null;
         this.onUpdateAvailableCallbacks = [];
+        this.addToHomeScreenAvailableCallbacks = [];
         this._init();
     }
 
@@ -15,6 +17,18 @@ class ServiceWorkerRegistrar {
                 onUpdated: () => this._whenUpdateCompleted()
             });
         });
+        if (window) {
+            window.addEventListener('beforeinstallprompt', e => {
+                // Prevent automatically showing the prompt
+                e.preventDefault();
+                // Store event for later use
+                this.installPrompt = e;
+                // Notify listeners
+                this.addToHomeScreenAvailableCallbacks.forEach(cb => {
+                    cb();
+                });
+            });
+        }
     }
 
     /**
@@ -39,6 +53,28 @@ class ServiceWorkerRegistrar {
         this.OfflinePluginRuntime.then(OfflinePluginRuntime =>
             OfflinePluginRuntime.applyUpdate()
         );
+    }
+
+    onAddToHomeScreenAvailable(cb) {
+        if (this.installPrompt) {
+            return true;
+        } else if (cb && typeof cb === 'function') {
+            this.addToHomeScreenAvailableCallbacks.push(cb);
+        }
+    }
+
+    requestAddToHomeScreenPrompt() {
+        if (this.installPrompt) {
+            this.installPrompt.prompt();
+            return this.installPrompt.userChoice.then(choiceResult => {
+                this.installPrompt = null;
+                if (choiceResult.outcome === 'accepted') {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        }
     }
 
     /**

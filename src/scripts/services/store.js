@@ -34,6 +34,9 @@ class Store {
     @observable
     appUpdateAvailable = false;
 
+    @observable
+    addToHomeScreenAvailable = false;
+
     constructor() {
         this.server = new Server();
         this.init();
@@ -44,6 +47,11 @@ class Store {
         ServiceWorkerRegistrar.onUpdateAvailable(() => {
             console.log('Update Available');
             this.appUpdateAvailable = true;
+        });
+
+        ServiceWorkerRegistrar.onAddToHomeScreenAvailable(() => {
+            console.log('Add to homescreen available');
+            this.addToHomeScreenAvailable = true;
         });
 
         // Fetch data from server
@@ -137,6 +145,14 @@ class Store {
         );
         this.currentList.tasks.splice(removedIndex, 1);
         this.loading = false;
+    }
+
+    applyAppUpdate() {
+        ServiceWorkerRegistrar.applyUpdates();
+    }
+
+    addToHomeScreen() {
+        ServiceWorkerRegistrar.requestAddToHomeScreenPrompt();
     }
 }
 
