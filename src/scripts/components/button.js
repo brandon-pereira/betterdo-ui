@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Container = styled.button.attrs({
     style: ({ color }) => ({
-        backgroundColor: color
+        backgroundColor: color || 'rgba(0,0,0,.2)'
     })
 })`
     border: none;
