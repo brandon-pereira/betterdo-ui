@@ -71,8 +71,10 @@ export default class Body extends Component {
                 <NotificationBanner
                     title="App Update Available"
                     description="Update to get the most out of your BetterDo experience."
-                    buttonCopy="Update"
-                    buttonAction={() => this.props.store.applyAppUpdate()}
+                    primaryButtonCopy="Update"
+                    primaryButtonAction={() =>
+                        this.props.store.applyAppUpdate()
+                    }
                 />
             );
         } else if (this.props.store.addToHomeScreenAvailable) {
@@ -80,8 +82,14 @@ export default class Body extends Component {
                 <NotificationBanner
                     title="Install App"
                     description="Install our application to more quickly access your tasks."
-                    buttonCopy="Install"
-                    buttonAction={() => this.props.store.addToHomeScreen()}
+                    primaryButtonCopy="Install"
+                    primaryButtonAction={() =>
+                        this.props.store.addToHomeScreen()
+                    }
+                    secondaryButtonCopy="Dismiss"
+                    secondaryButtonAction={() => {
+                        this.props.store.addToHomeScreenAvailable = false;
+                    }}
                 />
             );
         }
