@@ -6,7 +6,7 @@ import Icon from './icon';
 import { QUERIES } from '../constants';
 
 const Overlay = styled.div`
-    display: ${({ visible }) => (visible ? 'flex' : 'none')};
+    display: ${({ visible }) => (visible ? 'block' : 'none')};
     position: fixed;
     top: 0;
     left: 0;
@@ -14,12 +14,15 @@ const Overlay = styled.div`
     bottom: 0;
     z-index: 10;
     background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
 `;
 const _Modal = styled.div`
-    display: block;
-    background: #fff;
+    position: absolute;
+    top: ${props => props.theme.top || '50%'};
+    left: ${props => props.theme.left || '50%'};
+    bottom: ${props => props.theme.bottom || 'auto'};
+    right: ${props => props.theme.right || 'auto'};
+    transform: ${props => props.theme.transform || 'translate(-50%, -50%)'};
+    background: ${props => props.theme.background || '#fff'};
     width: 100%;
     max-width: 600px;
     padding: 1rem;
