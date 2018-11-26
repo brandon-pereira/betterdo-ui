@@ -91,7 +91,6 @@ class Store {
     }
 
     async updateTask(taskId, updatedProps) {
-        console.log(taskId, updatedProps);
         this.loading = true;
         const updatedTask = await this.server.updateTask(taskId, updatedProps);
         if (updatedProps.list && updatedProps.list !== this.currentList._id) {

@@ -8,25 +8,43 @@ const Container = styled.div``;
 const Block = styled.div``;
 const Notes = styled(TextArea)`
     background: #fff9b0;
-    min-height: 400px;
+    min-height: 10rem;
 `;
+
 @inject('store')
 @observer
-class EditTaskModalContent extends Component {
+class EditTask extends Component {
+    static priorities = [
+        { value: 'low', label: 'Low' },
+        { value: 'normal', label: 'Normal' },
+        { value: 'high', label: 'High' }
+    ];
+
     constructor(props) {
         super(props);
-        this.priorities = [
-            { value: 'low', label: 'Low' },
-            { value: 'normal', label: 'Normal' },
-            { value: 'high', label: 'High' }
-        ];
-        this.lists = this.props.store.lists.map(list => ({
-            value: list._id,
-            label: list.title
-        }));
+        const task = this.task;
+        this.state = {
+            title: task.title,
+            priority: task.priority,
+            dueDate: task.dueDate,
+            list: task.list,
+            notes: task.notes,
+            subtasks: task.subtasks
+        };
         this.updatePriority = this.updatePriority.bind(this);
         this.updateList = this.updateList.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
+    }
+
+    get lists() {
+        return this.props.store.lists.map(list => ({
+            value: list._id,
+            label: list.title
+        }));
+    }
+
+    get task() {
+        return this.props.store.currentTask;
     }
 
     updatePriority(priority) {
@@ -37,9 +55,21 @@ class EditTaskModalContent extends Component {
         this.updateTask({ list });
     }
 
-    updateTask(updatedProperties = {}) {
+    deleteTask() {
+        const result = confirm(
+            `Are you sure you want to delete the task "${
+                this.task.title
+            }"? This can't be undone.`
+        );
+        if (result) {
+            return this.props.store.deleteTask(this.task._id);
+        }
+    }
+
+    updateTask(updatedProperties) {
+        console.log('Update', this.task._id, updatedProperties);
         this.setState(updatedProperties);
-        this.props.updateTask(updatedProperties);
+        return this.props.store.updateTask(this.task._id, updatedProperties);
     }
 
     onKeyPress(e) {
@@ -52,13 +82,13 @@ class EditTaskModalContent extends Component {
     }
 
     render() {
-        const task = this.props.store.currentTask;
+        const state = this.state;
         return (
             <Container>
                 <Block>
                     <Label>Title</Label>
                     <Input
-                        value={task.title}
+                        value={state.title}
                         placeholder="Enter a title"
                         onKeyPress={this.onKeyPress}
                         onChange={evt =>
@@ -71,16 +101,16 @@ class EditTaskModalContent extends Component {
                 <Block>
                     <Label>Priority</Label>
                     <Dropdown
-                        values={this.priorities}
+                        values={EditTask.priorities}
                         onSelect={this.updatePriority}
-                        value={task.priority}
+                        value={state.priority}
                     />
                 </Block>
                 <Block>
                     <Label>Due Date</Label>
                     <Input
                         type="date"
-                        value={task.dueDate || ''}
+                        value={state.dueDate || ''}
                         onChange={evt =>
                             this.setState({
                                 dueDate: evt.target.value
@@ -94,12 +124,12 @@ class EditTaskModalContent extends Component {
                     <Dropdown
                         values={this.lists}
                         onSelect={this.updateList}
-                        value={task.list}
+                        value={state.list}
                     />
                 </Block>
                 <Block>
                     <Label>Notes</Label>
-                    <Notes />
+                    <Notes value={state.notes} />
                 </Block>
                 <Block>
                     <Label>Subtasks</Label>
@@ -109,4 +139,4 @@ class EditTaskModalContent extends Component {
     }
 }
 
-export default EditTaskModalContent;
+export default EditTask;
