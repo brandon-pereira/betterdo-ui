@@ -24,13 +24,13 @@ const _Modal = styled.div`
     transform: ${props => props.theme.transform || 'translate(-50%, -50%)'};
     background: ${props => props.theme.background || '#fff'};
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
     padding: 1rem;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
+    overflow-y: scroll;
     @media ${QUERIES.medium} {
-        max-width: 60%;
-        border-radius: 5px;
+        width: 60%;
     }
 `;
 const HeaderContainer = styled.div`
