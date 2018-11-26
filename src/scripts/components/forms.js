@@ -38,6 +38,21 @@ const Label = styled.label`
     display: block;
 `;
 
+const TextArea = styled.textarea`
+    background: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    resize: none;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.8rem 1rem;
+    border: none;
+    box-shadow: inset 0 0 0 2px #ccc;
+    border-radius: 3px;
+    outline: none;
+`;
+
 const Form = ({ children, errorMessage, ...props }) => (
     <form {...props}>
         {errorMessage ? <Error>{errorMessage}</Error> : null}
@@ -49,4 +64,4 @@ const Input = styled(props => (
     <_Input {...props} aria-label={props.placeholder} />
 ))``;
 
-export { Input, Label, Form, Error };
+export { Input, Label, Form, Error, TextArea };

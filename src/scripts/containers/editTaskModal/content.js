@@ -1,38 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
-import { Label, Input } from '../../components/forms';
+import { Label, Input, TextArea } from '../../components/forms';
 import Dropdown from '../../components/dropdown';
-import Icon from '../../components/icon';
 
-const Container = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-`;
-const Header = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    ${Input} {
-        margin: 0 0.5rem 0 0;
-    }
-`;
-const Block = styled.div`
-    width: calc(50% - 0.5rem);
-    margin-left: 1rem;
-    &:nth-of-type(2n) {
-        margin-left: 0;
-    }
-`;
-const Icons = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    height: 100%;
-    ${Icon} {
-        margin-bottom: 0.5rem;
-    }
+const Container = styled.div``;
+const Block = styled.div``;
+const Notes = styled(TextArea)`
+    background: #fff9b0;
+    min-height: 400px;
 `;
 @inject('store')
 @observer
@@ -48,7 +24,6 @@ class EditTaskModalContent extends Component {
             value: list._id,
             label: list.title
         }));
-        this.iconProps = { color: '#565656', size: '2rem' };
         this.updatePriority = this.updatePriority.bind(this);
         this.updateList = this.updateList.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
@@ -78,10 +53,10 @@ class EditTaskModalContent extends Component {
 
     render() {
         const task = this.props.store.currentTask;
-        console.log(task);
         return (
             <Container>
-                <Header>
+                <Block>
+                    <Label>Title</Label>
                     <Input
                         value={task.title}
                         placeholder="Enter a title"
@@ -92,18 +67,7 @@ class EditTaskModalContent extends Component {
                             })
                         }
                     />
-                    <Icon
-                        icon="chevron"
-                        size="2.5rem"
-                        color="#565656"
-                        onClick={e => {
-                            this.props.onClose();
-                            e.stopPropagation();
-                        }}
-                    >
-                        Close
-                    </Icon>
-                </Header>
+                </Block>
                 <Block>
                     <Label>Priority</Label>
                     <Dropdown
@@ -134,24 +98,11 @@ class EditTaskModalContent extends Component {
                     />
                 </Block>
                 <Block>
-                    <Icons>
-                        <Icon {...this.iconProps} icon="subtasks">
-                            Subtasks
-                        </Icon>
-                        <Icon {...this.iconProps} icon="book">
-                            Notes
-                        </Icon>
-                        <Icon
-                            {...this.iconProps}
-                            onClick={this.props.deleteTask}
-                            icon="bin"
-                        >
-                            Delete
-                        </Icon>
-                        <Icon {...this.iconProps} icon="floppy-disk">
-                            Save
-                        </Icon>
-                    </Icons>
+                    <Label>Notes</Label>
+                    <Notes />
+                </Block>
+                <Block>
+                    <Label>Subtasks</Label>
                 </Block>
             </Container>
         );
