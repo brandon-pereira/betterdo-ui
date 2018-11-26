@@ -26,13 +26,18 @@ const Checkbox = styled.input`
     outline: none;
     cursor: pointer;
     flex-shrink: 0;
-    &:checked:before {
+    &:before {
         content: '';
         border-radius: 50%;
         height: 1rem;
         width: 1rem;
         background: linear-gradient(#333, #666);
         display: block;
+        transform: scale(0);
+        transition: transform 0.2s;
+    }
+    &:checked:before {
+        transform: scale(1);
     }
 `;
 const Title = styled.span`
