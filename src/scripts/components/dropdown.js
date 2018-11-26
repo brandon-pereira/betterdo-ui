@@ -5,6 +5,7 @@ import Icon from './icon';
 const SelectContainer = styled.label`
     position: relative;
     display: block;
+    margin: 0 0 1rem;
     ${Icon} {
         pointer-events: none;
         position: absolute;
