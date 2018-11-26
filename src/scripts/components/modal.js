@@ -27,6 +27,7 @@ const _Modal = styled.div`
     max-width: 600px;
     padding: 1rem;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
     @media ${QUERIES.medium} {
         max-width: 60%;
         border-radius: 5px;

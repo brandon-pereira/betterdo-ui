@@ -35,6 +35,7 @@ const Container = styled.nav`
         transform: none;
         grid-row: 2 / 3;
         grid-column: 1 / 1;
+        overflow: hidden;
         ${NavigationModalOverlay} {
             display: none;
         }
@@ -45,6 +46,7 @@ const ListsContainer = styled.ul`
     padding: 0;
     margin: 0;
     flex: 1;
+    overflow-y: scroll;
 `;
 
 @inject('store')
