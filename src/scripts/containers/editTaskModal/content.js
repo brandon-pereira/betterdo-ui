@@ -4,6 +4,7 @@ import { observer, inject } from 'mobx-react';
 import { Label, Input, TextArea } from '../../components/forms';
 import Dropdown from '../../components/dropdown';
 import Button from '../../components/button';
+import Subtasks from '../../components/subtasks';
 
 const Container = styled.div``;
 const Block = styled.div``;
@@ -36,6 +37,7 @@ class EditTask extends Component {
         this.updateList = this.updateList.bind(this);
         this.saveTask = this.saveTask.bind(this);
         this.deleteTask = this.deleteTask.bind(this);
+        this.updateSubtasks = this.updateSubtasks.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
         this.onChange = this.onChange.bind(this);
     }
@@ -57,6 +59,10 @@ class EditTask extends Component {
 
     updateList(list) {
         this.updateTask({ list });
+    }
+
+    updateSubtasks(subtasks) {
+        this.updateTask({ subtasks });
     }
 
     saveTask() {
@@ -132,6 +138,13 @@ class EditTask extends Component {
                     />
                 </Block>
                 <Block>
+                    <Label>Subtasks</Label>
+                    <Subtasks
+                        subtasks={state.subtasks}
+                        onChange={this.updateSubtasks}
+                    />
+                </Block>
+                <Block>
                     <Label>Notes</Label>
                     <Notes
                         value={state.notes}
@@ -139,9 +152,6 @@ class EditTask extends Component {
                         onKeyPress={this.onKeyPress}
                         onChange={this.onChange}
                     />
-                </Block>
-                <Block>
-                    <Label>Subtasks</Label>
                 </Block>
                 <Block>
                     <Button onClick={this.deleteTask}>Delete</Button>
