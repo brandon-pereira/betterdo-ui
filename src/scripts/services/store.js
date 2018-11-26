@@ -90,15 +90,16 @@ class Store {
         this.loading = false;
     }
 
-    async updateTask(task) {
+    async updateTask(taskId, updatedProps) {
+        console.log(taskId, updatedProps);
         this.loading = true;
-        const updatedTask = await this.server.updateTask(task._id, task);
-        if (task.list && task.list === this.currentList._id) {
-            this.currentList.tasks.map(_task =>
-                task._id === _task._id ? updatedTask : _task
-            );
+        const updatedTask = await this.server.updateTask(taskId, updatedProps);
+        if (updatedProps.list && updatedProps.list !== this.currentList._id) {
+            this.switchLists(updatedProps.list);
         } else {
-            this.switchLists(task.list);
+            this.currentList.tasks = this.currentList.tasks.map(_task =>
+                taskId === _task._id ? updatedTask : _task
+            );
         }
         this.loading = false;
     }
