@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
-import EditTask from './editing';
 import Header from './header';
 
 const Container = styled.div`
@@ -32,7 +31,7 @@ class Task extends Component {
     }
 
     openEditView() {
-        this.props.store.currentTask = this.props.task._id;
+        this.props.store.currentTask = this.props.task;
     }
 
     closeEditView() {
@@ -41,20 +40,10 @@ class Task extends Component {
 
     getChildren() {
         const task = this.props.task;
-        const lists = this.props.store.lists;
-        if (this.props.store.currentTask === task._id) {
-            return (
-                <EditTask
-                    updateTask={this.updateTask.bind(this)}
-                    deleteTask={this.deleteTask.bind(this)}
-                    onClose={this.closeEditView.bind(this)}
-                    task={task}
-                    lists={lists}
-                />
-            );
-        }
+        // const lists = this.props.store.lists;
         return (
             <Header
+                selected={this.props.store.currentTask === task}
                 title={task.title}
                 isCompleted={task.isCompleted}
                 updateTask={this.updateTask.bind(this)}

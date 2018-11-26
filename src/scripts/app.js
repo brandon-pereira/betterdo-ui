@@ -14,6 +14,7 @@ import Logo from './components/logo';
 import Body from './containers/body';
 import AddListModal from './containers/addListModal';
 import EditListModal from './containers/editListModal';
+import EditTaskModal from './containers/editTaskModal';
 
 export default () => {
     render(
@@ -25,6 +26,7 @@ export default () => {
                 <Body />
                 <AddListModal />
                 <EditListModal />
+                <EditTaskModal />
             </Container>
         </Provider>,
         document.querySelector('.main-container')

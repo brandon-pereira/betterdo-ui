@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Label, Input } from '../forms';
-import Dropdown from '../dropdown';
-import Icon from '../icon';
+import { observer, inject } from 'mobx-react';
+import { Label, Input } from '../../components/forms';
+import Dropdown from '../../components/dropdown';
+import Icon from '../../components/icon';
 
 const Container = styled.div`
     display: flex;
@@ -33,26 +34,21 @@ const Icons = styled.div`
         margin-bottom: 0.5rem;
     }
 `;
-class EditBody extends Component {
+@inject('store')
+@observer
+class EditTaskModalContent extends Component {
     constructor(props) {
         super(props);
-        const { task } = this.props;
-        this.state = {
-            title: task.title,
-            priority: task.priority,
-            dueDate: task.dueDate,
-            list: task.list,
-            iconProps: { color: '#565656', size: '2rem' }
-        };
         this.priorities = [
             { value: 'low', label: 'Low' },
             { value: 'normal', label: 'Normal' },
             { value: 'high', label: 'High' }
         ];
-        this.lists = this.props.lists.map(list => ({
+        this.lists = this.props.store.lists.map(list => ({
             value: list._id,
             label: list.title
         }));
+        this.iconProps = { color: '#565656', size: '2rem' };
         this.updatePriority = this.updatePriority.bind(this);
         this.updateList = this.updateList.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
@@ -81,12 +77,13 @@ class EditBody extends Component {
     }
 
     render() {
-        const state = this.state;
+        const task = this.props.store.currentTask;
+        console.log(task);
         return (
             <Container>
                 <Header>
                     <Input
-                        value={state.title}
+                        value={task.title}
                         placeholder="Enter a title"
                         onKeyPress={this.onKeyPress}
                         onChange={evt =>
@@ -112,14 +109,14 @@ class EditBody extends Component {
                     <Dropdown
                         values={this.priorities}
                         onSelect={this.updatePriority}
-                        value={state.priority}
+                        value={task.priority}
                     />
                 </Block>
                 <Block>
                     <Label>Due Date</Label>
                     <Input
                         type="date"
-                        value={state.dueDate || ''}
+                        value={task.dueDate || ''}
                         onChange={evt =>
                             this.setState({
                                 dueDate: evt.target.value
@@ -133,25 +130,25 @@ class EditBody extends Component {
                     <Dropdown
                         values={this.lists}
                         onSelect={this.updateList}
-                        value={state.list}
+                        value={task.list}
                     />
                 </Block>
                 <Block>
                     <Icons>
-                        <Icon {...this.state.iconProps} icon="subtasks">
+                        <Icon {...this.iconProps} icon="subtasks">
                             Subtasks
                         </Icon>
-                        <Icon {...this.state.iconProps} icon="book">
+                        <Icon {...this.iconProps} icon="book">
                             Notes
                         </Icon>
                         <Icon
-                            {...this.state.iconProps}
+                            {...this.iconProps}
                             onClick={this.props.deleteTask}
                             icon="bin"
                         >
                             Delete
                         </Icon>
-                        <Icon {...this.state.iconProps} icon="floppy-disk">
+                        <Icon {...this.iconProps} icon="floppy-disk">
                             Save
                         </Icon>
                     </Icons>
@@ -161,4 +158,4 @@ class EditBody extends Component {
     }
 }
 
-export default EditBody;
+export default EditTaskModalContent;
