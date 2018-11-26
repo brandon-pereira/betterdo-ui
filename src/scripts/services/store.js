@@ -149,6 +149,7 @@ class Store {
             curr => curr._id === taskId
         );
         this.currentList.tasks.splice(removedIndex, 1);
+        this.currentTask = null;
         this.loading = false;
     }
 

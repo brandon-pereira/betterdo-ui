@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
 import { Label, Input, TextArea } from '../../components/forms';
 import Dropdown from '../../components/dropdown';
+import Button from '../../components/button';
 
 const Container = styled.div``;
 const Block = styled.div``;
@@ -33,7 +34,10 @@ class EditTask extends Component {
         };
         this.updatePriority = this.updatePriority.bind(this);
         this.updateList = this.updateList.bind(this);
+        this.saveTask = this.saveTask.bind(this);
+        this.deleteTask = this.deleteTask.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     get lists() {
@@ -55,6 +59,10 @@ class EditTask extends Component {
         this.updateTask({ list });
     }
 
+    saveTask() {
+        this.updateTask(this.state);
+    }
+
     deleteTask() {
         const result = confirm(
             `Are you sure you want to delete the task "${
@@ -72,12 +80,14 @@ class EditTask extends Component {
         return this.props.store.updateTask(this.task._id, updatedProperties);
     }
 
+    onChange(e) {
+        this.setState({ [e.target.id]: e.target.value });
+    }
+
     onKeyPress(e) {
         if (e.key === 'Enter') {
-            this.updateTask({
-                dueDate: this.state.dueDate,
-                title: this.state.title
-            });
+            this.onChange(e);
+            this.updateTask({ [e.target.id]: e.target.value });
         }
     }
 
@@ -89,13 +99,10 @@ class EditTask extends Component {
                     <Label>Title</Label>
                     <Input
                         value={state.title}
+                        id="title"
                         placeholder="Enter a title"
                         onKeyPress={this.onKeyPress}
-                        onChange={evt =>
-                            this.setState({
-                                title: evt.target.value
-                            })
-                        }
+                        onChange={this.onChange}
                     />
                 </Block>
                 <Block>
@@ -110,13 +117,10 @@ class EditTask extends Component {
                     <Label>Due Date</Label>
                     <Input
                         type="date"
+                        id="dueDate"
                         value={state.dueDate || ''}
-                        onChange={evt =>
-                            this.setState({
-                                dueDate: evt.target.value
-                            })
-                        }
                         onKeyPress={this.onKeyPress}
+                        onChange={this.onChange}
                     />
                 </Block>
                 <Block>
@@ -129,10 +133,19 @@ class EditTask extends Component {
                 </Block>
                 <Block>
                     <Label>Notes</Label>
-                    <Notes value={state.notes} />
+                    <Notes
+                        value={state.notes}
+                        id="notes"
+                        onKeyPress={this.onKeyPress}
+                        onChange={this.onChange}
+                    />
                 </Block>
                 <Block>
                     <Label>Subtasks</Label>
+                </Block>
+                <Block>
+                    <Button onClick={this.deleteTask}>Delete</Button>
+                    <Button onClick={this.saveTask}>Save</Button>
                 </Block>
             </Container>
         );
