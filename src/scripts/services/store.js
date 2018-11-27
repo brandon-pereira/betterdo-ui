@@ -63,7 +63,6 @@ class Store {
             const response = await this.server.init(Router.getCurrentRoute());
             this.lists = response.lists;
             this.currentList = response.currentList;
-            this.currentTask = this.currentList.tasks[0];
             this.user = response.user;
         } catch (err) {
             console.error('Failed to initialize', err);

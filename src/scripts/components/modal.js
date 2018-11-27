@@ -21,7 +21,15 @@ const _Modal = styled.div`
     left: ${props => props.theme.left || '50%'};
     bottom: ${props => props.theme.bottom || 'auto'};
     right: ${props => props.theme.right || 'auto'};
-    transform: ${props => props.theme.transform || 'translate(-50%, -50%)'};
+    transform: ${props => {
+        console.log(props.visible);
+        if (props.visible) {
+            return props.theme.transform || 'translate(-50%, -50%)';
+        } else {
+            return 'scale(0)';
+        }
+    }};
+    transition: all 2s;
     background: ${props => props.theme.background || '#fff'};
     width: 100%;
     max-width: 500px;
@@ -141,7 +149,7 @@ export default class Modal extends Component {
                 visible={this.props.visible}
                 onClick={e => this.closeModal(e)}
             >
-                <_Modal innerRef={this.ref}>
+                <_Modal innerRef={this.ref} visible={this.props.visible}>
                     <HeaderContainer>
                         <Header>{this.props.title || ''}</Header>
                         <Icon
