@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import AddTask from '../components/addTask';
 import NotificationBanner from '../components/notificationBanner';
 import Task from '../components/task';
+import Button from '../components/button';
 import { QUERIES } from '../constants';
 import {
     SortableContainer,
@@ -17,11 +18,15 @@ const Container = styled.div`
     grid-column: 2 / 3;
     overflow-y: scroll;
     background: #e4e4e4;
-        ${props =>
-            props.mobileNavVisible &&
-            `
+    ${props =>
+        props.mobileNavVisible &&
+        `
         grid-row: 4;
     `}
+    ${Button} {
+        margin: 0.5rem 1rem;
+        text-transform: uppercase;
+    }
     @media ${QUERIES.medium} {
         grid-row: 2 / 3;
     }
@@ -101,14 +106,17 @@ export default class Body extends Component {
                 mobileNavVisible={this.props.store.modalVisibility.listsView}
             >
                 {this.getNotificationBanner()}
-                <AddTask
-                    hidden={this.props.store.currentList.type === 'loading'}
-                />
+                <AddTask hidden={this.currentList.type === 'loading'} />
                 <SortableList
                     distance={10}
                     items={this.currentList.tasks.map(task => task)}
                     onSortEnd={this.onSortEnd}
                 />
+                {this.currentList.completedTasks && (
+                    <Button color="#999999">
+                        {this.currentList.completedTasks} completed tasks
+                    </Button>
+                )}
             </Container>
         );
     }
