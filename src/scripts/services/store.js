@@ -70,7 +70,7 @@ class Store {
         this.loading = false;
     }
 
-    async switchLists(listId) {
+    async switchLists(listId, options = {}) {
         // Load cached list till server loads
         const _cachedList = this.lists.find(_list => _list._id === listId);
         if (_cachedList) {
@@ -80,7 +80,7 @@ class Store {
         }
         this.loading = true;
         this.modalVisibility.listsView = false;
-        this.currentList = await this.server.getList(listId);
+        this.currentList = await this.server.getList(listId, options);
         Router.setCurrentRoute(
             this.currentList.type === 'default'
                 ? this.currentList._id

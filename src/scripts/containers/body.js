@@ -51,6 +51,12 @@ export default class Body extends Component {
         return this.props.store.currentList;
     }
 
+    loadCompletedTasks() {
+        this.props.store.switchLists(this.currentList._id, {
+            includeCompleted: true
+        });
+    }
+
     onSortEnd = ({ oldIndex, newIndex }) => {
         // Indexes match, no change
         if (oldIndex === newIndex) {
@@ -118,6 +124,7 @@ export default class Body extends Component {
                         this.currentList.completedTasks === 0
                     }
                     color="#999999"
+                    onClick={this.loadCompletedTasks.bind(this)}
                 >
                     {this.currentList.completedTasks} completed tasks
                 </Button>
