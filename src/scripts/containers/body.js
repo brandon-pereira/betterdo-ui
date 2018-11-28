@@ -112,7 +112,7 @@ export default class Body extends Component {
                     items={this.currentList.tasks.map(task => task)}
                     onSortEnd={this.onSortEnd}
                 />
-                {this.currentList.completedTasks && (
+                {this.currentList.completedTasks !== 0 && (
                     <Button color="#999999">
                         {this.currentList.completedTasks} completed tasks
                     </Button>
