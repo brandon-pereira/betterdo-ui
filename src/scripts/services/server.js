@@ -18,9 +18,9 @@ export default class Server {
         return inbox;
     }
 
-    async getList(id) {
+    async getList(id, params = {}) {
         try {
-            return this.get(`lists/${id}`);
+            return this.get(`lists/${id}`, params);
         } catch (err) {
             console.error('Failed to fetch list', id, err);
             return {
@@ -65,8 +65,15 @@ export default class Server {
         throw err;
     }
 
-    get(url) {
-        return this.fetch(`${this.baseUrl}/${url}`);
+    /**
+     * Performs a GET request
+     * @param {String} url the RELATIVE path
+     * @param {Object} queryParameters key/value pair of queryParameters
+     */
+    get(url, queryParameters = {}) {
+        let params = new URLSearchParams(queryParameters);
+        params = params.toString() ? `?${params}` : '';
+        return this.fetch(`${this.baseUrl}/${url}${params}`);
     }
 
     delete(url) {
