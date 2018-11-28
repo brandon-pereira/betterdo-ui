@@ -54,7 +54,6 @@ class Task extends Component {
 
     toggleCompleted() {
         const { _id, isCompleted } = this.props.task;
-        console.log(_id, this.props.task);
         this.props.store.updateTask(_id, {
             isCompleted: !isCompleted
         });

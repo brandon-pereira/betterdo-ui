@@ -112,11 +112,15 @@ export default class Body extends Component {
                     items={this.currentList.tasks.map(task => task)}
                     onSortEnd={this.onSortEnd}
                 />
-                {this.currentList.completedTasks !== 0 && (
-                    <Button color="#999999">
-                        {this.currentList.completedTasks} completed tasks
-                    </Button>
-                )}
+                <Button
+                    hidden={
+                        this.currentList.type === 'loading' ||
+                        this.currentList.completedTasks === 0
+                    }
+                    color="#999999"
+                >
+                    {this.currentList.completedTasks} completed tasks
+                </Button>
             </Container>
         );
     }

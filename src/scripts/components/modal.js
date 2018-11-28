@@ -22,7 +22,6 @@ const _Modal = styled.div`
     bottom: ${props => props.theme.bottom || 'auto'};
     right: ${props => props.theme.right || 'auto'};
     transform: ${props => {
-        console.log(props.visible);
         if (props.visible) {
             return props.theme.transform || 'translate(-50%, -50%)';
         } else {
