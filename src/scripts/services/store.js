@@ -135,8 +135,8 @@ class Store {
     async updateList(listId, updatedProps) {
         this.loading = true;
         const updatedList = await this.server.updateList(listId, updatedProps);
-        delete updatedList.completedTasks;
-        delete updatedList.additionalTasks;
+        // Use current completed lists, this will either be empty or full depending on state
+        updatedList.completedTasks = this.currentList.completedTasks;
         Object.assign(this.currentList, updatedList);
         this.lists = this.lists.map(_list =>
             listId === _list._id ? updatedList : _list
