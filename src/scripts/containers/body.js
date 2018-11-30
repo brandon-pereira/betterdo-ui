@@ -52,9 +52,7 @@ export default class Body extends Component {
     }
 
     loadCompletedTasks() {
-        this.props.store.switchLists(this.currentList._id, {
-            includeCompleted: true
-        });
+        this.props.store.loadCompletedTasks(this.currentList._id);
     }
 
     onSortEnd = ({ oldIndex, newIndex }) => {
@@ -118,15 +116,22 @@ export default class Body extends Component {
                     items={this.currentList.tasks.map(task => task)}
                     onSortEnd={this.onSortEnd}
                 />
+                {this.currentList.completedTasks.map((task, index) => {
+                    if (typeof task === 'object') {
+                        return <Task key={index} task={task} />;
+                    }
+                    return null;
+                })}
                 <Button
                     hidden={
                         this.currentList.type === 'loading' ||
-                        this.currentList.completedTasks === 0
+                        !this.currentList.additionalTasks ||
+                        this.currentList.additionalTasks === 0
                     }
                     color="#999999"
                     onClick={this.loadCompletedTasks.bind(this)}
                 >
-                    {this.currentList.completedTasks} completed tasks
+                    {this.currentList.additionalTasks} completed tasks
                 </Button>
             </Container>
         );

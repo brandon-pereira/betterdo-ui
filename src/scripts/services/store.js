@@ -12,6 +12,7 @@ class Store {
         title: '',
         color: COLORS.defaultList,
         tasks: [],
+        completedTasks: [],
         type: 'loading'
     };
 
@@ -70,7 +71,7 @@ class Store {
         this.loading = false;
     }
 
-    async switchLists(listId, options = {}) {
+    async switchLists(listId) {
         // Load cached list till server loads
         const _cachedList = this.lists.find(_list => _list._id === listId);
         if (_cachedList) {
@@ -80,13 +81,21 @@ class Store {
         }
         this.loading = true;
         this.modalVisibility.listsView = false;
-        this.currentList = await this.server.getList(listId, options);
+        this.currentList = await this.server.getList(listId);
         Router.setCurrentRoute(
             this.currentList.type === 'default'
                 ? this.currentList._id
                 : this.currentList.type
         );
         this.loading = false;
+    }
+
+    async loadCompletedTasks(listId) {
+        const list = await this.server.getList(listId, {
+            includeCompleted: true
+        });
+        this.currentList.completedTasks = list.completedTasks;
+        this.currentList.additionalTasks = list.additionalTasks;
     }
 
     async updateTask(taskId, updatedProps) {
@@ -98,6 +107,9 @@ class Store {
             this.currentList.tasks = this.currentList.tasks.map(_task =>
                 taskId === _task._id ? updatedTask : _task
             );
+            this.currentList.completedTasks = this.currentList.completedTasks.map(
+                _task => (taskId === _task._id ? updatedTask : _task)
+            );
         }
         this.loading = false;
     }
@@ -108,7 +120,7 @@ class Store {
             taskName,
             this.currentList._id
         );
-        this.currentList.tasks.push(task);
+        this.currentList.tasks.unshift(task);
         this.loading = false;
     }
 
@@ -123,7 +135,9 @@ class Store {
     async updateList(listId, updatedProps) {
         this.loading = true;
         const updatedList = await this.server.updateList(listId, updatedProps);
-        this.currentList = updatedList;
+        delete updatedList.completedTasks;
+        delete updatedList.additionalTasks;
+        Object.assign(this.currentList, updatedList);
         this.lists = this.lists.map(_list =>
             listId === _list._id ? updatedList : _list
         );
