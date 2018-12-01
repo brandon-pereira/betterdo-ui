@@ -6,7 +6,6 @@ import Icon from './icon';
 import { QUERIES } from '../constants';
 
 const Overlay = styled.div`
-    display: ${({ visible }) => (visible ? 'block' : 'none')};
     position: fixed;
     top: 0;
     left: 0;
@@ -14,6 +13,12 @@ const Overlay = styled.div`
     bottom: 0;
     z-index: 10;
     background: rgba(0, 0, 0, 0.5);
+    ${props =>
+        !props.visible &&
+        `
+        visibility: hidden;
+        pointer-events: none;
+    `}
 `;
 const _Modal = styled.div`
     position: absolute;
@@ -21,14 +26,10 @@ const _Modal = styled.div`
     left: ${props => props.theme.left || '50%'};
     bottom: ${props => props.theme.bottom || 'auto'};
     right: ${props => props.theme.right || 'auto'};
-    transform: ${props => {
-        if (props.visible) {
-            return props.theme.transform || 'translate(-50%, -50%)';
-        } else {
-            return 'scale(0)';
-        }
-    }};
-    transition: all 2s;
+    transform:  ${props =>
+        props.theme.transformFrom || 'scale(0) translate(-50%, -50%)'};
+    transform-origin: top left;
+    transition: transform 0.5s;
     background: ${props => props.theme.background || '#fff'};
     width: 100%;
     max-width: 500px;
@@ -36,6 +37,12 @@ const _Modal = styled.div`
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
     overflow-y: scroll;
+    ${props =>
+        props.visible &&
+        `
+        transform: ${props.theme.transformTo ||
+            'scale(1) translate(-50%, -50%)'};
+    `}
     @media ${QUERIES.medium} {
         width: 60%;
     }
