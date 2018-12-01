@@ -8,8 +8,11 @@ import Subtasks from '../../components/subtasks';
 
 const Container = styled.div``;
 const Block = styled.div``;
+const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
 const Notes = styled(TextArea)`
-    background: #fff9b0;
     min-height: 10rem;
 `;
 
@@ -153,10 +156,14 @@ class EditTask extends Component {
                         onChange={this.onChange}
                     />
                 </Block>
-                <Block>
-                    <Button onClick={this.deleteTask}>Delete</Button>
-                    <Button onClick={this.saveTask}>Save</Button>
-                </Block>
+                <ButtonContainer>
+                    <Button color="#42a5f5" onClick={this.saveTask}>
+                        Save
+                    </Button>
+                    <Button color="#c62828" onClick={this.deleteTask}>
+                        Delete
+                    </Button>
+                </ButtonContainer>
             </Container>
         );
     }

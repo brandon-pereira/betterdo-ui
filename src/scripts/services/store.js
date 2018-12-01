@@ -123,6 +123,9 @@ class Store {
             this._removeTask(taskId);
             // Add new task
             this.currentList.tasks.unshift(updatedTask);
+        } else {
+            // Simply update task in list
+            this._updateTask(taskId, updatedTask);
         }
         this.loading = false;
     }
