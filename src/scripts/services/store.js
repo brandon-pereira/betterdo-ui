@@ -100,15 +100,27 @@ class Store {
 
     async updateTask(taskId, updatedProps) {
         this.loading = true;
+        const modifiedComplete = typeof updatedProps.isCompleted === 'boolean';
         const updatedTask = await this.server.updateTask(taskId, updatedProps);
         if (updatedProps.list && updatedProps.list !== this.currentList._id) {
             this.switchLists(updatedProps.list);
-        } else {
-            this.currentList.tasks = this.currentList.tasks.map(_task =>
-                taskId === _task._id ? updatedTask : _task
+        } else if (modifiedComplete && updatedProps.isCompleted === true) {
+            console.log('MARK COMPLETED');
+            // Remove from incomplete tasks
+            this.currentList.tasks = this.currentList.tasks.filter(
+                _task => taskId !== _task._id
             );
+            // Update completed tasks
             this.currentList.completedTasks = this.currentList.completedTasks.map(
-                _task => (taskId === _task._id ? updatedTask : _task)
+                _task => (taskId === _task._id ? taskId : _task._id)
+            );
+            this.currentList.additionalTasks =
+                this.currentList.completedTasks.length + 1;
+        } else if (modifiedComplete && updatedProps.isCompleted === false) {
+            console.log('MARK INCOMPLETED');
+            this.currentList.tasks.unshift(updatedTask);
+            this.currentList.completedTasks = this.currentList.completedTasks.filter(
+                _task => taskId !== _task._id
             );
         }
         this.loading = false;
