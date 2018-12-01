@@ -3,6 +3,7 @@ import Server from './server';
 import ServiceWorkerRegistrar from './sw-registrar';
 import { COLORS } from '../constants';
 import Router from './router';
+
 class Store {
     @observable
     lists = [];
@@ -104,25 +105,24 @@ class Store {
         const modifiedComplete = typeof updatedProps.isCompleted === 'boolean';
         const updatedTask = await this.server.updateTask(taskId, updatedProps);
         if (updatedProps.list && updatedProps.list !== this.currentList._id) {
+            // Switch to new list
             this.switchLists(updatedProps.list);
         } else if (modifiedComplete && updatedProps.isCompleted === true) {
-            console.log('MARK COMPLETED');
-            // Remove from incomplete tasks
-            this.currentList.tasks = this.currentList.tasks.filter(
-                _task => taskId !== _task._id
-            );
-            // Update completed tasks
+            // Remove from arrays
+            this._removeTask(taskId);
+            // Add new task
+            this.currentList.completedTasks.unshift(updatedTask);
+            // Update the UI to reference the strings, forcing them hidden
             this.currentList.completedTasks = this.currentList.completedTasks.map(
-                _task => (taskId === _task._id ? taskId : _task._id)
+                task => task._id || task
             );
-            this.currentList.additionalTasks =
-                this.currentList.completedTasks.length + 1;
+            // Count new additional tasks
+            this.currentList.additionalTasks = this.currentList.completedTasks.length;
         } else if (modifiedComplete && updatedProps.isCompleted === false) {
-            console.log('MARK INCOMPLETED');
+            // Remove from arrays
+            this._removeTask(taskId);
+            // Add new task
             this.currentList.tasks.unshift(updatedTask);
-            this.currentList.completedTasks = this.currentList.completedTasks.filter(
-                _task => taskId !== _task._id
-            );
         }
         this.loading = false;
     }
@@ -185,8 +185,18 @@ class Store {
             _task => (taskId === _task._id ? newTask : _task)
         );
         // Update
-        this.currentList.task = this.currentList.task.map(_task =>
+        this.currentList.tasks = this.currentList.tasks.map(_task =>
             taskId === _task._id ? newTask : _task
+        );
+    }
+
+    _removeTask(taskId) {
+        this.currentList.completedTasks = this.currentList.completedTasks.filter(
+            _task => taskId !== _task._id
+        );
+
+        this.currentList.tasks = this.currentList.tasks.filter(
+            _task => taskId !== _task._id
         );
     }
 
