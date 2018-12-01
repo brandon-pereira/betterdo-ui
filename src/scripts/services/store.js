@@ -77,6 +77,7 @@ class Store {
         if (_cachedList) {
             // don't load cached tasks, usually just the ids
             _cachedList.tasks = [];
+            _cachedList.additionalTasks = 0;
             this.currentList = _cachedList;
         }
         this.loading = true;
@@ -176,6 +177,17 @@ class Store {
         this.currentList.tasks.splice(removedIndex, 1);
         this.currentTask = null;
         this.loading = false;
+    }
+
+    _updateTask(taskId, newTask) {
+        // Update completed tasks
+        this.currentList.completedTasks = this.currentList.completedTasks.map(
+            _task => (taskId === _task._id ? newTask : _task)
+        );
+        // Update
+        this.currentList.task = this.currentList.task.map(_task =>
+            taskId === _task._id ? newTask : _task
+        );
     }
 
     applyAppUpdate() {
