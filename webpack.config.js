@@ -27,7 +27,7 @@ const getPlugins = () => {
                     publicPath: '/betterdo/app/sw.js'
                 },
                 publicPath: '/betterdo/',
-                externals: ['./', 'betterdo/app', 'betterdo/app/manifest.json']
+                externals: ['./', 'app', 'app/manifest.json']
             })
         );
     }
