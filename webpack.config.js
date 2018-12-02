@@ -23,9 +23,11 @@ const getPlugins = () => {
             new OfflinePlugin({
                 ServiceWorker: {
                     output: '../sw.js',
-                    events: true
+                    events: true,
+                    publicPath: '/betterdo/app/sw.js'
                 },
-                externals: ['/', '/app', '/app/manifest.json']
+                publicPath: '/betterdo/',
+                externals: ['./', 'betterdo/app', 'betterdo/app/manifest.json']
             })
         );
     }
