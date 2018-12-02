@@ -1,6 +1,6 @@
 export const setCurrentRoute = url => {
     if (window && window.history) {
-        history.replaceState({}, document.title, `/#/${url}`);
+        history.replaceState({}, document.title, `#/${url}`);
     }
 };
 export const getCurrentRoute = () => {
