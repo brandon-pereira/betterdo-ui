@@ -1,6 +1,6 @@
 export default class Server {
     constructor() {
-        this.baseUrl = '/api';
+        this.baseUrl = `${process.env.ROOT_APP_DIR}api`;
     }
 
     async init(listId) {
