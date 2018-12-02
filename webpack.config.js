@@ -9,8 +9,10 @@ const getPlugins = () => {
         }),
         new webpack.optimize.ModuleConcatenationPlugin(), // scope hoisting
         new webpack.DefinePlugin({
-            PRODUCTION: JSON.stringify(config.isProduction),
-            ROOT_APP_DIR: config.isProduction ? 'betterdo/' : '/'
+            'process.env.PRODUCTION': JSON.stringify(config.isProduction),
+            'process.env.ROOT_APP_DIR': JSON.stringify(
+                config.isProduction ? 'betterdo/' : '/'
+            )
         })
     ];
 
