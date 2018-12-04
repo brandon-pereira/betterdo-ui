@@ -71,6 +71,7 @@ class Store {
             console.error('Failed to initialize', err);
         }
         this.loading = false;
+        this._onListChange();
     }
 
     async reload() {
@@ -98,13 +99,8 @@ class Store {
         this.loading = true;
         this.modalVisibility.listsView = false;
         this.currentList = await this.server.getList(listId);
-        Router.setCurrentRoute(
-            this.currentList.type === 'default'
-                ? this.currentList._id
-                : this.currentList.type
-        );
-        setThemeColor(this.currentList.color);
         this.loading = false;
+        this._onListChange();
     }
 
     async loadCompletedTasks(listId) {
@@ -173,6 +169,7 @@ class Store {
             listId === _list._id ? updatedList : _list
         );
         this.loading = false;
+        this._onListChange();
     }
 
     async deleteList(listId) {
@@ -195,6 +192,15 @@ class Store {
         this.currentList.tasks.splice(removedIndex, 1);
         this.currentTask = null;
         this.loading = false;
+    }
+
+    _onListChange() {
+        setThemeColor(this.currentList.color);
+        Router.setCurrentRoute(
+            this.currentList.type === 'default'
+                ? this.currentList._id
+                : this.currentList.type
+        );
     }
 
     _updateTask(taskId, newTask) {
