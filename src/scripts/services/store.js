@@ -72,6 +72,19 @@ class Store {
         this.loading = false;
     }
 
+    async reload() {
+        this.loading = true;
+        try {
+            const response = await this.server.init(Router.getCurrentRoute());
+            this.lists = response.lists;
+            this.currentList = response.currentList;
+            this.user = response.user;
+        } catch (err) {
+            console.error('Failed to reload', err);
+        }
+        this.loading = false;
+    }
+
     async switchLists(listId) {
         // Load cached list till server loads
         const _cachedList = this.lists.find(_list => _list._id === listId);

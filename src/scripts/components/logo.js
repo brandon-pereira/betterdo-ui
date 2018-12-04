@@ -51,7 +51,7 @@ export default class Logo extends Component {
         return (
             <Container
                 visibleOnMobile={this.props.store.modalVisibility.listsView}
-                onClick={() => state.switchLists('inbox')}
+                onClick={() => state.reload()}
             >
                 <Icon
                     open={this.props.store.modalVisibility.listsView}
