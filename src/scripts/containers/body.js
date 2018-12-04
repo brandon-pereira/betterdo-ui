@@ -112,7 +112,7 @@ export default class Body extends Component {
                 {this.getNotificationBanner()}
                 <AddTask hidden={this.currentList.type === 'loading'} />
                 <SortableList
-                    distance={10}
+                    pressDelay={200}
                     items={this.currentList.tasks.map(task => task)}
                     onSortEnd={this.onSortEnd}
                 />
