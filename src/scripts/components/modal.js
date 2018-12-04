@@ -29,7 +29,7 @@ const _Modal = styled.div`
     transform:  ${props =>
         props.theme.transformFrom || 'scale(0) translate(-50%, -50%)'};
     transform-origin: top left;
-    transition: transform 0.5s;
+    transition: transform 0.2s;
     background: ${props => props.theme.background || '#fff'};
     width: 100%;
     max-width: 500px;
