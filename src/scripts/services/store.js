@@ -3,6 +3,7 @@ import Server from './server';
 import ServiceWorkerRegistrar from './sw-registrar';
 import { COLORS } from '../constants';
 import Router from './router';
+import { setThemeColor } from './helmet';
 
 class Store {
     @observable
@@ -102,6 +103,7 @@ class Store {
                 ? this.currentList._id
                 : this.currentList.type
         );
+        setThemeColor(this.currentList.color);
         this.loading = false;
     }
 
