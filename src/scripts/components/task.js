@@ -26,6 +26,7 @@ const Checkbox = styled.input`
     outline: none;
     cursor: pointer;
     flex-shrink: 0;
+    user-select: none;
     &:before {
         content: '';
         border-radius: 50%;
