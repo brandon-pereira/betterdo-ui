@@ -46,7 +46,16 @@ const ListsContainer = styled.ul`
     padding: 0;
     margin: 0;
     flex: 1;
-    overflow-y: scroll;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+    &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.9);
+    }
+    &::-webkit-scrollbar-thumb {
+        background: linear-gradient(#1e88e5, #1565c0);
+    }
 `;
 
 @inject('store')
