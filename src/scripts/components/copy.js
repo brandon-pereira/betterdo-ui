@@ -7,6 +7,7 @@ const _header = styled.h2`
     font-size: 2rem;
     margin: 0 0 1rem;
     padding: 0;
+    letter-spacing: -2px;
 `;
 
 const _body = styled.p`
