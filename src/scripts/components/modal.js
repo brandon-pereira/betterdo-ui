@@ -31,7 +31,7 @@ const _Modal = styled.div`
     transform-origin: top left;
     transition: transform 0.2s;
     background: ${props => props.theme.background || '#fff'};
-    width: 100%;
+    width: ${props => props.theme.mobileWidth || '100%'};
     max-width: 500px;
     padding: 1rem;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);

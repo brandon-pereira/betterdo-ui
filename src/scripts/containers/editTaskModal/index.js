@@ -17,6 +17,7 @@ export default class AddListModalContainer extends Component {
             right: '0',
             top: '0',
             bottom: '0',
+            mobileWidth: '90%',
             transformTo: 'none',
             transformFrom: 'translateX(100%)'
         };
