@@ -111,6 +111,9 @@ export default class Server {
             await this.throwError(undefined, err);
         }
         if (!response.ok) {
+            if(response.status === 401) {
+                window.location = process.env.ROOT_APP_DIR;
+            }
             const message = (await response.json()).error;
             this.throwError(message);
         }
