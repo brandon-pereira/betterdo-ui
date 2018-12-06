@@ -26,7 +26,6 @@ const Checkbox = styled.input`
     outline: none;
     cursor: pointer;
     flex-shrink: 0;
-    user-select: none;
     &:before {
         content: '';
         border-radius: 50%;
@@ -45,6 +44,7 @@ const Title = styled.span`
     flex: 1;
     text-overflow: ellipsis;
     overflow: hidden;
+    user-select: none;
 `;
 @inject('store')
 @observer
