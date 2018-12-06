@@ -37,10 +37,19 @@ const Container = styled.div`
         transform: none;
         grid-row: 1 / 1;
         grid-column: 1 / 1;
+        h1 {
+            font-size: 1.3rem;
+            margin-right: 1rem;
+        }
         ${Icon} {
             display: none;
         }
 
+    }
+    @media ${QUERIES.large} {
+        h1 {
+            font-size: 1.8rem;
+        }
     }
 `;
 @inject('store')

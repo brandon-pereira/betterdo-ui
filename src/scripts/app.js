@@ -31,4 +31,8 @@ export default () => {
         </Provider>,
         document.querySelector('.main-container')
     );
+
+    import('./services/webfontloader').then(webfontloader =>
+        webfontloader.default()
+    );
 };

@@ -20,6 +20,9 @@ const Container = styled.header`
     ${Hamburger} {
         margin-right: 1rem;
     }
+    ${Loader} {
+        filter: drop-shadow(1px 1px rgba(0,0,0,.5))
+    }
     ${Button} {
         margin-left: 0.8rem;
         font-size: 0.8rem;
@@ -45,10 +48,14 @@ const Container = styled.header`
 `;
 const Title = styled.h2`
     flex: 1;
+    font-size: 1.8rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     text-align: center;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    line-height: 4rem;
+    margin: 0;
 `;
 
 @inject('store')
