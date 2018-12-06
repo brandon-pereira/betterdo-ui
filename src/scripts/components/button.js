@@ -18,6 +18,7 @@ const Container = styled.button.attrs({
     font-size: ${props => (props.small ? '0.6rem' : '1rem')};
     cursor: pointer;
     position: relative;
+    z-index: 0;
     overflow: hidden;
     outline: none;
     display: ${({ hidden }) => (hidden ? 'none' : 'inline-block')};
