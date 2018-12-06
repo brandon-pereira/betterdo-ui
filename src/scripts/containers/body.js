@@ -13,6 +13,11 @@ import {
     arrayMove
 } from 'react-sortable-hoc';
 
+const CompletedTasksButton = styled(Button)`
+    margin: 0.5rem 1rem;
+    text-transform: uppercase;
+    user-select: none;
+`;
 const Container = styled.div`
     grid-row: 2 / 3;
     grid-column: 2 / 3;
@@ -23,11 +28,6 @@ const Container = styled.div`
         `
         grid-row: 4;
     `}
-    ${Button} {
-        margin: 0.5rem 1rem;
-        text-transform: uppercase;
-        user-select: none;
-    }
     @media ${QUERIES.medium} {
         grid-row: 2 / 3;
     }
@@ -123,7 +123,7 @@ export default class Body extends Component {
                     }
                     return null;
                 })}
-                <Button
+                <CompletedTasksButton
                     hidden={
                         this.currentList.type === 'loading' ||
                         !this.currentList.additionalTasks ||
@@ -133,7 +133,7 @@ export default class Body extends Component {
                     onClick={this.loadCompletedTasks.bind(this)}
                 >
                     {this.currentList.additionalTasks} completed tasks
-                </Button>
+                </CompletedTasksButton>
             </Container>
         );
     }
