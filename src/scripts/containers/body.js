@@ -26,6 +26,7 @@ const Container = styled.div`
     ${Button} {
         margin: 0.5rem 1rem;
         text-transform: uppercase;
+        user-select: none;
     }
     @media ${QUERIES.medium} {
         grid-row: 2 / 3;
