@@ -143,11 +143,17 @@ class Store {
 
     async createTask(taskName) {
         this.loading = true;
+        const tempId = Math.floor(Math.random() * 1000);
+        this.currentList.tasks.unshift({
+            _id: tempId,
+            title: taskName,
+            isLoading: true
+        });
         const task = await this.server.createTask(
             taskName,
             this.currentList._id
         );
-        this.currentList.tasks.unshift(task);
+        this._updateTask(tempId, task);
         this.loading = false;
     }
 

@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
+import Loader from './loader';
 
-const Container = styled.div`
-    background: linear-gradient(#fff, #eee);
-    margin: 0.5rem 1rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2), inset 0 -1px #fff;
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-`;
 const Checkbox = styled.input`
     height: 1.4rem;
     width: 1.4rem;
@@ -18,7 +10,6 @@ const Checkbox = styled.input`
     display: inline-block;
     appearance: none;
     background: #fff;
-    margin-right: 1rem;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
@@ -40,11 +31,25 @@ const Checkbox = styled.input`
         transform: scale(1);
     }
 `;
+const Container = styled.div`
+    background: linear-gradient(#fff, #eee);
+    margin: 0.5rem 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2), inset 0 -1px #fff;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    ${props => props.isLoading && `
+        opacity: 0.5;
+        pointer-events: none;
+    `}
+`;
 const Title = styled.span`
     flex: 1;
     text-overflow: ellipsis;
     overflow: hidden;
     user-select: none;
+    margin-left: 1rem;
 `;
 @inject('store')
 @observer
@@ -63,13 +68,16 @@ class Task extends Component {
     render() {
         const { task } = this.props;
         return (
-            <Container onClick={this.edit.bind(this)}>
-                <Checkbox
-                    type="checkbox"
-                    onClick={e => e.stopPropagation()}
-                    onChange={this.toggleCompleted.bind(this)}
-                    checked={task.isCompleted}
-                />
+            <Container isLoading={task.isLoading} onClick={this.edit.bind(this)}>
+                {task.isLoading ? 
+                    <Loader color="#202020" size="1.7rem" loading={true} /> : 
+                    <Checkbox
+                        type="checkbox"
+                        onClick={e => e.stopPropagation()}
+                        onChange={this.toggleCompleted.bind(this)}
+                        checked={task.isCompleted}
+                    />
+                }
                 <Title>{task.title}</Title>
             </Container>
         );
