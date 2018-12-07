@@ -43,7 +43,7 @@ const Container = styled.div`
         stroke: ${props => props.color || '#fff'};
         animation: ${dashoffset} 2s ease-in-out infinite;
     }
-    ${({ loading, size }) =>
+    ${({ loading }) =>
         loading &&
         `
         transition: all 0s 0s !important;
