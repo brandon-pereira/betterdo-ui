@@ -114,6 +114,7 @@ class Store {
     async updateTask(taskId, updatedProps) {
         this.loading = true;
         const modifiedComplete = typeof updatedProps.isCompleted === 'boolean';
+        this._updateTask(taskId, updatedProps, { merge: true });
         const updatedTask = await this.server.updateTask(taskId, updatedProps);
         if (updatedProps.list && updatedProps.list !== this.currentList._id) {
             // Switch to new list
@@ -209,15 +210,23 @@ class Store {
         );
     }
 
-    _updateTask(taskId, newTask) {
+    _updateTask(taskId, newTask, { merge } = {}) {
+        const mapFn = _task => {
+            const isCorrectTask = taskId === _task._id;
+            if (isCorrectTask && merge) {
+                return Object.assign(_task, newTask);
+            } else if (isCorrectTask) {
+                return newTask;
+            } else {
+                return _task;
+            }
+        };
         // Update completed tasks
         this.currentList.completedTasks = this.currentList.completedTasks.map(
-            _task => (taskId === _task._id ? newTask : _task)
+            mapFn
         );
         // Update
-        this.currentList.tasks = this.currentList.tasks.map(_task =>
-            taskId === _task._id ? newTask : _task
-        );
+        this.currentList.tasks = this.currentList.tasks.map(mapFn);
     }
 
     _removeTask(taskId) {
