@@ -4,6 +4,7 @@ import { Form, Label, Input } from '../../components/forms';
 import ColorPicker from '../../components/colorPicker';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
+import { COLORS } from '../../constants';
 
 const ButtonContainer = styled.div`
     display: flex;
@@ -18,7 +19,8 @@ export default class EditListModalContent extends Component {
         super(props);
         const currentList = this.props.store.currentList;
         this.state = {
-            submitting: false,
+            isSaving: false,
+            isDeleting: false,
             isInvalid: false,
             serverError: null,
             title: currentList.title,
@@ -33,14 +35,14 @@ export default class EditListModalContent extends Component {
             }"? This can't be undone.`
         );
         if (result) {
-            this.setState({ submitting: true, isInvalid: false });
+            this.setState({ isDeleting: true, isInvalid: false });
             try {
                 await this.props.store.deleteList(
                     this.props.store.currentList._id
                 );
             } catch (err) {
                 this.setState({
-                    submitting: false,
+                    isDeleting: false,
                     serverError: err.formattedMessage
                 });
                 return;
@@ -53,12 +55,12 @@ export default class EditListModalContent extends Component {
 
     async onSubmit(e) {
         e.preventDefault();
-        if (this.state.submitting) {
+        if (this.state.isSaving || this.state.isDeleting) {
             return;
         }
         const store = this.props.store;
         if (this.state.title && this.state.title.length) {
-            this.setState({ submitting: true, isInvalid: false });
+            this.setState({ isSaving: true, isInvalid: false });
             try {
                 await store.updateList(store.currentList._id, {
                     title: this.state.title,
@@ -66,12 +68,12 @@ export default class EditListModalContent extends Component {
                 });
             } catch (err) {
                 this.setState({
-                    submitting: false,
+                    isSaving: false,
                     serverError: err.formattedMessage
                 });
                 return;
             }
-            this.setState({ submitting: false });
+            this.setState({ isSaving: false });
             if (this.props.closeModal) {
                 this.props.closeModal();
             }
@@ -106,16 +108,18 @@ export default class EditListModalContent extends Component {
                     />
                     <ButtonContainer>
                         <Button
-                            loading={this.state.submitting}
+                            loading={this.state.isSaving}
+                            loadingText="Saving"
                             color={this.state.color}
-                            type="submit"
+                            type="Save"
                         >
-                            Modify
+                            Save
                         </Button>
                         <Button
-                            loading={this.state.submitting}
-                            color={this.state.color}
+                            loading={this.state.isDeleting}
+                            loadingText="Deleting"
                             onClick={() => this.deleteList()}
+                            color={COLORS.dangerousAction}
                             type="button"
                         >
                             Delete

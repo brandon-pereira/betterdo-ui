@@ -5,6 +5,7 @@ import { Label, Input, TextArea } from '../../components/forms';
 import Dropdown from '../../components/dropdown';
 import Button from '../../components/button';
 import Subtasks from '../../components/subtasks';
+import { COLORS } from '../../constants';
 
 const Container = styled.div``;
 const Block = styled.div``;
@@ -34,7 +35,9 @@ class EditTask extends Component {
             dueDate: task.dueDate,
             list: task.list,
             notes: task.notes,
-            subtasks: task.subtasks
+            subtasks: task.subtasks,
+            isSaving: false,
+            isDeleting: false
         };
         this.updatePriority = this.updatePriority.bind(this);
         this.updateList = this.updateList.bind(this);
@@ -69,24 +72,43 @@ class EditTask extends Component {
     }
 
     saveTask() {
-        this.updateTask(this.state);
+        this.updateTask({
+            title: this.state.title,
+            priority: this.state.priority,
+            dueDate: this.state.dueDate,
+            list: this.state.list,
+            notes: this.state.notes,
+            subtasks: this.state.subtasks
+        });
     }
 
-    deleteTask() {
+    async deleteTask() {
         const result = confirm(
             `Are you sure you want to delete the task "${
                 this.task.title
             }"? This can't be undone.`
         );
         if (result) {
-            return this.props.store.deleteTask(this.task._id);
+            this.setState({
+                isDeleting: true
+            });
+            await this.props.store.deleteTask(this.task._id);
+            this.setState({
+                isDeleting: false
+            });
         }
     }
 
-    updateTask(updatedProperties) {
+    async updateTask(updatedProperties) {
         console.log('Update', this.task._id, updatedProperties);
-        this.setState(updatedProperties);
-        return this.props.store.updateTask(this.task._id, updatedProperties);
+        this.setState({
+            ...updatedProperties,
+            isSaving: true
+        });
+        await this.props.store.updateTask(this.task._id, updatedProperties);
+        this.setState({
+            isSaving: false
+        });
     }
 
     onChange(e) {
@@ -157,10 +179,20 @@ class EditTask extends Component {
                     />
                 </Block>
                 <ButtonContainer>
-                    <Button color="#42a5f5" onClick={this.saveTask}>
+                    <Button
+                        color="#42a5f5"
+                        onClick={this.saveTask}
+                        loading={this.state.isSaving}
+                        loadingText="Saving"
+                    >
                         Save
                     </Button>
-                    <Button color="#c62828" onClick={this.deleteTask}>
+                    <Button
+                        color={COLORS.dangerousAction}
+                        onClick={this.deleteTask}
+                        loading={this.state.isDeleting}
+                        loadingText="Deleting"
+                    >
                         Delete
                     </Button>
                 </ButtonContainer>

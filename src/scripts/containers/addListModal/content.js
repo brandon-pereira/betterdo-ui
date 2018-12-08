@@ -86,10 +86,11 @@ export default class AddListModalContent extends Component {
                     <ButtonContainer>
                         <Button
                             type="submit"
+                            loadingText="Creating"
                             loading={this.state.submitting}
                             color={this.state.color}
                         >
-                            Submit
+                            Create
                         </Button>
                     </ButtonContainer>
                 </Form>
