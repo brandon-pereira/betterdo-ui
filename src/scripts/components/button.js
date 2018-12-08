@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Loader from './loader';
 
 const Container = styled.button.attrs({
     style: ({ color }) => ({
@@ -21,7 +22,12 @@ const Container = styled.button.attrs({
     z-index: 0;
     overflow: hidden;
     outline: none;
-    display: ${({ hidden }) => (hidden ? 'none' : 'inline-block')};
+    display: ${({ hidden }) => (hidden ? 'none' : 'inline-flex')};
+    align-items: center;
+    ${Loader} {
+        display: inline-block;
+        margin-right: 0.5rem;
+    }
     span {
         position: relative;
         z-index: 1;
@@ -43,22 +49,22 @@ const Container = styled.button.attrs({
     ${props =>
         props.loading &&
         `
-            font-size: 0;
             pointer-events: none;
             &:before {
                 opacity: 1;
                 background: rgba(255, 255, 255, 0.3);
-            }
-            &:after {
-                content: "Loading...";
-                font-size: 1rem;
             }
         `};
 `;
 
 const Button = ({ children, type, ...props }) => (
     <Container type={type || 'button'} {...props}>
-        <span>{children}</span>
+        {props.loading && <Loader loading={true} size="1rem" />}
+        {props.loading ? (
+            <span>{props.loadingText || 'Loading'}</span>
+        ) : (
+            <span>{children}</span>
+        )}
     </Container>
 );
 

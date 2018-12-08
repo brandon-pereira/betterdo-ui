@@ -47,13 +47,26 @@ const SortableList = SortableContainer(({ items }) => {
 @inject('store')
 @observer
 export default class Body extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loadingCompletedTasks: false
+        };
+    }
+
     @computed
     get currentList() {
         return this.props.store.currentList;
     }
 
-    loadCompletedTasks() {
-        this.props.store.loadCompletedTasks(this.currentList._id);
+    async loadCompletedTasks() {
+        this.setState({
+            loadingCompletedTasks: true
+        });
+        await this.props.store.loadCompletedTasks(this.currentList._id);
+        this.setState({
+            loadingCompletedTasks: false
+        });
     }
 
     onSortEnd = ({ oldIndex, newIndex }) => {
@@ -129,6 +142,7 @@ export default class Body extends Component {
                         !this.currentList.additionalTasks ||
                         this.currentList.additionalTasks === 0
                     }
+                    loading={this.state.loadingCompletedTasks}
                     color="#999999"
                     onClick={this.loadCompletedTasks.bind(this)}
                 >
