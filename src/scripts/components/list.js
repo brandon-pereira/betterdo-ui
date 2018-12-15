@@ -52,8 +52,23 @@ class ListItem extends Component {
             title = 'New List';
             Icon = <SvgIcon icon="quill" {...svgIconProps} />;
         }
-        if (this.props.type === 'inbox') {
-            Icon = <SvgIcon icon="drawer" {...svgIconProps} />;
+        switch (this.props.type) {
+            case 'inbox':
+                title = 'Inbox';
+                Icon = <SvgIcon icon="drawer" {...svgIconProps} />;
+                break;
+            case 'today':
+                title = 'Today';
+                Icon = <SvgIcon icon="alarm" {...svgIconProps} />;
+                break;
+            case 'tomorrow':
+                title = 'Tomorrow';
+                Icon = <SvgIcon icon="calendar" {...svgIconProps} />;
+                break;
+            case 'highPriority':
+                title = 'High Priority';
+                Icon = <SvgIcon icon="bookmarks" {...svgIconProps} />;
+                break;
         }
         return (
             <Li

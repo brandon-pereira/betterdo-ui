@@ -25,7 +25,9 @@ class Store {
     loading = true;
 
     @observable
-    user = null;
+    user = {
+        customLists: {}
+    };
 
     @observable
     modalVisibility = {
@@ -73,6 +75,8 @@ class Store {
             this.currentList = response.currentList;
             this._updateListInCache(this.currentList._id, this.currentList);
             this.user = response.user;
+
+            console.log(this.user);
         } catch (err) {
             console.error('Init call failed from server', err);
         }
