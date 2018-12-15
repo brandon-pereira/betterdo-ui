@@ -38,7 +38,11 @@ const SortableList = SortableContainer(({ items }) => {
     return (
         <div>
             {items.map((task, index) => (
-                <SortableItem key={task._id} index={index} value={task} />
+                <SortableItem
+                    key={typeof task === 'object' ? task._id : index}
+                    index={index}
+                    value={task}
+                />
             ))}
         </div>
     );
