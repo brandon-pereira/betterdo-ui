@@ -61,16 +61,7 @@ class Store {
             this.addToHomeScreenAvailable = bool;
         });
 
-        // Fetch data from server
-        try {
-            const response = await this.server.init(Router.getCurrentRoute());
-            this.lists = response.lists;
-            this.currentList = response.currentList;
-            this.user = response.user;
-        } catch (err) {
-            console.error('Failed to initialize', err);
-        }
-        this.loading = false;
+        this.reload();
         this._onListChange();
     }
 
@@ -80,9 +71,10 @@ class Store {
             const response = await this.server.init(Router.getCurrentRoute());
             this.lists = response.lists;
             this.currentList = response.currentList;
+            this._updateListInCache(this.currentList._id, this.currentList);
             this.user = response.user;
         } catch (err) {
-            console.error('Failed to reload', err);
+            console.error('Init call failed from server', err);
         }
         this.loading = false;
     }
@@ -91,14 +83,12 @@ class Store {
         // Load cached list till server loads
         const _cachedList = this.lists.find(_list => _list._id === listId);
         if (_cachedList) {
-            // don't load cached tasks, usually just the ids
-            _cachedList.tasks = [];
-            _cachedList.additionalTasks = 0;
             this.currentList = _cachedList;
         }
         this.loading = true;
         this.modalVisibility.listsView = false;
         this.currentList = await this.server.getList(listId);
+        this._updateListInCache(this.currentList._id, this.currentList);
         this.loading = false;
         this._onListChange();
     }
@@ -208,6 +198,13 @@ class Store {
                 ? this.currentList._id
                 : this.currentList.type
         );
+    }
+
+    _updateListInCache(listId, newList) {
+        const index = this.lists.findIndex(list => list._id === listId);
+        if (index !== -1) {
+            this.lists.splice(index, 1, newList);
+        }
     }
 
     _updateTask(taskId, newTask, { merge } = {}) {
