@@ -127,9 +127,7 @@ export default class Body extends Component {
                 <AddTask hidden={this.currentList.type === 'loading'} />
                 <SortableList
                     pressDelay={200}
-                    items={this.currentList.tasks.filter(
-                        task => typeof task === 'object'
-                    )}
+                    items={this.currentList.tasks}
                     onSortEnd={this.onSortEnd}
                 />
                 {this.currentList.completedTasks.map((task, index) => {
