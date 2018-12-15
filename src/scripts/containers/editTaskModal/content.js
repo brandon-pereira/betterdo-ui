@@ -122,6 +122,14 @@ class EditTask extends Component {
         }
     }
 
+    formatDateForInput(dateString) {
+        const date = new Date(dateString);
+        if (dateString && !isNaN(date.getTime())) {
+            return date.toISOString().substr(0, 10);
+        }
+        return '';
+    }
+
     render() {
         const state = this.state;
         return (
@@ -149,7 +157,7 @@ class EditTask extends Component {
                     <Input
                         type="date"
                         id="dueDate"
-                        value={state.dueDate || ''}
+                        value={this.formatDateForInput(state.dueDate)}
                         onKeyPress={this.onKeyPress}
                         onChange={this.onChange}
                     />
