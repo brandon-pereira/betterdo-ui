@@ -75,8 +75,6 @@ class Store {
             this.currentList = response.currentList;
             this._updateListInCache(this.currentList._id, this.currentList);
             this.user = response.user;
-
-            console.log(this.user);
         } catch (err) {
             console.error('Init call failed from server', err);
         }
@@ -107,6 +105,7 @@ class Store {
 
     async updateTask(taskId, updatedProps) {
         this.loading = true;
+        console.info('Updated Task', updatedProps);
         const modifiedComplete = typeof updatedProps.isCompleted === 'boolean';
         this._updateTask(taskId, updatedProps, { merge: true });
         const updatedTask = await this.server.updateTask(taskId, updatedProps);
