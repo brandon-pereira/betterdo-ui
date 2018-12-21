@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Input } from './forms';
+import Icon from './icon';
 import {
     SortableContainer,
     SortableElement,
@@ -24,12 +25,25 @@ const Container = styled.div`
         margin-bottom: 0;
     }
 `;
+const DeleteIcon = styled(Icon)``;
+
 const Task = styled.div`
     display: flex;
     align-items: center;
     padding: 0.8rem 1rem;
     border-bottom: 1px solid #ccc;
     z-index: 11;
+    span {
+        flex: 1;
+    }
+    ${DeleteIcon} {
+        display: none;
+    }
+    &:hover {
+        ${DeleteIcon} {
+            display: block;
+        }
+    }
 `;
 const Checkbox = styled.input`
     height: 1rem;
@@ -117,7 +131,15 @@ export default class Subtasks extends Component {
                     onChange={() => this.toggleCompleted(sortIndex)}
                     checked={value.isComplete}
                 />
-                {value.title}
+                <span>{value.title}</span>
+                <DeleteIcon
+                    icon="x"
+                    size="1rem"
+                    color="#d8d8d8"
+                    onClick={() => {
+                        this.triggerDelete(sortIndex);
+                    }}
+                />
             </Task>
         ));
         const SortableList = SortableContainer(({ items }) => {
@@ -140,6 +162,7 @@ export default class Subtasks extends Component {
                 <SortableList
                     items={this.state.items}
                     onSortEnd={this.onSortEnd}
+                    pressDelay={200}
                     lockAxis="y"
                     lockToContainerEdges={true}
                 />
