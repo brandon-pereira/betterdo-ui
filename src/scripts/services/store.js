@@ -141,6 +141,7 @@ class Store {
             title: taskName,
             isLoading: true
         });
+        return;
         const task = await this.server.createTask(
             taskName,
             this.currentList._id
@@ -194,7 +195,6 @@ class Store {
 
     _onListChange() {
         setThemeColor(this.currentList.color);
-        console.log(this.currentList);
         Router.setCurrentRoute(
             this.currentList.type === 'default'
                 ? this.currentList._id
