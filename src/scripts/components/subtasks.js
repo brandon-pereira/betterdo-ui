@@ -86,7 +86,6 @@ export default class Subtasks extends Component {
 
     toggleCompleted(index) {
         const subtasks = this.state.items;
-        console.log(index, subtasks);
         subtasks[index].isComplete = !subtasks[index].isComplete;
         this.setState({
             subtasks

@@ -18,9 +18,7 @@ export default class AddListModalContainer extends Component {
         return bool;
     }
 
-    calculatePosition(coords) {
-        console.log(coords);
-    }
+    calculatePosition() {}
 
     render() {
         return (
