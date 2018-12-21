@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Input } from './forms';
+import {
+    SortableContainer,
+    SortableElement,
+    arrayMove
+} from 'react-sortable-hoc';
 
 const Container = styled.div`
     background: #fff;
@@ -24,6 +29,7 @@ const Task = styled.div`
     align-items: center;
     padding: 0.8rem 1rem;
     border-bottom: 1px solid #ccc;
+    z-index: 11;
 `;
 const Checkbox = styled.input`
     height: 1rem;
@@ -51,7 +57,7 @@ export default class Subtasks extends Component {
         super(props);
         this.state = {
             value: '',
-            subtasks: props.subtasks
+            items: props.subtasks
         };
 
         this.onKeyPress = this.onKeyPress.bind(this);
@@ -65,8 +71,18 @@ export default class Subtasks extends Component {
     }
 
     toggleCompleted(index) {
-        const subtasks = this.state.subtasks;
+        const subtasks = this.state.items;
+        console.log(index, subtasks);
         subtasks[index].isComplete = !subtasks[index].isComplete;
+        this.setState({
+            subtasks
+        });
+        this.props.onChange(subtasks);
+    }
+
+    triggerDelete(index) {
+        const subtasks = this.state.items;
+        subtasks.splice(index, 1);
         this.setState({
             subtasks
         });
@@ -75,28 +91,58 @@ export default class Subtasks extends Component {
 
     onKeyPress(e) {
         if (e.key === 'Enter' && this.state.value) {
-            this.state.subtasks.push({ title: this.state.value });
+            this.state.items.push({ title: this.state.value });
             this.setState({
                 value: ''
             });
-            this.props.onChange(this.state.subtasks);
+            this.props.onChange(this.state.items);
         }
     }
 
+    onSortEnd = ({ oldIndex, newIndex }) => {
+        if (oldIndex !== newIndex) {
+            this.setState({
+                items: arrayMove(this.state.items, oldIndex, newIndex)
+            });
+            this.props.onChange(this.state.items);
+        }
+    };
+
     render() {
+        const SortableItem = SortableElement(({ value, sortIndex }) => (
+            <Task>
+                <Checkbox
+                    type="checkbox"
+                    onClick={e => e.stopPropagation()}
+                    onChange={() => this.toggleCompleted(sortIndex)}
+                    checked={value.isComplete}
+                />
+                {value.title}
+            </Task>
+        ));
+        const SortableList = SortableContainer(({ items }) => {
+            return (
+                <div>
+                    {items.map((value, index) => (
+                        <SortableItem
+                            key={`item-${index}`}
+                            index={index}
+                            sortIndex={index}
+                            value={value}
+                        />
+                    ))}
+                </div>
+            );
+        });
+
         return (
             <Container>
-                {this.state.subtasks.map((task, index) => (
-                    <Task key={index}>
-                        <Checkbox
-                            type="checkbox"
-                            onClick={e => e.stopPropagation()}
-                            onChange={() => this.toggleCompleted(index)}
-                            checked={task.isComplete}
-                        />
-                        {task.title}
-                    </Task>
-                ))}
+                <SortableList
+                    items={this.state.items}
+                    onSortEnd={this.onSortEnd}
+                    lockAxis="y"
+                    lockToContainerEdges={true}
+                />
                 <Input
                     invalid={this.state.isInvalid}
                     value={this.state.value}
