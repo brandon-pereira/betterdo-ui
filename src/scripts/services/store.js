@@ -25,9 +25,7 @@ class Store {
     loading = true;
 
     @observable
-    user = {
-        customLists: {}
-    };
+    user = null;
 
     @observable
     modalVisibility = {
@@ -63,7 +61,7 @@ class Store {
             this.addToHomeScreenAvailable = bool;
         });
 
-        this.reload();
+        await this.reload();
         this._onListChange();
     }
 
@@ -196,6 +194,7 @@ class Store {
 
     _onListChange() {
         setThemeColor(this.currentList.color);
+        console.log(this.currentList);
         Router.setCurrentRoute(
             this.currentList.type === 'default'
                 ? this.currentList._id

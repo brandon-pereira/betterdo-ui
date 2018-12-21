@@ -69,16 +69,6 @@ class Navigation extends Component {
             >
                 <Search />
                 <ListsContainer>
-                    {Object.keys(store.user.customLists).map(key => {
-                        return (
-                            <ListItem
-                                selected={key === store.currentList._id}
-                                key={key}
-                                type={key}
-                                onClick={() => store.switchLists(key)}
-                            />
-                        );
-                    })}
                     {store.lists.map((item, i) => (
                         <ListItem
                             {...{
