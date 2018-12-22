@@ -141,7 +141,6 @@ class Store {
             title: taskName,
             isLoading: true
         });
-        return;
         const task = await this.server.createTask(
             taskName,
             this.currentList._id
