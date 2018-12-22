@@ -50,7 +50,7 @@ const SortableList = SortableContainer(({ items }) => {
 
 @inject('store')
 @observer
-export default class Body extends Component {
+class Body extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -73,7 +73,7 @@ export default class Body extends Component {
         });
     }
 
-    onSortEnd = ({ oldIndex, newIndex }) => {
+    onSortEnd({ oldIndex, newIndex }) {
         // Indexes match, no change
         if (oldIndex === newIndex) {
             return;
@@ -90,7 +90,7 @@ export default class Body extends Component {
         } catch (err) {
             console.error(err);
         }
-    };
+    }
 
     getNotificationBanner() {
         if (this.props.store.appUpdateAvailable) {
@@ -132,7 +132,7 @@ export default class Body extends Component {
                 <SortableList
                     pressDelay={200}
                     items={this.currentList.tasks}
-                    onSortEnd={this.onSortEnd}
+                    onSortEnd={this.onSortEnd.bind(this)}
                 />
                 {this.currentList.completedTasks.map((task, index) => {
                     if (typeof task === 'object') {
@@ -156,3 +156,5 @@ export default class Body extends Component {
         );
     }
 }
+
+export default Body;

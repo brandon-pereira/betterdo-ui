@@ -136,11 +136,16 @@ class Store {
     async createTask(taskName) {
         this.loading = true;
         const tempId = Math.floor(Math.random() * 1000);
-        this.currentList.tasks.unshift({
-            _id: tempId,
-            title: taskName,
-            isLoading: true
-        });
+        // FIXME: Unshift wasn't working with tempId stuff, so doing this instead
+        this.currentList.tasks = [
+            {
+                _id: tempId,
+                title: taskName,
+                priority: 'normal',
+                isLoading: true
+            },
+            ...this.currentList.tasks
+        ];
         const task = await this.server.createTask(
             taskName,
             this.currentList._id
