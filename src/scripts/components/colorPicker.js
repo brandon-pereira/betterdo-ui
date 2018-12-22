@@ -12,11 +12,11 @@ const Container = styled.div`
     border-radius: 5px;
 `;
 
-const Color = styled.div.attrs({
-    style: ({ color }) => ({
-        backgroundColor: color
-    })
-})`
+const Color = styled.div.attrs(props => ({
+    style: {
+        backgroundColor: props.color
+    }
+}))`
     flex: 1;
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);

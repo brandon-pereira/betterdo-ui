@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import Loader from './loader';
 
-const Container = styled.button.attrs({
-    style: ({ color }) => ({
-        backgroundColor: color || 'rgba(0,0,0,.2)'
-    })
-})`
+const Container = styled.button.attrs(props => ({
+    style: {
+        backgroundColor: props.color || 'rgba(0,0,0,.2)'
+    }
+}))`
     border: none;
     color: #fff;
     border-radius: 5px;

@@ -155,7 +155,7 @@ export default class Modal extends Component {
                 visible={this.props.visible}
                 onClick={e => this.closeModal(e)}
             >
-                <_Modal innerRef={this.ref} visible={this.props.visible}>
+                <_Modal ref={this.ref} visible={this.props.visible}>
                     <HeaderContainer>
                         <Header>{this.props.title || ''}</Header>
                         <Icon

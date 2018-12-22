@@ -33,18 +33,27 @@ class Icon extends Component {
 
     render() {
         const Icon = this.state.icon;
-        const { onClick, ...props } = this.props;
+        const { onClick, className, ...props } = this.props;
         if (Icon) {
             return (
-                <IconContainer {...props} onClick={e => onClick(e)}>
+                <IconContainer
+                    {...props}
+                    className={className}
+                    onClick={e => onClick(e)}
+                >
                     <Icon
+                        className={className}
                         title={this.props.children}
                         aria-describedby={this.props.children}
                     />
                 </IconContainer>
             );
         } else {
-            return <div onClick={e => onClick(e)}>{this.props.children}</div>;
+            return (
+                <div className={className} onClick={e => onClick(e)}>
+                    {this.props.children}
+                </div>
+            );
         }
     }
 }
