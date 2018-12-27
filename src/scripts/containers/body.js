@@ -4,6 +4,7 @@ import { computed } from 'mobx';
 import styled from 'styled-components';
 import AddTask from '../components/addTask';
 import NotificationBanner from '../components/notificationBanner';
+import AllCaughtUpBanner from '../components/allCaughtUpBanner';
 import Task from '../components/task';
 import Button from '../components/button';
 import { QUERIES } from '../constants';
@@ -17,12 +18,28 @@ const CompletedTasksButton = styled(Button)`
     margin: 0.5rem 1rem;
     text-transform: uppercase;
     user-select: none;
+    align-self: start;
+    flex-shrink: 0;
+    ${props =>
+        props.hasCaughtUpBanner &&
+        `
+        margin: 0 0 -0.5rem;
+        align-self: stretch;
+        border-radius: 0;
+        justify-content: center;
+        background-color: #cacaca !important;
+    
+    `}
+}
 `;
 const Container = styled.div`
     grid-row: 2 / 3;
     grid-column: 2 / 3;
     overflow-y: scroll;
     background: #e4e4e4;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0.5rem;
     ${props =>
         props.mobileNavVisible &&
         `
@@ -123,29 +140,41 @@ class Body extends Component {
     }
 
     render() {
+        const showAllCaughtUpBanner =
+            this.currentList.tasks.length === 0 &&
+            (this.currentList.additionalTasks !== 0 ||
+                !this.currentList.completedTasks.find(
+                    task => typeof task !== 'string'
+                ));
         return (
             <Container
                 mobileNavVisible={this.props.store.modalVisibility.listsView}
             >
                 {this.getNotificationBanner()}
                 <AddTask hidden={this.currentList.type === 'loading'} />
+                {showAllCaughtUpBanner && (
+                    <AllCaughtUpBanner title="You're all caught up!" />
+                )}
                 <SortableList
                     pressDelay={200}
                     items={this.currentList.tasks}
                     onSortEnd={this.onSortEnd.bind(this)}
                 />
-                {this.currentList.completedTasks.map((task, index) => {
-                    if (typeof task === 'object') {
-                        return <Task key={index} task={task} />;
-                    }
-                    return null;
-                })}
+                <div>
+                    {this.currentList.completedTasks.map((task, index) => {
+                        if (typeof task === 'object') {
+                            return <Task key={index} task={task} />;
+                        }
+                        return null;
+                    })}
+                </div>
                 <CompletedTasksButton
                     hidden={
                         this.currentList.type === 'loading' ||
                         !this.currentList.additionalTasks ||
                         this.currentList.additionalTasks === 0
                     }
+                    hasCaughtUpBanner={showAllCaughtUpBanner}
                     loading={this.state.loadingCompletedTasks}
                     color="#999999"
                     onClick={this.loadCompletedTasks.bind(this)}
