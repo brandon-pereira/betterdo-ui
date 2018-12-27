@@ -9,17 +9,34 @@ const UserList = styled.ol`
     list-style: none;
     padding: 0;
     margin: 0 0 1rem;
-    li {
-        display: flex;
-        align-items: center;
-        padding: 1rem;
-        border-radius: 1rem;
-        ${ProfilePic} {
-            margin-right: 1rem;
-        }
-        &:nth-of-type(odd) {
-            background: #eee;
-        }
+    max-height: 12.5rem;
+    overflow-y: scroll;
+`;
+const Owner = styled.div`
+    color: grey;
+    text-transform: uppercase;
+    font-weight: bold;
+    &:before {
+        content: 'OWNER';
+    }
+`;
+const UsersName = styled.div`
+    flex: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+`;
+
+const User = styled.li`
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 1rem;
+    ${ProfilePic} {
+        margin-right: 1rem;
+    }
+    &:nth-of-type(odd) {
+        background: #eee;
     }
 `;
 
@@ -34,6 +51,7 @@ class ListMembers extends Component {
             isDeleting: false,
             isInvalid: false,
             serverError: null,
+            owner: currentList.owner,
             members: currentList.members,
             title: currentList.title,
             color: currentList.color
@@ -49,10 +67,13 @@ class ListMembers extends Component {
                 <Label>Existing Members</Label>
                 <UserList>
                     {this.state.members.map((user, index) => (
-                        <li key={index}>
+                        <User key={index}>
                             <ProfilePic user={user} />
-                            {user.firstName} {user.lastName}
-                        </li>
+                            <UsersName>
+                                {user.firstName} {user.lastName}
+                            </UsersName>
+                            {user._id === this.state.owner._id && <Owner />}
+                        </User>
                     ))}
                 </UserList>
                 <Label>Add Member</Label>
