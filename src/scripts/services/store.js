@@ -30,7 +30,7 @@ class Store {
     @observable
     modalVisibility = {
         newList: false,
-        editList: false,
+        editList: true,
         listsView: false
     };
 

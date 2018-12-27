@@ -5,6 +5,7 @@ import ColorPicker from '../../components/colorPicker';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
 import { COLORS } from '../../constants';
+import Tabs, { Tab } from '../../components/tabs';
 
 const ButtonContainer = styled.div`
     display: flex;
@@ -84,49 +85,56 @@ export default class EditListModalContent extends Component {
 
     render() {
         return (
-            <Fragment>
-                <Form
-                    onSubmit={e => this.onSubmit(e)}
-                    errorMessage={this.state.serverError}
-                >
-                    <Label htmlFor="name">List Name</Label>
-                    <Input
-                        value={this.state.title}
-                        name="name"
-                        id="name"
-                        invalid={Boolean(this.state.isInvalid)}
-                        onChange={evt =>
-                            this.setState({ title: evt.target.value })
-                        }
-                        placeholder="ex. Groceries"
-                    />
-                    <ColorPicker
-                        currentColor={this.state.color}
-                        onChange={color => {
-                            this.setState({ color });
-                        }}
-                    />
-                    <ButtonContainer>
-                        <Button
-                            loading={this.state.isSaving}
-                            loadingText="Saving"
-                            color={this.state.color}
-                            type="Save"
-                        >
-                            Save
-                        </Button>
-                        <Button
-                            loading={this.state.isDeleting}
-                            loadingText="Deleting"
-                            onClick={() => this.deleteList()}
-                            color={COLORS.dangerousAction}
-                            type="button"
-                        >
-                            Delete
-                        </Button>
-                    </ButtonContainer>
-                </Form>
-            </Fragment>
+            <Tabs
+                color={this.state.color}
+                selectedIndex={1}
+                titles={['Settings', 'Members']}
+            >
+                <Tab>
+                    <Form
+                        onSubmit={e => this.onSubmit(e)}
+                        errorMessage={this.state.serverError}
+                    >
+                        <Label htmlFor="name">List Name</Label>
+                        <Input
+                            value={this.state.title}
+                            name="name"
+                            id="name"
+                            invalid={Boolean(this.state.isInvalid)}
+                            onChange={evt =>
+                                this.setState({ title: evt.target.value })
+                            }
+                            placeholder="ex. Groceries"
+                        />
+                        <ColorPicker
+                            currentColor={this.state.color}
+                            onChange={color => {
+                                this.setState({ color });
+                            }}
+                        />
+                        <ButtonContainer>
+                            <Button
+                                loading={this.state.isSaving}
+                                loadingText="Saving"
+                                color={this.state.color}
+                                type="Save"
+                            >
+                                Save
+                            </Button>
+                            <Button
+                                loading={this.state.isDeleting}
+                                loadingText="Deleting"
+                                onClick={() => this.deleteList()}
+                                color={COLORS.dangerousAction}
+                                type="button"
+                            >
+                                Delete
+                            </Button>
+                        </ButtonContainer>
+                    </Form>
+                </Tab>
+                <Tab>HELLO 2</Tab>
+            </Tabs>
         );
     }
 }
