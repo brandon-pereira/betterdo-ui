@@ -39,11 +39,7 @@ class Icon extends Component {
                 <IconContainer
                     {...props}
                     className={className}
-                    onClick={e => {
-                        if (onClick) {
-                            onClick(e);
-                        }
-                    }}
+                    onClick={onClick ? e => onClick(e) : null}
                 >
                     <Icon
                         className={className}
