@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Icon from './icon';
+import { COLORS } from '../constants';
 
 const SelectContainer = styled.label`
     position: relative;
@@ -28,7 +29,7 @@ const Select = styled.select`
     font-size: 1rem;
     padding: 1rem;
     &:focus {
-        box-shadow: inset 0 0 0 2px #2196f3;
+        box-shadow: inset 0 0 0 2px ${COLORS.blue};
     }
 `;
 

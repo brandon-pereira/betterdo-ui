@@ -65,7 +65,7 @@ const SettingsContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    display: none;
+    // display: none;
 `;
 @inject('store')
 @observer

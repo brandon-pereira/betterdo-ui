@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { COLORS } from '../constants';
 
 const _header = styled.h2`
-    color: #006fb0;
+    color: ${COLORS.blue};
     font-weight: 100;
     font-size: 2rem;
     margin: 0 0 1rem;

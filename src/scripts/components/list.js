@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import SvgIcon from './icon';
+import { COLORS } from '../constants';
 
 const Li = styled.li`
     cursor: pointer;
@@ -17,7 +18,8 @@ const Li = styled.li`
 const DotIcon = styled.div`
     height: 1rem;
     width: 1rem;
-    background-color: ${props => (props.color ? props.color : '#585858')};
+    background-color: ${props =>
+        props.color ? props.color : COLORS.defaultList};
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.2));
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5),
         0 1px 10px rgba(0, 0, 0, 0.4);

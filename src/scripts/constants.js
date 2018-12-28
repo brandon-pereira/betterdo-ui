@@ -6,4 +6,8 @@ export const QUERIES = {
     large: `(min-width: ${LARGE}px)`
 };
 
-export const COLORS = { defaultList: '#666666', dangerousAction: '#c62828' };
+export const COLORS = {
+    defaultList: '#666666',
+    dangerousAction: '#c62828',
+    blue: '#2979ff'
+};

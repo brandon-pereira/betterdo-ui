@@ -188,7 +188,7 @@ class EditTask extends Component {
                 </Block>
                 <ButtonContainer>
                     <Button
-                        color="#42a5f5"
+                        color={COLORS.blue}
                         onClick={this.saveTask}
                         loading={this.state.isSaving}
                         loadingText="Saving"

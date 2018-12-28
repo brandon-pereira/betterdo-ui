@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { COLORS } from '../constants';
 
 const Container = styled.div`
     height: ${props => props.size || '3rem'};
     width: ${props => props.size || '3rem'};
-    background: #006eff;
+    background: ${COLORS.blue};
     border-radius: 50%;
     overflow: hidden;
     font-size: 1.5rem;

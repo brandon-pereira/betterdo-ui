@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { COLORS } from '../constants';
 
 const Container = styled.div``;
 const TabsHeader = styled.ol`
@@ -53,15 +54,16 @@ class Tabs extends Component {
     }
 
     render() {
+        const color = this.props.color || COLORS.blue;
         return (
             <Container>
-                <TabsHeader color={this.props.color || 'cyan'}>
+                <TabsHeader color={color}>
                     {this.props.titles.map((title, index) => (
                         <TabHeaderItem
                             key={index}
                             selected={this.state.selectedIndex === index}
                             onClick={() => this.selectTab(index)}
-                            color={this.props.color || 'cyan'}
+                            color={color}
                         >
                             {title}
                         </TabHeaderItem>

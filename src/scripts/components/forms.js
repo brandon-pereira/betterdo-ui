@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { COLORS } from '../constants';
 
 const _Input = styled.input`
     appearance: none;
@@ -15,17 +16,17 @@ const _Input = styled.input`
     font-size: 1rem;
     margin-bottom: 1rem;
     &:focus {
-        box-shadow: inset 0 0 0 2px #2196f3;
+        box-shadow: inset 0 0 0 2px ${COLORS.blue};
     }
     ${({ invalid }) =>
         invalid &&
         `
-    box-shadow: inset 0 0 0 2px #e57373 !important
+    box-shadow: inset 0 0 0 2px ${COLORS.dangerousAction} !important
     `};
 `;
 
 const Error = styled.div`
-    background: #d32f2f;
+    background: ${COLORS.dangerousAction};
     color: #fff;
     padding: 0.5rem;
     margin: 1rem 0;
