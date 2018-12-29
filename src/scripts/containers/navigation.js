@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import Search from '../components/search';
 import ListItem from '../components/list';
 import { QUERIES } from '../constants';
-import ProfilePic from '../components/profilePic';
-import Icon from '../components/icon';
 import { COLORS } from '../constants';
 
 const NavigationModalOverlay = styled.div`
@@ -60,14 +58,7 @@ const ListsContainer = styled.ul`
         background: linear-gradient(#1e88e5, #1565c0);
     }
 `;
-const SettingsContainer = styled.div`
-    background: rgba(0, 0, 0, 0.5);
-    padding: 1rem 0.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    // display: none;
-`;
+
 @inject('store')
 @observer
 class Navigation extends Component {
@@ -96,15 +87,6 @@ class Navigation extends Component {
                         newList
                     />
                 </ListsContainer>
-                <SettingsContainer>
-                    <Icon icon="drawer" color="#fff" size="2rem" />
-                    <ProfilePic
-                        onClick={() =>
-                            (store.modalVisibility.userSettings = true)
-                        }
-                        user={store.user}
-                    />
-                </SettingsContainer>
                 <NavigationModalOverlay
                     onClick={() => {
                         this.props.store.modalVisibility.listsView = false;

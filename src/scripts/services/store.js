@@ -32,7 +32,7 @@ class Store {
         newList: false,
         editList: false,
         listsView: false,
-        userSettings: true
+        userSettings: false
     };
 
     @observable
