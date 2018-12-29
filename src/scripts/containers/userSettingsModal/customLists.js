@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Label } from '../../components/forms';
+import { Body } from '../../components/copy';
 import Icon from '../../components/icon';
 import Toggle from '../../components/toggle';
 import { observer, inject } from 'mobx-react';
@@ -13,7 +13,6 @@ const CustomListsContainer = styled.ol`
     background: ${COLORS.navigationBackground};
 `;
 const CustomList = styled.li`
-    cursor: pointer;
     color: #fff;
     display: flex;
     align-items: center;
@@ -47,7 +46,8 @@ class ListMembers extends Component {
         this.state = {
             isSaving: false,
             isInvalid: false,
-            serverError: null
+            serverError: null,
+            customLists: user.customLists
         };
         this.lists = {
             highPriority: {
@@ -65,26 +65,32 @@ class ListMembers extends Component {
         };
     }
 
+    onCustomListToggle(id, bool) {
+        console.log(id, bool);
+    }
+
     render() {
         return (
             <Fragment>
-                <Label>
+                <Body>
                     Enable or disable custom lists to customize your BetterDo
                     experience.
-                </Label>
-
+                </Body>
                 <CustomListsContainer>
-                    {Object.entries(this.lists).map(([id, value]) => {
-                        return (
-                            <CustomList>
-                                <IconHolder>
-                                    <Icon icon={value.icon} color="#fff" />
-                                </IconHolder>
-                                <Title>{value.title}</Title>
-                                <Toggle />
-                            </CustomList>
-                        );
-                    })}
+                    {Object.entries(this.lists).map(([id, value]) => (
+                        <CustomList key={id}>
+                            <IconHolder>
+                                <Icon icon={value.icon} color="#fff" />
+                            </IconHolder>
+                            <Title>{value.title}</Title>
+                            <Toggle
+                                onChange={(e, bool) =>
+                                    this.onCustomListToggle(id, bool)
+                                }
+                                checked={this.state.customLists[id]}
+                            />
+                        </CustomList>
+                    ))}
                 </CustomListsContainer>
             </Fragment>
         );

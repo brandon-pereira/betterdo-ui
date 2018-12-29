@@ -53,8 +53,12 @@ class Toggle extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange() {
-        this.setState({ checked: !this.state.checked });
+    handleChange(e) {
+        const newState = !this.state.checked;
+        this.setState({ checked: newState });
+        if (this.props.onChange) {
+            this.props.onChange(e, newState);
+        }
     }
 
     render() {
@@ -62,7 +66,7 @@ class Toggle extends Component {
             <Switch>
                 <input
                     type="checkbox"
-                    value={this.state.isChecked}
+                    checked={this.state.checked}
                     onChange={this.handleChange}
                 />
                 <Slider />
