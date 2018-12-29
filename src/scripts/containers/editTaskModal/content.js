@@ -196,7 +196,7 @@ class EditTask extends Component {
                         Save
                     </Button>
                     <Button
-                        color={COLORS.dangerousAction}
+                        color={COLORS.red}
                         onClick={this.deleteTask}
                         loading={this.state.isDeleting}
                         loadingText="Deleting"

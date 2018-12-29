@@ -117,7 +117,7 @@ class ListSettings extends Component {
                         loading={this.state.isDeleting}
                         loadingText="Deleting"
                         onClick={() => this.deleteList()}
-                        color={COLORS.dangerousAction}
+                        color={COLORS.red}
                         type="button"
                     >
                         Delete

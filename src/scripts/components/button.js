@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Loader from './loader';
-
+import { COLORS } from '../constants';
 const Container = styled.button.attrs(props => ({
     style: {
-        backgroundColor: props.color || 'rgba(0,0,0,.2)'
+        backgroundColor: props.color || COLORS.blue
     }
 }))`
     border: none;

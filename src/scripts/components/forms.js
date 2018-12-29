@@ -21,12 +21,12 @@ const _Input = styled.input`
     ${({ invalid }) =>
         invalid &&
         `
-    box-shadow: inset 0 0 0 2px ${COLORS.dangerousAction} !important
+    box-shadow: inset 0 0 0 2px ${COLORS.red} !important
     `};
 `;
 
 const Error = styled.div`
-    background: ${COLORS.dangerousAction};
+    background: ${COLORS.red};
     color: #fff;
     padding: 0.5rem;
     margin: 1rem 0;

@@ -8,6 +8,7 @@ export const QUERIES = {
 
 export const COLORS = {
     defaultList: '#666666',
-    dangerousAction: '#c62828',
-    blue: '#2979ff'
+    red: '#c62828',
+    blue: '#2979ff',
+    navigationBackground: '#202020'
 };
