@@ -61,7 +61,11 @@ class ListSettings extends Component {
         }
         const store = this.props.store;
         if (this.state.title && this.state.title.length) {
-            this.setState({ isSaving: true, isInvalid: false });
+            this.setState({
+                isSaving: true,
+                isInvalid: false,
+                serverError: null
+            });
             try {
                 await store.updateList(store.currentList._id, {
                     title: this.state.title,

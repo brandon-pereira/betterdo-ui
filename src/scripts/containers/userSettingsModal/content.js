@@ -9,7 +9,7 @@ import CustomLists from './customLists';
 class UserSettingsModalContent extends Component {
     render() {
         return (
-            <Tabs selectedIndex={1} titles={['Account', 'Custom Lists']}>
+            <Tabs titles={['Account', 'Custom Lists']}>
                 <Tab>
                     <AccountSettings />
                 </Tab>
