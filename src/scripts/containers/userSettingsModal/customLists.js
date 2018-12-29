@@ -66,7 +66,11 @@ class ListMembers extends Component {
     }
 
     onCustomListToggle(id, bool) {
-        console.log(id, bool);
+        this.props.store.updateUser({
+            customLists: {
+                [id]: bool
+            }
+        });
     }
 
     render() {

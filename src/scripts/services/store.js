@@ -176,6 +176,13 @@ class Store {
         this._onListChange();
     }
 
+    async updateUser(updatedProps) {
+        this.loading = true;
+        await this.server.updateUser(updatedProps);
+        await this.reload();
+        this.loading = false;
+    }
+
     async deleteList(listId) {
         this.loading = true;
         await this.server.deleteList(listId);
