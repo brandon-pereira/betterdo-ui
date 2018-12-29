@@ -3,6 +3,7 @@ import randomColor from 'randomcolor';
 import styled from 'styled-components';
 import { Label } from './forms';
 import Icon from './icon';
+import { COLORS } from '../constants';
 
 const Container = styled.div`
     display: flex;
@@ -24,7 +25,7 @@ const Color = styled.div.attrs(props => ({
         props.isCurrent &&
         `
         box-shadow: none;
-        border: 5px solid #2979ff;
+        border: 5px solid ${COLORS.blue};
     `};
 `;
 

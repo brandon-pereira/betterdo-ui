@@ -7,7 +7,6 @@ const getPlugins = () => {
         new webpack.optimize.MinChunkSizePlugin({
             minChunkSize: 10000
         }),
-        new webpack.optimize.ModuleConcatenationPlugin(), // scope hoisting
         new webpack.DefinePlugin({
             'process.env.PRODUCTION': JSON.stringify(config.isProduction),
             'process.env.ROOT_APP_DIR': JSON.stringify(
@@ -30,6 +29,7 @@ const getPlugins = () => {
                 externals: ['../', '../manifest.json']
             })
         );
+        plugins.push(new webpack.optimize.ModuleConcatenationPlugin()); // scope hoisting
     }
 
     return plugins;

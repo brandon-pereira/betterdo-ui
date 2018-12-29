@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import Search from '../components/search';
 import ListItem from '../components/list';
 import { QUERIES } from '../constants';
+import ProfilePic from '../components/profilePic';
+import Icon from '../components/icon';
+import { COLORS } from '../constants';
 
 const NavigationModalOverlay = styled.div`
     background: rgba(0, 0, 0, 0.5);
@@ -14,7 +17,7 @@ const NavigationModalOverlay = styled.div`
     height: 1000%;
 `;
 const Container = styled.nav`
-    background: #202020;
+    background: ${COLORS.navigationBackground};
     display: flex;
     flex-direction: column;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.15), 0 1px 2px rgba(0,0,0,.9);
@@ -57,7 +60,14 @@ const ListsContainer = styled.ul`
         background: linear-gradient(#1e88e5, #1565c0);
     }
 `;
-
+const SettingsContainer = styled.div`
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // display: none;
+`;
 @inject('store')
 @observer
 class Navigation extends Component {
@@ -74,7 +84,7 @@ class Navigation extends Component {
                             {...{
                                 selected: item._id === store.currentList._id
                             }}
-                            key={i}
+                            key={item._id}
                             type={item.type}
                             title={item.title}
                             color={item.color}
@@ -86,6 +96,15 @@ class Navigation extends Component {
                         newList
                     />
                 </ListsContainer>
+                <SettingsContainer>
+                    <Icon icon="drawer" color="#fff" size="2rem" />
+                    <ProfilePic
+                        onClick={() =>
+                            (store.modalVisibility.userSettings = true)
+                        }
+                        user={store.user}
+                    />
+                </SettingsContainer>
                 <NavigationModalOverlay
                     onClick={() => {
                         this.props.store.modalVisibility.listsView = false;

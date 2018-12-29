@@ -31,7 +31,8 @@ class Store {
     modalVisibility = {
         newList: false,
         editList: false,
-        listsView: false
+        listsView: false,
+        userSettings: true
     };
 
     @observable
@@ -173,6 +174,13 @@ class Store {
         );
         this.loading = false;
         this._onListChange();
+    }
+
+    async updateUser(updatedProps) {
+        this.loading = true;
+        await this.server.updateUser(updatedProps);
+        await this.reload();
+        this.loading = false;
     }
 
     async deleteList(listId) {

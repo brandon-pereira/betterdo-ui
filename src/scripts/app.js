@@ -15,6 +15,7 @@ import Body from './containers/body';
 import AddListModal from './containers/addListModal';
 import EditListModal from './containers/editListModal';
 import EditTaskModal from './containers/editTaskModal';
+import UserSettingsModal from './containers/userSettingsModal';
 
 export default () => {
     render(
@@ -27,6 +28,7 @@ export default () => {
                 <AddListModal />
                 <EditListModal />
                 <EditTaskModal />
+                <UserSettingsModal />
             </Container>
         </Provider>,
         document.querySelector('.main-container')

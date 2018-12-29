@@ -59,6 +59,10 @@ export default class Server {
         return this.delete(`lists/${listId}`);
     }
 
+    updateUser(props) {
+        return this.post(`users`, props);
+    }
+
     throwError(message = 'An unexpected error ocurred', error = null) {
         const err = new Error(error || message);
         err.formattedMessage = message;
@@ -111,7 +115,7 @@ export default class Server {
             await this.throwError(undefined, err);
         }
         if (!response.ok) {
-            if(response.status === 401) {
+            if (response.status === 401) {
                 window.location = process.env.ROOT_APP_DIR;
             }
             const message = (await response.json()).error;

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from './button';
 import { QUERIES } from '../constants';
+import { COLORS } from '../constants';
 
 const Header = styled.h2`
     margin: 0 0 0.3rem;
@@ -24,7 +25,7 @@ const SecondaryButton = styled(Button)`
     }
 `;
 const Container = styled.div`
-    background: #42a5f5;
+    background: ${COLORS.blue};
     box-shadow: inset 0 -1px rgba(0, 0, 0, 0.3);
     color: #fff;
     padding: 1rem;

@@ -188,7 +188,7 @@ class EditTask extends Component {
                 </Block>
                 <ButtonContainer>
                     <Button
-                        color="#42a5f5"
+                        color={COLORS.blue}
                         onClick={this.saveTask}
                         loading={this.state.isSaving}
                         loadingText="Saving"
@@ -196,7 +196,7 @@ class EditTask extends Component {
                         Save
                     </Button>
                     <Button
-                        color={COLORS.dangerousAction}
+                        color={COLORS.red}
                         onClick={this.deleteTask}
                         loading={this.state.isDeleting}
                         loadingText="Deleting"
