@@ -38,9 +38,6 @@ const Container = styled.header`
     `}
     @media ${QUERIES.medium} {
         grid-row: 1;
-        ${Loader} {
-            display: none;
-        }
         ${Hamburger} {
             display: none;
         }
@@ -75,8 +72,8 @@ export default class Header extends Component {
                         this.props.store.modalVisibility.listsView = true;
                     }}
                 />
-                <Title>{store.currentList.title}</Title>
                 <Loader loading={this.props.store.loading} size="2rem" />
+                <Title>{store.currentList.title}</Title>
                 <Button
                     color="rgba(0,0,0,.2)"
                     hidden={store.currentList.type !== 'default'}
