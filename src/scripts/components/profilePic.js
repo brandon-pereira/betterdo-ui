@@ -14,19 +14,38 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+`;
+const Img = styled.img`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    right: 0;
+    bottom: 0;
 `;
 
-const Loader = ({ user, ...props }) => {
+const ProfilePicture = ({ user, ...props }) => {
     console.log(user);
     const firstName = user ? user.firstName : 'A';
     const lastName = user ? user.lastName : 'A';
     const initials = firstName.charAt(0) + lastName.charAt(0);
     return (
         <Container {...props}>
-            {user && user.profilePic && <div />}
+            {user && user.profilePicture && (
+                <Img src={FormatProfilePictureUrl(user.profilePicture)} />
+            )}
             {initials}
         </Container>
     );
 };
 
-export default styled(Loader)``;
+export const FormatProfilePictureUrl = (url, sizeInPx) => {
+    if (url && typeof url === 'string') {
+        return url.replace('sz=50', sizeInPx ? `sz=${sizeInPx}` : '');
+    }
+    return null;
+};
+
+export default styled(ProfilePicture)``;
