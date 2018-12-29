@@ -27,7 +27,6 @@ const Img = styled.img`
 `;
 
 const ProfilePicture = ({ user, ...props }) => {
-    console.log(user);
     const firstName = user ? user.firstName : 'A';
     const lastName = user ? user.lastName : 'A';
     const initials = firstName.charAt(0) + lastName.charAt(0);
