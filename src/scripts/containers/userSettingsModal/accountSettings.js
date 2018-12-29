@@ -49,7 +49,7 @@ class ListMembers extends Component {
         const user = this.props.store.user;
         this.state = {
             isSaving: false,
-            isInvalid: false,
+            isInvalid: null,
             serverError: null,
             firstName: user.firstName,
             lastName: user.lastName,
@@ -57,23 +57,90 @@ class ListMembers extends Component {
         };
     }
 
+    validate() {
+        if (!this.state.firstName) {
+            this.setState({ isInvalid: 'firstName' });
+            return false;
+        } else if (!this.state.email) {
+            this.setState({ isInvalid: 'email' });
+            return false;
+        }
+        return true;
+    }
+
+    async onSubmit(e) {
+        e.preventDefault();
+        if (this.state.isSaving) {
+            return;
+        }
+        if (this.validate()) {
+            this.setState({
+                isSaving: true,
+                isInvalid: null,
+                serverError: null
+            });
+            const store = this.props.store;
+            try {
+                await store.updateUser({
+                    firstName: this.state.firstName,
+                    lastName: this.state.lastName,
+                    email: this.state.email
+                });
+            } catch (err) {
+                this.setState({
+                    isSaving: false,
+                    serverError: err.formattedMessage
+                });
+                return;
+            }
+            this.setState({ isSaving: false });
+        }
+    }
+
     render() {
         const user = this.props.store.user;
         return (
-            <Form onSubmit={e => this.onSubmit(e)}>
-                {/* // errorMessage={this.state.serverError} */}
+            <Form
+                onSubmit={e => this.onSubmit(e)}
+                errorMessage={this.state.serverError}
+            >
                 <ProfilePictureBanner>
                     <ProfilePictureBackground
                         src={FormatProfilePictureUrl(user.profilePicture)}
                     />
                     <ProfilePic size="8rem" user={user} />
                 </ProfilePictureBanner>
-                <Label>First Name</Label>
-                <Input value={this.state.firstName} placeholder="John" />
-                <Label>Last Name</Label>
-                <Input value={this.state.lastName} placeholder="Doe" />
-                <Label>Email</Label>
-                <Input value={this.state.email} placeholder="hello@world.com" />
+                <Label htmlFor="firstName">First Name</Label>
+                <Input
+                    value={this.state.firstName}
+                    name="firstName"
+                    id="firstName"
+                    invalid={Boolean(this.state.isInvalid === 'firstName')}
+                    onChange={evt =>
+                        this.setState({ firstName: evt.target.value })
+                    }
+                    placeholder="John"
+                />
+                <Label htmlFor="lastName">Last Name</Label>
+                <Input
+                    value={this.state.lastName}
+                    name="lastName"
+                    id="lastName"
+                    invalid={Boolean(this.state.isInvalid === 'lastName')}
+                    onChange={evt =>
+                        this.setState({ lastName: evt.target.value })
+                    }
+                    placeholder="Doe"
+                />
+                <Label htmlFor="email">Email</Label>
+                <Input
+                    value={this.state.email}
+                    name="email"
+                    id="email"
+                    invalid={Boolean(this.state.isInvalid === 'email')}
+                    onChange={evt => this.setState({ email: evt.target.value })}
+                    placeholder="hello@world.com"
+                />
                 <Button
                     loading={this.state.isSaving}
                     loadingText="Saving"

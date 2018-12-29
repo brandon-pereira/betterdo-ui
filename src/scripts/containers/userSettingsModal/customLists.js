@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Body } from '../../components/copy';
+import { Error } from '../../components/forms';
 import Icon from '../../components/icon';
 import Toggle from '../../components/toggle';
 import { observer, inject } from 'mobx-react';
@@ -44,8 +45,6 @@ class ListMembers extends Component {
         super(props);
         const user = this.props.store.user;
         this.state = {
-            isSaving: false,
-            isInvalid: false,
             serverError: null,
             customLists: user.customLists
         };
@@ -65,17 +64,30 @@ class ListMembers extends Component {
         };
     }
 
-    onCustomListToggle(id, bool) {
-        this.props.store.updateUser({
-            customLists: {
-                [id]: bool
-            }
+    async onCustomListToggle(id, bool) {
+        this.setState({
+            serverError: null
         });
+        try {
+            await this.props.store.updateUser({
+                customLists: {
+                    [id]: bool
+                }
+            });
+        } catch (err) {
+            this.setState({
+                serverError: err.formattedMessage
+            });
+            return;
+        }
     }
 
     render() {
         return (
             <Fragment>
+                {this.state.serverError && (
+                    <Error>{this.state.serverError}</Error>
+                )}
                 <Body>
                     Enable or disable custom lists to customize your BetterDo
                     experience.
