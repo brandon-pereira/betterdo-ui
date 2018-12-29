@@ -84,7 +84,7 @@ class Navigation extends Component {
                             {...{
                                 selected: item._id === store.currentList._id
                             }}
-                            key={i}
+                            key={item._id}
                             type={item.type}
                             title={item.title}
                             color={item.color}
