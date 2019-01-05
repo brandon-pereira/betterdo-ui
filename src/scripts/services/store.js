@@ -174,6 +174,7 @@ class Store {
         );
         this.loading = false;
         this._onListChange();
+        return updatedList;
     }
 
     async updateUser(updatedProps) {

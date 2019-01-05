@@ -68,20 +68,27 @@ class ListMembers extends Component {
         this.setState({ isAdding: true, isInvalid: false, serverError: null });
         // Get user details from server
         try {
+            // See if member exists
             const user = await this.props.store.getUser(this.state.input);
-            const members = this.state.members;
+            // Clone members array, add new member
+            const members = Array.from(this.state.members);
             members.push(user);
-            console.log('HERE');
-            this.setState({ members: members });
-            console.log(members.map(m => m._id));
-            await this.props.store.updateList(
+            // Update the list with the new member
+            const updatedList = await this.props.store.updateList(
                 this.props.store.currentList._id,
                 {
                     members: members.map(m => m._id)
                 }
             );
+            // Update UI with response from server
+            this.setState({
+                members: updatedList.members,
+                isAdding: false,
+                isInvalid: false,
+                serverError: null
+            });
         } catch (err) {
-            console.log('ERR', err);
+            console.log(err);
             this.setState({
                 isAdding: false,
                 isInvalid: true,
