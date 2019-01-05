@@ -47,15 +47,48 @@ class ListMembers extends Component {
         super(props);
         const currentList = this.props.store.currentList;
         this.state = {
-            isSaving: false,
-            isDeleting: false,
+            isAdding: false,
             isInvalid: false,
             serverError: null,
             owner: currentList.owner,
             members: currentList.members,
-            title: currentList.title,
+            input: '',
             color: currentList.color
         };
+    }
+
+    async onSubmit(e) {
+        e.preventDefault();
+        // Validate
+        if (!this.state.input) {
+            this.setState({ isInvalid: true });
+            return;
+        }
+        // Update UI to loading state
+        this.setState({ isAdding: true, isInvalid: false, serverError: null });
+        // Get user details from server
+        try {
+            const user = await this.props.store.getUser(this.state.input);
+            const members = this.state.members;
+            members.push(user);
+            console.log('HERE');
+            this.setState({ members: members });
+            console.log(members.map(m => m._id));
+            await this.props.store.updateList(
+                this.props.store.currentList._id,
+                {
+                    members: members.map(m => m._id)
+                }
+            );
+        } catch (err) {
+            console.log('ERR', err);
+            this.setState({
+                isAdding: false,
+                isInvalid: true,
+                serverError: err.formattedMessage
+            });
+            return;
+        }
     }
 
     render() {
@@ -76,15 +109,22 @@ class ListMembers extends Component {
                         </User>
                     ))}
                 </UserList>
-                <Label>Add Member</Label>
-                <Input placeholder="Email" />
+                <Label htmlFor="email">Add Member</Label>
+                <Input
+                    value={this.state.input}
+                    name="email"
+                    id="email"
+                    invalid={Boolean(this.state.isInvalid)}
+                    onChange={evt => this.setState({ input: evt.target.value })}
+                    placeholder="hello@world.com"
+                />
                 <Button
-                    loading={this.state.isSaving}
-                    loadingText="Saving"
-                    color={this.state.color}
-                    type="Save"
+                    loading={this.state.isAdding}
+                    loadingText="Adding"
+                    color={this.props.store.currentList.color}
+                    type="submit"
                 >
-                    Save
+                    Add
                 </Button>
             </Form>
         );

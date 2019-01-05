@@ -63,6 +63,10 @@ export default class Server {
         return this.post(`users`, props);
     }
 
+    getUserByEmail(email) {
+        return this.get(`users/${email}`);
+    }
+
     throwError(message = 'An unexpected error ocurred', error = null) {
         const err = new Error(error || message);
         err.formattedMessage = message;

@@ -205,6 +205,10 @@ class Store {
         this.loading = false;
     }
 
+    getUser(email) {
+        return this.server.getUserByEmail(email);
+    }
+
     _onListChange() {
         setThemeColor(this.currentList.color);
         Router.setCurrentRoute(
