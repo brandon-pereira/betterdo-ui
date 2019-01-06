@@ -98,6 +98,23 @@ class ListMembers extends Component {
         }
     }
 
+    async removeMember(_id) {
+        // // Temporarily update UI while request sends
+        const members = this.state.members.filter(member => member._id !== _id);
+        this.setState({ members });
+        // Make actual request
+        const updatedList = await this.props.store.updateList(
+            this.props.store.currentList._id,
+            {
+                members: members.map(m => m._id)
+            }
+        );
+        // Update UI with response from server
+        this.setState({
+            members: updatedList.members
+        });
+    }
+
     render() {
         return (
             <Form
@@ -112,7 +129,15 @@ class ListMembers extends Component {
                             <UsersName>
                                 {user.firstName} {user.lastName}
                             </UsersName>
-                            {user._id === this.state.owner._id && <Owner />}
+                            {user._id === this.state.owner ? (
+                                <Owner />
+                            ) : (
+                                <Button
+                                    onClick={() => this.removeMember(user._id)}
+                                >
+                                    Remove
+                                </Button>
+                            )}
                         </User>
                     ))}
                 </UserList>
