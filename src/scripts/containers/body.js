@@ -44,9 +44,15 @@ const Container = styled.div`
         props.mobileNavVisible &&
         `
         grid-row: 4;
+        ${AllCaughtUpBanner} {
+            opacity: 0;
+        }
     `}
     @media ${QUERIES.medium} {
         grid-row: 2 / 3;
+        ${AllCaughtUpBanner} {
+            opacity: 1;
+        }
     }
 `;
 const SortableItem = SortableElement(({ value }) => <Task task={value} />);

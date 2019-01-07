@@ -22,11 +22,11 @@ const Title = styled.span`
     margin: 1rem 0 0 0;
 `;
 
-const AllCaughtUpBanner = ({ title }) => (
-    <Container>
+const AllCaughtUpBanner = ({ title, className }) => (
+    <Container className={className}>
         <Icon size="30vmin" icon="betterdo" />
         <Title>{title}</Title>
     </Container>
 );
 
-export default AllCaughtUpBanner;
+export default styled(AllCaughtUpBanner)``;
