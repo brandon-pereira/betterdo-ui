@@ -30,6 +30,7 @@ const Container = styled.div`
     color: #fff;
     padding: 1rem;
     text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
     ${Button} {
         margin-top: 1rem;
         margin-right: 0.5rem;
