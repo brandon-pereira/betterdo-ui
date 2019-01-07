@@ -91,7 +91,6 @@ export default class Logo extends Component {
                     onClick={() => (store.modalVisibility.userSettings = true)}
                     user={store.user}
                 />
-                {/* <Loader size="2rem" loading={this.props.store.loading} /> */}
             </Container>
         );
     }

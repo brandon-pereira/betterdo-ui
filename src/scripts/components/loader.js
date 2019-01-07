@@ -24,8 +24,8 @@ const dashoffset = keyframes`
     }
 `;
 const Container = styled.div`
-    height: ${props => props.size || '1rem'};
-    width: ${props => props.size || '1rem'};
+    height: 0;
+    width: 0;
     transform: scale(0);
     opacity: 0;
     transition: all 0.5s 0.2s;
@@ -43,12 +43,14 @@ const Container = styled.div`
         stroke: ${props => props.color || '#fff'};
         animation: ${dashoffset} 2s ease-in-out infinite;
     }
-    ${({ loading }) =>
+    ${({ loading, size }) =>
         loading &&
         `
-        transition: all 0s 0s !important;
+        transition: all 0s 0s, width 0.2s !important;
         transform: scale(1);
         opacity: 1;
+        height: ${size || '1rem'};
+        width: ${size || '1rem'};
     `};
 `;
 
