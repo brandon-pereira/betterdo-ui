@@ -16,22 +16,24 @@ const NavigationModalOverlay = styled.div`
 `;
 const Container = styled.nav`
     background: ${COLORS.navigationBackground};
-    display: flex;
     flex-direction: column;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.15), 0 1px 2px rgba(0,0,0,.9);
     transform: translateY(-100%);
     transition: transform 0s;
     position: relative;
     z-index: 5;
+    display: none;
      ${props =>
          props.visibleOnMobile &&
          `
+        display: flex;
         grid-row: 2;
         grid-column: 2;
         transform: translateY(0%);
         transition: transform .2s;
     `}
     @media ${QUERIES.medium} {
+        display: flex;
         position: static;
         transform: none;
         grid-row: 2 / 3;
