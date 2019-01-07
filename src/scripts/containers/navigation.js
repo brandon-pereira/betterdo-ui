@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
-import Search from '../components/search';
+// import Search from '../components/search';
 import ListItem from '../components/list';
 import { QUERIES } from '../constants';
 import { COLORS } from '../constants';
@@ -68,7 +68,6 @@ class Navigation extends Component {
             <Container
                 visibleOnMobile={this.props.store.modalVisibility.listsView}
             >
-                <Search />
                 <ListsContainer>
                     {store.lists.map((item, i) => (
                         <ListItem
