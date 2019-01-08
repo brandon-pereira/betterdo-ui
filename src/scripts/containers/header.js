@@ -24,8 +24,8 @@ const Container = styled.header`
         filter: drop-shadow(1px 1px rgba(0,0,0,.5))
     }
     ${Button} {
-        margin-left: 0.8rem;
-        font-size: 0.5rem;
+        margin-left: 0.5rem;
+        font-size: 0.8rem;
         padding: 0.8rem;
         box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5),
             inset 0 2px rgba(255, 255, 255, 0.1);
