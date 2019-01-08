@@ -40,7 +40,10 @@ const ProfilePictureBackground = styled.img`
     height: 110%;
     filter: blur(10px);
 `;
-
+const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
 @inject('store')
 @observer
 class ListMembers extends Component {
@@ -97,6 +100,12 @@ class ListMembers extends Component {
         }
     }
 
+    logout() {
+        if (window) {
+            window.location.href = '/auth/logout';
+        }
+    }
+
     render() {
         const user = this.props.store.user;
         return (
@@ -141,13 +150,18 @@ class ListMembers extends Component {
                     onChange={evt => this.setState({ email: evt.target.value })}
                     placeholder="hello@world.com"
                 />
-                <Button
-                    loading={this.state.isSaving}
-                    loadingText="Saving"
-                    type="Save"
-                >
-                    Save
-                </Button>
+                <ButtonContainer>
+                    <Button
+                        loading={this.state.isSaving}
+                        loadingText="Saving"
+                        type="Save"
+                    >
+                        Save
+                    </Button>
+                    <Button onClick={() => this.logout()} color={COLORS.red}>
+                        Logout
+                    </Button>
+                </ButtonContainer>
             </Form>
         );
     }
