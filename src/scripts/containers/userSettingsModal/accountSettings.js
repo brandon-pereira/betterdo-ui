@@ -102,7 +102,7 @@ class ListMembers extends Component {
 
     logout() {
         if (window) {
-            window.location.href = '/auth/logout';
+            window.location.href = `${process.env.ROOT_APP_DIR}auth/logout`;
         }
     }
 
