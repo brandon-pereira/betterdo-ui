@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Label } from './forms';
 import Icon from './icon';
 import { COLORS } from '../constants';
+import TouchEvents from '../services/touchevents';
 
 const Container = styled.div`
     display: flex;
@@ -44,6 +45,7 @@ export default class ColorPicker extends Component {
     constructor(props) {
         super(props);
         this.inputColorRef = React.createRef();
+        this.colorPaletteRef = React.createRef();
         this.state = {
             currentColor: 0,
             palette: [
@@ -53,6 +55,21 @@ export default class ColorPicker extends Component {
                 randomColor()
             ]
         };
+    }
+
+    componentDidMount() {
+        this.TouchEvents = new TouchEvents(
+            this.colorPaletteRef.current,
+            ({ direction }) => {
+                if (['left', 'right'].includes(direction)) {
+                    this.refreshPalette();
+                }
+            }
+        );
+    }
+
+    componentWillUnmount() {
+        this.TouchEvents.destroy();
     }
 
     changeColor(color) {
@@ -75,7 +92,9 @@ export default class ColorPicker extends Component {
     }
 
     refreshPalette(e) {
-        e.preventDefault();
+        if (e) {
+            e.preventDefault();
+        }
         const currentColor = this.state.palette[this.state.currentColor];
         this.setState({
             currentColor: 0,
@@ -128,7 +147,7 @@ export default class ColorPicker extends Component {
                     type="color"
                     style={{ display: 'none' }}
                 />
-                <Container>
+                <Container ref={this.colorPaletteRef}>
                     {this.state.palette.map((color, index) => (
                         <Color
                             key={color}
