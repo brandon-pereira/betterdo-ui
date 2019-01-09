@@ -37,6 +37,7 @@ const _Modal = styled.div`
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
     overflow-y: scroll;
+    max-height: 100vh;
     ${props =>
         props.visible &&
         `
