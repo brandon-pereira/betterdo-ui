@@ -27,7 +27,6 @@ export default class AddListModalContainer extends Component {
                 onResize={this.calculatePosition.bind(this)}
                 onRequestClose={() => (this.visible = false)}
                 visible={this.visible}
-                title="Create List"
                 asyncContent={() => import('./content')}
             />
         );

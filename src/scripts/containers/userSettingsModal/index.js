@@ -19,7 +19,6 @@ class UserSettingsModal extends Component {
             <Modal
                 onRequestClose={() => (this.visible = false)}
                 visible={this.visible}
-                title="Settings"
                 asyncContent={() => import('./content')}
             />
         );

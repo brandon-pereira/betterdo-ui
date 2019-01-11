@@ -33,7 +33,6 @@ export default class AddListModalContainer extends Component {
                 <Modal
                     onRequestClose={this.close.bind(this)}
                     visible={this.visible}
-                    title="Edit Task"
                     asyncContent={() => import('./content')}
                 />
             </ThemeProvider>

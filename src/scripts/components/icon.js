@@ -42,7 +42,6 @@ class Icon extends Component {
                     onClick={onClick ? e => onClick(e) : null}
                 >
                     <Icon
-                        className={className}
                         title={this.props.children}
                         aria-describedby={this.props.children}
                     />

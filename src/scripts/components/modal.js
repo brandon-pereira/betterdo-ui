@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Header } from './copy';
 import Loader from './loader';
 import Icon from './icon';
 import { QUERIES } from '../constants';
@@ -48,20 +47,18 @@ const _Modal = styled.div`
         width: 60%;
     }
 `;
-const HeaderContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-    h2 {
-        margin-bottom: 0;
-    }
-`;
 const LoaderContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     height: 10rem;
+`;
+const ModalClose = styled(Icon)`
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1;
+    filter: drop-shadow(0 1px #555);
 `;
 
 export default class Modal extends Component {
@@ -157,17 +154,14 @@ export default class Modal extends Component {
                 onClick={e => this.closeModal(e)}
             >
                 <_Modal ref={this.ref} visible={this.props.visible}>
-                    <HeaderContainer>
-                        <Header>{this.props.title || ''}</Header>
-                        <Icon
-                            icon="x"
-                            color="#a9a9a9"
-                            size="1rem"
-                            onClick={() => this.closeModal()}
-                        >
-                            Close
-                        </Icon>
-                    </HeaderContainer>
+                    <ModalClose
+                        icon="x"
+                        color="#a9a9a9"
+                        size="1rem"
+                        onClick={() => this.closeModal()}
+                    >
+                        Close
+                    </ModalClose>
                     {this.getModalContent()}
                 </_Modal>
             </Overlay>

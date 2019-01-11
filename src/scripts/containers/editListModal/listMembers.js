@@ -121,7 +121,7 @@ class ListMembers extends Component {
                 onSubmit={e => this.onSubmit(e)}
                 errorMessage={this.state.serverError}
             >
-                <Label>Existing Members</Label>
+                <Label>Current Members</Label>
                 <UserList>
                     {this.state.members.map((user, index) => (
                         <User key={index}>
