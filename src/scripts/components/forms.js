@@ -18,6 +18,9 @@ const _Input = styled.input`
     &:focus {
         box-shadow: inset 0 0 0 2px ${COLORS.blue};
     }
+    &::placeholder {
+        color: #aaa;
+    }
     ${({ invalid }) =>
         invalid &&
         `
