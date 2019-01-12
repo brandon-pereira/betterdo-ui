@@ -52,6 +52,7 @@ const Container = styled.div`
 `;
 
 const NotificationBanner = ({
+    className,
     title,
     description,
     primaryButtonCopy,
@@ -59,7 +60,7 @@ const NotificationBanner = ({
     secondaryButtonCopy,
     secondaryButtonAction
 }) => (
-    <Container onClick={() => primaryButtonAction()}>
+    <Container className={className} onClick={() => primaryButtonAction()}>
         <CopyContainer>
             <Header>{title}</Header>
             <Description>{description}</Description>
