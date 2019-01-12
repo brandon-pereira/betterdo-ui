@@ -49,10 +49,10 @@ export default class ColorPicker extends Component {
         this.state = {
             currentColor: 0,
             palette: [
-                this.props.currentColor || randomColor(),
-                randomColor(),
-                randomColor(),
-                randomColor()
+                this.props.currentColor || this.randomColor(),
+                this.randomColor(),
+                this.randomColor(),
+                this.randomColor()
             ]
         };
     }
@@ -70,6 +70,10 @@ export default class ColorPicker extends Component {
 
     componentWillUnmount() {
         this.TouchEvents.destroy();
+    }
+
+    randomColor() {
+        return randomColor({ luminosity: 'dark' });
     }
 
     changeColor(color) {
@@ -99,7 +103,7 @@ export default class ColorPicker extends Component {
         this.setState({
             currentColor: 0,
             palette: this.state.palette.map((curr, i) =>
-                i === 0 ? currentColor : randomColor()
+                i === 0 ? currentColor : this.randomColor()
             )
         });
     }
