@@ -5,6 +5,7 @@
     "repository": "https://github.com/brandon-pereira/betterdo-ui",
     "dependencies": {
         "babel-polyfill": "^6.26.0",
+        "date-fns": "^2.0.0-alpha.26",
         "mobx": "^5.8.0",
         "mobx-react": "^5.4.3",
         "offline-plugin": "^5.0.6",

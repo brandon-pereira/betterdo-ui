@@ -6,9 +6,27 @@ import Dropdown from '../../components/dropdown';
 import Button from '../../components/button';
 import Subtasks from '../../components/subtasks';
 import { COLORS } from '../../constants';
+import ProfilePic from '../../components/profilePic';
+import { Header } from '../../components/copy';
 
 const Container = styled.div``;
 const Block = styled.div``;
+const CreatorBlock = styled.div`
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    border-radius: 3px;
+    ${ProfilePic} {
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    ${Block} {
+        flex: 1;
+        padding: 0 1rem;
+    }
+`;
+
 const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
@@ -36,6 +54,7 @@ class EditTask extends Component {
             list: task.list,
             notes: task.notes,
             subtasks: task.subtasks,
+            formattedCreationDate: task.creationDate,
             isSaving: false,
             isDeleting: false
         };
@@ -46,6 +65,18 @@ class EditTask extends Component {
         this.updateSubtasks = this.updateSubtasks.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
         this.onChange = this.onChange.bind(this);
+    }
+
+    componentDidMount() {
+        import('./relativeTime').then(time => {
+            this.relativeTime = time.default;
+            this.setState({
+                formattedCreationDate: this.relativeTime(
+                    this.task.creationDate,
+                    new Date()
+                )
+            });
+        });
     }
 
     get lists() {
@@ -134,6 +165,7 @@ class EditTask extends Component {
         const state = this.state;
         return (
             <Container>
+                <Header>Edit Task</Header>
                 <Block>
                     <Label>Title</Label>
                     <Input
@@ -186,6 +218,14 @@ class EditTask extends Component {
                         onChange={this.onChange}
                     />
                 </Block>
+                <CreatorBlock>
+                    <ProfilePic user={this.props.store.user} />
+                    <Block>
+                        Created by Brandon Pereira
+                        <br />
+                        Created {this.state.formattedCreationDate}
+                    </Block>
+                </CreatorBlock>
                 <ButtonContainer>
                     <Button
                         color={COLORS.blue}
