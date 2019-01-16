@@ -99,7 +99,22 @@ const SortableList = SortableContainer(({ items, currentId, onClick }) => {
 @inject('store')
 @observer
 class Navigation extends Component {
-    onSortEnd() {}
+    onSortEnd({ oldIndex, newIndex }) {
+        const store = this.props.store;
+        // Indexes match, no change
+        if (oldIndex === newIndex) {
+            return;
+        }
+        store.lists = arrayMove(store.lists, oldIndex, newIndex);
+        try {
+            this.props.store.updateUser({
+                lists: store.lists.map(t => t._id)
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     render() {
         const store = this.props.store;
         return (
