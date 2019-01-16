@@ -5,6 +5,11 @@ import styled from 'styled-components';
 import ListItem from '../components/list';
 import { QUERIES } from '../constants';
 import { COLORS } from '../constants';
+import {
+    SortableContainer,
+    SortableElement,
+    arrayMove
+} from 'react-sortable-hoc';
 
 const NavigationModalOverlay = styled.div`
     background: rgba(0, 0, 0, 0.5);
@@ -61,9 +66,40 @@ const ListsContainer = styled.ul`
     }
 `;
 
+const SortableItem = SortableElement(({ value, index, onClick, currentId }) => (
+    <ListItem
+        {...{
+            selected: value._id === currentId
+        }}
+        key={value._id}
+        type={value.type}
+        title={value.title}
+        color={value.color}
+        onClick={() => onClick(value._id)}
+    />
+));
+
+const SortableList = SortableContainer(({ items, currentId, onClick }) => {
+    return (
+        <div>
+            {items.map((task, index) => (
+                <SortableItem
+                    key={typeof task === 'object' ? task._id : index}
+                    index={index}
+                    value={task}
+                    currentId={currentId}
+                    onClick={onClick}
+                    disabled={task.type !== 'default'}
+                />
+            ))}
+        </div>
+    );
+});
+
 @inject('store')
 @observer
 class Navigation extends Component {
+    onSortEnd() {}
     render() {
         const store = this.props.store;
         return (
@@ -71,18 +107,14 @@ class Navigation extends Component {
                 visibleOnMobile={this.props.store.modalVisibility.listsView}
             >
                 <ListsContainer>
-                    {store.lists.map((item, i) => (
-                        <ListItem
-                            {...{
-                                selected: item._id === store.currentList._id
-                            }}
-                            key={item._id}
-                            type={item.type}
-                            title={item.title}
-                            color={item.color}
-                            onClick={() => store.switchLists(item._id)}
-                        />
-                    ))}
+                    <SortableList
+                        lockAxis="y"
+                        pressDelay={200}
+                        items={store.lists}
+                        currentId={store.currentList._id}
+                        onSortEnd={this.onSortEnd.bind(this)}
+                        onClick={id => store.switchLists(id)}
+                    />
                     <ListItem
                         onClick={() => (store.modalVisibility.newList = true)}
                         newList
