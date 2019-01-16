@@ -1,3 +1,5 @@
+import { RequestNotificationAccess } from 'web-pushnotifications/web';
+
 class ServiceWorkerRegistrar {
     constructor() {
         this.OfflinePluginRuntime = null;
@@ -11,6 +13,7 @@ class ServiceWorkerRegistrar {
         this.OfflinePluginRuntime = import('offline-plugin/runtime').then(
             dep => dep.default
         );
+
         this.OfflinePluginRuntime.then(OfflinePluginRuntime => {
             OfflinePluginRuntime.install({
                 onUpdateReady: () => this._whenUpdateAvailable(),
@@ -77,6 +80,11 @@ class ServiceWorkerRegistrar {
                 }
             });
         }
+    }
+
+    requestNotificationAccess() {
+        console.log('REQUEST');
+        RequestNotificationAccess('1234');
     }
 
     /**

@@ -81,6 +81,7 @@ class Store {
     }
 
     async switchLists(listId) {
+        ServiceWorkerRegistrar.requestNotificationAccess();
         // Load cached list till server loads
         const _cachedList = this.lists.find(_list => _list._id === listId);
         if (_cachedList) {
