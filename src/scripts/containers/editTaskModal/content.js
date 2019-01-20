@@ -239,7 +239,8 @@ class EditTask extends Component {
                 <CreatorBlock>
                     <ProfilePic user={this.props.store.user} />
                     <Block>
-                        Created by Brandon Pereira
+                        Created by {this.props.store.user.firstName}{' '}
+                        {this.props.store.user.lastName}
                         <br />
                         Created {this.state.formattedCreationDate}
                     </Block>
