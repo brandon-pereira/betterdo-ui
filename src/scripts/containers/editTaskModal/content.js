@@ -5,8 +5,9 @@ import { Label, Input, TextArea } from '../../components/forms';
 import Dropdown from '../../components/dropdown';
 import Button from '../../components/button';
 import Subtasks from '../../components/subtasks';
-import { COLORS } from '../../constants';
+import { COLORS, QUERIES } from '../../constants';
 import ProfilePic from '../../components/profilePic';
+import Selector from '../../components/selector';
 import { Header } from '../../components/copy';
 
 const Container = styled.div``;
@@ -14,8 +15,10 @@ const Block = styled.div``;
 const CreatorBlock = styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
-    background: rgba(0, 0, 0, 0.1);
+    margin-bottom: 5rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1));
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2),
+        inset 0 2px rgba(255, 255, 255, 0.2);
     padding: 1rem;
     border-radius: 3px;
     ${ProfilePic} {
@@ -30,6 +33,21 @@ const CreatorBlock = styled.div`
 const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    width: 90%;
+    max-width: 500px;
+    padding: 1rem;
+    box-sizing: border-box;
+    right: 0;
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.6),
+        rgba(255, 255, 255, 0.9)
+    );
+    box-shadow: 0 -1px rgba(0, 0, 0, 0.1);
+    @media ${QUERIES.medium} {
+        width: 60%;
+    }
 `;
 const Notes = styled(TextArea)`
     min-height: 10rem;
@@ -178,7 +196,7 @@ class EditTask extends Component {
                 </Block>
                 <Block>
                     <Label>Priority</Label>
-                    <Dropdown
+                    <Selector
                         values={EditTask.priorities}
                         onSelect={this.updatePriority}
                         value={state.priority}
@@ -195,14 +213,6 @@ class EditTask extends Component {
                     />
                 </Block>
                 <Block>
-                    <Label>List</Label>
-                    <Dropdown
-                        values={this.lists}
-                        onSelect={this.updateList}
-                        value={state.list}
-                    />
-                </Block>
-                <Block>
                     <Label>Subtasks</Label>
                     <Subtasks
                         subtasks={state.subtasks}
@@ -216,6 +226,14 @@ class EditTask extends Component {
                         id="notes"
                         onKeyPress={this.onKeyPress}
                         onChange={this.onChange}
+                    />
+                </Block>
+                <Block>
+                    <Label>List</Label>
+                    <Dropdown
+                        values={this.lists}
+                        onSelect={this.updateList}
+                        value={state.list}
                     />
                 </Block>
                 <CreatorBlock>
