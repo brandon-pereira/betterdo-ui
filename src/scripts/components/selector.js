@@ -3,30 +3,34 @@ import styled from 'styled-components';
 import { COLORS } from '../constants';
 const SelectorContainer = styled.div`
     display: flex;
-    border: 1px solid #a2a2a2;
     border-radius: 3px;
-    overflow: hidden;
     margin-bottom: 1rem;
 `;
 const Selection = styled.button`
     flex: 1;
     appearance: none;
     border: none;
-    border-right: 1px solid #d6d6d6
     background: linear-gradient(#fff, #ddd);
-    box-shadow: inset 0 -1px #fff;
-    padding: 0.5rem 1rem;
+    box-shadow: inset 0 0 0 1px #a2a2a2, inset 0 -2px #fff;
+    padding: 0.75rem 1rem;
     font: inherit;
     outline: none;
+    &:first-of-type {
+        border-radius: 5px 0 0 5px;
+    }
     &:last-of-type {
         border-right: none;
+        border-radius: 0 5px 5px 0;
     }
     ${props =>
         props.selected &&
         `
-        background: ${COLORS.blue};
-        box-shadow: inset 0 0 0 1px rgba(0,0,0,0.9), inset 0 0 30px rgba(0,0,0,.8);
+        background-color: ${COLORS.blue};
+        background-image: linear-gradient(transparent, rgba(0,0,0,.3));
+        box-shadow: inset 0 0 0 1px rgba(0,0,0,0.9), inset 0 -2px rgba(255,255,255,.3);
         text-shadow: 1px 1px rgba(0,0,0,.9);
+        position: relative;
+        z-index: 1;
         color: #fff;
     `}
 `;
