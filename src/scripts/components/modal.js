@@ -57,7 +57,7 @@ const ModalClose = styled(Icon)`
     position: fixed;
     top: 1rem;
     right: 1rem;
-    z-index: 1;
+    z-index: 2;
     filter: drop-shadow(0 1px #555);
 `;
 

@@ -12,6 +12,15 @@ import { Header } from '../../components/copy';
 
 const Container = styled.div``;
 const Block = styled.div``;
+const Content = styled.div`
+    padding: 1rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: scroll;
+`;
 const CreatorBlock = styled.div`
     display: flex;
     align-items: center;
@@ -33,10 +42,10 @@ const CreatorBlock = styled.div`
 const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
-    position: fixed;
+    position: absolute;
+    transition: all 0.5s;
     bottom: 0;
-    width: 90%;
-    max-width: 500px;
+    width: 100%;
     padding: 1rem;
     box-sizing: border-box;
     right: 0;
@@ -45,9 +54,6 @@ const ButtonContainer = styled.div`
         rgba(255, 255, 255, 0.9)
     );
     box-shadow: 0 -1px rgba(0, 0, 0, 0.1);
-    @media ${QUERIES.medium} {
-        width: 60%;
-    }
 `;
 const Notes = styled(TextArea)`
     min-height: 10rem;
@@ -183,68 +189,70 @@ class EditTask extends Component {
         const state = this.state;
         return (
             <Container>
-                <Header>Edit Task</Header>
-                <Block>
-                    <Label>Title</Label>
-                    <Input
-                        value={state.title}
-                        id="title"
-                        placeholder="Enter a title"
-                        onKeyPress={this.onKeyPress}
-                        onChange={this.onChange}
-                    />
-                </Block>
-                <Block>
-                    <Label>Priority</Label>
-                    <Selector
-                        values={EditTask.priorities}
-                        onSelect={this.updatePriority}
-                        value={state.priority}
-                    />
-                </Block>
-                <Block>
-                    <Label>Due Date</Label>
-                    <Input
-                        type="date"
-                        id="dueDate"
-                        value={this.formatDateForInput(state.dueDate)}
-                        onKeyPress={this.onKeyPress}
-                        onChange={this.onChange}
-                    />
-                </Block>
-                <Block>
-                    <Label>Subtasks</Label>
-                    <Subtasks
-                        subtasks={state.subtasks}
-                        onChange={this.updateSubtasks}
-                    />
-                </Block>
-                <Block>
-                    <Label>Notes</Label>
-                    <Notes
-                        value={state.notes}
-                        id="notes"
-                        onKeyPress={this.onKeyPress}
-                        onChange={this.onChange}
-                    />
-                </Block>
-                <Block>
-                    <Label>List</Label>
-                    <Dropdown
-                        values={this.lists}
-                        onSelect={this.updateList}
-                        value={state.list}
-                    />
-                </Block>
-                <CreatorBlock>
-                    <ProfilePic user={this.task.createdBy} />
+                <Content>
+                    <Header>Edit Task</Header>
                     <Block>
-                        Created by {this.task.createdBy.firstName}{' '}
-                        {this.task.createdBy.lastName}
-                        <br />
-                        Created {this.state.formattedCreationDate}
+                        <Label>Title</Label>
+                        <Input
+                            value={state.title}
+                            id="title"
+                            placeholder="Enter a title"
+                            onKeyPress={this.onKeyPress}
+                            onChange={this.onChange}
+                        />
                     </Block>
-                </CreatorBlock>
+                    <Block>
+                        <Label>Priority</Label>
+                        <Selector
+                            values={EditTask.priorities}
+                            onSelect={this.updatePriority}
+                            value={state.priority}
+                        />
+                    </Block>
+                    <Block>
+                        <Label>Due Date</Label>
+                        <Input
+                            type="date"
+                            id="dueDate"
+                            value={this.formatDateForInput(state.dueDate)}
+                            onKeyPress={this.onKeyPress}
+                            onChange={this.onChange}
+                        />
+                    </Block>
+                    <Block>
+                        <Label>Subtasks</Label>
+                        <Subtasks
+                            subtasks={state.subtasks}
+                            onChange={this.updateSubtasks}
+                        />
+                    </Block>
+                    <Block>
+                        <Label>Notes</Label>
+                        <Notes
+                            value={state.notes}
+                            id="notes"
+                            onKeyPress={this.onKeyPress}
+                            onChange={this.onChange}
+                        />
+                    </Block>
+                    <Block>
+                        <Label>List</Label>
+                        <Dropdown
+                            values={this.lists}
+                            onSelect={this.updateList}
+                            value={state.list}
+                        />
+                    </Block>
+                    <CreatorBlock>
+                        <ProfilePic user={this.task.createdBy} />
+                        <Block>
+                            Created by {this.task.createdBy.firstName}{' '}
+                            {this.task.createdBy.lastName}
+                            <br />
+                            Created {this.state.formattedCreationDate}
+                        </Block>
+                    </CreatorBlock>
+                </Content>
                 <ButtonContainer>
                     <Button
                         color={COLORS.blue}
