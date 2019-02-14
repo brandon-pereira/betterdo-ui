@@ -73,6 +73,12 @@ const Container = styled.div`
         opacity: 0.5;
         pointer-events: none;
     `}
+    ${props =>
+        props.priority === 'low' &&
+        `
+        background: linear-gradient(#eee, #ddd);
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    `}
     ${Loader} {
         margin: 1rem;
     }
@@ -104,6 +110,7 @@ class Task extends Component {
             <Container
                 isLoading={task.isLoading}
                 onClick={this.edit.bind(this)}
+                priority={task.priority}
             >
                 {task.isLoading ? (
                     <Loader color="#202020" size="1.7rem" loading={true} />
