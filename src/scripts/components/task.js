@@ -4,13 +4,14 @@ import styled from 'styled-components';
 import Loader from './loader';
 
 const Checkbox = styled.input`
-    height: 1.4rem;
-    width: 1.4rem;
+    height: 1.6rem;
+    width: 1.6rem;
     border-radius: 5px;
     display: inline-block;
     appearance: none;
     background: #fff;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 1px 1px #fff;
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -87,7 +88,6 @@ const Title = styled.span`
     flex: 1;
     text-overflow: ellipsis;
     overflow: hidden;
-    user-select: none;
     margin: 1rem 1rem 1rem 0;
 `;
 @inject('store')
