@@ -5,7 +5,7 @@ import { Label, Input, TextArea } from '../../components/forms';
 import Dropdown from '../../components/dropdown';
 import Button from '../../components/button';
 import Subtasks from '../../components/subtasks';
-import { COLORS, QUERIES } from '../../constants';
+import { COLORS } from '../../constants';
 import ProfilePic from '../../components/profilePic';
 import Selector from '../../components/selector';
 import { Header } from '../../components/copy';
@@ -104,10 +104,12 @@ class EditTask extends Component {
     }
 
     get lists() {
-        return this.props.store.lists.map(list => ({
-            value: list._id,
-            label: list.title
-        }));
+        return this.props.store.lists
+            .filter(list => list.type === 'default')
+            .map(list => ({
+                value: list._id,
+                label: list.title
+            }));
     }
 
     get task() {
@@ -210,16 +212,6 @@ class EditTask extends Component {
                         />
                     </Block>
                     <Block>
-                        <Label>Due Date</Label>
-                        <Input
-                            type="date"
-                            id="dueDate"
-                            value={this.formatDateForInput(state.dueDate)}
-                            onKeyPress={this.onKeyPress}
-                            onChange={this.onChange}
-                        />
-                    </Block>
-                    <Block>
                         <Label>Subtasks</Label>
                         <Subtasks
                             subtasks={state.subtasks}
@@ -241,6 +233,16 @@ class EditTask extends Component {
                             values={this.lists}
                             onSelect={this.updateList}
                             value={state.list}
+                        />
+                    </Block>
+                    <Block>
+                        <Label>Due Date</Label>
+                        <Input
+                            type="date"
+                            id="dueDate"
+                            value={this.formatDateForInput(state.dueDate)}
+                            onKeyPress={this.onKeyPress}
+                            onChange={this.onChange}
                         />
                     </Block>
                     <CreatorBlock>
