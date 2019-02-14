@@ -87,10 +87,14 @@ export default class Logo extends Component {
                     Better
                     <span>Do.</span>
                 </h1>
-                <ProfilePic
-                    onClick={() => (store.modalVisibility.userSettings = true)}
-                    user={store.user}
-                />
+                {store.user && (
+                    <ProfilePic
+                        onClick={() =>
+                            (store.modalVisibility.userSettings = true)
+                        }
+                        user={store.user}
+                    />
+                )}
             </Container>
         );
     }
