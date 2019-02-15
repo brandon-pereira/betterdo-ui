@@ -10,6 +10,7 @@ const Selection = styled.button`
     flex: 1;
     appearance: none;
     border: none;
+    margin: 0;
     background: linear-gradient(#fff, #ddd);
     box-shadow: inset 0 0 0 1px #a2a2a2, inset 0 -2px #fff;
     padding: 0.75rem 1rem;
