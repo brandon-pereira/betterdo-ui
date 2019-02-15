@@ -79,6 +79,7 @@ class EditTask extends Component {
             notes: task.notes,
             subtasks: task.subtasks,
             formattedCreationDate: task.creationDate,
+            createdBy: task.createdBy,
             isSaving: false,
             isDeleting: false
         };
@@ -246,10 +247,10 @@ class EditTask extends Component {
                         />
                     </Block>
                     <CreatorBlock>
-                        <ProfilePic user={this.task.createdBy} />
+                        <ProfilePic user={this.state.createdBy} />
                         <Block>
-                            Created by {this.task.createdBy.firstName}{' '}
-                            {this.task.createdBy.lastName}
+                            Created by {this.state.createdBy.firstName}{' '}
+                            {this.state.createdBy.lastName}
                             <br />
                             Created {this.state.formattedCreationDate}
                         </Block>
