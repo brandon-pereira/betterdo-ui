@@ -36,6 +36,9 @@ class Store {
     };
 
     @observable
+    hasServerError = false;
+
+    @observable
     appUpdateAvailable = false;
 
     @observable
@@ -75,6 +78,7 @@ class Store {
             this._updateListInCache(this.currentList._id, this.currentList);
             this.user = response.user;
         } catch (err) {
+            this.hasServerError = true;
             console.error('Init call failed from server', err);
         }
         this.loading = false;
