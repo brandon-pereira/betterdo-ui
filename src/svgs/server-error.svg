@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="190px" height="190px" viewBox="0 0 190 190" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <path d="M21.5,20.5 L21.5,60.5 L0.5,60.5 L0.5,0.5 L79.5,0.5 L79.5,20.5 L21.5,20.5 Z" id="Bottom-Right-Square" stroke="#979797" fill="#D8D8D8"></path>
+        <path d="M112.5,124.5 L112.5,189.5 L91.5,189.5 L91.5,103.5 L189.5,103.5 L189.5,124.5 L112.5,124.5 Z" id="Top-Left-Square" stroke="#979797" fill="#D8D8D8" transform="translate(140.500000, 146.500000) rotate(180.000000) translate(-140.500000, -146.500000) "></path>
+        <path d="M115.338835,54.1880772 L106.292893,45.1421356 L121.142136,30.2928932 L130.188077,39.3388348 L139.234019,30.2928932 L154.083261,45.1421356 L145.03732,54.1880772 L155.083261,64.2340187 L140.234019,79.0832611 L130.188077,69.0373196 L120.142136,79.0832611 L105.292893,64.2340187 L115.338835,54.1880772 Z" id="Eye-1" stroke="#979797" fill="#D8D8D8"></path>
+        <path d="M50.3388348,56.1880772 L41.2928932,47.1421356 L56.1421356,32.2928932 L65.1880772,41.3388348 L74.2340187,32.2928932 L89.0832611,47.1421356 L80.0373196,56.1880772 L90.0832611,66.2340187 L75.2340187,81.0832611 L65.1880772,71.0373196 L55.1421356,81.0832611 L40.2928932,66.2340187 L50.3388348,56.1880772 Z" id="Eye-1-Copy" stroke="#979797" fill="#D8D8D8"></path>
+        <path d="M114.5,119.5 L114.5,105.5 L135.5,105.5 L135.5,138.5 L59.5,138.5 L59.5,162.5 L38.5,162.5 L38.5,119.5 L114.5,119.5 Z" id="Combined-Shape" stroke="#979797" fill="#D8D8D8"></path>
+    </g>
+</svg>
