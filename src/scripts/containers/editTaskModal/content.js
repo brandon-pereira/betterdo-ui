@@ -7,15 +7,27 @@ import Button from '../../components/button';
 import Subtasks from '../../components/subtasks';
 import { COLORS } from '../../constants';
 import ProfilePic from '../../components/profilePic';
+import Selector from '../../components/selector';
 import { Header } from '../../components/copy';
 
 const Container = styled.div``;
 const Block = styled.div``;
+const Content = styled.div`
+    padding: 1rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: scroll;
+`;
 const CreatorBlock = styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
-    background: rgba(0, 0, 0, 0.1);
+    margin-bottom: 5rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1));
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2),
+        inset 0 2px rgba(255, 255, 255, 0.2);
     padding: 1rem;
     border-radius: 3px;
     ${ProfilePic} {
@@ -30,6 +42,18 @@ const CreatorBlock = styled.div`
 const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    position: absolute;
+    transition: all 0.5s;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    right: 0;
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.6),
+        rgba(255, 255, 255, 0.9)
+    );
+    box-shadow: 0 -1px rgba(0, 0, 0, 0.1);
 `;
 const Notes = styled(TextArea)`
     min-height: 10rem;
@@ -55,6 +79,7 @@ class EditTask extends Component {
             notes: task.notes,
             subtasks: task.subtasks,
             formattedCreationDate: task.creationDate,
+            createdBy: task.createdBy,
             isSaving: false,
             isDeleting: false
         };
@@ -80,10 +105,12 @@ class EditTask extends Component {
     }
 
     get lists() {
-        return this.props.store.lists.map(list => ({
-            value: list._id,
-            label: list.title
-        }));
+        return this.props.store.lists
+            .filter(list => list.type === 'default')
+            .map(list => ({
+                value: list._id,
+                label: list.title
+            }));
     }
 
     get task() {
@@ -165,67 +192,70 @@ class EditTask extends Component {
         const state = this.state;
         return (
             <Container>
-                <Header>Edit Task</Header>
-                <Block>
-                    <Label>Title</Label>
-                    <Input
-                        value={state.title}
-                        id="title"
-                        placeholder="Enter a title"
-                        onKeyPress={this.onKeyPress}
-                        onChange={this.onChange}
-                    />
-                </Block>
-                <Block>
-                    <Label>Priority</Label>
-                    <Dropdown
-                        values={EditTask.priorities}
-                        onSelect={this.updatePriority}
-                        value={state.priority}
-                    />
-                </Block>
-                <Block>
-                    <Label>Due Date</Label>
-                    <Input
-                        type="date"
-                        id="dueDate"
-                        value={this.formatDateForInput(state.dueDate)}
-                        onKeyPress={this.onKeyPress}
-                        onChange={this.onChange}
-                    />
-                </Block>
-                <Block>
-                    <Label>List</Label>
-                    <Dropdown
-                        values={this.lists}
-                        onSelect={this.updateList}
-                        value={state.list}
-                    />
-                </Block>
-                <Block>
-                    <Label>Subtasks</Label>
-                    <Subtasks
-                        subtasks={state.subtasks}
-                        onChange={this.updateSubtasks}
-                    />
-                </Block>
-                <Block>
-                    <Label>Notes</Label>
-                    <Notes
-                        value={state.notes}
-                        id="notes"
-                        onKeyPress={this.onKeyPress}
-                        onChange={this.onChange}
-                    />
-                </Block>
-                <CreatorBlock>
-                    <ProfilePic user={this.props.store.user} />
+                <Content>
+                    <Header>Edit Task</Header>
                     <Block>
-                        Created by Brandon Pereira
-                        <br />
-                        Created {this.state.formattedCreationDate}
+                        <Label>Title</Label>
+                        <Input
+                            value={state.title}
+                            id="title"
+                            placeholder="Enter a title"
+                            onKeyPress={this.onKeyPress}
+                            onChange={this.onChange}
+                        />
                     </Block>
-                </CreatorBlock>
+                    <Block>
+                        <Label>Priority</Label>
+                        <Selector
+                            values={EditTask.priorities}
+                            onSelect={this.updatePriority}
+                            value={state.priority}
+                        />
+                    </Block>
+                    <Block>
+                        <Label>Subtasks</Label>
+                        <Subtasks
+                            subtasks={state.subtasks}
+                            onChange={this.updateSubtasks}
+                        />
+                    </Block>
+                    <Block>
+                        <Label>Notes</Label>
+                        <Notes
+                            value={state.notes}
+                            id="notes"
+                            onKeyPress={this.onKeyPress}
+                            onChange={this.onChange}
+                        />
+                    </Block>
+                    <Block>
+                        <Label>List</Label>
+                        <Dropdown
+                            values={this.lists}
+                            onSelect={this.updateList}
+                            value={state.list}
+                        />
+                    </Block>
+                    <Block>
+                        <Label>Due Date</Label>
+                        <Input
+                            type="date"
+                            id="dueDate"
+                            value={this.formatDateForInput(state.dueDate)}
+                            onKeyPress={this.onKeyPress}
+                            onChange={this.onChange}
+                        />
+                    </Block>
+                    <CreatorBlock>
+                        <ProfilePic user={this.state.createdBy} />
+                        <Block>
+                            Created by {this.state.createdBy.firstName}{' '}
+                            {this.state.createdBy.lastName}
+                            <br />
+                            Created {this.state.formattedCreationDate}
+                        </Block>
+                    </CreatorBlock>
+                </Content>
                 <ButtonContainer>
                     <Button
                         color={COLORS.blue}

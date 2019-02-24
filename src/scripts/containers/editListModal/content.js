@@ -19,10 +19,15 @@ class EditListModalContent extends Component {
                     showTitleAbove={true}
                 >
                     <Tab>
-                        <ListSettings currentList={currentList} />
+                        <ListSettings
+                            closeModal={() => this.props.closeModal()}
+                            currentList={currentList}
+                        />
                     </Tab>
                     <Tab>
-                        <ListMembers />
+                        <ListMembers
+                            closeModal={() => this.props.closeModal()}
+                        />
                     </Tab>
                 </Tabs>
             </Fragment>

@@ -39,6 +39,11 @@ const Task = styled.div`
     ${DeleteIcon} {
         display: none;
     }
+    ${props =>
+        props.checked &&
+        `
+        text-decoration: line-through;
+    `}
     &:hover {
         ${DeleteIcon} {
             display: block;
@@ -123,7 +128,7 @@ export default class Subtasks extends Component {
 
     render() {
         const SortableItem = SortableElement(({ value, sortIndex }) => (
-            <Task>
+            <Task checked={value.isComplete}>
                 <Checkbox
                     type="checkbox"
                     onClick={e => e.stopPropagation()}

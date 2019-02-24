@@ -4,7 +4,7 @@ import { computed } from 'mobx';
 import styled from 'styled-components';
 import AddTask from '../components/addTask';
 import NotificationBanner from '../components/notificationBanner';
-import AllCaughtUpBanner from '../components/allCaughtUpBanner';
+import Banner from '../components/banner';
 import Task from '../components/task';
 import Button from '../components/button';
 import { QUERIES } from '../constants';
@@ -44,13 +44,13 @@ const Container = styled.div`
         props.mobileNavVisible &&
         `
         grid-row: 4;
-        ${AllCaughtUpBanner} {
+        ${Banner} {
             opacity: 0;
         }
     `}
     @media ${QUERIES.medium} {
         grid-row: 2 / 3;
-        ${AllCaughtUpBanner} {
+        ${Banner} {
             opacity: 1;
         }
     }
@@ -145,8 +145,16 @@ class Body extends Component {
         }
     }
 
+    reloadBrowser() {
+        if (window && window.location) {
+            window.location.reload();
+        }
+    }
+
     render() {
+        const hasServerError = this.props.store.hasServerError;
         const showAllCaughtUpBanner =
+            !hasServerError &&
             this.currentList.tasks.length === 0 &&
             (this.currentList.additionalTasks !== 0 ||
                 !this.currentList.completedTasks.find(
@@ -157,9 +165,22 @@ class Body extends Component {
                 mobileNavVisible={this.props.store.modalVisibility.listsView}
             >
                 {this.getNotificationBanner()}
-                <AddTask hidden={this.currentList.type === 'loading'} />
+                <AddTask
+                    hidden={
+                        this.currentList.type === 'loading' || hasServerError
+                    }
+                />
                 {showAllCaughtUpBanner && (
-                    <AllCaughtUpBanner title="You're all caught up!" />
+                    <Banner icon="betterdo" body="You're all caught up!" />
+                )}
+                {hasServerError && (
+                    <Banner
+                        icon="server-error"
+                        title="Oops!"
+                        body="There was an issue connecting to the server."
+                        buttonText="Reload"
+                        buttonAction={this.reloadBrowser}
+                    />
                 )}
                 <SortableList
                     pressDelay={200}
@@ -176,6 +197,7 @@ class Body extends Component {
                 </div>
                 <CompletedTasksButton
                     hidden={
+                        hasServerError ||
                         this.currentList.type === 'loading' ||
                         !this.currentList.additionalTasks ||
                         this.currentList.additionalTasks === 0
