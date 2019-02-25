@@ -2,8 +2,6 @@
  * This file gets merged with 'offline-plugin' in the webpack config. As such,
  * it's good to ensure that any modifications are tested well for mutations.
  */
-console.log('HERE');
-
 self.addEventListener('push', event => {
     let data = {};
     try {
@@ -15,8 +13,6 @@ self.addEventListener('push', event => {
         console.error('Expected JSON, got text');
         return;
     }
-
-    console.log('receivedNotification', data);
     event.waitUntil(
         self.registration.showNotification(data.title, {
             body: data.body,
@@ -31,6 +27,5 @@ self.addEventListener('push', event => {
 });
 
 self.addEventListener('activate', event => {
-    console.log('Activated');
     return event.waitUntil(self.clients.claim()); // immediately control activating sw
 });
