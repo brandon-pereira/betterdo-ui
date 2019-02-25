@@ -6,6 +6,7 @@ class ServiceWorkerRegistrar {
         this.installPrompt = null;
         this.onUpdateAvailableCallbacks = [];
         this.addToHomeScreenAvailableCallbacks = [];
+        this.notificationAccessCallbacks = [];
         this._init();
     }
 
@@ -82,9 +83,11 @@ class ServiceWorkerRegistrar {
         }
     }
 
-    requestNotificationAccess() {
-        console.log('REQUEST');
-        RequestNotificationAccess('1234');
+    async requestNotificationAccess(vapidKey) {
+        console.log('Requesting user notification subscription');
+        const subscription = await RequestNotificationAccess(vapidKey);
+        console.log('Sucessfully got user subscription', subscription);
+        return subscription;
     }
 
     /**

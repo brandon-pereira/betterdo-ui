@@ -44,6 +44,8 @@ class Store {
     @observable
     addToHomeScreenAvailable = false;
 
+    config = {};
+
     constructor() {
         this.server = new Server();
         this.init();
@@ -77,6 +79,7 @@ class Store {
             this.currentList = response.currentList;
             this._updateListInCache(this.currentList._id, this.currentList);
             this.user = response.user;
+            this.config = response.config;
         } catch (err) {
             this.hasServerError = true;
             console.error('Init call failed from server', err);
@@ -101,7 +104,9 @@ class Store {
     }
 
     async requestNotificationAccess() {
-        const subscription = await ServiceWorkerRegistrar.requestNotificationAccess();
+        const subscription = await ServiceWorkerRegistrar.requestNotificationAccess(
+            this.config.vapidKey
+        );
         await this.updateUser({
             pushSubscription: subscription
         });
