@@ -85,7 +85,6 @@ class Store {
     }
 
     async switchLists(listId) {
-        ServiceWorkerRegistrar.requestNotificationAccess();
         // Load cached list till server loads
         const _cachedList = this.lists.find(_list => _list._id === listId);
         if (_cachedList) {
@@ -97,6 +96,15 @@ class Store {
         this._updateListInCache(this.currentList._id, this.currentList);
         this.loading = false;
         this._onListChange();
+
+        this.requestNotificationAccess();
+    }
+
+    async requestNotificationAccess() {
+        const subscription = await ServiceWorkerRegistrar.requestNotificationAccess();
+        await this.updateUser({
+            pushSubscription: subscription
+        });
     }
 
     async loadCompletedTasks(listId) {
