@@ -44,6 +44,9 @@ class Store {
     @observable
     addToHomeScreenAvailable = false;
 
+    @observable
+    notificationStatus = 'UNKNOWN';
+
     config = {};
 
     constructor() {
@@ -56,6 +59,10 @@ class Store {
         ServiceWorkerRegistrar.onUpdateAvailable(() => {
             console.log('Update Available');
             this.appUpdateAvailable = true;
+        });
+
+        ServiceWorkerRegistrar.subscribeToNotificationUpdates(status => {
+            this.notificationStatus = status;
         });
 
         ServiceWorkerRegistrar.onAddToHomeScreenAvailable(bool => {

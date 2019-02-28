@@ -127,6 +127,22 @@ class Body extends Component {
                     }
                 />
             );
+            // here check if any due dates set OR is shared list && pushNotificationAvailable
+        } else if (this.props.store.notificationStatus === 'UNKNOWN') {
+            return (
+                <NotificationBanner
+                    title="Get notified"
+                    description="Enable push notifications so we can notify you when a task is due as well as when a friend updates a shared list."
+                    primaryButtonCopy="Enable"
+                    primaryButtonAction={() =>
+                        this.props.store.requestNotificationAccess()
+                    }
+                    secondaryButtonCopy="Dismiss"
+                    secondaryButtonAction={() => {
+                        this.props.store.pushNotificationsAvailable = false;
+                    }}
+                />
+            );
         } else if (this.props.store.addToHomeScreenAvailable) {
             return (
                 <NotificationBanner

@@ -1,7 +1,8 @@
-import { RequestNotificationAccess } from 'web-pushnotifications/web';
+import { requestNotificationAccess } from 'web-pushnotifications/web';
 
 class ServiceWorkerRegistrar {
     constructor() {
+        this._notificationStatus = 'UNKNOWN';
         this.OfflinePluginRuntime = null;
         this.installPrompt = null;
         this.onUpdateAvailableCallbacks = [];
@@ -34,6 +35,8 @@ class ServiceWorkerRegistrar {
             window.addEventListener('appinstalled', () => {
                 this._whenHomescreenStateChanges(false);
             });
+
+            this.getNotificationStatus();
         }
     }
 
@@ -83,11 +86,38 @@ class ServiceWorkerRegistrar {
         }
     }
 
+    set notificationStatus(status) {
+        console.log(status);
+        this._notificationStatus = status;
+        this.notificationAccessCallbacks.forEach(cb => cb(status));
+    }
+
+    subscribeToNotificationUpdates(cb) {
+        this.notificationAccessCallbacks.push(cb);
+    }
+
+    async getNotificationStatus() {
+        this.notificationStatus = 'DISABLED';
+        if (navigator.serviceWorker) {
+            const reg = await navigator.serviceWorker.ready;
+            const key = await reg.pushManager.getSubscription();
+            console.log(key);
+            const status = key ? 'ENABLED' : 'UNKNOWN';
+            this.notificationStatus = status;
+            return status;
+        }
+    }
+
     async requestNotificationAccess(vapidKey) {
-        console.log('Requesting user notification subscription');
-        const subscription = await RequestNotificationAccess(vapidKey);
-        console.log('Sucessfully got user subscription', subscription);
-        return subscription;
+        console.info('Requesting user notification subscription');
+        const subscription = await requestNotificationAccess(vapidKey);
+        if (subscription) {
+            console.info('Sucessfully got user subscription', subscription);
+            this.notificationStatus = 'ENABLED';
+            return subscription;
+        } else {
+            this.notificationStatus = 'DISABLED';
+        }
     }
 
     /**
