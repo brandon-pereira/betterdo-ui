@@ -1,4 +1,7 @@
-import { requestNotificationAccess } from 'web-pushnotifications/web';
+import {
+    requestNotificationAccess,
+    getNotificationSubscription
+} from 'web-pushnotifications/web';
 
 class ServiceWorkerRegistrar {
     constructor() {
@@ -98,13 +101,10 @@ class ServiceWorkerRegistrar {
 
     async getNotificationStatus() {
         this.notificationStatus = 'DISABLED';
-        if (navigator.serviceWorker) {
-            const reg = await navigator.serviceWorker.ready;
-            const key = await reg.pushManager.getSubscription();
-            const status = key ? 'ENABLED' : 'UNKNOWN';
-            this.notificationStatus = status;
-            return status;
-        }
+        const subscription = await getNotificationSubscription();
+        const status = subscription ? 'ENABLED' : 'UNKNOWN';
+        this.notificationStatus = status;
+        return status;
     }
 
     async requestNotificationAccess(vapidKey) {
