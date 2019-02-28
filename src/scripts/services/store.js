@@ -106,8 +106,6 @@ class Store {
         this._updateListInCache(this.currentList._id, this.currentList);
         this.loading = false;
         this._onListChange();
-
-        this.requestNotificationAccess();
     }
 
     async requestNotificationAccess() {

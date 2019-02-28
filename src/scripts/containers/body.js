@@ -116,45 +116,53 @@ class Body extends Component {
     }
 
     getNotificationBanner() {
-        if (this.props.store.appUpdateAvailable) {
+        const store = this.props.store;
+        let isSharedList = false;
+        let doesListHaveDueDates = false;
+        if (store.currentList.type !== 'loading') {
+            isSharedList = store.currentList.members.length > 1;
+            doesListHaveDueDates = Boolean(
+                store.currentList.tasks.find(task => task.dueDate)
+            );
+        }
+        if (store.appUpdateAvailable) {
             return (
                 <NotificationBanner
                     title="App Update Available"
                     description="Update to get the most out of your BetterDo experience."
                     primaryButtonCopy="Update"
-                    primaryButtonAction={() =>
-                        this.props.store.applyAppUpdate()
-                    }
+                    primaryButtonAction={() => store.applyAppUpdate()}
                 />
             );
             // here check if any due dates set OR is shared list && pushNotificationAvailable
-        } else if (this.props.store.notificationStatus === 'UNKNOWN') {
+        } else if (
+            store.notificationStatus === 'UNKNOWN' &&
+            (isSharedList || doesListHaveDueDates)
+        ) {
             return (
                 <NotificationBanner
                     title="Get notified"
                     description="Enable push notifications so we can notify you when a task is due as well as when a friend updates a shared list."
                     primaryButtonCopy="Enable"
                     primaryButtonAction={() =>
-                        this.props.store.requestNotificationAccess()
+                        store.requestNotificationAccess()
                     }
                     secondaryButtonCopy="Dismiss"
                     secondaryButtonAction={() => {
-                        this.props.store.pushNotificationsAvailable = false;
+                        store.pushNotificationsAvailable = false;
                     }}
                 />
             );
-        } else if (this.props.store.addToHomeScreenAvailable) {
+        } else if (store.addToHomeScreenAvailable) {
             return (
                 <NotificationBanner
                     title="Install App"
                     description="Install our application to more quickly access your tasks."
                     primaryButtonCopy="Install"
-                    primaryButtonAction={() =>
-                        this.props.store.addToHomeScreen()
-                    }
+                    primaryButtonAction={() => store.addToHomeScreen()}
                     secondaryButtonCopy="Dismiss"
                     secondaryButtonAction={() => {
-                        this.props.store.addToHomeScreenAvailable = false;
+                        store.addToHomeScreenAvailable = false;
                     }}
                 />
             );

@@ -101,7 +101,6 @@ class ServiceWorkerRegistrar {
         if (navigator.serviceWorker) {
             const reg = await navigator.serviceWorker.ready;
             const key = await reg.pushManager.getSubscription();
-            console.log(key);
             const status = key ? 'ENABLED' : 'UNKNOWN';
             this.notificationStatus = status;
             return status;
