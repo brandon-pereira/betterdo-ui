@@ -90,7 +90,6 @@ class ServiceWorkerRegistrar {
     }
 
     set notificationStatus(status) {
-        console.log(status);
         this._notificationStatus = status;
         this.notificationAccessCallbacks.forEach(cb => cb(status));
     }

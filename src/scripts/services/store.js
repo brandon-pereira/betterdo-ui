@@ -127,7 +127,6 @@ class Store {
 
     async updateTask(taskId, updatedProps) {
         this.loading = true;
-        console.info('Updated Task', updatedProps);
         const modifiedComplete = typeof updatedProps.isCompleted === 'boolean';
         this._updateTask(taskId, updatedProps, { merge: true });
         const updatedTask = await this.server.updateTask(taskId, updatedProps);
