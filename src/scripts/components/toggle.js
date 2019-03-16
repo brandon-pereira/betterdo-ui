@@ -12,6 +12,11 @@ const Slider = styled.div`
     background-color: ${COLORS.red};
     transition: 0.4s;
     border-radius: 34px;
+    ${({ disabled }) =>
+        disabled &&
+        `
+        background-color: #ccc !important;
+    `}
     &:before {
         position: absolute;
         content: '';
@@ -30,6 +35,11 @@ const Switch = styled.label`
     width: 60px;
     height: 34px;
     outline: none;
+    ${({ disabled }) =>
+        disabled &&
+        `
+        opacity: 0.7;
+    `}
     input {
         position: absolute;
         top: -99999px;
@@ -63,13 +73,14 @@ class Toggle extends Component {
 
     render() {
         return (
-            <Switch>
+            <Switch disabled={this.props.disabled}>
                 <input
                     type="checkbox"
                     checked={this.state.checked}
                     onChange={this.handleChange}
+                    disabled={this.props.disabled}
                 />
-                <Slider />
+                <Slider disabled={this.props.disabled} />
             </Switch>
         );
     }
