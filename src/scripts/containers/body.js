@@ -136,7 +136,9 @@ class Body extends Component {
             );
             // here check if any due dates set OR is shared list && pushNotificationAvailable
         } else if (
+            !localStorage.getItem('banners.pushDisabled') &&
             store.notificationStatus === 'UNKNOWN' &&
+            (store.user && store.user.isPushEnabled) &&
             (isSharedList || doesListHaveDueDates)
         ) {
             return (
@@ -149,11 +151,15 @@ class Body extends Component {
                     }
                     secondaryButtonCopy="Dismiss"
                     secondaryButtonAction={() => {
-                        store.pushNotificationsAvailable = false;
+                        localStorage.setItem('banners.pushDisabled', true);
+                        this.setState({});
                     }}
                 />
             );
-        } else if (store.addToHomeScreenAvailable) {
+        } else if (
+            !localStorage.getItem('banners.a2hDisabled') &&
+            store.addToHomeScreenAvailable
+        ) {
             return (
                 <NotificationBanner
                     title="Install App"
@@ -162,7 +168,8 @@ class Body extends Component {
                     primaryButtonAction={() => store.addToHomeScreen()}
                     secondaryButtonCopy="Dismiss"
                     secondaryButtonAction={() => {
-                        store.addToHomeScreenAvailable = false;
+                        localStorage.setItem('banners.a2hDisabled', true);
+                        this.setState({});
                     }}
                 />
             );
