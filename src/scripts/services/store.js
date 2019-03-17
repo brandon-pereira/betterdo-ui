@@ -45,7 +45,7 @@ class Store {
     addToHomeScreenAvailable = false;
 
     @observable
-    notificationStatus = 'UNKNOWN';
+    notificationStatus = 'DISABLED';
 
     config = {};
 
