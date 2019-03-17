@@ -32,7 +32,6 @@ const getPlugins = () => {
             externals: ['../', '../manifest.json']
         })
     );
-    // plugins.push(new webpack.optimize.ModuleConcatenationPlugin()); // scope hoisting
     // }
 
     return plugins;
