@@ -59,6 +59,42 @@ self.addEventListener('activate', event => {
     return event.waitUntil(self.clients.claim()); // immediately control activating sw
 });
 
+self.onnotificationclick = event => {
+    const notification = event.notification;
+    const clients = self.clients;
+    let url = event.notification.data.url;
+    if (!url) {
+        url = '/';
+    }
+    // reach router uses hash
+    if (url !== '/' && !url.startsWith('/#')) {
+        url = `/#${url}`;
+    }
+    notification.close();
+
+    // This looks to see if the current is already open and
+    // focuses if it is
+    event.waitUntil(
+        clients
+            .matchAll({
+                type: 'window'
+            })
+            .then(clientList => {
+                const openClient = clientList.find(client => {
+                    if (url === '/') {
+                        return true;
+                    }
+                    return client.url.endsWith(url);
+                });
+                if (openClient) {
+                    openClient.focus();
+                } else {
+                    clients.openWindow(url);
+                }
+            })
+    );
+};
+
 function getNotificationsByTag(tag) {
     return self.registration.getNotifications({ tag });
 }
