@@ -18,9 +18,12 @@ self.addEventListener('push', event => {
         console.error('Expected JSON, got text');
         return;
     }
-    // we split the tag by ":" because we pass identifiers after colon
-    const createMultiMessage =
-        multiReplyResponses[notification.tag.split(':')[0]];
+    let createMultiMessage;
+    if (notification.tag) {
+        // we split the tag by ":" because we pass identifiers after colon
+        createMultiMessage =
+            multiReplyResponses[notification.tag.split(':')[0]];
+    }
     event.waitUntil(
         getNotificationsByTag(notification.tag)
             .then(([oldNotification]) => {
