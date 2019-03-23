@@ -1,7 +1,7 @@
 import {
     requestNotificationAccess,
     getNotificationSubscription
-} from 'web-pushnotifications/web';
+} from 'web-notifier/web';
 
 class ServiceWorkerRegistrar {
     constructor() {
