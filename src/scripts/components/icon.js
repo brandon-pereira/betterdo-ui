@@ -4,13 +4,13 @@ import styled from 'styled-components';
 const IconContainer = styled.div`
     height: ${props => props.size || '1rem'};
     width: ${props => props.size || '1rem'};
-    cursor: ${props => (props.onClick ? 'pointer' : 'default')}
+    cursor: ${props => (props.onClick ? 'pointer' : 'default')};
     position: relative;
     svg {
         position: absolute;
         left: 0;
         top: 0;
-        fill: ${props => props.color || '#000'}
+        fill: ${props => props.color || '#000'};
         height: 100%;
         width: 100%;
     }
@@ -24,11 +24,18 @@ class Icon extends Component {
     }
 
     async componentDidMount() {
+        this._isMounted = true;
         let icon = await import(`../../svgs/${this.props.icon}.svg`);
         icon = icon.default;
-        this.setState({
-            icon
-        });
+        if (this._isMounted) {
+            this.setState({
+                icon
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     render() {

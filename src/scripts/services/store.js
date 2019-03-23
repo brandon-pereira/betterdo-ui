@@ -44,6 +44,11 @@ class Store {
     @observable
     addToHomeScreenAvailable = false;
 
+    @observable
+    notificationStatus = 'DISABLED';
+
+    config = {};
+
     constructor() {
         this.server = new Server();
         this.init();
@@ -54,6 +59,10 @@ class Store {
         ServiceWorkerRegistrar.onUpdateAvailable(() => {
             console.log('Update Available');
             this.appUpdateAvailable = true;
+        });
+
+        ServiceWorkerRegistrar.subscribeToNotificationUpdates(status => {
+            this.notificationStatus = status;
         });
 
         ServiceWorkerRegistrar.onAddToHomeScreenAvailable(bool => {
@@ -77,6 +86,7 @@ class Store {
             this.currentList = response.currentList;
             this._updateListInCache(this.currentList._id, this.currentList);
             this.user = response.user;
+            this.config = response.config;
         } catch (err) {
             this.hasServerError = true;
             console.error('Init call failed from server', err);
@@ -98,6 +108,15 @@ class Store {
         this._onListChange();
     }
 
+    async requestNotificationAccess() {
+        const subscription = await ServiceWorkerRegistrar.requestNotificationAccess(
+            this.config.vapidKey
+        );
+        await this.updateUser({
+            pushSubscription: subscription
+        });
+    }
+
     async loadCompletedTasks(listId) {
         const list = await this.server.getList(listId, {
             includeCompleted: true
@@ -108,7 +127,6 @@ class Store {
 
     async updateTask(taskId, updatedProps) {
         this.loading = true;
-        console.info('Updated Task', updatedProps);
         const modifiedComplete = typeof updatedProps.isCompleted === 'boolean';
         this._updateTask(taskId, updatedProps, { merge: true });
         const updatedTask = await this.server.updateTask(taskId, updatedProps);
