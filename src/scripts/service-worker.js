@@ -74,12 +74,14 @@ self.onnotificationclick = event => {
             })
             .then(clientList => {
                 const openClient = clientList.find(client => {
+                    console.log(url);
                     if (url.startsWith('https://branclon.com')) {
                         url = url.split('https://branclon.com')[1];
                     }
                     if (url === '/') {
                         return true;
                     }
+                    console.log(client.url);
                     return client.url.endsWith(url);
                 });
                 if (openClient) {
