@@ -24,13 +24,14 @@ export default class addTask extends Component {
 
     async createTask(e) {
         e.preventDefault();
-        if (!this.state.value) {
+        const title = this.state.value;
+        if (!title) {
             this.setState({ isInvalid: true });
             return;
         }
-        this.setState({ isInvalid: false, submitting: true });
-        await this.props.store.createTask(this.state.value);
-        this.setState({ isInvalid: false, submitting: false, value: '' });
+        this.setState({ isInvalid: false, submitting: true, value: '' });
+        await this.props.store.createTask(title);
+        this.setState({ isInvalid: false, submitting: false });
     }
 
     updateInputValue(value) {
