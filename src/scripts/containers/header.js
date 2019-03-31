@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
 import Button from '../components/button';
+import Icon from '../components/icon';
 import Loader from '../components/loader';
 import Hamburger from '../components/hamburger';
 import { QUERIES } from '../constants';
@@ -23,14 +24,6 @@ const Container = styled.header`
     ${Loader} {
         filter: drop-shadow(1px 1px rgba(0,0,0,.5))
     }
-    ${Button} {
-        margin-left: 0.5rem;
-        font-size: 0.8rem;
-        padding: 0.8rem;
-        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5),
-            inset 0 2px rgba(255, 255, 255, 0.1);
-        background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3));
-    }
     ${props =>
         props.mobileNavVisible &&
         `
@@ -42,6 +35,15 @@ const Container = styled.header`
             display: none;
         }
     }
+`;
+
+const SettingsButton = styled(Button)`
+    margin-left: 0.35rem;
+    border-radius: 20px;
+    user-select: none;
+    padding: 0.8rem 1.1rem;
+    box-shadow: 0px 0px 0px 1px inset rgba(0, 0, 0, 0.8),
+        0px 2px inset rgba(255, 255, 255, 0.1), 0 1px rgba(255, 255, 255, 0.3);
 `;
 const Title = styled.h2`
     flex: 1;
@@ -57,7 +59,7 @@ const Title = styled.h2`
 
 @inject('store')
 @observer
-export default class Header extends Component {
+class Header extends Component {
     render() {
         const store = this.props.store;
         return (
@@ -74,14 +76,16 @@ export default class Header extends Component {
                 />
                 <Loader loading={this.props.store.loading} size="2rem" />
                 <Title>{store.currentList.title}</Title>
-                <Button
+                <SettingsButton
                     color="rgba(0,0,0,.2)"
                     hidden={store.currentList.type !== 'default'}
                     onClick={() => (store.modalVisibility.editList = true)}
                 >
-                    Settings
-                </Button>
+                    <Icon icon="settings" color="#fff" />
+                </SettingsButton>
             </Container>
         );
     }
 }
+
+export default Header;
