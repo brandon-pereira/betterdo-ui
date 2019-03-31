@@ -44,7 +44,7 @@ self.addEventListener('push', event => {
             .then(() => {
                 // Send new notification
                 const { title, url, data, ...details } = notification;
-                self.registration.showNotification(title, {
+                return self.registration.showNotification(title, {
                     ...details,
                     data: {
                         url,
@@ -63,13 +63,6 @@ self.onnotificationclick = event => {
     const notification = event.notification;
     const clients = self.clients;
     let url = event.notification.data.url;
-    if (!url) {
-        url = '/';
-    }
-    // reach router uses hash
-    if (url !== '/' && !url.startsWith('/#')) {
-        url = `/#${url}`;
-    }
     notification.close();
 
     // This looks to see if the current is already open and
@@ -81,6 +74,9 @@ self.onnotificationclick = event => {
             })
             .then(clientList => {
                 const openClient = clientList.find(client => {
+                    if (url.startsWith('https://branclon.com')) {
+                        url = url.split('https://branclon.com')[1];
+                    }
                     if (url === '/') {
                         return true;
                     }
