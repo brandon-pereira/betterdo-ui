@@ -220,10 +220,14 @@ class Store {
     async deleteTask(taskId) {
         this.loading = true;
         await this.server.deleteTask(taskId);
-        const removedIndex = this.currentList.tasks.findIndex(
-            curr => curr._id === taskId
-        );
-        this.currentList.tasks.splice(removedIndex, 1);
+        const findById = curr => curr._id === taskId;
+        let removedIndex = this.currentList.tasks.findIndex(findById);
+        if (removedIndex !== -1) {
+            this.currentList.tasks.splice(removedIndex, 1);
+        } else {
+            removedIndex = this.currentList.completedTasks.findIndex(findById);
+            this.currentList.completedTasks.splice(removedIndex, 1);
+        }
         this.currentTask = null;
         this.loading = false;
     }
