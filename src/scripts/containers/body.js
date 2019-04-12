@@ -115,6 +115,25 @@ class Body extends Component {
         }
     }
 
+    componentDidMount() {
+        let lastRefresh = new Date();
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                const now = new Date();
+                var timeDiff = now - lastRefresh; //in ms
+                // strip the ms
+                if (!document.hidden && timeDiff >= 5 * 1000) {
+                    lastRefresh = new Date();
+                    this.props.store.reload();
+                }
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('visibilitychange');
+    }
+
     getNotificationBanner() {
         const store = this.props.store;
         let isSharedList = false;
@@ -213,33 +232,39 @@ class Body extends Component {
                         buttonAction={this.reloadBrowser}
                     />
                 )}
-                <SortableList
-                    pressDelay={200}
-                    items={this.currentList.tasks}
-                    onSortEnd={this.onSortEnd.bind(this)}
-                />
-                <div>
-                    {this.currentList.completedTasks.map((task, index) => {
-                        if (typeof task === 'object') {
-                            return <Task key={index} task={task} />;
-                        }
-                        return null;
-                    })}
-                </div>
-                <CompletedTasksButton
-                    hidden={
-                        hasServerError ||
-                        this.currentList.type === 'loading' ||
-                        !this.currentList.additionalTasks ||
-                        this.currentList.additionalTasks === 0
-                    }
-                    hasCaughtUpBanner={showAllCaughtUpBanner}
-                    loading={this.state.loadingCompletedTasks}
-                    color="#999999"
-                    onClick={this.loadCompletedTasks.bind(this)}
-                >
-                    {this.currentList.additionalTasks} completed tasks
-                </CompletedTasksButton>
+                {!hasServerError && (
+                    <>
+                        <SortableList
+                            pressDelay={200}
+                            items={this.currentList.tasks}
+                            onSortEnd={this.onSortEnd.bind(this)}
+                        />
+                        <div>
+                            {this.currentList.completedTasks.map(
+                                (task, index) => {
+                                    if (typeof task === 'object') {
+                                        return <Task key={index} task={task} />;
+                                    }
+                                    return null;
+                                }
+                            )}
+                        </div>
+                        <CompletedTasksButton
+                            hidden={
+                                hasServerError ||
+                                this.currentList.type === 'loading' ||
+                                !this.currentList.additionalTasks ||
+                                this.currentList.additionalTasks === 0
+                            }
+                            hasCaughtUpBanner={showAllCaughtUpBanner}
+                            loading={this.state.loadingCompletedTasks}
+                            color="#999999"
+                            onClick={this.loadCompletedTasks.bind(this)}
+                        >
+                            {this.currentList.additionalTasks} completed tasks
+                        </CompletedTasksButton>
+                    </>
+                )}
             </Container>
         );
     }

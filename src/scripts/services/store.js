@@ -87,6 +87,7 @@ class Store {
             this._updateListInCache(this.currentList._id, this.currentList);
             this.user = response.user;
             this.config = response.config;
+            this.hasServerError = false;
         } catch (err) {
             this.hasServerError = true;
             console.error('Init call failed from server', err);
