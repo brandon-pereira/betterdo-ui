@@ -106,7 +106,7 @@ class EditTask extends Component {
 
     get lists() {
         return this.props.store.lists
-            .filter(list => list.type === 'default')
+            .filter(list => list.type === 'default' || list.type === 'inbox')
             .map(list => ({
                 value: list._id,
                 label: list.title
