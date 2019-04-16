@@ -5,7 +5,13 @@ import { ThemeProvider } from 'styled-components';
 
 @inject('store')
 @observer
-export default class AddListModalContainer extends Component {
+class AddListModalContainer extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            hasUnsavedChanges: false
+        };
+    }
     get visible() {
         return this.props.store.currentTask;
     }
@@ -23,8 +29,25 @@ export default class AddListModalContainer extends Component {
         };
     }
 
+    setUnsavedChanges(bool) {
+        this.setState({ hasUnsavedChanges: bool });
+    }
+
     close() {
         this.props.store.currentTask = null;
+        this.setState({ hasUnsavedChanges: false });
+    }
+
+    canCloseModal() {
+        if (!this.state.hasUnsavedChanges) {
+            return true;
+        } else {
+            return Boolean(
+                confirm(
+                    `You've made changes that aren't saved. Are you sure you want to discard them?`
+                )
+            );
+        }
     }
 
     render() {
@@ -32,10 +55,16 @@ export default class AddListModalContainer extends Component {
             <ThemeProvider theme={this.theme}>
                 <Modal
                     onRequestClose={this.close.bind(this)}
+                    canCloseModal={this.canCloseModal.bind(this)}
                     visible={this.visible}
+                    childProp_setUnsavedChanges={this.setUnsavedChanges.bind(
+                        this
+                    )}
                     asyncContent={() => import('./content')}
                 />
             </ThemeProvider>
         );
     }
 }
+
+export default AddListModalContainer;

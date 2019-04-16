@@ -95,10 +95,10 @@ export default class Modal extends Component {
                     ? this.props.canCloseModal()
                     : true;
             if (canCloseModal) {
-            this.setState({ content: null });
-            this.props.onRequestClose();
+                this.setState({ content: null });
+                this.props.onRequestClose();
+            }
         }
-    }
     }
 
     componentDidMount() {
@@ -158,7 +158,20 @@ export default class Modal extends Component {
                 </LoaderContainer>
             );
         } else if (this.state.content) {
-            return <this.state.content closeModal={e => this.closeModal(e)} />;
+            const childrenProps = {};
+            Object.keys(this.props).forEach(key => {
+                if (key.startsWith('childProp_')) {
+                    childrenProps[key.replace('childProp_', '')] = this.props[
+                        key
+                    ];
+                }
+            });
+            return (
+                <this.state.content
+                    {...childrenProps}
+                    closeModal={e => this.closeModal(e)}
+                />
+            );
         } else {
             return this.props.children;
         }

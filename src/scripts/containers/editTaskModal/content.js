@@ -164,12 +164,14 @@ class EditTask extends Component {
             isSaving: true
         });
         await this.props.store.updateTask(this.task._id, updatedProperties);
+        this.props.setUnsavedChanges(false);
         this.setState({
             isSaving: false
         });
     }
 
     onChange(e) {
+        this.props.setUnsavedChanges(true);
         this.setState({ [e.target.id]: e.target.value });
     }
 
