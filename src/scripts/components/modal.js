@@ -90,9 +90,15 @@ export default class Modal extends Component {
     closeModal(e) {
         const isBackgroundClick = !e || e.currentTarget === e.target;
         if (isBackgroundClick) {
+            const canCloseModal =
+                typeof this.props.canCloseModal === 'function'
+                    ? this.props.canCloseModal()
+                    : true;
+            if (canCloseModal) {
             this.setState({ content: null });
             this.props.onRequestClose();
         }
+    }
     }
 
     componentDidMount() {
