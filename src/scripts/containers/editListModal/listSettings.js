@@ -17,16 +17,28 @@ const ButtonContainer = styled.div`
 class ListSettings extends Component {
     constructor(props) {
         super(props);
-        const currentList = this.props.store.currentList;
         this.state = {
             isSaving: false,
             isDeleting: false,
             isInvalid: false,
             serverError: null,
-            members: currentList.members,
-            title: currentList.title,
-            color: currentList.color
+            _id: props.currentList._id,
+            members: props.currentList.members,
+            title: props.currentList.title,
+            color: props.currentList.color
         };
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        if (props.currentList._id !== state._id) {
+            return {
+                _id: props.currentList._id,
+                members: props.currentList.members,
+                title: props.currentList.title,
+                color: props.currentList.color
+            };
+        }
+        return null;
     }
 
     async deleteList() {

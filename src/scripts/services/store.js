@@ -212,6 +212,7 @@ class Store {
         await this.server.deleteList(listId);
         const removedIndex = this.lists.findIndex(curr => curr._id === listId);
         this.lists.splice(removedIndex, 1);
+        this.modalVisibility.editList = false;
         if (this.currentList._id === listId) {
             await this.switchLists('inbox');
         }
