@@ -21,8 +21,7 @@ const Container = styled.div`
     width: 2rem;
     cursor: pointer;
     filter: drop-shadow(0 1px rgba(0, 0, 0, 0.5));
-    display: flex;
-    opacity: ${props => (props.hidden ? '0' : '1')};
+    display: ${props => (props.hidden ? 'none' : 'flex')};
     ${props =>
         props.open &&
         css`

@@ -17,20 +17,22 @@ const getPlugins = () => {
 
     if (!config.isProduction) {
         plugins.push(new webpack.SourceMapDevToolPlugin());
-    } else {
-        plugins.push(
-            new OfflinePlugin({
-                ServiceWorker: {
-                    output: '../sw.js',
-                    events: true,
-                    publicPath: '/betterdo/app/sw.js'
-                },
-                publicPath: '/betterdo/app/scripts/',
-                externals: ['../', '../manifest.json']
-            })
-        );
-        plugins.push(new webpack.optimize.ModuleConcatenationPlugin()); // scope hoisting
     }
+    // } else {
+    const publicPath = config.isProduction ? `/betterdo/app/` : '';
+    plugins.push(
+        new OfflinePlugin({
+            ServiceWorker: {
+                entry: './src/scripts/service-worker.js',
+                output: '../sw.js',
+                events: true,
+                publicPath: `${publicPath}sw.js`
+            },
+            publicPath: `${publicPath}scripts/`,
+            externals: ['../', '../manifest.json']
+        })
+    );
+    // }
 
     return plugins;
 };

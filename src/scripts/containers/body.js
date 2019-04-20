@@ -4,7 +4,7 @@ import { computed } from 'mobx';
 import styled from 'styled-components';
 import AddTask from '../components/addTask';
 import NotificationBanner from '../components/notificationBanner';
-import AllCaughtUpBanner from '../components/allCaughtUpBanner';
+import Banner from '../components/banner';
 import Task from '../components/task';
 import Button from '../components/button';
 import { QUERIES } from '../constants';
@@ -44,13 +44,13 @@ const Container = styled.div`
         props.mobileNavVisible &&
         `
         grid-row: 4;
-        ${AllCaughtUpBanner} {
+        ${Banner} {
             opacity: 0;
         }
     `}
     @media ${QUERIES.medium} {
         grid-row: 2 / 3;
-        ${AllCaughtUpBanner} {
+        ${Banner} {
             opacity: 1;
         }
     }
@@ -115,38 +115,96 @@ class Body extends Component {
         }
     }
 
+    componentDidMount() {
+        let lastRefresh = new Date();
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                const now = new Date();
+                var timeDiff = now - lastRefresh; //in ms
+                // strip the ms
+                if (!document.hidden && timeDiff >= 5 * 1000) {
+                    lastRefresh = new Date();
+                    this.props.store.reload();
+                }
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('visibilitychange');
+    }
+
     getNotificationBanner() {
-        if (this.props.store.appUpdateAvailable) {
+        const store = this.props.store;
+        let isSharedList = false;
+        let doesListHaveDueDates = false;
+        if (store.currentList.type !== 'loading') {
+            isSharedList = store.currentList.members.length > 1;
+            doesListHaveDueDates = Boolean(
+                store.currentList.tasks.find(task => task.dueDate)
+            );
+        }
+        if (store.appUpdateAvailable) {
             return (
                 <NotificationBanner
                     title="App Update Available"
                     description="Update to get the most out of your BetterDo experience."
                     primaryButtonCopy="Update"
-                    primaryButtonAction={() =>
-                        this.props.store.applyAppUpdate()
-                    }
+                    primaryButtonAction={() => store.applyAppUpdate()}
                 />
             );
-        } else if (this.props.store.addToHomeScreenAvailable) {
+            // here check if any due dates set OR is shared list && pushNotificationAvailable
+        } else if (
+            !localStorage.getItem('banners.pushDisabled') &&
+            store.notificationStatus === 'UNKNOWN' &&
+            (store.user && store.user.isPushEnabled) &&
+            (isSharedList || doesListHaveDueDates)
+        ) {
+            return (
+                <NotificationBanner
+                    title="Get notified"
+                    description="Enable push notifications so we can notify you when a task is due as well as when a friend updates a shared list."
+                    primaryButtonCopy="Enable"
+                    primaryButtonAction={() =>
+                        store.requestNotificationAccess()
+                    }
+                    secondaryButtonCopy="Dismiss"
+                    secondaryButtonAction={() => {
+                        localStorage.setItem('banners.pushDisabled', true);
+                        this.setState({});
+                    }}
+                />
+            );
+        } else if (
+            !localStorage.getItem('banners.a2hDisabled') &&
+            store.addToHomeScreenAvailable
+        ) {
             return (
                 <NotificationBanner
                     title="Install App"
                     description="Install our application to more quickly access your tasks."
                     primaryButtonCopy="Install"
-                    primaryButtonAction={() =>
-                        this.props.store.addToHomeScreen()
-                    }
+                    primaryButtonAction={() => store.addToHomeScreen()}
                     secondaryButtonCopy="Dismiss"
                     secondaryButtonAction={() => {
-                        this.props.store.addToHomeScreenAvailable = false;
+                        localStorage.setItem('banners.a2hDisabled', true);
+                        this.setState({});
                     }}
                 />
             );
         }
     }
 
+    reloadBrowser() {
+        if (window && window.location) {
+            window.location.reload();
+        }
+    }
+
     render() {
+        const hasServerError = this.props.store.hasServerError;
         const showAllCaughtUpBanner =
+            !hasServerError &&
             this.currentList.tasks.length === 0 &&
             (this.currentList.additionalTasks !== 0 ||
                 !this.currentList.completedTasks.find(
@@ -157,36 +215,56 @@ class Body extends Component {
                 mobileNavVisible={this.props.store.modalVisibility.listsView}
             >
                 {this.getNotificationBanner()}
-                <AddTask hidden={this.currentList.type === 'loading'} />
-                {showAllCaughtUpBanner && (
-                    <AllCaughtUpBanner title="You're all caught up!" />
-                )}
-                <SortableList
-                    pressDelay={200}
-                    items={this.currentList.tasks}
-                    onSortEnd={this.onSortEnd.bind(this)}
-                />
-                <div>
-                    {this.currentList.completedTasks.map((task, index) => {
-                        if (typeof task === 'object') {
-                            return <Task key={index} task={task} />;
-                        }
-                        return null;
-                    })}
-                </div>
-                <CompletedTasksButton
+                <AddTask
                     hidden={
-                        this.currentList.type === 'loading' ||
-                        !this.currentList.additionalTasks ||
-                        this.currentList.additionalTasks === 0
+                        this.currentList.type === 'loading' || hasServerError
                     }
-                    hasCaughtUpBanner={showAllCaughtUpBanner}
-                    loading={this.state.loadingCompletedTasks}
-                    color="#999999"
-                    onClick={this.loadCompletedTasks.bind(this)}
-                >
-                    {this.currentList.additionalTasks} completed tasks
-                </CompletedTasksButton>
+                />
+                {showAllCaughtUpBanner && (
+                    <Banner icon="betterdo" body="You're all caught up!" />
+                )}
+                {hasServerError && (
+                    <Banner
+                        icon="server-error"
+                        title="Oops!"
+                        body="There was an issue connecting to the server."
+                        buttonText="Reload"
+                        buttonAction={this.reloadBrowser}
+                    />
+                )}
+                {!hasServerError && (
+                    <>
+                        <SortableList
+                            pressDelay={200}
+                            items={this.currentList.tasks}
+                            onSortEnd={this.onSortEnd.bind(this)}
+                        />
+                        <div>
+                            {this.currentList.completedTasks.map(
+                                (task, index) => {
+                                    if (typeof task === 'object') {
+                                        return <Task key={index} task={task} />;
+                                    }
+                                    return null;
+                                }
+                            )}
+                        </div>
+                        <CompletedTasksButton
+                            hidden={
+                                hasServerError ||
+                                this.currentList.type === 'loading' ||
+                                !this.currentList.additionalTasks ||
+                                this.currentList.additionalTasks === 0
+                            }
+                            hasCaughtUpBanner={showAllCaughtUpBanner}
+                            loading={this.state.loadingCompletedTasks}
+                            color="#999999"
+                            onClick={this.loadCompletedTasks.bind(this)}
+                        >
+                            {this.currentList.additionalTasks} completed tasks
+                        </CompletedTasksButton>
+                    </>
+                )}
             </Container>
         );
     }

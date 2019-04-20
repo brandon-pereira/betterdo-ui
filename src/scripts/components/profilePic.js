@@ -27,8 +27,9 @@ const Img = styled.img`
 `;
 
 const ProfilePicture = ({ user, ...props }) => {
-    const firstName = user ? user.firstName : 'A';
-    const lastName = user ? user.lastName : 'A';
+    user = user || {};
+    const firstName = user.firstName || 'A';
+    const lastName = user.lastName || 'A';
     const initials = firstName.charAt(0) + lastName.charAt(0);
     return (
         <Container {...props}>

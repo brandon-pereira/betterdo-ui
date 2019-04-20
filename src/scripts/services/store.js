@@ -36,10 +36,18 @@ class Store {
     };
 
     @observable
+    hasServerError = false;
+
+    @observable
     appUpdateAvailable = false;
 
     @observable
     addToHomeScreenAvailable = false;
+
+    @observable
+    notificationStatus = 'DISABLED';
+
+    config = {};
 
     constructor() {
         this.server = new Server();
@@ -51,6 +59,10 @@ class Store {
         ServiceWorkerRegistrar.onUpdateAvailable(() => {
             console.log('Update Available');
             this.appUpdateAvailable = true;
+        });
+
+        ServiceWorkerRegistrar.subscribeToNotificationUpdates(status => {
+            this.notificationStatus = status;
         });
 
         ServiceWorkerRegistrar.onAddToHomeScreenAvailable(bool => {
@@ -74,7 +86,10 @@ class Store {
             this.currentList = response.currentList;
             this._updateListInCache(this.currentList._id, this.currentList);
             this.user = response.user;
+            this.config = response.config;
+            this.hasServerError = false;
         } catch (err) {
+            this.hasServerError = true;
             console.error('Init call failed from server', err);
         }
         this.loading = false;
@@ -94,6 +109,15 @@ class Store {
         this._onListChange();
     }
 
+    async requestNotificationAccess() {
+        const subscription = await ServiceWorkerRegistrar.requestNotificationAccess(
+            this.config.vapidKey
+        );
+        await this.updateUser({
+            pushSubscription: subscription
+        });
+    }
+
     async loadCompletedTasks(listId) {
         const list = await this.server.getList(listId, {
             includeCompleted: true
@@ -104,7 +128,6 @@ class Store {
 
     async updateTask(taskId, updatedProps) {
         this.loading = true;
-        console.info('Updated Task', updatedProps);
         const modifiedComplete = typeof updatedProps.isCompleted === 'boolean';
         this._updateTask(taskId, updatedProps, { merge: true });
         const updatedTask = await this.server.updateTask(taskId, updatedProps);
@@ -189,6 +212,7 @@ class Store {
         await this.server.deleteList(listId);
         const removedIndex = this.lists.findIndex(curr => curr._id === listId);
         this.lists.splice(removedIndex, 1);
+        this.modalVisibility.editList = false;
         if (this.currentList._id === listId) {
             await this.switchLists('inbox');
         }
@@ -198,10 +222,14 @@ class Store {
     async deleteTask(taskId) {
         this.loading = true;
         await this.server.deleteTask(taskId);
-        const removedIndex = this.currentList.tasks.findIndex(
-            curr => curr._id === taskId
-        );
-        this.currentList.tasks.splice(removedIndex, 1);
+        const findById = curr => curr._id === taskId;
+        let removedIndex = this.currentList.tasks.findIndex(findById);
+        if (removedIndex !== -1) {
+            this.currentList.tasks.splice(removedIndex, 1);
+        } else {
+            removedIndex = this.currentList.completedTasks.findIndex(findById);
+            this.currentList.completedTasks.splice(removedIndex, 1);
+        }
         this.currentTask = null;
         this.loading = false;
     }

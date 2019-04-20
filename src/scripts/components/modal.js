@@ -19,6 +19,7 @@ const Overlay = styled.div`
         pointer-events: none;
     `}
 `;
+const ModalContent = styled.div``;
 const _Modal = styled.div`
     position: absolute;
     top: ${props => props.theme.top || '50%'};
@@ -26,22 +27,32 @@ const _Modal = styled.div`
     bottom: ${props => props.theme.bottom || 'auto'};
     right: ${props => props.theme.right || 'auto'};
     transform:  ${props =>
-        props.theme.transformFrom || 'scale(0) translate(-50%, -50%)'};
-    transform-origin: top left;
+        props.theme.transformFrom || 'translate(-50%, -50%)'};
+    transform-origin: center;
     transition: transform 0.2s;
-    background: ${props => props.theme.background || '#fff'};
+    backface-visibility: hidden;
     width: ${props => props.theme.mobileWidth || '100%'};
     max-width: 500px;
-    padding: 1rem;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
-    box-sizing: border-box;
-    overflow-y: scroll;
-    max-height: 100vh;
+    ${ModalContent} {
+        box-sizing: border-box;
+        transition: all .2s;
+        transform: ${props =>
+            !props.theme.transformFrom ? 'scale(0)' : 'none'};
+        background: ${props => props.theme.background || '#fff'};
+        padding: 1rem;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+        overflow-y: scroll;
+        max-height: 100vh;
+        width: 100%;
+        height: 100%;
+    }
     ${props =>
         props.visible &&
         `
-        transform: ${props.theme.transformTo ||
-            'scale(1) translate(-50%, -50%)'};
+        transform: ${props.theme.transformTo || 'translate(-50%, -50%)'};
+        ${ModalContent} {
+            transform: scale(1);
+        }
     `}
     @media ${QUERIES.medium} {
         width: 60%;
@@ -57,7 +68,7 @@ const ModalClose = styled(Icon)`
     position: fixed;
     top: 1rem;
     right: 1rem;
-    z-index: 1;
+    z-index: 2;
     filter: drop-shadow(0 1px #555);
 `;
 
@@ -79,8 +90,14 @@ export default class Modal extends Component {
     closeModal(e) {
         const isBackgroundClick = !e || e.currentTarget === e.target;
         if (isBackgroundClick) {
-            this.setState({ content: null });
-            this.props.onRequestClose();
+            const canCloseModal =
+                typeof this.props.canCloseModal === 'function'
+                    ? this.props.canCloseModal()
+                    : true;
+            if (canCloseModal) {
+                this.setState({ content: null });
+                this.props.onRequestClose();
+            }
         }
     }
 
@@ -141,7 +158,20 @@ export default class Modal extends Component {
                 </LoaderContainer>
             );
         } else if (this.state.content) {
-            return <this.state.content closeModal={e => this.closeModal(e)} />;
+            const childrenProps = {};
+            Object.keys(this.props).forEach(key => {
+                if (key.startsWith('childProp_')) {
+                    childrenProps[key.replace('childProp_', '')] = this.props[
+                        key
+                    ];
+                }
+            });
+            return (
+                <this.state.content
+                    {...childrenProps}
+                    closeModal={e => this.closeModal(e)}
+                />
+            );
         } else {
             return this.props.children;
         }
@@ -154,15 +184,17 @@ export default class Modal extends Component {
                 onClick={e => this.closeModal(e)}
             >
                 <_Modal ref={this.ref} visible={this.props.visible}>
-                    <ModalClose
-                        icon="x"
-                        color="#a9a9a9"
-                        size="1rem"
-                        onClick={() => this.closeModal()}
-                    >
-                        Close
-                    </ModalClose>
-                    {this.getModalContent()}
+                    <ModalContent>
+                        <ModalClose
+                            icon="x"
+                            color="#a9a9a9"
+                            size="1rem"
+                            onClick={() => this.closeModal()}
+                        >
+                            Close
+                        </ModalClose>
+                        {this.getModalContent()}
+                    </ModalContent>
                 </_Modal>
             </Overlay>
         );

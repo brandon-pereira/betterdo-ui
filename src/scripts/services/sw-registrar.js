@@ -1,9 +1,16 @@
+import {
+    requestNotificationAccess,
+    getNotificationSubscription
+} from 'web-notifier/web';
+
 class ServiceWorkerRegistrar {
     constructor() {
+        this._notificationStatus = 'UNKNOWN';
         this.OfflinePluginRuntime = null;
         this.installPrompt = null;
         this.onUpdateAvailableCallbacks = [];
         this.addToHomeScreenAvailableCallbacks = [];
+        this.notificationAccessCallbacks = [];
         this._init();
     }
 
@@ -11,6 +18,7 @@ class ServiceWorkerRegistrar {
         this.OfflinePluginRuntime = import('offline-plugin/runtime').then(
             dep => dep.default
         );
+
         this.OfflinePluginRuntime.then(OfflinePluginRuntime => {
             OfflinePluginRuntime.install({
                 onUpdateReady: () => this._whenUpdateAvailable(),
@@ -30,6 +38,8 @@ class ServiceWorkerRegistrar {
             window.addEventListener('appinstalled', () => {
                 this._whenHomescreenStateChanges(false);
             });
+
+            this.getNotificationStatus();
         }
     }
 
@@ -76,6 +86,35 @@ class ServiceWorkerRegistrar {
                     return false;
                 }
             });
+        }
+    }
+
+    set notificationStatus(status) {
+        this._notificationStatus = status;
+        this.notificationAccessCallbacks.forEach(cb => cb(status));
+    }
+
+    subscribeToNotificationUpdates(cb) {
+        this.notificationAccessCallbacks.push(cb);
+    }
+
+    async getNotificationStatus() {
+        this.notificationStatus = 'DISABLED';
+        const subscription = await getNotificationSubscription();
+        const status = subscription ? 'ENABLED' : 'UNKNOWN';
+        this.notificationStatus = status;
+        return status;
+    }
+
+    async requestNotificationAccess(vapidKey) {
+        console.info('Requesting user notification subscription');
+        const subscription = await requestNotificationAccess(vapidKey);
+        if (subscription) {
+            console.info('Sucessfully got user subscription', subscription);
+            this.notificationStatus = 'ENABLED';
+            return subscription;
+        } else {
+            this.notificationStatus = 'DISABLED';
         }
     }
 
