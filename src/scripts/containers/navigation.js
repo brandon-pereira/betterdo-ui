@@ -66,7 +66,7 @@ const ListsContainer = styled.ul`
     }
 `;
 
-const SortableItem = SortableElement(({ value, index, onClick, currentId }) => (
+const SortableItem = SortableElement(({ value, onClick, currentId }) => (
     <ListItem
         {...{
             selected: value._id === currentId
@@ -106,9 +106,12 @@ class Navigation extends Component {
             return;
         }
         store.lists = arrayMove(store.lists, oldIndex, newIndex);
+
         try {
             this.props.store.updateUser({
-                lists: store.lists.map(t => t._id)
+                lists: store.lists
+                    .filter(t => t.type === 'default')
+                    .map(t => t._id)
             });
         } catch (err) {
             console.error(err);
