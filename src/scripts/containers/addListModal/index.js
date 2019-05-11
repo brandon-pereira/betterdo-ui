@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react';
 import Modal from '../../components/modal';
 @inject('store')
 @observer
-export default class AddListModalContainer extends Component {
+class AddListModalContainer extends Component {
     constructor(props) {
         super(props);
         this.ref = React.createRef();
@@ -32,3 +32,4 @@ export default class AddListModalContainer extends Component {
         );
     }
 }
+export default AddListModalContainer;

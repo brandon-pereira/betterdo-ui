@@ -14,7 +14,7 @@ const ButtonContainer = styled.div`
 
 @inject('store')
 @observer
-export default class AddListModalContent extends Component {
+class AddListModalContent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -100,3 +100,5 @@ export default class AddListModalContent extends Component {
         );
     }
 }
+
+export default AddListModalContent;

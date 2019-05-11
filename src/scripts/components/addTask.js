@@ -14,7 +14,7 @@ const Container = styled.form`
 
 @inject('store')
 @observer
-export default class addTask extends Component {
+class addTask extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -57,3 +57,5 @@ export default class addTask extends Component {
         );
     }
 }
+
+export default addTask;

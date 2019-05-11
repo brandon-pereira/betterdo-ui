@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react';
 import Modal from '../../components/modal';
 @inject('store')
 @observer
-export default class AddListModalContainer extends Component {
+class EditListModalContainer extends Component {
     get visible() {
         return this.props.store.modalVisibility.editList;
     }
@@ -23,3 +23,4 @@ export default class AddListModalContainer extends Component {
         );
     }
 }
+export default EditListModalContainer;

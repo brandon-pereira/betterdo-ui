@@ -68,7 +68,7 @@ const Container = styled.div`
 `;
 @inject('store')
 @observer
-export default class Logo extends Component {
+class Logo extends Component {
     render() {
         const store = this.props.store;
         return (
@@ -99,3 +99,4 @@ export default class Logo extends Component {
         );
     }
 }
+export default Logo;

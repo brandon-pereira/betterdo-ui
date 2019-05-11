@@ -2,7 +2,7 @@
  * Inspired by watson-developer-cloud/node-sdk
  */
 module.exports = {
-    plugins: ['react'],
+    plugins: ['react', 'prettier'],
     parserOptions: {
         ecmaFeatures: {
             experimentalObjectRestSpread: true,
@@ -23,6 +23,7 @@ module.exports = {
         }
     },
     rules: {
+        'prettier/prettier': 'error',
         'react/prop-types': 0,
         'react/jsx-uses-react': 'error',
         'react/jsx-uses-vars': 'error',
