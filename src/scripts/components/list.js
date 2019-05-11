@@ -4,16 +4,21 @@ import SvgIcon from './icon';
 import { COLORS } from '../constants';
 
 const Li = styled.li`
+    user-select: none;
+    z-index: 5;
+    position: relative;
     cursor: pointer;
     color: #fff;
     display: flex;
     align-items: center;
     background: ${props =>
-        props.selected ? 'linear-gradient(#006EFF, #004DB4)' : 'transparent'};
+        props.selected
+            ? 'linear-gradient(#006EFF, #004DB4)'
+            : COLORS.navigationBackground};
     box-shadow: ${props =>
         props.selected
             ? 'inset 0 -1px rgba(0,0,0,.5)'
-            : '0 1px rgba(255,255,255,.15)'};
+            : 'inset 0 -1px rgba(255,255,255,.15)'};
 `;
 const DotIcon = styled.div`
     height: 1rem;
