@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import SvgIcon from './icon';
 import { COLORS } from '../constants';
@@ -47,46 +47,55 @@ const IconHolder = styled.div`
         filter: drop-shadow(0 1px #000);
     }
 `;
+const Count = styled.span`
+    background: rgba(0, 0, 0, 0.4);
+    margin: 0 0.5rem;
+    padding: 0.2rem;
+    font-size: 0.6rem;
+    border-radius: 50%;
+    min-width: 0.8rem;
+    text-align: center;
+    box-shadow: 0 1px rgba(0, 0, 0, 0.7), 0 -1px rgba(255, 255, 255, 0.1);
+`;
 
-class ListItem extends Component {
-    render() {
-        let title = this.props.title;
-        let Icon = <DotIcon color={this.props.color} />;
-        const svgIconProps = {
-            color: '#fff'
-        };
-        if (this.props.newList) {
-            title = 'New List';
-            Icon = <SvgIcon icon="quill" {...svgIconProps} />;
-        }
-        switch (this.props.type) {
-            case 'inbox':
-                title = 'Inbox';
-                Icon = <SvgIcon icon="drawer" {...svgIconProps} />;
-                break;
-            case 'today':
-                title = 'Today';
-                Icon = <SvgIcon icon="alarm" {...svgIconProps} />;
-                break;
-            case 'tomorrow':
-                title = 'Tomorrow';
-                Icon = <SvgIcon icon="calendar" {...svgIconProps} />;
-                break;
-            case 'highPriority':
-                title = 'High Priority';
-                Icon = <SvgIcon icon="bookmarks" {...svgIconProps} />;
-                break;
-        }
-        return (
-            <Li
-                {...{ selected: this.props.selected }}
-                onClick={this.props.onClick}
-            >
-                <IconHolder>{Icon}</IconHolder>
-                <Title>{title}</Title>
-            </Li>
-        );
+function ListItem(props) {
+    let title = props.title;
+    let Icon = <DotIcon color={props.color} />;
+    const svgIconProps = {
+        color: '#fff'
+    };
+    if (props.newList) {
+        title = 'New List';
+        Icon = <SvgIcon icon="quill" {...svgIconProps} />;
     }
+    switch (props.type) {
+        case 'inbox':
+            title = 'Inbox';
+            Icon = <SvgIcon icon="drawer" {...svgIconProps} />;
+            break;
+        case 'today':
+            title = 'Today';
+            Icon = <SvgIcon icon="alarm" {...svgIconProps} />;
+            break;
+        case 'tomorrow':
+            title = 'Tomorrow';
+            Icon = <SvgIcon icon="calendar" {...svgIconProps} />;
+            break;
+        case 'highPriority':
+            title = 'High Priority';
+            Icon = <SvgIcon icon="bookmarks" {...svgIconProps} />;
+            break;
+    }
+    const shouldShowCount = Boolean(
+        props.type !== 'default' && props.type !== 'newList' && props.count
+    );
+    return (
+        <Li {...{ selected: props.selected }} onClick={props.onClick}>
+            <IconHolder>{Icon}</IconHolder>
+            <Title>{title}</Title>
+            {shouldShowCount && <Count>{props.count}</Count>}
+        </Li>
+    );
 }
 
 export default ListItem;

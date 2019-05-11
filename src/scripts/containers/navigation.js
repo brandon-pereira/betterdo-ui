@@ -68,13 +68,12 @@ const ListsContainer = styled.ul`
 
 const SortableItem = SortableElement(({ value, onClick, currentId }) => (
     <ListItem
-        {...{
-            selected: value._id === currentId
-        }}
+        selected={value._id === currentId}
         key={value._id}
         type={value.type}
         title={value.title}
         color={value.color}
+        count={value.tasks.length}
         onClick={() => onClick(value._id)}
     />
 ));
