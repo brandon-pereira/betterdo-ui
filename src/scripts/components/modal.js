@@ -181,7 +181,7 @@ export default class Modal extends Component {
         return (
             <Overlay
                 visible={this.props.visible}
-                onClick={e => this.closeModal(e)}
+                onMouseDown={e => this.closeModal(e)}
             >
                 <_Modal ref={this.ref} visible={this.props.visible}>
                     <ModalContent>
