@@ -16,10 +16,11 @@ const Container = styled.header`
     color: #fff;
     display: flex;
     align-items: center;
-    padding: 0 0.8rem;
+    padding: 0 0.8rem 0 0;
     overflow: hidden;
     ${Hamburger} {
-        margin-right: 0.5rem;
+        padding: 0 0.5rem 0 0.8rem;
+        
     }
     ${Loader} {
         filter: drop-shadow(1px 1px rgba(0,0,0,.5))

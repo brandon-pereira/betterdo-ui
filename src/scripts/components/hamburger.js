@@ -14,12 +14,18 @@ const Bar = styled.div`
         transform-origin: bottom left;
     }
 `;
-const Container = styled.div`
+const ClickContainer = styled.div`
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+`;
+const BarContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
     height: 1.5rem;
     width: 2rem;
-    cursor: pointer;
     filter: drop-shadow(0 1px rgba(0, 0, 0, 0.5));
     display: ${props => (props.hidden ? 'none' : 'flex')};
     ${props =>
@@ -38,11 +44,13 @@ const Container = styled.div`
 `;
 
 const Hamburger = props => (
-    <Container {...props}>
-        <Bar />
-        <Bar />
-        <Bar />
-    </Container>
+    <ClickContainer {...props}>
+        <BarContainer>
+            <Bar />
+            <Bar />
+            <Bar />
+        </BarContainer>
+    </ClickContainer>
 );
 
 export default styled(Hamburger)``;
