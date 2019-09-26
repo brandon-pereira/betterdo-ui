@@ -17,7 +17,7 @@ const getPlugins = () => {
         plugins.push(new webpack.SourceMapDevToolPlugin());
     }
     // } else {
-    const publicPath = config.isProduction ? `/betterdo/app/` : '';
+    const publicPath = config.isProduction ? `/app` : '';
     plugins.push(
         new OfflinePlugin({
             ServiceWorker: {
