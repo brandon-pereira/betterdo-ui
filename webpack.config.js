@@ -9,9 +9,7 @@ const getPlugins = () => {
         }),
         new webpack.DefinePlugin({
             'process.env.PRODUCTION': JSON.stringify(config.isProduction),
-            'process.env.ROOT_APP_DIR': JSON.stringify(
-                config.isProduction ? '/betterdo/' : '/'
-            )
+            'process.env.ROOT_APP_DIR': JSON.stringify('/')
         })
     ];
 
