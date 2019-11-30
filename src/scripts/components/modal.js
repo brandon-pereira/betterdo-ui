@@ -152,7 +152,7 @@ export default class Modal extends Component {
         if (this.state.loading) {
             return (
                 <LoaderContainer>
-                    <Loader color="#006fb0" size="4rem" loading={true}>
+                    <Loader color="#006fb0" size="4rem" isLoading={true}>
                         Loading...
                     </Loader>
                 </LoaderContainer>

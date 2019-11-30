@@ -75,7 +75,7 @@ class Header extends Component {
                         this.props.store.modalVisibility.listsView = true;
                     }}
                 />
-                <Loader loading={this.props.store.loading} size="2rem" />
+                <Loader isLoading={this.props.store.loading} size="2rem" />
                 <Title>{store.currentList.title}</Title>
                 <SettingsButton
                     color="rgba(0,0,0,.2)"

@@ -151,7 +151,7 @@ class ListMembers extends Component {
                     placeholder="hello@world.com"
                 />
                 <Button
-                    loading={this.state.isAdding}
+                    isLoading={this.state.isAdding}
                     loadingText="Adding"
                     color={this.props.store.currentList.color}
                     type="submit"

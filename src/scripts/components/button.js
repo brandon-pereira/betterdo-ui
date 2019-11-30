@@ -47,7 +47,7 @@ const Container = styled.button.attrs(props => ({
         opacity: 1;
     }
     ${props =>
-        props.loading &&
+        props.isLoading &&
         `
             pointer-events: none;
             &:before {
@@ -59,8 +59,8 @@ const Container = styled.button.attrs(props => ({
 
 const Button = ({ children, type, ...props }) => (
     <Container type={type || 'button'} {...props}>
-        {props.loading && <Loader loading={true} size="1rem" />}
-        {props.loading ? (
+        {props.isLoading && <Loader isLoading={true} size="1rem" />}
+        {props.isLoading ? (
             <span>{props.loadingText || 'Loading'}</span>
         ) : (
             <span>{children}</span>

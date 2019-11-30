@@ -5,11 +5,8 @@ import styled from 'styled-components';
 import ListItem from '../components/list';
 import { QUERIES } from '../constants';
 import { COLORS } from '../constants';
-import {
-    SortableContainer,
-    SortableElement,
-    arrayMove
-} from 'react-sortable-hoc';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import arrayMove from 'array-move';
 
 const NavigationModalOverlay = styled.div`
     background: rgba(0, 0, 0, 0.5);

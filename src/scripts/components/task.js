@@ -113,7 +113,7 @@ class Task extends Component {
                 priority={task.priority}
             >
                 {task.isLoading ? (
-                    <Loader color="#202020" size="1.7rem" loading={true} />
+                    <Loader color="#202020" size="1.7rem" isLoading={true} />
                 ) : (
                     <Checkbox
                         type="checkbox"

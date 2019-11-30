@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { computed } from 'mobx';
 import styled from 'styled-components';
-import AddTask from '../components/addTask';
+import AddTask from '../components/addTask/index';
 import NotificationBanner from '../components/notificationBanner';
 import Banner from '../components/banner';
 import Task from '../components/task';
 import Button from '../components/button';
 import { QUERIES } from '../constants';
-import {
-    SortableContainer,
-    SortableElement,
-    arrayMove
-} from 'react-sortable-hoc';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import arrayMove from 'array-move';
 
 const CompletedTasksButton = styled(Button)`
     margin: 0.5rem 1rem;
@@ -219,6 +216,7 @@ class Body extends Component {
                     hidden={
                         this.currentList.type === 'loading' || hasServerError
                     }
+                    createTask={title => this.props.store.createTask(title)}
                 />
                 {showAllCaughtUpBanner && (
                     <Banner icon="betterdo" body="You're all caught up!" />
@@ -257,7 +255,7 @@ class Body extends Component {
                                 this.currentList.additionalTasks === 0
                             }
                             hasCaughtUpBanner={showAllCaughtUpBanner}
-                            loading={this.state.loadingCompletedTasks}
+                            isLoading={this.state.loadingCompletedTasks}
                             color="#999999"
                             onClick={this.loadCompletedTasks.bind(this)}
                         >

@@ -89,7 +89,7 @@ class AddListModalContent extends Component {
                         <Button
                             type="submit"
                             loadingText="Creating"
-                            loading={this.state.submitting}
+                            isLoading={this.state.submitting}
                             color={this.state.color}
                         >
                             Create

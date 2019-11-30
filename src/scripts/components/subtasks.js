@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Input } from './forms';
 import Icon from './icon';
-import {
-    SortableContainer,
-    SortableElement,
-    arrayMove
-} from 'react-sortable-hoc';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import arrayMove from 'array-move';
 
 const Container = styled.div`
     background: #fff;

@@ -43,8 +43,8 @@ const Container = styled.div`
         stroke: ${props => props.color || '#fff'};
         animation: ${dashoffset} 2s ease-in-out infinite;
     }
-    ${({ loading, size }) =>
-        loading &&
+    ${({ isLoading, size }) =>
+        isLoading &&
         `
         transition: all 0s 0s, width 0.2s !important;
         transform: scale(1);
@@ -54,8 +54,13 @@ const Container = styled.div`
     `};
 `;
 
-const Loader = props => (
-    <Container {...props}>
+const Loader = ({ className, isLoading, color, size }) => (
+    <Container
+        className={className}
+        color={color}
+        size={size}
+        isLoading={isLoading}
+    >
         <LoaderSvg />
     </Container>
 );

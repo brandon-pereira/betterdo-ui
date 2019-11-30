@@ -110,7 +110,7 @@ class ListSettings extends Component {
                 />
                 <ButtonContainer>
                     <Button
-                        loading={this.state.isSaving}
+                        isLoading={this.state.isSaving}
                         loadingText="Saving"
                         color={this.state.color}
                         type="Save"
@@ -118,7 +118,7 @@ class ListSettings extends Component {
                         Save
                     </Button>
                     <Button
-                        loading={this.state.isDeleting}
+                        isLoading={this.state.isDeleting}
                         loadingText="Deleting"
                         onClick={() => this.deleteList()}
                         color={COLORS.red}

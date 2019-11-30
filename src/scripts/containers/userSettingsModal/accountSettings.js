@@ -152,7 +152,7 @@ class ListMembers extends Component {
                 />
                 <ButtonContainer>
                     <Button
-                        loading={this.state.isSaving}
+                        isLoading={this.state.isSaving}
                         loadingText="Saving"
                         type="Save"
                     >

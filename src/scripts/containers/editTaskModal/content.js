@@ -262,7 +262,7 @@ class EditTask extends Component {
                     <Button
                         color={COLORS.blue}
                         onClick={this.saveTask}
-                        loading={this.state.isSaving}
+                        isLoading={this.state.isSaving}
                         loadingText="Saving"
                     >
                         Save
@@ -270,7 +270,7 @@ class EditTask extends Component {
                     <Button
                         color={COLORS.red}
                         onClick={this.deleteTask}
-                        loading={this.state.isDeleting}
+                        isLoading={this.state.isDeleting}
                         loadingText="Deleting"
                     >
                         Delete
