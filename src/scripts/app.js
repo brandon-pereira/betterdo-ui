@@ -6,6 +6,10 @@ import Store from './services/store';
 import { Provider } from 'mobx-react';
 const store = new Store();
 
+// Theme
+import { ThemeProvider } from 'styled-components';
+import { createTheme, GlobalStyles } from './utils/style-utils';
+
 // Components
 import Container from './containers/container';
 import Header from './containers/header';
@@ -19,18 +23,21 @@ import UserSettingsModal from './containers/userSettingsModal';
 
 export default () => {
     render(
-        <Provider store={store}>
-            <Container>
-                <Logo />
-                <Header />
-                <Navigation />
-                <Body />
-                <AddListModal />
-                <EditListModal />
-                <EditTaskModal />
-                <UserSettingsModal />
-            </Container>
-        </Provider>,
+        <ThemeProvider theme={createTheme()}>
+            <GlobalStyles />
+            <Provider store={store}>
+                <Container>
+                    <Logo />
+                    <Header />
+                    <Navigation />
+                    <Body />
+                    <AddListModal />
+                    <EditListModal />
+                    <EditTaskModal />
+                    <UserSettingsModal />
+                </Container>
+            </Provider>
+        </ThemeProvider>,
         document.querySelector('.main-container')
     );
 

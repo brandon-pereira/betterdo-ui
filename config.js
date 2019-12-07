@@ -10,7 +10,7 @@ module.exports = {
         },
         dist: './dist',
         watch: {
-            scripts: ['./src/scripts/**/*.js', './src/styles/**/*.scss'],
+            scripts: ['./src/scripts/**/*.js'],
             html: ['./src/html/**/*.html', './src/styles/critical.css'],
             svg: './src/svgs/*.svg',
             static: './src/static/**/*'

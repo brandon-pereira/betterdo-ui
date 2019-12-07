@@ -1,7 +1,6 @@
 import 'babel-polyfill';
 const dependencies = new Map();
 dependencies.set('app', import('./app'));
-dependencies.set('styles', import('../styles/app.scss'));
 
 Promise.all(dependencies.values())
     .then(values => setMapToResolvedValues(values))

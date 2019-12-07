@@ -3,8 +3,6 @@
  *
  * These styles are added directly to the head when the build is run.
  * In that sense, we should KEEP THIS FILE AS SMALL AS POSSIBLE.
- * This is also why I've deliberately made this a CSS file instead of
- * an SCSS file (to avoid nesting).
  */
 .loader {
     background: #4285f4;
