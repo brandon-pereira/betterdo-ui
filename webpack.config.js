@@ -1,86 +1,96 @@
-const config = require('./config');
 const webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
 
-const getPlugins = () => {
-    const plugins = [
-        new webpack.optimize.MinChunkSizePlugin({
-            minChunkSize: 10000
-        }),
-        new webpack.DefinePlugin({
-            'process.env.PRODUCTION': JSON.stringify(config.isProduction),
-            'process.env.ROOT_APP_DIR': JSON.stringify('/')
-        })
-    ];
-
-    if (!config.isProduction) {
-        plugins.push(new webpack.SourceMapDevToolPlugin());
-    }
-    // } else {
-    const publicPath = config.isProduction ? `/app/` : '';
-    plugins.push(
-        new OfflinePlugin({
-            ServiceWorker: {
-                entry: './src/scripts/service-worker.js',
-                output: '../sw.js',
-                events: true,
-                publicPath: `${publicPath}sw.js`
-            },
-            publicPath: `${publicPath}scripts/`,
-            externals: ['../', '../manifest.json']
-        })
-    );
-    // }
-
-    return plugins;
-};
+const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
-    mode: config.isProduction ? 'production' : 'development',
-    devtool: config.isProduction ? false : 'eval-source-map',
-    entry: config.paths.src.scripts,
+    mode: isProduction ? 'production' : 'development',
+    devtool: isProduction ? false : 'eval-source-map',
+    entry: './scripts/index.js',
     output: {
-        publicPath: 'scripts/',
-        filename: config.naming.scripts
+        // publicPath: '/',
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.min.js'
     },
-    node: {
-        fs: 'empty'
+    devServer: {
+        contentBase: './dist',
+        proxy: {
+            '/api': 'http://localhost:8000'
+        }
     },
+    // node: {
+    //     fs: 'empty'
+    // },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.js?$/,
                 exclude: /node_modules/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: [
-                                '@babel/preset-env',
-                                '@babel/preset-react',
-                                'mobx'
-                            ],
-                            plugins: [
-                                'add-module-exports', // export default will allow you to import without typing .default
-                                '@babel/plugin-syntax-dynamic-import'
-                            ]
-                        }
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-react', 'mobx'],
+                        plugins: [
+                            'add-module-exports', // export default will allow you to import without typing .default
+                            '@babel/plugin-syntax-dynamic-import'
+                        ]
                     }
-                ]
+                }]
             },
             {
                 test: /\.svg$/,
-                use: [
-                    {
-                        loader: '@svgr/webpack',
-                        options: {
-                            icon: true,
-                            titleProp: true
-                        }
+                use: [{
+                    loader: '@svgr/webpack',
+                    options: {
+                        icon: true,
+                        titleProp: true
                     }
-                ]
+                }]
             }
         ]
     },
     plugins: getPlugins()
 };
+
+function getPlugins() {
+    const plugins = [
+        new webpack.optimize.MinChunkSizePlugin({
+            minChunkSize: 10000
+        }),
+        new webpack.DefinePlugin({
+            'process.env.PRODUCTION': JSON.stringify(isProduction),
+            'process.env.ROOT_APP_DIR': JSON.stringify('/')
+        }),
+        new CopyPlugin([
+            'static'
+        ]),
+        new HtmlWebpackPlugin({
+            template: 'index.html',
+            base: false
+            // minify: true
+            // filename: 'static/index.html'
+        })
+    ];
+
+    if (!isProduction) {
+        plugins.push(new webpack.SourceMapDevToolPlugin());
+    } else {
+        const publicPath = isProduction ? `/app/` : '';
+        plugins.push(
+            new OfflinePlugin({
+                ServiceWorker: {
+                    entry: './scripts/service-worker.js',
+                    output: 'service-worker.js',
+                    events: true,
+                    publicPath: `${publicPath}service-worker.js`
+                },
+                publicPath: publicPath + '/',
+                externals: ['../', '../manifest.json']
+            })
+        );
+    }
+
+    return plugins;
+}

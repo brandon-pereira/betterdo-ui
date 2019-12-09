@@ -2,7 +2,6 @@
     "useTabs": false,
     "tabWidth": 4,
     "singleQuote": true,
-    "printWidth": 80,
+    "printWidth": 280,
     "arrowParens": "avoid"
-  }
-  
+}

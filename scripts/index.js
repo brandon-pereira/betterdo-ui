@@ -30,5 +30,5 @@ const setMapToResolvedValues = values => {
  * either cause duplicate code or un-prefixed code.
  */
 const ejectCriticalCss = () => {
-    document.querySelector('#critical-css').remove();
+    // document.querySelector('#critical-css').remove();
 };

@@ -31,29 +31,21 @@
         "babel-plugin-transform-custom-element-classes": "^0.1.0",
         "babel-plugin-transform-es2015-classes": "^6.24.1",
         "babel-preset-mobx": "^2.0.0",
-        "browser-sync": "^2.26.7",
-        "del": "^3.0.0",
+        "copy-webpack-plugin": "^5.0.5",
         "eslint": "^5.10.0",
         "eslint-plugin-prettier": "^3.1.0",
         "eslint-plugin-react": "^7.11.1",
-        "gulp": "^4.0.0",
-        "gulp-htmlmin": "^5.0.1",
-        "gulp-inline-source": "^4.0.0",
-        "gulp-nunjucks-render": "^2.2.3",
-        "gulp-rename": "^1.2.2",
-        "gulp-svgstore": "^7.0.1",
+        "html-webpack-plugin": "^3.2.0",
         "http-proxy-middleware": "^0.19.1",
         "prettier": "^1.17.0",
         "webpack": "^4.28.1",
-        "webpack-stream": "^5.2.1"
+        "webpack-cli": "^3.3.10",
+        "webpack-dev-server": "^3.9.0"
     },
     "scripts": {
-        "build": "NODE_ENV='production' ./node_modules/.bin/gulp build",
-        "start": "./node_modules/.bin/gulp serve",
+        "build": "NODE_ENV='production' webpack",
+        "start": "webpack-dev-server",
         "test": "./node_modules/.bin/eslint test"
-    },
-    "engines": {
-        "node": ">=8.7.0"
     },
     "author": "Brandon Pereira",
     "license": "ISC"

@@ -1,9 +1,3 @@
-/**
- * Welcome to critical.css.
- *
- * These styles are added directly to the head when the build is run.
- * In that sense, we should KEEP THIS FILE AS SMALL AS POSSIBLE.
- */
 .loader {
     background: #4285f4;
     display: flex;
