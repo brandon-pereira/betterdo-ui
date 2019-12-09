@@ -1,8 +1,7 @@
 import React, { useState, useCallback } from 'react';
-import { Input } from '../forms';
-import { Container } from './styles';
+import { Container, Input } from './styles';
 
-const addTask = function({ createTask, hidden }) {
+const AddTask = function({ createTask, hidden }) {
     const [value, setValue] = useState('');
     const [invalid, setInvalid] = useState(false);
     // const [submitting, setSubmitting] = useState(false);
@@ -46,4 +45,4 @@ const addTask = function({ createTask, hidden }) {
     );
 };
 
-export default addTask;
+export default AddTask;

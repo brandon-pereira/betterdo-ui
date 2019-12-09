@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import Loader from './loader';
+import StyledLoader from './loader';
 import { COLORS } from '../constants';
 
-export const StyledButton = styled.button.attrs(props => ({
+export const Button = styled.button.attrs(props => ({
     style: {
         backgroundColor: props.color || COLORS.blue
     }
@@ -24,14 +24,6 @@ export const StyledButton = styled.button.attrs(props => ({
     outline: none;
     display: ${({ hidden }) => (hidden ? 'none' : 'inline-flex')};
     align-items: center;
-    ${Loader} {
-        display: inline-block;
-        margin-right: 0.5rem;
-    }
-    span {
-        position: relative;
-        z-index: 1;
-    }
     &:before {
         content: '';
         opacity: 0;
@@ -55,4 +47,14 @@ export const StyledButton = styled.button.attrs(props => ({
                 background: rgba(255, 255, 255, 0.3);
             }
         `};
+`;
+
+export const Loader = styled(StyledLoader)`
+    display: inline-block;
+    margin-right: 0.5rem;
+`;
+
+export const Text = styled.span`
+    position: relative;
+    z-index: 1;
 `;
