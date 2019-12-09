@@ -142,9 +142,7 @@ class EditTask extends Component {
 
     async deleteTask() {
         const result = confirm(
-            `Are you sure you want to delete the task "${
-                this.task.title
-            }"? This can't be undone.`
+            `Are you sure you want to delete the task "${this.task.title}"? This can't be undone.`
         );
         if (result) {
             this.setState({

@@ -11,7 +11,6 @@ module.exports = {
     devtool: isProduction ? false : 'eval-source-map',
     entry: './scripts/index.js',
     output: {
-        // publicPath: '/',
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.min.js'
     },
@@ -19,35 +18,38 @@ module.exports = {
         contentBase: './dist',
         proxy: {
             '/api': 'http://localhost:8000'
-        }
+        },
+        stats: 'minimal'
     },
-    // node: {
-    //     fs: 'empty'
-    // },
     module: {
-        rules: [{
+        rules: [
+            {
                 test: /\.js?$/,
                 exclude: /node_modules/,
-                use: [{
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react', 'mobx'],
-                        plugins: [
-                            'add-module-exports', // export default will allow you to import without typing .default
-                            '@babel/plugin-syntax-dynamic-import'
-                        ]
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                '@babel/preset-env',
+                                '@babel/preset-react',
+                                'mobx'
+                            ]
+                        }
                     }
-                }]
+                ]
             },
             {
                 test: /\.svg$/,
-                use: [{
-                    loader: '@svgr/webpack',
-                    options: {
-                        icon: true,
-                        titleProp: true
+                use: [
+                    {
+                        loader: '@svgr/webpack',
+                        options: {
+                            icon: true,
+                            titleProp: true
+                        }
                     }
-                }]
+                ]
             }
         ]
     },
@@ -63,13 +65,11 @@ function getPlugins() {
             'process.env.PRODUCTION': JSON.stringify(isProduction),
             'process.env.ROOT_APP_DIR': JSON.stringify('/')
         }),
-        new CopyPlugin([
-            'static'
-        ]),
+        new CopyPlugin(['static']),
         new HtmlWebpackPlugin({
             template: 'index.html',
-            base: false
-            // minify: true
+            base: false,
+            minify: true
             // filename: 'static/index.html'
         })
     ];

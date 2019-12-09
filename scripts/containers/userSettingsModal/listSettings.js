@@ -31,9 +31,7 @@ class ListSettings extends Component {
 
     async deleteList() {
         const result = confirm(
-            `Are you sure you want to delete the list "${
-                this.state.title
-            }"? This can't be undone.`
+            `Are you sure you want to delete the list "${this.state.title}"? This can't be undone.`
         );
         if (result) {
             this.setState({ isDeleting: true, isInvalid: false });

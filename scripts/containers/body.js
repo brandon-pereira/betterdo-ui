@@ -154,7 +154,8 @@ class Body extends Component {
         } else if (
             !localStorage.getItem('banners.pushDisabled') &&
             store.notificationStatus === 'UNKNOWN' &&
-            (store.user && store.user.isPushEnabled) &&
+            store.user &&
+            store.user.isPushEnabled &&
             (isSharedList || doesListHaveDueDates)
         ) {
             return (
