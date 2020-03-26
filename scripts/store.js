@@ -1,9 +1,9 @@
 import { observable } from 'mobx';
-import Server from './server';
-import ServiceWorkerRegistrar from './sw-registrar';
-import { COLORS } from '../constants';
-import Router from './router';
-import { setThemeColor } from './helmet';
+import Server from './utilities/server';
+import ServiceWorkerRegistrar from './utilities/sw-registrar';
+import { COLORS } from './constants';
+import Router from './utilities/router';
+import { setThemeColor } from './utilities/helmet';
 
 class Store {
     @observable

@@ -19,7 +19,8 @@ module.exports = {
         proxy: {
             '/api': 'http://localhost:8000'
         },
-        stats: 'minimal'
+        stats: 'minimal',
+        historyApiFallback: true
     },
     module: {
         rules: [

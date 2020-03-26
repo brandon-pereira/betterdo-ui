@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Label } from './forms';
 import Icon from './icon';
 import { COLORS } from '../constants';
-import TouchEvents from '../services/touchevents';
+import TouchEvents from '../utilities/touchevents';
 
 const Container = styled.div`
     display: flex;
