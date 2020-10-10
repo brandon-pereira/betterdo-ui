@@ -1,6 +1,9 @@
 /* eslint-disable import/no-commonjs */
-const webpack = require('webpack');
+/* eslint-env node */
+require('dotenv').config();
 const path = require('path');
+
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
@@ -10,18 +13,22 @@ const isProduction = process.env.NODE_ENV === 'production';
 module.exports = {
     mode: isProduction ? 'production' : 'development',
     devtool: isProduction ? false : 'eval-source-map',
-    entry: './scripts/index.js',
+    entry: ['react-hot-loader/patch', './scripts/index.js'],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.min.js'
     },
     devServer: {
+        hot: true,
+        historyApiFallback: true,
         contentBase: './dist',
-        proxy: {
-            '/api': 'http://localhost:8000'
-        },
         stats: 'minimal',
-        historyApiFallback: true
+        proxy: {
+            '/auth': 'http://localhost:8000'
+        }
+    },
+    resolve: {
+        alias: createAliases()
     },
     module: {
         rules: [
@@ -32,10 +39,18 @@ module.exports = {
                     {
                         loader: 'babel-loader',
                         options: {
+                            plugins: [
+                                'babel-plugin-styled-components',
+                                'react-hot-loader/babel'
+                            ],
                             presets: [
-                                '@babel/preset-env',
-                                '@babel/preset-react',
-                                'mobx'
+                                [
+                                    '@babel/preset-env',
+                                    {
+                                        exclude: ['transform-regenerator']
+                                    }
+                                ],
+                                '@babel/preset-react'
                             ]
                         }
                     }
@@ -55,14 +70,7 @@ module.exports = {
             }
         ]
     },
-    plugins: getPlugins(),
-    resolve: {
-        alias: {
-            '@hooks': path.resolve(process.cwd(), 'scripts/hooks'),
-            '@components': path.resolve(process.cwd(), 'scripts/components'),
-            '@utilities': path.resolve(process.cwd(), 'scripts/utilities')
-        }
-    }
+    plugins: getPlugins()
 };
 
 function getPlugins() {
@@ -70,16 +78,20 @@ function getPlugins() {
         new webpack.optimize.MinChunkSizePlugin({
             minChunkSize: 10000
         }),
-        new webpack.DefinePlugin({
-            'process.env.PRODUCTION': JSON.stringify(isProduction),
-            'process.env.ROOT_APP_DIR': JSON.stringify('/')
+        new webpack.EnvironmentPlugin({
+            NODE_ENV: 'development',
+            SERVER_URL: isProduction
+                ? 'https://tether.branclon.com'
+                : 'http://localhost:8000',
+            GOOGLE_ANALYTICS_ID: undefined,
+            VERSION: process.env.npm_package_version
         }),
         new CopyPlugin(['static']),
         new HtmlWebpackPlugin({
             template: 'index.html',
             base: false,
-            minify: true
-            // filename: 'static/index.html'
+            minify: true,
+            GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID
         })
     ];
 
@@ -102,4 +114,13 @@ function getPlugins() {
     }
 
     return plugins;
+}
+
+function createAliases() {
+    return {
+        ...(isProduction ? {} : { 'react-dom': '@hot-loader/react-dom' }),
+        '@components': path.resolve('./scripts/components'),
+        '@hooks': path.resolve('./scripts/hooks'),
+        '@utilities': path.resolve('./scripts/utilities')
+    };
 }
