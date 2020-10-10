@@ -1,34 +1,28 @@
-import 'babel-polyfill';
-const dependencies = new Map();
-dependencies.set('app', import('./app'));
+import React from 'react';
+import { render } from 'react-dom';
+import { ThemeProvider } from 'styled-components';
+import { createTheme, GlobalStyles } from './utilities/style-utils';
+import { BrowserRouter } from 'react-router-dom';
+import SharedProviders from '@hooks/internal/SharedProviders';
+import App from './App';
+import ErrorBoundary from '@components/ErrorBoundary';
+document.body.classList.add('loaded');
+document.querySelector('#critical-css').remove();
 
-Promise.all(dependencies.values())
-    .then(values => setMapToResolvedValues(values))
-    .then(() => ejectCriticalCss())
-    .then(() => {
-        dependencies.get('app')(dependencies);
-        document.body.classList.add('loaded');
-    })
-    .catch(err => console.error('Failed to load dependencies.', err));
+render(
+    <ThemeProvider theme={createTheme()}>
+        <BrowserRouter>
+            <GlobalStyles />
+            <SharedProviders>
+                <ErrorBoundary>
+                    <App />
+                </ErrorBoundary>
+            </SharedProviders>
+        </BrowserRouter>
+    </ThemeProvider>,
+    document.querySelector('.main-container')
+);
 
-/**
- * We take the resolved values from Promise.all and we
- * inject those values back into the map. Since
- * we know that order is guaranteed, this should always map
- * 1-1 by index.
- * @param {Array} values
- */
-const setMapToResolvedValues = values => {
-    Array.from(dependencies.keys()).forEach((key, i) => {
-        dependencies.set(key, values[i].default);
-    });
-};
-
-/**
- * We remove the "critical.css" file from the page
- * once our app is ready. This is useful because usually the files
- * either cause duplicate code or un-prefixed code.
- */
-const ejectCriticalCss = () => {
-    // document.querySelector('#critical-css').remove();
-};
+import('@utilities/webfontloader').then(webfontloader =>
+    webfontloader.default()
+);

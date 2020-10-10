@@ -1,58 +1,36 @@
 import React from 'react';
-import { render } from 'react-dom';
 
-// State
-import Store from './store';
-import { Provider } from 'mobx-react';
-const store = new Store();
-
-// Theme
-import { ThemeProvider } from 'styled-components';
-import { createTheme, GlobalStyles } from './utilities/style-utils';
-import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom';
+import { Switch, Redirect, Route } from 'react-router-dom';
 
 // Components
-import Container from './containers/container';
-import Header from './containers/header';
-import Navigation from './containers/navigation';
-import Logo from './components/logo';
-import Body from './containers/body';
-import AddListModal from './containers/addListModal';
+import Container from './containers/Container';
+import Header from './containers/Header/index';
+// import Navigation from './containers/navigation';
+import Logo from '@components/Logo';
+// import Body from './containers/body';
+// import AddListModal from './containers/addListModal';
 import EditListModal from './containers/editListModal';
-import EditTaskModal from './containers/editTaskModal';
-import UserSettingsModal from './containers/userSettingsModal';
-import SharedProviders from '@hooks/internal/SharedProviders';
+// import EditTaskModal from './containers/editTaskModal';
+// import UserSettingsModal from './containers/userSettingsModal';
 
-export default () => {
-    render(
-        <ThemeProvider theme={createTheme()}>
-            <BrowserRouter>
-                <GlobalStyles />
-                <SharedProviders>
-                    <Provider store={store}>
-                        <Switch>
-                            <Route path="/:listd">
-                                <Container>
-                                    <Logo />
-                                    <Header />
-                                    <Navigation />
-                                    <Body />
-                                    <AddListModal />
-                                    <EditListModal />
-                                    <EditTaskModal />
-                                    <UserSettingsModal />
-                                </Container>
-                            </Route>
-                            <Redirect from="/" to="/inbox" />
-                        </Switch>
-                    </Provider>
-                </SharedProviders>
-            </BrowserRouter>
-        </ThemeProvider>,
-        document.querySelector('.main-container')
-    );
+const App = () => (
+    <Switch>
+        <Route path="/:listd">
+            <Container>
+                <Logo />
+                <Header />
+                <EditListModal />
+                {/*
+                <Navigation />
+                <Body />
+                <AddListModal />
+                <EditListModal />
+                <EditTaskModal />
+                <UserSettingsModal /> */}
+            </Container>
+        </Route>
+        <Redirect from="/" to="/inbox" />
+    </Switch>
+);
 
-    import('@utilities/webfontloader').then(webfontloader =>
-        webfontloader.default()
-    );
-};
+export default App;
