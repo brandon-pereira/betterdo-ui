@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import Button from '../../components/button';
-import { Form, Label, Input } from '../../components/forms';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
-import ProfilePic from '../../components/profilePic';
+
+import Button from '@components/Button';
+import { Form, Label, Input } from '@components/forms';
+import ProfilePic from '@components/profilePic';
 
 const UserList = styled.ol`
     list-style: none;

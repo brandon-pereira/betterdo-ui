@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
-import { Label, Input, TextArea } from '../../components/forms';
-import Dropdown from '../../components/dropdown';
-import Button from '../../components/button';
-import Subtasks from '../../components/subtasks';
+import { Label, Input, TextArea } from '@components/forms';
+import Dropdown from '@components/dropdown';
+import Button from '@components/Button';
+import Subtasks from '@components/subtasks';
 import { COLORS } from '../../constants';
-import ProfilePic from '../../components/profilePic';
-import Selector from '../../components/selector';
-import { Header } from '../../components/copy';
+import ProfilePic from '@components/profilePic';
+import Selector from '@components/selector';
+import { Header } from '@components/copy';
 
 const Container = styled.div``;
 const Block = styled.div``;

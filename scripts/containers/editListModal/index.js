@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import Modal from '../../components/modal';
+import Modal from '@components/Modal';
 @inject('store')
 @observer
 class EditListModalContainer extends Component {

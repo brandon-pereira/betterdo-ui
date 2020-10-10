@@ -1,9 +1,9 @@
-export const setCurrentRoute = url => {
+const setCurrentRoute = url => {
     if (window && window.history) {
         history.replaceState({}, document.title, `#/${url}`);
     }
 };
-export const getCurrentRoute = () => {
+const getCurrentRoute = () => {
     if (window && window.location) {
         return window.location.hash.replace('/', '').replace('#', '');
     }

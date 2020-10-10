@@ -1,35 +1,33 @@
-import React, { Component } from 'react';
-import { observer, inject } from 'mobx-react';
-import Modal from '../../components/modal';
-@inject('store')
-@observer
-class AddListModalContainer extends Component {
-    constructor(props) {
-        super(props);
-        this.ref = React.createRef();
-    }
+import React, { useCallback, useEffect, useRef } from 'react';
+import Modal from '../../components/Modal';
+import useModals from '@hooks/useModals';
+function AddListModalContainer() {
+    const modalRef = useRef();
+    // const [pos, setPosition] = useState({ top: 0, left: 0 });
+    const { modalVisibility, closeModal } = useModals();
 
-    get visible() {
-        return this.props.store.modalVisibility.newList;
-    }
+    const calculatePosition = useCallback(() => {
+        const listItem = document.querySelector('[data-betterdo-newlist]');
+        const modal = modalRef.current;
+        console.log(listItem, modal);
+    }, []);
 
-    set visible(bool) {
-        this.props.store.modalVisibility.newList = bool;
-        return bool;
-    }
+    useEffect(() => {
+        calculatePosition();
+    }, [modalVisibility.newList, calculatePosition]);
 
-    calculatePosition() {}
+    useEffect(() => {
+        window.addEventListener('resize', calculatePosition);
+        return () => window.removeEventListener('resize', calculatePosition);
+    }, [calculatePosition]);
 
-    render() {
-        return (
-            <Modal
-                ref={this.ref}
-                onResize={this.calculatePosition.bind(this)}
-                onRequestClose={() => (this.visible = false)}
-                visible={this.visible}
-                asyncContent={() => import('./content')}
-            />
-        );
-    }
+    return (
+        <Modal
+            ref={modalRef}
+            onRequestClose={() => closeModal('newList')}
+            visible={modalVisibility['newList']}
+            asyncContent={() => import('./content')}
+        />
+    );
 }
 export default AddListModalContainer;

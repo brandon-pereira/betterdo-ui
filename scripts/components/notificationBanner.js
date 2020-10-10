@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from './button';
-import { QUERIES } from '../constants';
-import { COLORS } from '../constants';
+import Button from './Button';
+import { QUERIES, COLORS } from '../constants';
 
 const Header = styled.h2`
     margin: 0 0 0.3rem;

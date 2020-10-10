@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import Modal from '../../components/modal';
+import Modal from '@components/Modal';
 import { ThemeProvider } from 'styled-components';
 
 @inject('store')
@@ -57,9 +57,10 @@ class AddListModalContainer extends Component {
                     onRequestClose={this.close.bind(this)}
                     canCloseModal={this.canCloseModal.bind(this)}
                     visible={this.visible}
-                    childProp_setUnsavedChanges={this.setUnsavedChanges.bind(
-                        this
-                    )}
+                    //  TODO: This doesn't work...
+                    childProps={{
+                        setUnsavedChanges: this.setUnsavedChanges.bind(this)
+                    }}
                     asyncContent={() => import('./content')}
                 />
             </ThemeProvider>

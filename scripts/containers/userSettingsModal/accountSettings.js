@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from '../../components/button';
+import Button from '../../components/Button';
 import { Form, Label, Input } from '../../components/forms';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';

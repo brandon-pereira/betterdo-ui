@@ -80,6 +80,9 @@ class ListItem extends Component {
         return (
             <Li
                 {...{ selected: this.props.selected }}
+                {...(this.props.newList
+                    ? { 'data-betterdo-newlist': true }
+                    : undefined)}
                 onClick={this.props.onClick}
             >
                 <IconHolder>{Icon}</IconHolder>

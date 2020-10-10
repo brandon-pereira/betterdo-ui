@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import Button from '../../components/button';
-import { Label, Error } from '../../components/forms';
-import Toggle from '../../components/toggle';
+import Button from '@components/Button';
+import { Label, Error } from '@components/forms';
+import Toggle from '@components/toggle';
 // import Dropdown from '../../components/dropdown';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';

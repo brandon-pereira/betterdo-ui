@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import Button from '../../components/button';
-import { Form, Label, Input } from '../../components/forms';
-import ColorPicker from '../../components/colorPicker';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
+
+import Button from '@components/Button';
+import { Form, Label, Input } from '@components/forms';
+import ColorPicker from '@components/colorPicker';
+
 import { COLORS } from '../../constants';
 
 const ButtonContainer = styled.div`

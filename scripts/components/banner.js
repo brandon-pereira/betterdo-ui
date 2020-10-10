@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import _Icon from './icon';
-import _Button from './button';
+import _Button from './Button';
 const Container = styled.div`
     display: flex;
     flex-direction: column;

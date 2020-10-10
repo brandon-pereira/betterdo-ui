@@ -21,35 +21,38 @@ import AddListModal from './containers/addListModal';
 import EditListModal from './containers/editListModal';
 import EditTaskModal from './containers/editTaskModal';
 import UserSettingsModal from './containers/userSettingsModal';
+import SharedProviders from '@hooks/internal/SharedProviders';
 
 export default () => {
     render(
         <ThemeProvider theme={createTheme()}>
             <BrowserRouter>
                 <GlobalStyles />
-                <Provider store={store}>
-                    <Switch>
-                        <Route path="/:listd">
-                            <Container>
-                                <Logo />
-                                <Header />
-                                <Navigation />
-                                <Body />
-                                <AddListModal />
-                                <EditListModal />
-                                <EditTaskModal />
-                                <UserSettingsModal />
-                            </Container>
-                        </Route>
-                        <Redirect from="/" to="/inbox" />
-                    </Switch>
-                </Provider>
+                <SharedProviders>
+                    <Provider store={store}>
+                        <Switch>
+                            <Route path="/:listd">
+                                <Container>
+                                    <Logo />
+                                    <Header />
+                                    <Navigation />
+                                    <Body />
+                                    <AddListModal />
+                                    <EditListModal />
+                                    <EditTaskModal />
+                                    <UserSettingsModal />
+                                </Container>
+                            </Route>
+                            <Redirect from="/" to="/inbox" />
+                        </Switch>
+                    </Provider>
+                </SharedProviders>
             </BrowserRouter>
         </ThemeProvider>,
         document.querySelector('.main-container')
     );
 
-    import('./utilities/webfontloader').then(webfontloader =>
+    import('@utilities/webfontloader').then(webfontloader =>
         webfontloader.default()
     );
 };

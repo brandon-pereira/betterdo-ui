@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyledButton } from './styles';
 import Loader from '../loader';
+import { StyledButton } from './styles';
 
 const Button = ({ children, type, ...props }) => (
     <StyledButton type={type || 'button'} {...props}>

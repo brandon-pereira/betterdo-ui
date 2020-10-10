@@ -1,3 +1,4 @@
+/* eslint-disable import/no-commonjs */
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -54,7 +55,14 @@ module.exports = {
             }
         ]
     },
-    plugins: getPlugins()
+    plugins: getPlugins(),
+    resolve: {
+        alias: {
+            '@hooks': path.resolve(process.cwd(), 'scripts/hooks'),
+            '@components': path.resolve(process.cwd(), 'scripts/components'),
+            '@utilities': path.resolve(process.cwd(), 'scripts/utilities')
+        }
+    }
 };
 
 function getPlugins() {

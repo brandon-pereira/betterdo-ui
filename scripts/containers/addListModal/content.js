@@ -1,12 +1,11 @@
 import React, { Fragment, Component } from 'react';
 import randomColor from 'randomcolor';
-import Button from '../../components/button';
-import { Body } from '../../components/copy';
+import Button from '../../components/Button';
+import { Body, Header } from '../../components/copy';
 import { Form, Label, Input } from '../../components/forms';
 import ColorPicker from '../../components/colorPicker';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
-import { Header } from '../../components/copy';
 
 const ButtonContainer = styled.div`
     margin-top: 1.5rem;

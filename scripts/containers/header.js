@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
-import Button from '../components/button';
-import Icon from '../components/icon';
-import Loader from '../components/loader';
-import Hamburger from '../components/hamburger';
+import Button from '@components/Button';
+import Icon from '@components/icon';
+import Loader from '@components/loader';
+import Hamburger from '@components/hamburger';
 import { QUERIES } from '../constants';
 
 const Container = styled.header`

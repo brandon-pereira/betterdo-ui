@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import StyledLoader from './loader';
-import { COLORS } from '../constants';
+import StyledLoader from '../loader';
+import { COLORS } from '../../constants';
 
-export const Button = styled.button.attrs(props => ({
+export const StyledButton = styled.button.attrs(props => ({
     style: {
         backgroundColor: props.color || COLORS.blue
     }

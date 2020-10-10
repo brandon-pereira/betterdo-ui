@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
+import { Context } from '@hooks/useModals';
 // import Search from '../components/search';
-import ListItem from '../components/list';
-import { QUERIES } from '../constants';
-import { COLORS } from '../constants';
+import ListItem from '@components/list';
+import { QUERIES, COLORS } from '../constants';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 
@@ -118,9 +118,7 @@ class Navigation extends Component {
     render() {
         const store = this.props.store;
         return (
-            <Container
-                visibleOnMobile={this.props.store.modalVisibility.listsView}
-            >
+            <Container visibleOnMobile={store.modalVisibility.listsView}>
                 <ListsContainer>
                     <SortableList
                         lockAxis="y"
@@ -130,10 +128,16 @@ class Navigation extends Component {
                         onSortEnd={this.onSortEnd.bind(this)}
                         onClick={id => store.switchLists(id)}
                     />
-                    <ListItem
-                        onClick={() => (store.modalVisibility.newList = true)}
-                        newList
-                    />
+                    <Context.Consumer>
+                        {context => (
+                            <ListItem
+                                onClick={() => {
+                                    context.openModal('newList');
+                                }}
+                                newList
+                            />
+                        )}
+                    </Context.Consumer>
                 </ListsContainer>
                 <NavigationModalOverlay
                     onClick={() => {
@@ -144,5 +148,7 @@ class Navigation extends Component {
         );
     }
 }
+
+Navigation.contextType = Context;
 
 export default Navigation;
