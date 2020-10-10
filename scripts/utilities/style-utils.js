@@ -6,7 +6,6 @@ export const GlobalStyles = createGlobalStyle`
         overflow: hidden;
     }
     body {
-        background: #000;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
             Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
         html.wf-notosans-n4-active & {

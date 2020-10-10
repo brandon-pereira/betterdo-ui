@@ -25,9 +25,14 @@ const Modal = React.forwardRef(
         const [Content, setContent] = useState(null);
 
         const loadContent = useCallback(async () => {
-            const _content = await asyncContent();
-            setContent(_content.default);
-            setLoading(false);
+            try {
+                const _content = await asyncContent();
+                setContent(_content.default);
+                console.log(_content.default);
+                setLoading(false);
+            } catch (err) {
+                console.error(err);
+            }
         }, [asyncContent]);
 
         const closeModal = useCallback(
@@ -76,13 +81,15 @@ const Modal = React.forwardRef(
                                 </Loader>
                             </LoaderContainer>
                         )}
-                        {Content && (
+                        {Boolean(Content) && (
                             <Content
                                 {...(childProps || {})}
                                 closeModal={e => closeModal(e)}
                             />
                         )}
-                        {!loading && !Content && children}
+                        {!loading && Boolean(!Content) && children
+                            ? children
+                            : null}
                     </ModalContent>
                 </Container>
             </Overlay>

@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
 import styled from 'styled-components';
-import { QUERIES } from '../constants';
-import { observer, inject } from 'mobx-react';
+import { QUERIES } from '../../constants';
 
-const Div = styled.div`
+export const _Container = styled.div`
     width: 100vw;
     height: 100vh;
     display: grid;
@@ -22,17 +20,3 @@ const Div = styled.div`
         grid-template-columns: 14rem 1fr;
     }
 `;
-
-@inject('store')
-@observer
-class Container extends Component {
-    render() {
-        return (
-            <Div mobileNavVisible={this.props.store.modalVisibility.listsView}>
-                {this.props.children}
-            </Div>
-        );
-    }
-}
-
-export default Container;
