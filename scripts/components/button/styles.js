@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import StyledLoader from '../loader';
+import StyledLoader from '../Loader';
 import { COLORS } from '../../constants';
 
 export const StyledButton = styled.button.attrs(props => ({

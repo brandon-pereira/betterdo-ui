@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
 
 import Button from '@components/Button';
@@ -41,12 +40,10 @@ const User = styled.li`
     }
 `;
 
-@inject('store')
-@observer
 class ListMembers extends Component {
     constructor(props) {
         super(props);
-        const currentList = this.props.store.currentList;
+        const currentList = this.props.currentList;
         this.state = {
             isAdding: false,
             isInvalid: false,
@@ -76,7 +73,7 @@ class ListMembers extends Component {
             members.push(user);
             // Update the list with the new member
             const updatedList = await this.props.store.updateList(
-                this.props.store.currentList._id,
+                this.props.currentList._id,
                 {
                     members: members.map(m => m._id)
                 }
@@ -105,7 +102,7 @@ class ListMembers extends Component {
         this.setState({ members });
         // Make actual request
         const updatedList = await this.props.store.updateList(
-            this.props.store.currentList._id,
+            this.props.currentList._id,
             {
                 members: members.map(m => m._id)
             }
@@ -154,7 +151,7 @@ class ListMembers extends Component {
                 <Button
                     isLoading={this.state.isAdding}
                     loadingText="Adding"
-                    color={this.props.store.currentList.color}
+                    color={this.props.currentList.color}
                     type="submit"
                 >
                     Add

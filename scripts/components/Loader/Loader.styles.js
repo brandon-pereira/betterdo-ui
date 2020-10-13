@@ -1,6 +1,4 @@
-import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import LoaderSvg from '../../svgs/loader.svg';
 
 const rotate = keyframes`
     0% {
@@ -10,6 +8,7 @@ const rotate = keyframes`
         transform: rotate(270deg);
     }
 `;
+
 const dashoffset = keyframes`
     0% {
         stroke-dashoffset: 184;
@@ -23,7 +22,8 @@ const dashoffset = keyframes`
         transform: rotate(450deg);
     }
 `;
-const Container = styled.div`
+
+export const Loader = styled.div`
     height: 0;
     width: 0;
     transform: scale(0);
@@ -43,8 +43,8 @@ const Container = styled.div`
         stroke: ${props => props.color || '#fff'};
         animation: ${dashoffset} 2s ease-in-out infinite;
     }
-    ${({ isLoading, size }) =>
-        isLoading &&
+    ${({ isVisible, size }) =>
+        isVisible &&
         `
         transition: all 0s 0s, width 0.2s !important;
         transform: scale(1);
@@ -53,16 +53,3 @@ const Container = styled.div`
         width: ${size || '1rem'};
     `};
 `;
-
-const Loader = ({ className, isLoading, color, size }) => (
-    <Container
-        className={className}
-        color={color}
-        size={size}
-        isLoading={isLoading}
-    >
-        <LoaderSvg />
-    </Container>
-);
-
-export default styled(Loader)``;

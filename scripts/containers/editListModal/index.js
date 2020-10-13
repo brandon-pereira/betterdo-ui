@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
-import { observer, inject } from 'mobx-react';
-import Modal from '@components/Modal';
-@inject('store')
-@observer
-class EditListModalContainer extends Component {
-    get visible() {
-        return this.props.store.modalVisibility.editList;
-    }
+import React from 'react';
+import Modal, { Loader } from '@components/Modal';
+import useModals from '../../hooks/useModals';
+import loadable from '@loadable/component';
 
-    set visible(bool) {
-        this.props.store.modalVisibility.editList = bool;
-        return bool;
-    }
+const Content = loadable(() => import('./content'), {
+    fallback: <Loader />
+});
 
-    render() {
-        return (
-            <Modal
-                onRequestClose={() => (this.visible = false)}
-                visible={this.visible}
-                asyncContent={() => import('./content')}
-            />
-        );
-    }
+function EditListModalContainer() {
+    const { modalVisibility, closeModal } = useModals();
+
+    return (
+        <Modal
+            onRequestClose={() => closeModal('editList')}
+            visible={modalVisibility.editList}
+        >
+            {modalVisibility.editList && (
+                <Content onClose={() => closeModal('editList')} />
+            )}
+        </Modal>
+    );
 }
+
 export default EditListModalContainer;

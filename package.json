@@ -4,6 +4,7 @@
     "description": "Frontend for BetterDo",
     "repository": "https://github.com/brandon-pereira/betterdo-ui",
     "dependencies": {
+        "@loadable/component": "^5.13.2",
         "array-move": "^2.2.2",
         "babel-polyfill": "^6.26.0",
         "date-fns": "^2.16.1",

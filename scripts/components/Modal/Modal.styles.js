@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { default as _Loader } from '../loader';
 import Icon from '../icon';
 import { QUERIES } from '../../constants';
 
@@ -57,7 +56,7 @@ export const Container = styled.div`
         width: 60%;
     }
 `;
-export const Loader = styled(_Loader)``;
+
 export const LoaderContainer = styled.div`
     display: flex;
     justify-content: center;

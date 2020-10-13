@@ -1,5 +1,5 @@
 import React from 'react';
-import Loader from '../loader';
+import Loader from '../Loader';
 import { StyledButton } from './styles';
 
 const Button = ({ children, type, ...props }) => (

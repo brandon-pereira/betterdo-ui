@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import Button from '@components/Button';
 import Icon from '@components/icon';
-import Loader from '@components/loader';
+import _Loader from '@components/Loader';
 import Hamburger from '@components/hamburger';
 import { QUERIES } from '../../constants';
 
-export { Icon, Loader, Hamburger, Button };
+export { Icon, Hamburger, Button };
+
+export const Loader = styled(_Loader)``;
 
 export const Container = styled.header`
     grid-row: 1 / 1;

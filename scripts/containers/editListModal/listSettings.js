@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Button from '@components/Button';
 import { Form, Label, Input } from '@components/forms';
 import ColorPicker from '@components/colorPicker';
-import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
 import { COLORS } from '../../constants';
 
@@ -12,8 +11,6 @@ const ButtonContainer = styled.div`
     margin-top: 1.5rem;
 `;
 
-@inject('store')
-@observer
 class ListSettings extends Component {
     constructor(props) {
         super(props);
@@ -48,9 +45,7 @@ class ListSettings extends Component {
         if (result) {
             this.setState({ isDeleting: true, isInvalid: false });
             try {
-                await this.props.store.deleteList(
-                    this.props.store.currentList._id
-                );
+                await this.props.store.deleteList(this.props.currentList._id);
             } catch (err) {
                 this.setState({
                     isDeleting: false,

@@ -75,9 +75,6 @@ module.exports = {
 
 function getPlugins() {
     const plugins = [
-        new webpack.optimize.MinChunkSizePlugin({
-            minChunkSize: 10000
-        }),
         new webpack.EnvironmentPlugin({
             NODE_ENV: 'development',
             SERVER_URL: isProduction
