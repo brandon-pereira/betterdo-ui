@@ -1,13 +1,17 @@
 import React from 'react';
 
 import useModals from '@hooks/useModals';
-import { Container, Content, Icon, ProfilePicture } from './Logo.styles';
+import { Container, Content, Hamburger, ProfilePicture } from './Logo.styles';
+import useCurrentList from '@hooks/useCurrentList';
+import useProfile from '@hooks/useProfile';
 
 function Logo() {
     const { modalVisibility, closeModal } = useModals();
+    const { profile } = useProfile();
+    const { currentList } = useCurrentList();
     return (
         <Container
-            // color={store.currentList.color}
+            color={currentList.color}
             visibleOnMobile={modalVisibility.listsView}
         >
             <Content
@@ -16,10 +20,10 @@ function Logo() {
                     console.log('RELOAD');
                 }}
             >
-                <Icon
+                <Hamburger
                     open={modalVisibility.listsView}
                     onClick={e => {
-                        closeModal('listView');
+                        closeModal('listsView');
                         e.stopPropagation();
                     }}
                 />
@@ -27,14 +31,12 @@ function Logo() {
                     Better
                     <span>Do.</span>
                 </h1>
-                {/* {store.user && (
+                {profile && (
                     <ProfilePicture
-                        onClick={() =>
-                            (store.modalVisibility.userSettings = true)
-                        }
-                        user={store.user}
+                        onClick={() => (modalVisibility.userSettings = true)}
+                        user={profile}
                     />
-                )} */}
+                )}
             </Content>
         </Container>
     );

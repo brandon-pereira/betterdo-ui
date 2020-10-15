@@ -1,6 +1,12 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import Modal from '../../components/Modal';
+import Modal, { Loader } from '../../components/Modal';
 import useModals from '@hooks/useModals';
+import loadable from '@loadable/component';
+
+const Content = loadable(() => import('./content'), {
+    fallback: <Loader />
+});
+
 function AddListModalContainer() {
     const modalRef = useRef();
     // const [pos, setPosition] = useState({ top: 0, left: 0 });
@@ -26,8 +32,9 @@ function AddListModalContainer() {
             ref={modalRef}
             onRequestClose={() => closeModal('newList')}
             visible={modalVisibility['newList']}
-            asyncContent={() => import('./content')}
-        />
+        >
+            {modalVisibility['newList'] && <Content />}
+        </Modal>
     );
 }
 export default AddListModalContainer;

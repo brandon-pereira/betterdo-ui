@@ -1,9 +1,15 @@
 import React from 'react';
 
 import { ModalsProvider } from '../useModals';
+import { CurrentListProvider } from '../useCurrentList';
+import { ProfileProvider } from '../useProfile';
 
 // Order matters for some of these!
-const Providers = [ModalsProvider].reverse();
+const Providers = [
+    ModalsProvider,
+    ProfileProvider,
+    CurrentListProvider
+].reverse();
 
 function SharedProviders({ children }) {
     return React.cloneElement(

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import _ProfilePicture from '@components/profilePic';
-import _Icon from '@components/hamburger';
+import _Hamburger from '@components/hamburger';
 import { QUERIES } from '../../constants';
 
 export const Container = styled.div`
@@ -9,7 +9,9 @@ export const Container = styled.div`
         color || theme.colors.defaultList};
     overflow: hidden;
     transform: translateY(-100%);
-    transition: transform 0.2s;
+    position: relative;
+    z-index: 10;
+    /* transition: transform 0.1s 0.1s; */
     ${props =>
         props.visibleOnMobile &&
         `
@@ -24,7 +26,7 @@ export const Container = styled.div`
     }
 `;
 
-export const Icon = styled(_Icon)``;
+export const Hamburger = styled(_Hamburger)``;
 export const ProfilePicture = styled(_ProfilePicture)``;
 
 export const Content = styled.div`
@@ -64,7 +66,7 @@ export const Content = styled.div`
             height: 2rem;
             width: 2rem;
         }
-        ${Icon} {
+        ${Hamburger} {
             display: none;
         }
     }

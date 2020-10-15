@@ -4,11 +4,11 @@ import { Switch, Redirect, Route } from 'react-router-dom';
 
 // Components
 import Container from './containers/Container';
-import Header from './containers/Header/index';
-// import Navigation from './containers/navigation';
-import Logo from '@components/Logo';
+import Header from './containers/Header';
+import Navigation from './containers/Navigation';
+import Logo from './containers/Logo';
 // import Body from './containers/body';
-// import AddListModal from './containers/addListModal';
+import AddListModal from './containers/addListModal';
 import EditListModal from './containers/editListModal';
 // import EditTaskModal from './containers/editTaskModal';
 // import UserSettingsModal from './containers/userSettingsModal';
@@ -20,6 +20,8 @@ const App = () => (
                 <Logo />
                 <Header />
                 <EditListModal />
+                <AddListModal />
+                <Navigation />
                 {/*
                 <Navigation />
                 <Body />

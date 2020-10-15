@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import SharedProviders from '@hooks/internal/SharedProviders';
 import App from './App';
 import ErrorBoundary from '@components/ErrorBoundary';
+import SWRProvider from './utilities/SWRProvider';
 document.body.classList.add('loaded');
 document.querySelector('#critical-css').remove();
 
@@ -13,11 +14,13 @@ render(
     <ThemeProvider theme={createTheme()}>
         <BrowserRouter>
             <GlobalStyles />
-            <SharedProviders>
-                <ErrorBoundary>
-                    <App />
-                </ErrorBoundary>
-            </SharedProviders>
+            <SWRProvider>
+                <SharedProviders>
+                    <ErrorBoundary>
+                        <App />
+                    </ErrorBoundary>
+                </SharedProviders>
+            </SWRProvider>
         </BrowserRouter>
     </ThemeProvider>,
     document.querySelector('.main-container')

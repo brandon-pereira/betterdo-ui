@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import Button from '@components/Button';
 import Icon from '@components/icon';
 import _Loader from '@components/Loader';
-import Hamburger from '@components/hamburger';
+import _Hamburger from '@components/hamburger';
 import { QUERIES } from '../../constants';
 
-export { Icon, Hamburger, Button };
+export { Icon, Button };
 
+export const Hamburger = styled(_Hamburger)``;
 export const Loader = styled(_Loader)``;
 
 export const Container = styled.header`
@@ -21,6 +22,7 @@ export const Container = styled.header`
     align-items: center;
     padding: 0 0.8rem 0 0;
     overflow: hidden;
+    transform: translateY(0%);
     ${Hamburger} {
         padding: 0 0.5rem 0 0.8rem;
         
@@ -31,6 +33,7 @@ export const Container = styled.header`
     ${props =>
         props.mobileNavVisible &&
         `
+        // transform: translateY(50%);
         grid-row: 3;
     `}
     @media ${QUERIES.medium} {

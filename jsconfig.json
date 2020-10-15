@@ -1,5 +1,10 @@
 {
     "compilerOptions": {
-        "experimentalDecorators": true
+        "baseUrl": ".",
+        "paths": {
+            "@hooks/*": ["./scripts/hooks/*"],
+            "@components/*": ["./scripts/components/*"],
+            "@utilities/*": ["./scripts/utilities/*"]
+        }
     }
 }

@@ -11,8 +11,6 @@ const ButtonContainer = styled.div`
     margin-top: 1.5rem;
 `;
 
-@inject('store')
-@observer
 class AddListModalContent extends Component {
     constructor(props) {
         super(props);

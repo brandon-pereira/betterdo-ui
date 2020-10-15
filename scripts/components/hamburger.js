@@ -14,6 +14,7 @@ const Bar = styled.div`
         transform-origin: bottom left;
     }
 `;
+
 const ClickContainer = styled.div`
     height: 100%;
     display: flex;
@@ -21,6 +22,7 @@ const ClickContainer = styled.div`
     justify-content: center;
     cursor: pointer;
 `;
+
 const BarContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
@@ -30,7 +32,7 @@ const BarContainer = styled.div`
     display: ${props => (props.hidden ? 'none' : 'flex')};
     ${props =>
         props.open &&
-        css`
+        `
             ${Bar}:nth-of-type(1) {
                 transform: rotate(45deg);
             }
@@ -40,12 +42,12 @@ const BarContainer = styled.div`
             ${Bar}:nth-of-type(3) {
                 transform: rotate(-45deg);
             }
-        `}
+    `}
 `;
 
-const Hamburger = props => (
-    <ClickContainer {...props}>
-        <BarContainer>
+const Hamburger = ({ open, className, onClick }) => (
+    <ClickContainer onClick={onClick} className={className}>
+        <BarContainer open={open}>
             <Bar />
             <Bar />
             <Bar />
@@ -53,4 +55,4 @@ const Hamburger = props => (
     </ClickContainer>
 );
 
-export default styled(Hamburger)``;
+export default Hamburger;
