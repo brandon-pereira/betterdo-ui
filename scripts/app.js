@@ -8,8 +8,8 @@ import Header from './containers/Header';
 import Navigation from './containers/Navigation';
 import Logo from './containers/Logo';
 // import Body from './containers/body';
-import AddListModal from './containers/addListModal';
-import EditListModal from './containers/editListModal';
+import AddListModal from './containers/AddListModal';
+import EditListModal from './containers/EditListModal';
 // import EditTaskModal from './containers/editTaskModal';
 // import UserSettingsModal from './containers/userSettingsModal';
 
@@ -19,16 +19,12 @@ const App = () => (
             <Container>
                 <Logo />
                 <Header />
-                <EditListModal />
-                <AddListModal />
                 <Navigation />
-                {/*
-                <Navigation />
-                <Body />
+                {/* <Body /> */}
                 <AddListModal />
                 <EditListModal />
-                <EditTaskModal />
-                <UserSettingsModal /> */}
+                {/* <EditTaskModal /> */}
+                {/* <UserSettingsModal /> */}
             </Container>
         </Route>
         <Redirect from="/" to="/inbox" />

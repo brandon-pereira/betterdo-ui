@@ -1,14 +1,13 @@
 import React from 'react';
 import Tabs, { Tab } from '@components/tabs';
-import ListSettings from './listSettings';
-import ListMembers from './listMembers';
+import ListSettings from './ListSettings';
+import ListMembers from './ListMembers';
 import { Header } from '@components/copy';
+import useCurrentList from '@hooks/useCurrentList';
 
 function EditListModalContent({ onClose }) {
-    const currentList = {
-        color: 'red',
-        members: []
-    };
+    const { currentList } = useCurrentList();
+
     return (
         <>
             <Header color={currentList.color}>List Settings</Header>
