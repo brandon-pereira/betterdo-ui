@@ -41,7 +41,7 @@ export const Loader = styled.div`
         stroke-dashoffset: 0;
         transform-origin: center;
         stroke: ${props => props.color || '#fff'};
-        animation: ${dashoffset} 2s ease-in-out infinite;
+        animation: ${dashoffset} 2s linear infinite;
     }
     ${({ isVisible, size }) =>
         isVisible &&

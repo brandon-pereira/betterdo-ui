@@ -7,8 +7,16 @@ import { QUERIES } from '../../constants';
 
 export { Icon, Button };
 
-export const Hamburger = styled(_Hamburger)``;
-export const Loader = styled(_Loader)``;
+export const Hamburger = styled(_Hamburger)`
+    ${({ hidden }) =>
+        hidden &&
+        `
+        display: none;
+    `}
+`;
+export const Loader = styled(_Loader)`
+    margin-left: 0.5rem;
+`;
 
 export const Container = styled.header`
     grid-row: 1 / 1;

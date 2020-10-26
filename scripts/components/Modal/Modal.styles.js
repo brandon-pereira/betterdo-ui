@@ -17,39 +17,27 @@ export const Overlay = styled.div`
         pointer-events: none;
     `}
 `;
-export const ModalContent = styled.div``;
+
 export const Container = styled.div`
+    background: #fff;
+    transition: transform 0.2s;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
     position: absolute;
-    top: ${props => props.theme.top || '50%'};
-    left: ${props => props.theme.left || '50%'};
-    bottom: ${props => props.theme.bottom || 'auto'};
-    right: ${props => props.theme.right || 'auto'};
-    transform:  ${props =>
-        props.theme.transformFrom || 'translate(-50%, -50%)'};
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
     transform-origin: center;
+    visibility: hidden;
     transition: transform 0.2s;
     backface-visibility: hidden;
-    width: ${props => props.theme.mobileWidth || '100%'};
+    width: 100%;
     max-width: 500px;
-    ${ModalContent} {
-        box-sizing: border-box;
-        transition: all .2s;
-        transform: ${props =>
-            !props.theme.transformFrom ? 'scale(0)' : 'none'};
-        background: ${props => props.theme.background || '#fff'};
-        padding: 1rem;
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
-        overflow-y: scroll;
-        max-height: 100vh;
-        width: 100%;
-        height: 100%;
-    }
     ${props =>
         props.visible &&
         `
-        transform: ${props.theme.transformTo || 'translate(-50%, -50%)'};
-        ${ModalContent} {
-            transform: scale(1);
+        visibility: visible;
+        transform: translate(-50%, -50%);
         }
     `}
     @media ${QUERIES.medium} {
@@ -64,9 +52,31 @@ export const LoaderContainer = styled.div`
     height: 10rem;
 `;
 export const ModalClose = styled(Icon)`
-    position: fixed;
+    position: absolute;
     top: 1rem;
     right: 1rem;
-    z-index: 2;
+    z-index: 3;
     filter: drop-shadow(0 1px #555);
+`;
+
+export const Content = styled.div`
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    padding: 1rem;
+    max-height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+`;
+
+export const Arrow = styled.div`
+    height: 2rem;
+    width: 2rem;
+    position: absolute;
+    z-index: 1;
+    top: 1rem;
+    left: -1rem;
+    transform: rotate(45deg);
+    background: #fff;
 `;

@@ -14,6 +14,7 @@ const ButtonContainer = styled.div`
 class AddListModalContent extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             submitting: false,
             isInvalid: false,
@@ -21,6 +22,12 @@ class AddListModalContent extends Component {
             title: '',
             color: randomColor()
         };
+    }
+
+    componentDidMount() {
+        if (this.props.onLoad && typeof this.props.onLoad === 'function') {
+            this.props.onLoad();
+        }
     }
 
     randomizeColor() {
