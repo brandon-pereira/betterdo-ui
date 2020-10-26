@@ -32,13 +32,14 @@ function AddListModalContainer() {
                 $modal.style = toStyleString({
                     top: 'auto',
                     left: nlCords.width + 10 + 'px',
-                    bottom: '10px'
+                    bottom: 0
                 });
                 $arrow.style = toStyleString({
                     top: 'auto',
                     bottom:
                         window.innerHeight -
                         (nlCords.height + nlCords.top) +
+                        10 +
                         'px'
                 });
             }
