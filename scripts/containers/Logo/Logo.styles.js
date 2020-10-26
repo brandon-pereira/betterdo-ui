@@ -11,6 +11,7 @@ export const Container = styled.div`
     transform: translateY(-100%);
     position: relative;
     z-index: 10;
+    transition: background 0.6s;
     /* transition: transform 0.1s 0.1s; */
     ${props =>
         props.visibleOnMobile &&

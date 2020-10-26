@@ -31,6 +31,7 @@ export const Container = styled.header`
     padding: 0 0.8rem 0 0;
     overflow: hidden;
     transform: translateY(0%);
+    transition: background 0.6s;
     ${Hamburger} {
         padding: 0 0.5rem 0 0.8rem;
         

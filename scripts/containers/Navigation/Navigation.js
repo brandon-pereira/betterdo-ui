@@ -1,5 +1,5 @@
 import React from 'react';
-import useModals, { ModalsContext } from '@hooks/useModals';
+import useModals from '@hooks/useModals';
 import ListItem from '@components/list';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
@@ -11,6 +11,7 @@ import {
     MobileNavigationSkirt
 } from './Navigation.styles';
 import useCurrentList from '@hooks/useCurrentList';
+import useLists from '@hooks/useLists';
 
 const SortableItem = SortableElement(({ value, onClick, currentId }) => (
     <ListItem
@@ -44,7 +45,8 @@ const SortableList = SortableContainer(({ items, currentId, onClick }) => {
 
 function Navigation() {
     const { modalVisibility, openModal, closeModal } = useModals();
-    const { currentList } = useCurrentList();
+    const { currentList, switchList } = useCurrentList();
+    const { lists } = useLists();
 
     const onSortEnd = ({ oldIndex, newIndex }) => {
         const store = this.props.store;
@@ -75,11 +77,10 @@ function Navigation() {
                     <SortableList
                         lockAxis="y"
                         pressDelay={200}
-                        items={[]}
-                        // items={store.lists}
+                        items={lists}
                         currentId={currentList._id}
                         onSortEnd={onSortEnd}
-                        // onClick={id => store.switchLists(id)}
+                        onClick={switchList}
                     />
 
                     <ListItem onClick={() => openModal('newList')} newList />

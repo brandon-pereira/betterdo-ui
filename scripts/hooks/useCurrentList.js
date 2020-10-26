@@ -4,10 +4,14 @@ import useSWR from 'swr';
 import createSharedHook from './internal/createSharedHook';
 
 function useCurrentListOnce() {
-    const { data, error } = useSWR(`${process.env.SERVER_URL}/api/init`);
+    const [currentList, setCurrentList] = useState('inbox');
+    const { data, error } = useSWR(
+        `${process.env.SERVER_URL}/api/init/${currentList}`
+    );
     console.log(data);
     return {
         loading: Boolean(!data),
+        switchList: id => setCurrentList(id),
         currentList: data ? data.currentList : {}
     };
 }
