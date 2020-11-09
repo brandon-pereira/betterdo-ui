@@ -58,7 +58,7 @@ class EditTaskContainer extends Component {
                     childProps={{
                         setUnsavedChanges: this.setUnsavedChanges.bind(this)
                     }}
-                    asyncContent={() => import('./content')}
+                    asyncContent={() => import('../EditTaskModal/content')}
                 />
             </ThemeProvider>
         );
