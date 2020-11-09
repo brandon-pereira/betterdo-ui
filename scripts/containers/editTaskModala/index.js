@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import { observer, inject } from 'mobx-react';
 import Modal from '@components/Modal';
 import { ThemeProvider } from 'styled-components';
 
-@inject('store')
-@observer
-class AddListModalContainer extends Component {
+class EditTaskContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {

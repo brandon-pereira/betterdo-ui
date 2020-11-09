@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
-import _Loader from './Loader';
+import _Loader from '../Loader';
 
-const Loader = styled(_Loader)`
+export const Loader = styled(_Loader)`
     margin: 1rem;
 `;
-const Checkbox = styled.input`
+
+export const Checkbox = styled.input`
     height: 1.6rem;
     width: 1.6rem;
     border-radius: 5px;
@@ -36,7 +35,7 @@ const Checkbox = styled.input`
         transform: scale(1);
     }
 `;
-const HighPriorityFlag = styled.div`
+export const HighPriorityFlag = styled.div`
     align-self: flex-start;
     height: 2rem;
     width: 1.6rem;
@@ -63,7 +62,7 @@ const HighPriorityFlag = styled.div`
         border-color: transparent #c11010 transparent transparent;
     }
 `;
-const Container = styled.div`
+export const Container = styled.div`
     background: linear-gradient(#fff, #eee);
     margin: 0.5rem 1rem 0;
     border-radius: 5px;
@@ -74,58 +73,19 @@ const Container = styled.div`
     ${props =>
         props.isLoading &&
         `
-        opacity: 0.5;
-        pointer-events: none;
-    `}
+    opacity: 0.5;
+    pointer-events: none;
+`}
     ${props =>
         props.priority === 'low' &&
         `
-        background: linear-gradient(#eee, #ddd);
-        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-    `}
+    background: linear-gradient(#eee, #ddd);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+`}
 `;
-const Title = styled.span`
+export const Title = styled.span`
     flex: 1;
     text-overflow: ellipsis;
     overflow: hidden;
     margin: 1rem 1rem 1rem 0;
 `;
-
-class Task extends Component {
-    edit() {
-        this.props.store.currentTask = this.props.task;
-    }
-
-    toggleCompleted() {
-        const { _id, isCompleted } = this.props.task;
-        this.props.store.updateTask(_id, {
-            isCompleted: !isCompleted
-        });
-    }
-
-    render() {
-        const { task } = this.props;
-        return (
-            <Container
-                isLoading={task.isLoading}
-                onClick={this.edit.bind(this)}
-                priority={task.priority}
-            >
-                {task.isLoading ? (
-                    <Loader color="#202020" size="1.7rem" isLoading={true} />
-                ) : (
-                    <Checkbox
-                        type="checkbox"
-                        onClick={e => e.stopPropagation()}
-                        onChange={this.toggleCompleted.bind(this)}
-                        checked={task.isCompleted}
-                    />
-                )}
-                <Title>{task.title}</Title>
-                {task.priority === 'high' && <HighPriorityFlag />}
-            </Container>
-        );
-    }
-}
-
-export default Task;

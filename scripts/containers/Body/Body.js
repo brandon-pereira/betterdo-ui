@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AddTask from '../../components/AddTask';
 import Banner from '../../components/banner';
-import Task from '../../components/task';
+import Task from '../../components/Task';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 

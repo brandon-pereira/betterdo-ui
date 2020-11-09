@@ -4,12 +4,14 @@ import { ModalsProvider } from '../useModals';
 import { CurrentListProvider } from '../useCurrentList';
 import { ProfileProvider } from '../useProfile';
 import { ListsProvider } from '../useLists';
+import { TaskProvider } from '../useTask';
 
 // Order matters for some of these!
 const Providers = [
     ModalsProvider,
     ProfileProvider,
     ListsProvider,
+    TaskProvider,
     CurrentListProvider
 ].reverse();
 
