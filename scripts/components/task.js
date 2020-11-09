@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
-import Loader from './loader';
+import _Loader from './Loader';
 
+const Loader = styled(_Loader)`
+    margin: 1rem;
+`;
 const Checkbox = styled.input`
     height: 1.6rem;
     width: 1.6rem;
@@ -80,9 +83,6 @@ const Container = styled.div`
         background: linear-gradient(#eee, #ddd);
         box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
     `}
-    ${Loader} {
-        margin: 1rem;
-    }
 `;
 const Title = styled.span`
     flex: 1;
@@ -90,8 +90,7 @@ const Title = styled.span`
     overflow: hidden;
     margin: 1rem 1rem 1rem 0;
 `;
-@inject('store')
-@observer
+
 class Task extends Component {
     edit() {
         this.props.store.currentTask = this.props.task;

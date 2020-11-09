@@ -1,21 +1,21 @@
 import React from 'react';
 import LoaderSvg from '../../../svgs/loader.svg';
 
-import { Loader } from './Loader.styles';
+import { Loader as _Loader } from './Loader.styles';
 
-function Icon({ className, isVisible, color, size }) {
+function Loader({ className, isVisible, color, size }) {
     return (
-        <Loader
+        <_Loader
             className={className}
             color={color}
             size={size}
             isVisible={isVisible}
         >
             <LoaderSvg />
-        </Loader>
+        </_Loader>
     );
 }
 
-Icon.displayName = 'LoaderIcon';
+Loader.displayName = 'Loader';
 
-export default Icon;
+export default Loader;

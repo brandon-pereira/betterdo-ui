@@ -5,9 +5,9 @@ import createSharedHook from './internal/createSharedHook';
 
 function useListsOnce() {
     const { data, error } = useSWR(`${process.env.SERVER_URL}/api/init`);
-    console.log(data);
-    // console.log(data);
+
     return {
+        error,
         loading: Boolean(!data),
         lists: data ? data.lists : []
     };

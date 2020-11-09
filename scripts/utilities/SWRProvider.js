@@ -7,7 +7,7 @@ function SWRProvider({ children }) {
             value={{
                 //   refreshInterval: 3000,
                 fetcher: (...args) => {
-                    console.log(args);
+                    // console.log(args);
                     return fetch(...args, {
                         credentials: 'include'
                         // method: 'POST'

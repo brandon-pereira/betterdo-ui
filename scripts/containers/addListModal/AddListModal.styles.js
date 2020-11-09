@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import _Modal from '@components/Modal';
 import { QUERIES } from '../../constants';
 
-console.log(QUERIES);
 export const Modal = styled(_Modal)`
     [data-betterdo-modal-arrow] {
         display: none;

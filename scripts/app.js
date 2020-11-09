@@ -7,7 +7,7 @@ import Container from './containers/Container';
 import Header from './containers/Header';
 import Navigation from './containers/Navigation';
 import Logo from './containers/Logo';
-// import Body from './containers/body';
+import Body from './containers/Body';
 import AddListModal from './containers/AddListModal';
 import EditListModal from './containers/EditListModal';
 // import EditTaskModal from './containers/editTaskModal';
@@ -20,7 +20,7 @@ const App = () => (
                 <Logo />
                 <Header />
                 <Navigation />
-                {/* <Body /> */}
+                <Body />
                 <AddListModal />
                 <EditListModal />
                 {/* <EditTaskModal /> */}
