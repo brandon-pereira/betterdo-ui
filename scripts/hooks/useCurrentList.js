@@ -10,20 +10,23 @@ function useCurrentListOnce() {
         completedTasks: []
     });
     const [currentList, setCurrentList] = useState('inbox');
+    console.log(currentList);
+    console.log(`${process.env.SERVER_URL}/api/lists/${currentList}`);
     const { data, error } = useSWR(
-        `${process.env.SERVER_URL}/api/init/${currentList}`
+        `${process.env.SERVER_URL}/api/lists/${currentList}`
     );
 
     useEffect(() => {
         if (data && !error) {
-            previousList.current = data.currentList;
+            previousList.current = data;
         }
     }, [data, error]);
 
     return {
+        error,
         loading: Boolean(!data),
         switchList: id => setCurrentList(id),
-        currentList: data ? data.currentList : previousList.current
+        currentList: data ? data : previousList.current
     };
 }
 

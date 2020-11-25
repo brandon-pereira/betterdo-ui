@@ -10,7 +10,7 @@ import Logo from './containers/Logo';
 import Body from './containers/Body';
 import AddListModal from './containers/AddListModal';
 import EditListModal from './containers/EditListModal';
-// import EditTaskModal from './containers/editTaskModal';
+import EditTaskModal from './containers/EditTaskModal';
 // import UserSettingsModal from './containers/userSettingsModal';
 
 const App = () => (
@@ -23,7 +23,7 @@ const App = () => (
                 <Body />
                 <AddListModal />
                 <EditListModal />
-                {/* <EditTaskModal /> */}
+                <EditTaskModal />
                 {/* <UserSettingsModal /> */}
             </Container>
         </Route>

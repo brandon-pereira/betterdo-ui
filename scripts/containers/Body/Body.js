@@ -71,10 +71,10 @@ function Body() {
             window.location.reload();
         }
     };
-    const { currentList } = useCurrentList();
+    const { currentList, error } = useCurrentList();
     const { modalVisibility } = useModals();
-    console.log(currentList);
-    const hasServerError = false;
+    console.log(currentList, error);
+    const hasServerError = Boolean(error);
     const showAllCaughtUpBanner =
         !hasServerError &&
         currentList.tasks.length === 0 &&
@@ -96,7 +96,7 @@ function Body() {
                     title="Oops!"
                     body="There was an issue connecting to the server."
                     buttonText="Reload"
-                    buttonAction={this.reloadBrowser}
+                    buttonAction={reloadBrowser}
                 />
             )}
             {!hasServerError && (

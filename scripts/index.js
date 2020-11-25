@@ -12,16 +12,16 @@ document.querySelector('#critical-css').remove();
 
 render(
     <ThemeProvider theme={createTheme()}>
-        <BrowserRouter>
-            <GlobalStyles />
+        <ErrorBoundary>
             <SWRProvider>
                 <SharedProviders>
-                    <ErrorBoundary>
+                    <BrowserRouter>
+                        <GlobalStyles />
                         <App />
-                    </ErrorBoundary>
+                    </BrowserRouter>
                 </SharedProviders>
             </SWRProvider>
-        </BrowserRouter>
+        </ErrorBoundary>
     </ThemeProvider>,
     document.querySelector('.main-container')
 );

@@ -12,7 +12,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
     mode: isProduction ? 'production' : 'development',
-    devtool: isProduction ? false : 'eval-source-map',
+    devtool: isProduction ? false : 'eval-cheap-source-map',
     entry: ['react-hot-loader/patch', './scripts/index.js'],
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -32,6 +32,12 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /\.m?js/,
+                resolve: {
+                    fullySpecified: false
+                }
+            },
             {
                 test: /\.js?$/,
                 exclude: /node_modules/,
@@ -83,7 +89,7 @@ function getPlugins() {
             GOOGLE_ANALYTICS_ID: undefined,
             VERSION: process.env.npm_package_version
         }),
-        new CopyPlugin(['static']),
+        new CopyPlugin({ patterns: ['static'] }),
         new HtmlWebpackPlugin({
             template: 'index.html',
             base: false,
@@ -93,7 +99,7 @@ function getPlugins() {
     ];
 
     if (!isProduction) {
-        plugins.push(new webpack.SourceMapDevToolPlugin());
+        // plugins.push(new webpack.SourceMapDevToolPlugin());
     } else {
         const publicPath = isProduction ? `/app/` : '';
         plugins.push(
