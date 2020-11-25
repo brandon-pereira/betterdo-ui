@@ -1,10 +1,12 @@
-import { useCallback, useState } from 'react';
 import useSWR from 'swr';
+import ms from 'ms.macro';
 
 import createSharedHook from './internal/createSharedHook';
 
 function useListsOnce() {
-    const { data, error } = useSWR(`${process.env.SERVER_URL}/api/lists`);
+    const { data, error } = useSWR(`${process.env.SERVER_URL}/api/lists`, {
+        dedupingInterval: ms('10m')
+    });
 
     if (error) {
         console.error(error);

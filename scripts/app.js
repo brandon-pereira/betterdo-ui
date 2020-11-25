@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Switch, Redirect, Route } from 'react-router-dom';
-
 // Components
 import Container from './containers/Container';
 import Header from './containers/Header';
@@ -14,21 +12,16 @@ import EditTaskModal from './containers/EditTaskModal';
 // import UserSettingsModal from './containers/userSettingsModal';
 
 const App = () => (
-    <Switch>
-        <Route path="/:listd">
-            <Container>
-                <Logo />
-                <Header />
-                <Navigation />
-                <Body />
-                <AddListModal />
-                <EditListModal />
-                <EditTaskModal />
-                {/* <UserSettingsModal /> */}
-            </Container>
-        </Route>
-        <Redirect from="/" to="/inbox" />
-    </Switch>
+    <Container>
+        <Logo />
+        <Header />
+        <Navigation />
+        <Body />
+        <AddListModal />
+        <EditListModal />
+        <EditTaskModal />
+        {/* <UserSettingsModal /> */}
+    </Container>
 );
 
 export default App;

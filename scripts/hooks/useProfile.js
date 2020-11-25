@@ -1,14 +1,17 @@
 import useSWR from 'swr';
+import ms from 'ms.macro';
 
 import createSharedHook from './internal/createSharedHook';
 
 function useProfileOnce() {
-    const { data, error } = useSWR(`${process.env.SERVER_URL}/api/init`);
+    const { data, error } = useSWR(`${process.env.SERVER_URL}/api/user`, {
+        dedupingInterval: ms('2hr')
+    });
 
     return {
         error: error,
         loading: Boolean(!data),
-        profile: data ? data.user : null
+        profile: data ? data : null
     };
 }
 

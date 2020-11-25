@@ -1,20 +1,23 @@
-import { useRef, useEffect, useState } from 'react';
-import useSWR from 'swr';
+import { useRef, useEffect, useCallback } from 'react';
+import useSWR, { mutate } from 'swr';
+import { COLORS } from '../constants';
 
 import createSharedHook from './internal/createSharedHook';
+import { useHistory, useParams } from 'react-router-dom';
 
 function useCurrentListOnce() {
     const previousList = useRef({
-        color: 'red',
+        color: COLORS.defaultList,
         tasks: [],
         completedTasks: []
     });
-    const [currentList, setCurrentList] = useState('inbox');
-    console.log(currentList);
-    console.log(`${process.env.SERVER_URL}/api/lists/${currentList}`);
-    const { data, error } = useSWR(
-        `${process.env.SERVER_URL}/api/lists/${currentList}`
-    );
+    const { currentListId } = useParams();
+    console.log(currentListId);
+    const history = useHistory();
+    const { data, error } = useSWR(getUrl(currentListId), {
+        dedupingInterval: 5000,
+        refreshInterval: 30000
+    });
 
     useEffect(() => {
         if (data && !error) {
@@ -22,13 +25,37 @@ function useCurrentListOnce() {
         }
     }, [data, error]);
 
+    useEffect(() => {
+        if (error && error.message === 'Invalid List ID') {
+            console.warn('Invalid list detected, redirecting to inbox.');
+            history.replace('/inbox');
+        }
+    }, [error, history]);
+
+    const switchList = useCallback(
+        async nextList => {
+            // update the local data immediately, but disable the revalidation
+            await mutate(
+                getUrl(nextList.id),
+                list => ({ ...nextList, ...list }),
+                false
+            );
+            // update url
+            history.push(`/${nextList.id}`);
+        },
+        [history]
+    );
+
     return {
         error,
         loading: Boolean(!data),
-        switchList: id => setCurrentList(id),
+        switchList,
+        currentListId,
         currentList: data ? data : previousList.current
     };
 }
+
+const getUrl = listId => `${process.env.SERVER_URL}/api/lists/${listId}`;
 
 const {
     Provider: CurrentListProvider,

@@ -47,7 +47,8 @@ module.exports = {
                         options: {
                             plugins: [
                                 'babel-plugin-styled-components',
-                                'react-hot-loader/babel'
+                                'react-hot-loader/babel',
+                                'macros'
                             ],
                             presets: [
                                 [

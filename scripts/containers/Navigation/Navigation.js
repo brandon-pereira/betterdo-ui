@@ -15,20 +15,18 @@ import useLists from '@hooks/useLists';
 
 const SortableItem = SortableElement(({ value, onClick, currentId }) => (
     <ListItem
-        {...{
-            selected: value._id === currentId
-        }}
+        selected={value._id === currentId}
         key={value._id}
         type={value.type}
         title={value.title}
         color={value.color}
-        onClick={() => onClick(value._id)}
+        onClick={() => onClick(value)}
     />
 ));
 
 const SortableList = SortableContainer(({ items, currentId, onClick }) => {
     return (
-        <div>
+        <>
             {items.map((task, index) => (
                 <SortableItem
                     key={typeof task === 'object' ? task._id : index}
@@ -39,13 +37,13 @@ const SortableList = SortableContainer(({ items, currentId, onClick }) => {
                     disabled={task.type !== 'default'}
                 />
             ))}
-        </div>
+        </>
     );
 });
 
 function Navigation() {
     const { modalVisibility, openModal, closeModal } = useModals();
-    const { currentList, switchList } = useCurrentList();
+    const { currentListId, switchList } = useCurrentList();
     const { lists } = useLists();
 
     const onSortEnd = ({ oldIndex, newIndex }) => {
@@ -78,7 +76,7 @@ function Navigation() {
                         lockAxis="y"
                         pressDelay={200}
                         items={lists}
-                        currentId={currentList._id}
+                        currentId={currentListId}
                         onSortEnd={onSortEnd}
                         onClick={switchList}
                     />

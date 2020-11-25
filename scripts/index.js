@@ -1,8 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { ThemeProvider } from 'styled-components';
+import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom';
+
 import { createTheme, GlobalStyles } from './utilities/style-utils';
-import { BrowserRouter } from 'react-router-dom';
 import SharedProviders from '@hooks/internal/SharedProviders';
 import App from './App';
 import ErrorBoundary from '@components/ErrorBoundary';
@@ -13,14 +14,19 @@ document.querySelector('#critical-css').remove();
 render(
     <ThemeProvider theme={createTheme()}>
         <ErrorBoundary>
-            <SWRProvider>
-                <SharedProviders>
-                    <BrowserRouter>
-                        <GlobalStyles />
-                        <App />
-                    </BrowserRouter>
-                </SharedProviders>
-            </SWRProvider>
+            <BrowserRouter>
+                <Switch>
+                    <Route path="/:currentListId">
+                        <SWRProvider>
+                            <SharedProviders>
+                                <GlobalStyles />
+                                <App />
+                            </SharedProviders>
+                        </SWRProvider>
+                    </Route>
+                    <Redirect from="/" to="/inbox" />
+                </Switch>
+            </BrowserRouter>
         </ErrorBoundary>
     </ThemeProvider>,
     document.querySelector('.main-container')

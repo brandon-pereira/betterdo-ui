@@ -13,7 +13,7 @@ const SortableItem = SortableElement(({ value }) => <Task task={value} />);
 
 const SortableList = SortableContainer(({ items }) => {
     return (
-        <div>
+        <>
             {items.map((task, index) => (
                 <SortableItem
                     key={typeof task === 'object' ? task._id : index}
@@ -21,7 +21,7 @@ const SortableList = SortableContainer(({ items }) => {
                     value={task}
                 />
             ))}
-        </div>
+        </>
     );
 });
 
@@ -77,6 +77,7 @@ function Body() {
     const hasServerError = Boolean(error);
     const showAllCaughtUpBanner =
         !hasServerError &&
+        currentList.tasks &&
         currentList.tasks.length === 0 &&
         (currentList.additionalTasks !== 0 ||
             !currentList.completedTasks.find(task => typeof task !== 'string'));
@@ -103,16 +104,17 @@ function Body() {
                 <>
                     <SortableList
                         pressDelay={200}
-                        items={currentList.tasks}
+                        items={currentList.tasks || []}
                         onSortEnd={onSortEnd}
                     />
                     <div>
-                        {currentList.completedTasks.map((task, index) => {
-                            if (typeof task === 'object') {
-                                return <Task task={task} />;
-                            }
-                            return null;
-                        })}
+                        {currentList.completedTasks &&
+                            currentList.completedTasks.map((task, index) => {
+                                if (typeof task === 'object') {
+                                    return <Task task={task} />;
+                                }
+                                return null;
+                            })}
                     </div>
                     <CompletedTasksButton
                         hidden={

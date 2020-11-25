@@ -8,17 +8,20 @@ function SWRProvider({ children }) {
                 // revalidateOnMount: false,
                 //   refreshInterval: 3000,
                 fetcher: async (...args) => {
-                    // console.log(args);
                     const res = await fetch(...args, {
                         credentials: 'include'
-                        // method: 'POST'
                     });
-
-                    // const res = await fetch('/api/teams/my-team')
-
-                    if (res.status === 401) throw new Error('Not authorized');
-                    // if (res.status === 404) return { team: null };
-                    // if (res.status === 200) return { team: await res.json() };
+                    if (res.status >= 400) {
+                        let error = 'Unexpected Error';
+                        try {
+                            const data = await res.json();
+                            error = data.error;
+                        } catch (err) {
+                            error = 'Internal Error';
+                        }
+                        console.error('API Request Failed!', ...args, error);
+                        throw new Error(error);
+                    }
 
                     return await res.json();
                 }
