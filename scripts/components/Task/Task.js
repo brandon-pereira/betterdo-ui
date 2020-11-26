@@ -30,7 +30,7 @@ function Task({ task }) {
             priority={task.priority}
         >
             {task.isLoading ? (
-                <Loader color="#202020" size="1.7rem" isLoading={true} />
+                <Loader color="#202020" size="1.7rem" isVisible={true} />
             ) : (
                 <Checkbox
                     type="checkbox"

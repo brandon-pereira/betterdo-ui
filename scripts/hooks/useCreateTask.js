@@ -1,22 +1,41 @@
-import { useRef, useEffect, useState } from 'react';
-import useSWR from 'swr';
+import { useRef, useEffect, useState, useCallback } from 'react';
+import useSWR, { mutate } from 'swr';
+import useCurrentList from './useCurrentList';
+import { createTask } from '@utilities/server';
 
 function useCreateTask() {
-    const { data, error } = useSWR(
-        `${process.env.SERVER_URL}/api/lists/${currentList}`
-    );
-
-    useEffect(() => {
-        if (data && !error) {
-            previousList.current = data;
-        }
-    }, [data, error]);
-
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const { currentListId } = useCurrentList();
+    const _createTask = useCallback(async taskName => {
+        setLoading(true);
+        const tempId = Math.floor(Math.random() * 1000);
+        await mutate(
+            `${process.env.SERVER_URL}/api/lists/${currentListId}`,
+            async currentList => {
+                return {
+                    ...currentList,
+                    tasks: [
+                        {
+                            _id: tempId,
+                            title: taskName,
+                            priority: 'normal',
+                            isLoading: true
+                        },
+                        ...currentList.tasks
+                    ]
+                };
+            },
+            false
+        );
+        await createTask(taskName, currentListId);
+        await mutate(`${process.env.SERVER_URL}/api/lists/${currentListId}`);
+        setLoading(false);
+    }, []);
     return {
+        loading,
         error,
-        loading: Boolean(!data),
-        switchList: id => setCurrentList(id),
-        currentList: data ? data : previousList.current
+        createTask: _createTask
     };
 }
 

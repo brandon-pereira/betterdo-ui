@@ -1,130 +1,96 @@
-export default class Server {
-    constructor() {
-        this.baseUrl = `${process.env.ROOT_APP_DIR}api`;
-    }
+const baseUrl = `${process.env.SERVER_URL}/api`;
 
-    async init(listId) {
-        const response = await this.get('init' + (listId ? `/${listId}` : ''));
-        return response;
-    }
+export const createTask = (taskName, listId) => {
+    return _put(`tasks`, {
+        title: taskName,
+        listId
+    });
+};
+// createList(list) {
+//     return this.put(`lists`, list);
+// }
 
-    async getLists() {
-        const lists = await this.get('lists');
-        return lists.lists || [];
-    }
+// updateTask(taskId, props) {
+//     return this.post(`tasks/${taskId}`, props);
+// }
 
-    async getInbox() {
-        const inbox = await this.getList('inbox');
-        return inbox;
-    }
+// updateList(listId, props) {
+//     return this.post(`lists/${listId}`, props);
+// }
 
-    async getList(id, params = {}) {
-        try {
-            return this.get(`lists/${id}`, params);
-        } catch (err) {
-            console.error('Failed to fetch list', id, err);
-            return {
-                title: '',
-                tasks: [],
-                _id: null,
-                color: 'red',
-                isError: true
-            };
-        }
-    }
+// deleteTask(taskId) {
+//     return this.delete(`tasks/${taskId}`);
+// }
 
-    createTask(taskName, listId) {
-        return this.put(`tasks`, {
-            title: taskName,
-            listId
-        });
-    }
-    createList(list) {
-        return this.put(`lists`, list);
-    }
+// deleteList(listId) {
+//     return this.delete(`lists/${listId}`);
+// }
 
-    updateTask(taskId, props) {
-        return this.post(`tasks/${taskId}`, props);
-    }
+// updateUser(props) {
+//     return this.post(`users`, props);
+// }
 
-    updateList(listId, props) {
-        return this.post(`lists/${listId}`, props);
-    }
+// getUserByEmail(email) {
+//     return this.get(`users/${email}`);
+// }
 
-    deleteTask(taskId) {
-        return this.delete(`tasks/${taskId}`);
-    }
+function _throwError(message = 'An unexpected error ocurred', error = null) {
+    const err = new Error(error || message);
+    err.formattedMessage = message;
+    throw err;
+}
 
-    deleteList(listId) {
-        return this.delete(`lists/${listId}`);
-    }
+/**
+ * Performs a GET request
+ * @param {String} url the RELATIVE path
+ * @param {Object} queryParameters key/value pair of queryParameters
+ */
+function _get(url, queryParameters = {}) {
+    let params = new URLSearchParams(queryParameters);
+    params = params.toString() ? `?${params}` : '';
+    return this.fetch(`${this.baseUrl}/${url}${params}`);
+}
 
-    updateUser(props) {
-        return this.post(`users`, props);
-    }
+function _delete(url) {
+    return this.fetch(`${this.baseUrl}/${url}`, {
+        method: 'DELETE'
+    });
+}
 
-    getUserByEmail(email) {
-        return this.get(`users/${email}`);
-    }
+function _post(url, data = {}) {
+    return this.fetch(`${this.baseUrl}/${url}`, {
+        method: 'POST',
+        body: JSON.stringify(data)
+    });
+}
 
-    throwError(message = 'An unexpected error ocurred', error = null) {
-        const err = new Error(error || message);
-        err.formattedMessage = message;
-        throw err;
-    }
+function _put(url, data = {}) {
+    return _fetch(`${baseUrl}/${url}`, {
+        method: 'PUT',
+        body: JSON.stringify(data)
+    });
+}
 
-    /**
-     * Performs a GET request
-     * @param {String} url the RELATIVE path
-     * @param {Object} queryParameters key/value pair of queryParameters
-     */
-    get(url, queryParameters = {}) {
-        let params = new URLSearchParams(queryParameters);
-        params = params.toString() ? `?${params}` : '';
-        return this.fetch(`${this.baseUrl}/${url}${params}`);
-    }
-
-    delete(url) {
-        return this.fetch(`${this.baseUrl}/${url}`, {
-            method: 'DELETE'
-        });
-    }
-
-    post(url, data = {}) {
-        return this.fetch(`${this.baseUrl}/${url}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8'
-            },
-            body: JSON.stringify(data)
-        });
-    }
-
-    put(url, data = {}) {
-        return this.fetch(`${this.baseUrl}/${url}`, {
-            method: 'PUT',
+async function _fetch(url, data) {
+    let response;
+    try {
+        response = await fetch(url, {
+            credentials: 'include',
             headers: {
                 Accept: 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json; charset=utf-8'
             },
-            body: JSON.stringify(data)
+            ...data
         });
+    } catch (err) {
+        await _throwError(undefined, err);
     }
-
-    async fetch(url, data) {
-        let response;
-        try {
-            response = await fetch(url, data);
-        } catch (err) {
-            await this.throwError(undefined, err);
+    if (!response.ok) {
+        if (response.status === 401) {
+            window.location = process.env.ROOT_APP_DIR;
         }
-        if (!response.ok) {
-            if (response.status === 401) {
-                window.location = process.env.ROOT_APP_DIR;
-            }
-            const message = (await response.json()).error;
-            this.throwError(message);
-        }
-        return await response.json();
+        const message = (await response.json()).error;
+        _throwError(message);
     }
+    return await response.json();
 }

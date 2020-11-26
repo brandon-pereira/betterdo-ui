@@ -8,6 +8,7 @@ import arrayMove from 'array-move';
 import { Container, CompletedTasksButton } from './Body.styles';
 import useCurrentList from '@hooks/useCurrentList';
 import useModals from '@hooks/useModals';
+import useCreateTask from '@hooks/useCreateTask';
 
 const SortableItem = SortableElement(({ value }) => <Task task={value} />);
 
@@ -72,6 +73,7 @@ function Body() {
         }
     };
     const { currentList, error } = useCurrentList();
+    const { createTask } = useCreateTask();
     const { modalVisibility } = useModals();
     console.log(currentList, error);
     const hasServerError = Boolean(error);
@@ -86,7 +88,7 @@ function Body() {
             {/* {this.getNotificationBanner()} */}
             <AddTask
                 hidden={currentList.type === 'loading' || hasServerError}
-                createTask={title => this.props.store.createTask(title)}
+                createTask={createTask}
             />
             {showAllCaughtUpBanner && (
                 <Banner icon="betterdo" body="You're all caught up!" />

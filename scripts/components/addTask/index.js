@@ -21,7 +21,7 @@ const AddTask = function({ createTask, hidden }) {
             try {
                 await createTask(title);
             } catch (err) {
-                console.log(err);
+                console.error(err);
             }
             console.log('HERE');
             // setInvalid(false);
