@@ -18,6 +18,7 @@ import useLists from '@hooks/useLists';
 import useCurrentTaskId from '@hooks/useCurrentTaskId';
 import useTaskDetails from '@hooks/useTaskDetails';
 import useCurrentListId from '@hooks/useCurrentListId';
+import { COLORS } from '../../constants';
 
 const PRIORITIES = [
     { value: 'low', label: 'Low' },
@@ -241,6 +242,7 @@ function EditTaskContent() {
                     Save
                 </Button>
                 <Button
+                    color={COLORS.red}
                     onClick={deleteTask}
                     isLoading={state.isDeleting}
                     loadingText="Deleting"

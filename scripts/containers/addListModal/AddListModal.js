@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useLayoutEffect } from 'react';
 import { Loader } from '@components/Modal';
 import { Modal } from './AddListModal.styles';
-import useModals from '@hooks/useModals';
 import loadable from '@loadable/component';
 import useNewListModal from '@hooks/useNewListModal';
 

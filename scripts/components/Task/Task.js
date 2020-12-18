@@ -13,14 +13,14 @@ function Task({ task }) {
     const { openTaskModal } = useEditTaskModal();
     const onEditTask = useCallback(() => {
         openTaskModal(task._id);
-    }, [task]);
+    }, [openTaskModal, task]);
 
     const onToggleTaskCompletion = useCallback(() => {
-        const { _id, isCompleted } = task;
-        updateTask(_id, {
-            isCompleted: !isCompleted
-        });
-    }, [task]);
+        // const { _id, isCompleted } = task;
+        // updateTask(_id, {
+        //     isCompleted: !isCompleted
+        // });
+    }, []);
 
     return (
         <Container

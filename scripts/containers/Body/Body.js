@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import AddTask from '../../components/AddTask';
 import Banner from '../../components/banner';
 import Task from '../../components/Task';
@@ -28,11 +28,14 @@ const SortableList = SortableContainer(({ items }) => {
 });
 
 function Body() {
-    const [loadingCompletedTasks, setLoadingCompletedTasks] = useState(false);
     const currentListId = useCurrentListId();
-    const { list: currentList, loadCompletedTasks, error } = useListDetails(
-        currentListId
-    );
+    const {
+        list: currentList,
+        loading,
+        isCompletedTasksIncluded,
+        setIncludeCompletedTasks,
+        error
+    } = useListDetails(currentListId);
     const { createTask } = useCreateTask();
     const { modalVisibility } = useModals();
 
@@ -74,12 +77,6 @@ function Body() {
         }
     };
 
-    const _loadCompletedTasks = async () => {
-        setLoadingCompletedTasks(true);
-        await loadCompletedTasks(currentList._id);
-        setLoadingCompletedTasks(false);
-    };
-
     const hasServerError = Boolean(error);
     const showAllCaughtUpBanner =
         !hasServerError &&
@@ -114,9 +111,9 @@ function Body() {
                         onSortEnd={onSortEnd}
                     />
                     {currentList.completedTasks &&
-                        currentList.completedTasks.map((task, index) => {
+                        currentList.completedTasks.map(task => {
                             if (typeof task === 'object') {
-                                return <Task {...task} />;
+                                return <Task key={task._id} task={task} />;
                             }
                             return null;
                         })}
@@ -128,9 +125,9 @@ function Body() {
                             currentList.additionalTasks === 0
                         }
                         hasCaughtUpBanner={showAllCaughtUpBanner}
-                        isLoading={loadingCompletedTasks}
+                        isLoading={loading && isCompletedTasksIncluded}
                         color="#999999"
-                        onClick={_loadCompletedTasks}
+                        onClick={() => setIncludeCompletedTasks(true)}
                     >
                         {currentList.additionalTasks} completed tasks
                     </CompletedTasksButton>

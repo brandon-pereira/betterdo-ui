@@ -1,9 +1,8 @@
-import { useRef, useEffect, useCallback, useState } from 'react';
-import useSWR, { mutate } from 'swr';
+import { useRef, useEffect, useState } from 'react';
+import useSWR from 'swr';
 import { COLORS } from '../constants';
 
-import createSharedHook from './internal/createSharedHook';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function useListDetails(listId) {
     const previousList = useRef({
@@ -11,11 +10,21 @@ function useListDetails(listId) {
         tasks: [],
         completedTasks: []
     });
+    const [isCompletedTasksIncluded, setIncludeCompletedTasks] = useState(
+        false
+    );
     const history = useHistory();
-    const { data, error } = useSWR(getUrl(listId), {
+    const { data, error } = useSWR(getUrl(listId, isCompletedTasksIncluded), {
         dedupingInterval: 5000,
         refreshInterval: 30000
     });
+
+    // cleanup on list change
+    useEffect(() => {
+        setIncludeCompletedTasks(false);
+    }, [listId]);
+
+    console.log(data);
 
     useEffect(() => {
         if (data && !error) {
@@ -30,25 +39,16 @@ function useListDetails(listId) {
         }
     }, [error, history]);
 
-    const loadCompletedTasks = useCallback(async () => {
-        console.log('LAOD MORE');
-    }, []);
-
     return {
         error,
         loading: Boolean(!data),
-        loadCompletedTasks,
+        isCompletedTasksIncluded,
+        setIncludeCompletedTasks,
         list: data ? data : previousList.current
     };
 }
 
-const getUrl = listId => `${process.env.SERVER_URL}/api/lists/${listId}`;
+const getUrl = (listId, includeCompleted) =>
+    `${process.env.SERVER_URL}/api/lists/${listId}?includeCompleted=${includeCompleted}`;
 
-// const {
-//     Provider: CurrentListProvider,
-//     Context: CurrentListContext,
-//     useConsumer: useCurrentList
-// } = createSharedHook(useCurrentListOnce);
-
-// export { CurrentListContext, CurrentListProvider };
 export default useListDetails;

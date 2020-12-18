@@ -34,7 +34,7 @@ const Modal = React.forwardRef(
                         icon="x"
                         color="#a9a9a9"
                         size="1rem"
-                        onClick={() => closeModal()}
+                        onClick={closeModal}
                     >
                         Close
                     </ModalClose>

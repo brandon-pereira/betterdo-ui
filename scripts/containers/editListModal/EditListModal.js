@@ -12,8 +12,8 @@ const Content = loadable(() => import('./content'), {
 function EditListModalContainer({ isOpen }) {
     const { closeModal } = useEditListModal();
     return (
-        <Modal onRequestClose={() => closeModal('editList')} visible={isOpen}>
-            {isOpen && <Content onClose={() => closeModal('editList')} />}
+        <Modal onRequestClose={closeModal} visible={isOpen}>
+            {isOpen && <Content onClose={closeModal} />}
         </Modal>
     );
 }
