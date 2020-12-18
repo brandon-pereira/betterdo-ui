@@ -16,7 +16,7 @@ render(
         <ErrorBoundary>
             <BrowserRouter>
                 <Switch>
-                    <Route path="/:currentListId">
+                    <Route path="/:currentListId/:subroute?/:subrouteId?">
                         <SWRProvider>
                             <SharedProviders>
                                 <GlobalStyles />

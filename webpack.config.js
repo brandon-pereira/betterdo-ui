@@ -16,12 +16,13 @@ module.exports = {
     entry: ['react-hot-loader/patch', './scripts/index.js'],
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.min.js'
+        filename: 'bundle.min.js',
+        publicPath: '/'
     },
     devServer: {
         hot: true,
         historyApiFallback: true,
-        contentBase: './dist',
+        contentBase: path.resolve(__dirname, 'dist'),
         stats: 'minimal',
         proxy: {
             '/auth': 'http://localhost:8000'

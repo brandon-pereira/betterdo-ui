@@ -4,7 +4,7 @@ import { StyledButton } from './styles';
 
 const Button = ({ children, type, ...props }) => (
     <StyledButton type={type || 'button'} {...props}>
-        {props.isLoading && <Loader isLoading={true} size="1rem" />}
+        {props.isLoading && <Loader isVisible={true} size="1rem" />}
         {props.isLoading ? (
             <span>{props.loadingText || 'Loading'}</span>
         ) : (

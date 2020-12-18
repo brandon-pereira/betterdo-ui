@@ -1,4 +1,4 @@
-import useTask from '@hooks/useTask';
+import useCurrentTask from '@hooks/useCurrentTask';
 import React, { useCallback } from 'react';
 
 import {
@@ -10,18 +10,17 @@ import {
 } from './Task.styles';
 
 function Task({ task }) {
-    const [, setCurrentTask] = useTask();
+    const { openTaskModal } = useCurrentTask();
     const onEditTask = useCallback(() => {
-        console.log('HERE');
-        setCurrentTask(task);
-    }, []);
+        openTaskModal(task._id);
+    }, [task]);
 
     const onToggleTaskCompletion = useCallback(() => {
-        const { _id, isCompleted } = this.props.task;
-        this.props.store.updateTask(_id, {
+        const { _id, isCompleted } = task;
+        updateTask(_id, {
             isCompleted: !isCompleted
         });
-    }, []);
+    }, [task]);
 
     return (
         <Container

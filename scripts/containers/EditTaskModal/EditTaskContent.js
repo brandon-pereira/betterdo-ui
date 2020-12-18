@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from '@components/copy';
 import Selector from '@components/selector';
 import { Label, Input } from '@components/forms';
@@ -15,6 +15,7 @@ import {
     ButtonContainer
 } from './EditTask.styles';
 import useLists from '@hooks/useLists';
+import useCurrentTask from '@hooks/useCurrentTask';
 
 const PRIORITIES = [
     { value: 'low', label: 'Low' },
@@ -22,8 +23,16 @@ const PRIORITIES = [
     { value: 'high', label: 'High' }
 ];
 
-function EditTaskContent({ task }) {
-    // const task =
+const defaultTask = {
+    title: '',
+    createdBy: {
+        firstName: '',
+        lastName: ''
+    }
+};
+function EditTaskContent() {
+    const { currentTask: _task, loading, error } = useCurrentTask();
+    const task = _task || defaultTask;
     const [state, setState] = useState({
         title: task.title,
         priority: task.priority,
@@ -127,6 +136,24 @@ function EditTaskContent({ task }) {
         }
         return '';
     };
+
+    useEffect(() => {
+        setState(prevState => ({
+            ...prevState,
+            ...task
+        }));
+    }, [task]);
+
+    if (!task) {
+        return null;
+    }
+
+    if (loading) {
+        return 'LOADING';
+    }
+    if (error) {
+        return 'ERROR';
+    }
 
     return (
         <Container>

@@ -1,22 +1,25 @@
 import React, { useState, useCallback } from 'react';
-import useTask from '@hooks/useTask';
+import useCurrentTask from '@hooks/useCurrentTask';
 import loadable from '@loadable/component';
 import { Modal } from './EditTask.styles';
+import _Loader from '@components/Loader';
 
-// import { Loader } from './Ed'
+const Loader = () => <_Loader color="#006fb0" size="4rem" isVisible={true} />;
+
 const Content = loadable(() => import('./EditTaskContent'), {
-    // fallback: <Loader />
+    fallback: <Loader />
 });
 
-function EditTaskContainer() {
+function EditTaskContainer({ isOpen }) {
     const [hasUnsavedChanges, setUnsavedChanges] = useState(false);
-    const [task, setTask] = useTask();
-    const isVisible = Boolean(task);
+    const { loading, error, currentTask, closeTaskModal } = useCurrentTask();
 
     const onClose = useCallback(() => {
-        setTask(null);
-        setUnsavedChanges(false);
-    }, []);
+        if (canCloseModal()) {
+            closeTaskModal();
+            setUnsavedChanges(false);
+        }
+    }, [canCloseModal, closeTaskModal]);
 
     const canCloseModal = useCallback(() => {
         if (!hasUnsavedChanges) {
@@ -28,20 +31,18 @@ function EditTaskContainer() {
                 )
             );
         }
-    }, []);
+    }, [hasUnsavedChanges]);
 
     return (
         <Modal
             onRequestClose={onClose}
             canCloseModal={canCloseModal}
-            visible={isVisible}
-            //  TODO: This doesn't work...
-            // childProps={{
-            //     setUnsavedChanges: this.setUnsavedChanges.bind(this)
-            // }}
-            // asyncContent={() => import('../EditTaskModal/content')}
+            visible={isOpen}
         >
-            {isVisible && <Content task={task} />}
+            {loading && <Loader />}
+            {!loading && isOpen && (
+                <Content setUnsavedChanges={() => setUnsavedChanges(true)} />
+            )}
         </Modal>
     );
 }

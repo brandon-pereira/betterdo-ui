@@ -12,6 +12,8 @@ import {
 } from './Navigation.styles';
 import useCurrentList from '@hooks/useCurrentList';
 import useLists from '@hooks/useLists';
+import { useHistory } from 'react-router-dom';
+import useNewListModal from '@hooks/useNewListModal';
 
 const SortableItem = SortableElement(({ value, onClick, currentId }) => (
     <ListItem
@@ -42,8 +44,9 @@ const SortableList = SortableContainer(({ items, currentId, onClick }) => {
 });
 
 function Navigation() {
-    const { modalVisibility, openModal, closeModal } = useModals();
+    const { modalVisibility, closeModal } = useModals();
     const { currentListId, switchList } = useCurrentList();
+    const { openModal: openNewListModal } = useNewListModal();
     const { lists } = useLists();
 
     const onSortEnd = ({ oldIndex, newIndex }) => {
@@ -81,7 +84,7 @@ function Navigation() {
                         onClick={switchList}
                     />
 
-                    <ListItem onClick={() => openModal('newList')} newList />
+                    <ListItem onClick={openNewListModal} newList />
                 </ListsContainer>
                 <NavigationModalOverlay
                     onClick={() => closeModal('listsView')}

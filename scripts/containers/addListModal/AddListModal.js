@@ -3,14 +3,15 @@ import { Loader } from '@components/Modal';
 import { Modal } from './AddListModal.styles';
 import useModals from '@hooks/useModals';
 import loadable from '@loadable/component';
+import useNewListModal from '@hooks/useNewListModal';
 
 const Content = loadable(() => import('./content'), {
     fallback: <Loader />
 });
 
-function AddListModalContainer() {
+function AddListModalContainer({ isOpen }) {
     const modalRef = useRef();
-    const { modalVisibility, closeModal } = useModals();
+    const { closeModal } = useNewListModal();
 
     const calculatePosition = useCallback(() => {
         const $modal = modalRef.current;
@@ -51,29 +52,27 @@ function AddListModalContainer() {
     }, []);
 
     useLayoutEffect(() => {
-        if (modalVisibility.newList && modalRef.current) {
+        if (isOpen && modalRef.current) {
             calculatePosition();
         }
-    }, [modalVisibility.newList, calculatePosition]);
+    }, [isOpen, calculatePosition]);
 
     useEffect(() => {
-        if (modalVisibility.newList && modalRef.current) {
+        if (isOpen && modalRef.current) {
             window.addEventListener('resize', calculatePosition);
             return () =>
                 window.removeEventListener('resize', calculatePosition);
         }
-    }, [modalVisibility.newList, calculatePosition]);
+    }, [isOpen, calculatePosition]);
 
     return (
         <Modal
             ref={modalRef}
-            onRequestClose={() => closeModal('newList')}
+            onRequestClose={closeModal}
             onLoad={calculatePosition}
-            visible={modalVisibility['newList']}
+            visible={isOpen}
         >
-            {modalVisibility['newList'] && (
-                <Content onLoad={calculatePosition} />
-            )}
+            {isOpen && <Content onLoad={calculatePosition} />}
         </Modal>
     );
 }

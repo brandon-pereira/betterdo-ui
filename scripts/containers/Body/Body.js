@@ -28,13 +28,6 @@ const SortableList = SortableContainer(({ items }) => {
 
 function Body() {
     const [loadingCompletedTasks, setLoadingCompletedTasks] = useState(false);
-
-    const loadCompletedTasks = async () => {
-        setLoadingCompletedTasks(true);
-        await loadCompletedTasks(currentList._id);
-        setLoadingCompletedTasks(false);
-    };
-
     const onSortEnd = ({ oldIndex, newIndex }) => {
         // Indexes match, no change
         if (oldIndex === newIndex) {
@@ -72,10 +65,16 @@ function Body() {
             window.location.reload();
         }
     };
-    const { currentList, error } = useCurrentList();
+    const { currentList, loadCompletedTasks, error } = useCurrentList();
     const { createTask } = useCreateTask();
     const { modalVisibility } = useModals();
-    console.log(currentList, error);
+
+    const _loadCompletedTasks = async () => {
+        setLoadingCompletedTasks(true);
+        await loadCompletedTasks(currentList._id);
+        setLoadingCompletedTasks(false);
+    };
+
     const hasServerError = Boolean(error);
     const showAllCaughtUpBanner =
         !hasServerError &&
@@ -113,7 +112,7 @@ function Body() {
                         {currentList.completedTasks &&
                             currentList.completedTasks.map((task, index) => {
                                 if (typeof task === 'object') {
-                                    return <Task task={task} />;
+                                    return <Task {...task} />;
                                 }
                                 return null;
                             })}
@@ -128,7 +127,7 @@ function Body() {
                         hasCaughtUpBanner={showAllCaughtUpBanner}
                         isLoading={loadingCompletedTasks}
                         color="#999999"
-                        onClick={loadCompletedTasks}
+                        onClick={_loadCompletedTasks}
                     >
                         {currentList.additionalTasks} completed tasks
                     </CompletedTasksButton>

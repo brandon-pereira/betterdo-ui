@@ -12,6 +12,10 @@ function SWRProvider({ children }) {
                         credentials: 'include'
                     });
                     if (res.status >= 400) {
+                        if (res.status === 401) {
+                            window.location.href =
+                                window.origin + '/auth/google';
+                        }
                         let error = 'Unexpected Error';
                         try {
                             const data = await res.json();

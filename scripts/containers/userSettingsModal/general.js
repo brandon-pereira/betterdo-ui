@@ -35,7 +35,6 @@ class ListMembers extends Component {
     constructor(props) {
         super(props);
         const user = this.props.store.user;
-        console.log(user);
         this.state = {
             isSaving: false,
             serverError: null,

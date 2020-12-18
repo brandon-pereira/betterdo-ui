@@ -12,7 +12,12 @@ export const Modal = styled(_Modal)`
     top: 0;
     left: auto;
     bottom: 0;
-    &[data-betterdo-modal-arrow] {
+    transform: translateX(100%);
+    &.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    & [data-betterdo-modal-arrow] {
         display: none;
     }
 `;

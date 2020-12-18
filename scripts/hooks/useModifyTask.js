@@ -1,19 +1,22 @@
-import { useRef, useEffect, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import useSWR, { mutate } from 'swr';
 import useCurrentList from './useCurrentList';
 import { createTask } from '@utilities/server';
 
-function useCreateTask() {
+function useModifyTask() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const { currentListId } = useCurrentList();
-    const _createTask = useCallback(
-        async taskName => {
+
+    const _modifyTask = useCallback(
+        async (taskId, task) => {
             setLoading(true);
-            const tempId = Math.floor(Math.random() * 1000);
             await mutate(
                 `${process.env.SERVER_URL}/api/lists/${currentListId}`,
                 async currentList => {
+                    const currentTask = currentList.tasks.find(
+                        task => task.id === taskId
+                    );
                     return {
                         ...currentList,
                         tasks: [
@@ -40,8 +43,8 @@ function useCreateTask() {
     return {
         loading,
         error,
-        createTask: _createTask
+        modifyTask: _modifyTask
     };
 }
 
-export default useCreateTask;
+export default useModifyTask;

@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback, useState } from 'react';
 import useSWR, { mutate } from 'swr';
 import { COLORS } from '../constants';
 
@@ -12,7 +12,6 @@ function useCurrentListOnce() {
         completedTasks: []
     });
     const { currentListId } = useParams();
-    console.log(currentListId);
     const history = useHistory();
     const { data, error } = useSWR(getUrl(currentListId), {
         dedupingInterval: 5000,
@@ -40,16 +39,22 @@ function useCurrentListOnce() {
                 list => ({ ...nextList, ...list }),
                 false
             );
+            // setCurrentListId(nextList.id);
             // update url
-            history.push(`/${nextList.id}`);
+            history.replace(`/${nextList.id}`);
         },
         [history]
     );
+
+    const loadCompletedTasks = useCallback(async () => {
+        console.log('LAOD MORE');
+    }, []);
 
     return {
         error,
         loading: Boolean(!data),
         switchList,
+        loadCompletedTasks,
         currentListId,
         currentList: data ? data : previousList.current
     };
