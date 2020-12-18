@@ -1,4 +1,4 @@
-import useCurrentTask from '@hooks/useCurrentTask';
+import useEditTaskModal from '@hooks/useEditTaskModal';
 import React, { useCallback } from 'react';
 
 import {
@@ -10,7 +10,7 @@ import {
 } from './Task.styles';
 
 function Task({ task }) {
-    const { openTaskModal } = useCurrentTask();
+    const { openTaskModal } = useEditTaskModal();
     const onEditTask = useCallback(() => {
         openTaskModal(task._id);
     }, [task]);

@@ -1,18 +1,18 @@
 import React from 'react';
 
 import { ModalsProvider } from '../useModals';
-import { CurrentListProvider } from '../useCurrentList';
+// import { CurrentListProvider } from '../useListDetails';
 import { ProfileProvider } from '../useProfile';
 import { ListsProvider } from '../useLists';
-import { CurrentTaskProvider } from '../useCurrentTask';
+// import { CurrentTaskProvider } from '../useCurrentTask';
 
 // Order matters for some of these!
 const Providers = [
     ModalsProvider,
     ProfileProvider,
-    ListsProvider,
-    CurrentListProvider,
-    CurrentTaskProvider
+    ListsProvider
+    // CurrentListProvider,
+    // CurrentTaskProvider
 ].reverse();
 
 function SharedProviders({ children }) {

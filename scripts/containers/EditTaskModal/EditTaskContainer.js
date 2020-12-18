@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import useCurrentTask from '@hooks/useCurrentTask';
 import loadable from '@loadable/component';
 import { Modal } from './EditTask.styles';
 import _Loader from '@components/Loader';
+import useCurrentListId from '@hooks/useCurrentListId';
+import useEditTaskModal from '@hooks/useEditTaskModal';
 
 const Loader = () => <_Loader color="#006fb0" size="4rem" isVisible={true} />;
 
@@ -12,7 +13,7 @@ const Content = loadable(() => import('./EditTaskContent'), {
 
 function EditTaskContainer({ isOpen }) {
     const [hasUnsavedChanges, setUnsavedChanges] = useState(false);
-    const { loading, error, currentTask, closeTaskModal } = useCurrentTask();
+    const { closeTaskModal } = useEditTaskModal();
 
     const onClose = useCallback(() => {
         if (canCloseModal()) {
@@ -39,8 +40,7 @@ function EditTaskContainer({ isOpen }) {
             canCloseModal={canCloseModal}
             visible={isOpen}
         >
-            {loading && <Loader />}
-            {!loading && isOpen && (
+            {isOpen && (
                 <Content setUnsavedChanges={() => setUnsavedChanges(true)} />
             )}
         </Modal>

@@ -5,9 +5,8 @@ function SWRProvider({ children }) {
     return (
         <SWRConfig
             value={{
-                // revalidateOnMount: false,
-                //   refreshInterval: 3000,
                 fetcher: async (...args) => {
+                    console.log(args);
                     const res = await fetch(...args, {
                         credentials: 'include'
                     });

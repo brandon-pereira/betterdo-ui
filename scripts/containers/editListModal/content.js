@@ -3,30 +3,26 @@ import Tabs, { Tab } from '@components/tabs';
 import ListSettings from './ListSettings';
 import ListMembers from './ListMembers';
 import { Header } from '@components/copy';
-import useCurrentList from '@hooks/useCurrentList';
+import useListDetails from '@hooks/useListDetails';
+import useCurrentListId from '@hooks/useCurrentListId';
 
 function EditListModalContent({ onClose }) {
-    const { currentList } = useCurrentList();
+    const currentListId = useCurrentListId();
+    const { list } = useListDetails(currentListId);
 
     return (
         <>
-            <Header color={currentList.color}>List Settings</Header>
+            <Header color={list.color}>List Settings</Header>
             <Tabs
-                color={currentList.color}
+                color={list.color}
                 titles={['General', 'Members']}
                 showTitleAbove={true}
             >
                 <Tab>
-                    <ListSettings
-                        closeModal={onClose}
-                        currentList={currentList}
-                    />
+                    <ListSettings closeModal={onClose} currentList={list} />
                 </Tab>
                 <Tab>
-                    <ListMembers
-                        currentList={currentList}
-                        closeModal={onClose}
-                    />
+                    <ListMembers currentList={list} closeModal={onClose} />
                 </Tab>
             </Tabs>
         </>

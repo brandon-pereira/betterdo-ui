@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import useSWR, { mutate } from 'swr';
-import useCurrentList from './useCurrentList';
+import useCurrentList from './useListDetails';
 import { createTask } from '@utilities/server';
 
 function useModifyTask() {

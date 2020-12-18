@@ -8,17 +8,19 @@ import {
     SettingsButton,
     Icon
 } from './Header.styles';
-import useCurrentList from '@hooks/useCurrentList';
 import useEditListModal from '@hooks/useEditListModal';
+import useListDetails from '@hooks/useListDetails';
+import useCurrentListId from '@hooks/useCurrentListId';
 
 function Header() {
     const { modalVisibility } = useModals();
     const { openModal: openEditListModal } = useEditListModal();
-    const { currentList, loading } = useCurrentList();
+    const currentListId = useCurrentListId();
+    const { list, loading } = useListDetails(currentListId);
     return (
         <Container
             mobileNavVisible={modalVisibility.listsView}
-            color={currentList.color}
+            color={list.color}
         >
             <Hamburger
                 open={modalVisibility.listsView}
@@ -26,10 +28,10 @@ function Header() {
                 // onClick={() => openModal('listsView')}
             />
             <Loader isVisible={loading} size="2rem" />
-            <Title>{currentList.title}</Title>
+            <Title>{list.title}</Title>
             <SettingsButton
                 color="rgba(0,0,0,.2)"
-                hidden={currentList.type !== 'default'}
+                hidden={list.type !== 'default'}
                 onClick={openEditListModal}
             >
                 <Icon icon="settings" color="#fff" />

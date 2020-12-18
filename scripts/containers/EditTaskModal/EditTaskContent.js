@@ -15,7 +15,9 @@ import {
     ButtonContainer
 } from './EditTask.styles';
 import useLists from '@hooks/useLists';
-import useCurrentTask from '@hooks/useCurrentTask';
+import useCurrentTaskId from '@hooks/useCurrentTaskId';
+import useTaskDetails from '@hooks/useTaskDetails';
+import useCurrentListId from '@hooks/useCurrentListId';
 
 const PRIORITIES = [
     { value: 'low', label: 'Low' },
@@ -31,8 +33,16 @@ const defaultTask = {
     }
 };
 function EditTaskContent() {
-    const { currentTask: _task, loading, error } = useCurrentTask();
+    const currentTaskId = useCurrentTaskId();
+    const currentListId = useCurrentListId();
+    console.log('EDIT TASK', currentListId, currentTaskId);
+    const { task: _task, loading, error } = useTaskDetails(
+        currentListId,
+        currentTaskId
+    );
+    console.log(_task);
     const task = _task || defaultTask;
+    console.log(task);
     const [state, setState] = useState({
         title: task.title,
         priority: task.priority,
@@ -137,12 +147,12 @@ function EditTaskContent() {
         return '';
     };
 
-    useEffect(() => {
-        setState(prevState => ({
-            ...prevState,
-            ...task
-        }));
-    }, [task]);
+    // useEffect(() => {
+    //     setState(prevState => ({
+    //         ...prevState,
+    //         ...task
+    //     }));
+    // }, [task]);
 
     if (!task) {
         return null;

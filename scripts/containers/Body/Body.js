@@ -6,9 +6,10 @@ import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 
 import { Container, CompletedTasksButton } from './Body.styles';
-import useCurrentList from '@hooks/useCurrentList';
+import useListDetails from '@hooks/useListDetails';
 import useModals from '@hooks/useModals';
 import useCreateTask from '@hooks/useCreateTask';
+import useCurrentListId from '@hooks/useCurrentListId';
 
 const SortableItem = SortableElement(({ value }) => <Task task={value} />);
 
@@ -28,6 +29,13 @@ const SortableList = SortableContainer(({ items }) => {
 
 function Body() {
     const [loadingCompletedTasks, setLoadingCompletedTasks] = useState(false);
+    const currentListId = useCurrentListId();
+    const { list: currentList, loadCompletedTasks, error } = useListDetails(
+        currentListId
+    );
+    const { createTask } = useCreateTask();
+    const { modalVisibility } = useModals();
+
     const onSortEnd = ({ oldIndex, newIndex }) => {
         // Indexes match, no change
         if (oldIndex === newIndex) {
@@ -65,9 +73,6 @@ function Body() {
             window.location.reload();
         }
     };
-    const { currentList, loadCompletedTasks, error } = useCurrentList();
-    const { createTask } = useCreateTask();
-    const { modalVisibility } = useModals();
 
     const _loadCompletedTasks = async () => {
         setLoadingCompletedTasks(true);
@@ -108,15 +113,13 @@ function Body() {
                         items={currentList.tasks || []}
                         onSortEnd={onSortEnd}
                     />
-                    <div>
-                        {currentList.completedTasks &&
-                            currentList.completedTasks.map((task, index) => {
-                                if (typeof task === 'object') {
-                                    return <Task {...task} />;
-                                }
-                                return null;
-                            })}
-                    </div>
+                    {currentList.completedTasks &&
+                        currentList.completedTasks.map((task, index) => {
+                            if (typeof task === 'object') {
+                                return <Task {...task} />;
+                            }
+                            return null;
+                        })}
                     <CompletedTasksButton
                         hidden={
                             hasServerError ||

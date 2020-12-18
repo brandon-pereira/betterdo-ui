@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import useCurrentList from './useCurrentList';
+import useCurrentList from './useListDetails';
 
 function useCompletedTasks() {
     const [loading, setLoading] = useState(null);

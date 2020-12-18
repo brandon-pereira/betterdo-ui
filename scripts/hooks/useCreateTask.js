@@ -1,12 +1,13 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import useSWR, { mutate } from 'swr';
-import useCurrentList from './useCurrentList';
+import useCurrentList from './useListDetails';
 import { createTask } from '@utilities/server';
+import useCurrentListId from './useCurrentListId';
 
 function useCreateTask() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const { currentListId } = useCurrentList();
+    const currentListId = useCurrentListId();
     const _createTask = useCallback(
         async taskName => {
             setLoading(true);

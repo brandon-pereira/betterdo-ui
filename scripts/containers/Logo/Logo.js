@@ -2,16 +2,18 @@ import React from 'react';
 
 import useModals from '@hooks/useModals';
 import { Container, Content, Hamburger, ProfilePicture } from './Logo.styles';
-import useCurrentList from '@hooks/useCurrentList';
+import useListDetails from '@hooks/useListDetails';
 import useProfile from '@hooks/useProfile';
+import useCurrentListId from '@hooks/useCurrentListId';
 
 function Logo() {
     const { modalVisibility, closeModal } = useModals();
     const { profile } = useProfile();
-    const { currentList } = useCurrentList();
+    const currentListId = useCurrentListId();
+    const { list, loading } = useListDetails(currentListId);
     return (
         <Container
-            color={currentList.color}
+            color={list.color}
             visibleOnMobile={modalVisibility.listsView}
         >
             <Content
