@@ -24,8 +24,6 @@ function useListDetails(listId) {
         setIncludeCompletedTasks(false);
     }, [listId]);
 
-    console.log(data);
-
     useEffect(() => {
         if (data && !error) {
             previousList.current = data;
@@ -49,6 +47,8 @@ function useListDetails(listId) {
 }
 
 const getUrl = (listId, includeCompleted) =>
-    `${process.env.SERVER_URL}/api/lists/${listId}?includeCompleted=${includeCompleted}`;
+    `${process.env.SERVER_URL}/api/lists/${listId}${
+        includeCompleted ? `?includeCompleted=true` : ''
+    }`;
 
 export default useListDetails;

@@ -8,10 +8,8 @@ const getTaskFromList = (list, id) => list.tasks.find(task => task._id === id);
 
 function useTaskDetails(listId, taskId) {
     const { list, loading } = useListDetails(listId);
-    console.log(list);
     const task = useMemo(() => {
         if (!loading && list) {
-            console.log(list, taskId);
             return getTaskFromList(list, taskId);
         }
         return null;

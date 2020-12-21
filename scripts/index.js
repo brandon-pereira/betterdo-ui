@@ -16,7 +16,7 @@ render(
         <ErrorBoundary>
             <BrowserRouter>
                 <Switch>
-                    <Route path="/:currentListId">
+                    <Route path="/:currentListId?">
                         <SWRProvider>
                             <SharedProviders>
                                 <GlobalStyles />
@@ -24,7 +24,6 @@ render(
                             </SharedProviders>
                         </SWRProvider>
                     </Route>
-                    <Redirect from="/" to="/inbox" />
                 </Switch>
             </BrowserRouter>
         </ErrorBoundary>

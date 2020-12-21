@@ -6,7 +6,6 @@ function SWRProvider({ children }) {
         <SWRConfig
             value={{
                 fetcher: async (...args) => {
-                    console.log(args);
                     const res = await fetch(...args, {
                         credentials: 'include'
                     });

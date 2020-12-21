@@ -12,7 +12,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
     mode: isProduction ? 'production' : 'development',
-    devtool: isProduction ? false : 'eval-cheap-source-map',
+    devtool: isProduction ? undefined : 'eval-cheap-source-map',
     entry: ['react-hot-loader/patch', './scripts/index.js'],
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -86,7 +86,7 @@ function getPlugins() {
         new webpack.EnvironmentPlugin({
             NODE_ENV: 'development',
             SERVER_URL: isProduction
-                ? 'https://tether.branclon.com'
+                ? 'http://localhost:8000'
                 : 'http://localhost:8000',
             GOOGLE_ANALYTICS_ID: undefined,
             VERSION: process.env.npm_package_version
@@ -103,19 +103,19 @@ function getPlugins() {
     if (!isProduction) {
         // plugins.push(new webpack.SourceMapDevToolPlugin());
     } else {
-        const publicPath = isProduction ? `/app/` : '';
-        plugins.push(
-            new OfflinePlugin({
-                ServiceWorker: {
-                    entry: './scripts/service-worker.js',
-                    output: 'service-worker.js',
-                    events: true,
-                    publicPath: `${publicPath}service-worker.js`
-                },
-                publicPath: publicPath + '/',
-                externals: ['../', '../manifest.json']
-            })
-        );
+        // const publicPath = isProduction ? `/app/` : '';
+        // plugins.push(
+        //     new OfflinePlugin({
+        //         ServiceWorker: {
+        //             entry: './scripts/service-worker.js',
+        //             output: 'service-worker.js',
+        //             events: true,
+        //             publicPath: `${publicPath}service-worker.js`
+        //         },
+        //         publicPath: publicPath + '/',
+        //         externals: ['../', '../manifest.json']
+        //     })
+        // );
     }
 
     return plugins;

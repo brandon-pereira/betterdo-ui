@@ -5,8 +5,7 @@ import AccountSettings from './accountSettings';
 import CustomLists from './customLists';
 import General from './general';
 import { Header } from '../../components/copy';
-@inject('store')
-@observer
+
 class UserSettingsModalContent extends Component {
     render() {
         return (

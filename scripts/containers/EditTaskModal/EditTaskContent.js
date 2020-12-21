@@ -36,14 +36,11 @@ const defaultTask = {
 function EditTaskContent() {
     const currentTaskId = useCurrentTaskId();
     const currentListId = useCurrentListId();
-    console.log('EDIT TASK', currentListId, currentTaskId);
     const { task: _task, loading, error } = useTaskDetails(
         currentListId,
         currentTaskId
     );
-    console.log(_task);
     const task = _task || defaultTask;
-    console.log(task);
     const [state, setState] = useState({
         title: task.title,
         priority: task.priority,
@@ -116,7 +113,6 @@ function EditTaskContent() {
     };
 
     const updateTask = async updatedProperties => {
-        console.log('Update', this.task._id, updatedProperties);
         this.setState({
             ...updatedProperties,
             isSaving: true
