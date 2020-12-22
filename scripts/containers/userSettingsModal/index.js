@@ -1,28 +1,21 @@
-import React, { Component } from 'react';
-import { observer, inject } from 'mobx-react';
-import Modal from '../../components/Modal';
+import React from 'react';
+import { Loader } from '@components/Modal';
+import useEditListModal from '@hooks/useEditListModal';
+import loadable from '@loadable/component';
 
-@inject('store')
-@observer
-class UserSettingsModal extends Component {
-    get visible() {
-        return this.props.store.modalVisibility.userSettings;
-    }
+import { Modal } from './UserSettingsModal.styles';
 
-    set visible(bool) {
-        this.props.store.modalVisibility.userSettings = bool;
-        return bool;
-    }
+const Content = loadable(() => import('./content'), {
+    fallback: <Loader />
+});
 
-    render() {
-        return (
-            <Modal
-                onRequestClose={() => (this.visible = false)}
-                visible={this.visible}
-                asyncContent={() => import('./content')}
-            />
-        );
-    }
+function EditListModalContainer({ isOpen }) {
+    const { closeModal } = useEditListModal();
+    return (
+        <Modal onRequestClose={closeModal} visible={isOpen}>
+            {isOpen && <Content onClose={closeModal} />}
+        </Modal>
+    );
 }
 
-export default UserSettingsModal;
+export default EditListModalContainer;

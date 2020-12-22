@@ -11,7 +11,7 @@ function useProfileOnce() {
     return {
         error: error,
         loading: Boolean(!data),
-        profile: data ? data : null
+        profile: data ? data : {}
     };
 }
 

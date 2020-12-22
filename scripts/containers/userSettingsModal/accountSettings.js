@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, useCallback, useState } from 'react';
 import Button from '../../components/Button';
 import { Form, Label, Input } from '../../components/forms';
-import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
 import ProfilePic, {
     FormatProfilePictureUrl
 } from '../../components/profilePic';
 import { COLORS } from '../../constants';
+import useProfile from '@hooks/useProfile';
 
 const ProfilePictureBanner = styled.div`
     position: relative;
@@ -44,8 +44,6 @@ const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
 `;
-@inject('store')
-@observer
 class ListMembers extends Component {
     constructor(props) {
         super(props);
@@ -167,4 +165,70 @@ class ListMembers extends Component {
     }
 }
 
-export default ListMembers;
+function AccountSettings() {
+    const { profile, logout, loading } = useProfile();
+    const [state, setState] = useState({
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        email: profile.email
+    });
+    const [error, setError] = useState(null);
+
+    const onSubmit = useCallback(() => {
+        console.log('on sobmit');
+    }, []);
+    if (loading) {
+        return 'Loading';
+    }
+    return (
+        <Form onSubmit={e => onSubmit(e)} errorMessage={error}>
+            <ProfilePictureBanner>
+                <ProfilePictureBackground
+                    src={FormatProfilePictureUrl(profile.profilePicture)}
+                />
+                <ProfilePic size="8rem" user={profile} />
+            </ProfilePictureBanner>
+            <Label htmlFor="firstName">First Name</Label>
+            <Input
+                value={state.firstName}
+                name="firstName"
+                id="firstName"
+                invalid={Boolean(state.isInvalid === 'firstName')}
+                onChange={evt => setState({ firstName: evt.target.value })}
+                placeholder="John"
+            />
+            <Label htmlFor="lastName">Last Name</Label>
+            <Input
+                value={state.lastName}
+                name="lastName"
+                id="lastName"
+                invalid={Boolean(state.isInvalid === 'lastName')}
+                onChange={evt => setState({ lastName: evt.target.value })}
+                placeholder="Doe"
+            />
+            <Label htmlFor="email">Email</Label>
+            <Input
+                value={state.email}
+                name="email"
+                id="email"
+                invalid={Boolean(state.isInvalid === 'email')}
+                onChange={evt => setState({ email: evt.target.value })}
+                placeholder="hello@world.com"
+            />
+            <ButtonContainer>
+                <Button
+                    isLoading={state.isSaving}
+                    loadingText="Saving"
+                    type="Save"
+                >
+                    Save
+                </Button>
+                <Button onClick={logout} color={COLORS.red}>
+                    Logout
+                </Button>
+            </ButtonContainer>
+        </Form>
+    );
+}
+
+export default AccountSettings;

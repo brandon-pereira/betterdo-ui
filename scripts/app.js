@@ -10,7 +10,7 @@ import AddListModal from './containers/AddListModal';
 import EditListModal from './containers/EditListModal';
 import EditTaskModal from './containers/EditTaskModal';
 import { Route } from 'react-router-dom';
-// import UserSettingsModal from './containers/userSettingsModal';
+import UserSettingsModal from './containers/userSettingsModal';
 
 const App = () => (
     <>
@@ -42,6 +42,13 @@ const App = () => (
                     <EditTaskModal isOpen={Boolean(match)} />
                 )}
                 path="/:currentListId/edit-task/:currentTaskId"
+            />
+            <Route
+                // eslint-disable-next-line react/no-children-prop
+                children={({ match }) => (
+                    <UserSettingsModal isOpen={Boolean(match)} />
+                )}
+                path="/:currentListId/account-settings/:subroute?"
             />
         </>
     </>

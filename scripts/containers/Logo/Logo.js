@@ -5,12 +5,17 @@ import { Container, Content, Hamburger, ProfilePicture } from './Logo.styles';
 import useListDetails from '@hooks/useListDetails';
 import useProfile from '@hooks/useProfile';
 import useCurrentListId from '@hooks/useCurrentListId';
+import useGeneratedUrl from '@hooks/useGeneratedUrl';
+import { useHistory } from 'react-router-dom';
 
 function Logo() {
     const { modalVisibility, closeModal } = useModals();
+    const generateUrl = useGeneratedUrl();
+    const history = useHistory();
+
     const { profile } = useProfile();
     const currentListId = useCurrentListId();
-    const { list, loading } = useListDetails(currentListId);
+    const { list } = useListDetails(currentListId);
     return (
         <Container
             color={list.color}
@@ -33,9 +38,12 @@ function Logo() {
                     Better
                     <span>Do.</span>
                 </h1>
-                {profile && (
+                {profile && profile.firstName && (
                     <ProfilePicture
-                        onClick={() => (modalVisibility.userSettings = true)}
+                        onClick={e => {
+                            e.stopPropagation();
+                            history.replace(generateUrl('/account-settings'));
+                        }}
                         user={profile}
                     />
                 )}

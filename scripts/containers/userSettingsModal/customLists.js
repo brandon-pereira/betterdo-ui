@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, useCallback, Fragment, useState } from 'react';
 import { Body } from '../../components/copy';
 import { Error } from '../../components/forms';
 import Icon from '../../components/icon';
 import Toggle from '../../components/toggle';
-import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
 import { COLORS } from '../../constants';
 
@@ -38,8 +37,6 @@ const IconHolder = styled.div`
     }
 `;
 
-@inject('store')
-@observer
 class ListMembers extends Component {
     constructor(props) {
         super(props);
@@ -82,35 +79,76 @@ class ListMembers extends Component {
         }
     }
 
-    render() {
-        return (
-            <Fragment>
-                {this.state.serverError && (
-                    <Error>{this.state.serverError}</Error>
-                )}
-                <Body>
-                    Enable or disable custom lists to customize your BetterDo
-                    experience.
-                </Body>
-                <CustomListsContainer>
-                    {Object.entries(this.lists).map(([id, value]) => (
-                        <CustomList key={id}>
-                            <IconHolder>
-                                <Icon icon={value.icon} color="#fff" />
-                            </IconHolder>
-                            <Title>{value.title}</Title>
-                            <Toggle
-                                onChange={(e, bool) =>
-                                    this.onCustomListToggle(id, bool)
-                                }
-                                checked={this.state.customLists[id]}
-                            />
-                        </CustomList>
-                    ))}
-                </CustomListsContainer>
-            </Fragment>
-        );
-    }
+    // render() {}
 }
 
-export default ListMembers;
+const CUSTOM_LISTS = [
+    {
+        id: 'highPriority',
+        title: 'High Priority',
+        icon: 'bookmarks'
+    },
+    {
+        id: 'today',
+        title: 'Today',
+        icon: 'alarm'
+    },
+    {
+        id: 'tomorrow',
+        title: 'Tomorrow',
+        icon: 'calendar'
+    }
+];
+function CustomListSettings() {
+    const [error, setError] = useState(null);
+    const [customLists] = useState({
+        customLists: {
+            highPriority: true
+        }
+    });
+    const onCustomListToggle = useCallback(async (id, bool) => {
+        this.setState({
+            serverError: null
+        });
+        try {
+            await this.props.store.updateUser({
+                customLists: {
+                    [id]: bool
+                }
+            });
+        } catch (err) {
+            this.setState({
+                serverError: err.formattedMessage
+            });
+            return;
+        }
+    }, []);
+
+    return (
+        <Fragment>
+            {error && <Error>{error}</Error>}
+            <Body>
+                Enable or disable custom lists to customize your BetterDo
+                experience.
+            </Body>
+            <CustomListsContainer>
+                {CUSTOM_LISTS.map(list => (
+                    <CustomList key={list.id}>
+                        <IconHolder>
+                            <Icon icon={list.icon} color="#fff" />
+                        </IconHolder>
+                        <Title>{list.title}</Title>
+                        <Toggle
+                            onChange={(e, bool) =>
+                                onCustomListToggle(list.id, bool)
+                            }
+                            checked={customLists[list.id]}
+                        />
+                    </CustomList>
+                ))}
+            </CustomListsContainer>
+        </Fragment>
+    );
+}
+
+export default CustomListSettings;

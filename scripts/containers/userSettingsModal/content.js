@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import Tabs, { Tab } from '../../components/tabs';
-import { observer, inject } from 'mobx-react';
+import Tabs, { Tab } from '@components/tabs';
 import AccountSettings from './accountSettings';
 import CustomLists from './customLists';
 import General from './general';
