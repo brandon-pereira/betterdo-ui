@@ -22,9 +22,9 @@ export const updateList = (listId, props) => {
 //     return this.delete(`tasks/${taskId}`);
 // }
 
-// deleteList(listId) {
-//     return this.delete(`lists/${listId}`);
-// }
+export const deleteList = listId => {
+    return _delete(`lists/${listId}`);
+};
 
 // updateUser(props) {
 //     return this.post(`users`, props);
@@ -52,7 +52,7 @@ function _get(url, queryParameters = {}) {
 }
 
 function _delete(url) {
-    return this.fetch(`${this.baseUrl}/${url}`, {
+    return _fetch(`${baseUrl}/${url}`, {
         method: 'DELETE'
     });
 }

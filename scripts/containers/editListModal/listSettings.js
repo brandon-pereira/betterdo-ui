@@ -7,6 +7,7 @@ import { COLORS } from '../../constants';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useModifyList from '@hooks/useModifyList';
 import useListDetails from '@hooks/useListDetails';
+import useDeleteList from '@hooks/useDeleteList';
 
 const ButtonContainer = styled.div`
     display: flex;
@@ -14,32 +15,12 @@ const ButtonContainer = styled.div`
     margin-top: 1.5rem;
 `;
 
-//     async deleteList() {
-//         const result = confirm(
-//             `Are you sure you want to delete the list "${this.state.title}"? This can't be undone.`
-//         );
-//         if (result) {
-//             this.setState({ isDeleting: true, isInvalid: false });
-//             try {
-//                 await this.props.store.deleteList(this.props.currentList._id);
-//             } catch (err) {
-//                 this.setState({
-//                     isDeleting: false,
-//                     serverError: err.formattedMessage
-//                 });
-//                 return;
-//             }
-//             if (this.props.closeModal) {
-//                 this.props.closeModal();
-//             }
-//         }
-//     }
-
 function ListSettings({ setUnsavedChanges, onRequestClose }) {
     const currentListId = useCurrentListId();
     const { list } = useListDetails(currentListId);
     const [isSaving, setSaving] = useState(false);
     const modifyList = useModifyList();
+    const _deleteList = useDeleteList();
     const [isDeleting, setDeleting] = useState(false);
     const [isInvalid, setInvalid] = useState(false);
     const [error, setError] = useState(null);
@@ -47,6 +28,24 @@ function ListSettings({ setUnsavedChanges, onRequestClose }) {
         title: list.title,
         color: list.color
     });
+
+    const deleteList = useCallback(async () => {
+        const result = confirm(
+            `Are you sure you want to delete the list "${state.title}"? This can't be undone.`
+        );
+        if (result) {
+            setDeleting(true);
+            setInvalid(false);
+            try {
+                await _deleteList(currentListId);
+            } catch (err) {
+                console.error(err);
+                setError(err.formattedMessage || 'Unexpected Error');
+                setDeleting(false);
+                return;
+            }
+        }
+    }, [_deleteList, currentListId, state.title]);
 
     const onSubmit = useCallback(
         async e => {
@@ -61,8 +60,8 @@ function ListSettings({ setUnsavedChanges, onRequestClose }) {
                 try {
                     await modifyList(currentListId, state);
                 } catch (err) {
-                    console.log('ERR', err);
-                    setError(err.formattedMessage);
+                    console.error(err);
+                    setError(err.formattedMessage || 'Unexpected Error');
                     setSaving(false);
                     return;
                 }
@@ -119,7 +118,7 @@ function ListSettings({ setUnsavedChanges, onRequestClose }) {
                 <Button
                     isLoading={isDeleting}
                     loadingText="Deleting"
-                    onClick={() => this.deleteList()}
+                    onClick={deleteList}
                     color={COLORS.red}
                     type="button"
                 >
