@@ -1,4 +1,5 @@
 import useEditTaskModal from '@hooks/useEditTaskModal';
+import useModifyTask from '@hooks/useModifyTask';
 import React, { useCallback } from 'react';
 
 import {
@@ -11,16 +12,18 @@ import {
 
 function Task({ task }) {
     const { openTaskModal } = useEditTaskModal();
+    const modifyTask = useModifyTask();
+
     const onEditTask = useCallback(() => {
         openTaskModal(task._id);
     }, [openTaskModal, task]);
 
     const onToggleTaskCompletion = useCallback(() => {
-        // const { _id, isCompleted } = task;
-        // updateTask(_id, {
-        //     isCompleted: !isCompleted
-        // });
-    }, []);
+        const { _id, isCompleted } = task;
+        modifyTask(_id, task.list, {
+            isCompleted: !isCompleted
+        });
+    }, [task.id]);
 
     return (
         <Container

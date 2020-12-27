@@ -16,7 +16,7 @@ const TabHeaderItem = styled.li`
     flex: 1;
     text-align: center;
     border-right: 1px solid ${props => props.color};
-    padding: 0.4rem;
+    padding: 0.6rem 0.4rem;
     cursor: pointer;
     color: ${props => props.color};
     ${props =>

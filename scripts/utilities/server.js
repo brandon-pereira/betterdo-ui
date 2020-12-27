@@ -10,13 +10,13 @@ export const createTask = (taskName, listId) => {
 //     return this.put(`lists`, list);
 // }
 
-// updateTask(taskId, props) {
-//     return this.post(`tasks/${taskId}`, props);
-// }
+export const updateTask = (taskId, props) => {
+    return _post(`tasks/${taskId}`, props);
+};
 
-// updateList(listId, props) {
-//     return this.post(`lists/${listId}`, props);
-// }
+export const updateList = (listId, props) => {
+    return _post(`lists/${listId}`, props);
+};
 
 // deleteTask(taskId) {
 //     return this.delete(`tasks/${taskId}`);
@@ -58,7 +58,7 @@ function _delete(url) {
 }
 
 function _post(url, data = {}) {
-    return this.fetch(`${this.baseUrl}/${url}`, {
+    return _fetch(`${baseUrl}/${url}`, {
         method: 'POST',
         body: JSON.stringify(data)
     });

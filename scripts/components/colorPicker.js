@@ -10,8 +10,9 @@ const Container = styled.div`
     display: flex;
     height: 3rem;
     overflow: hidden;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
+    border-radius: 50px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14),
+        0 3px 3px -2px rgba(0, 0, 0, 0.12), 0 1px 8px 0 rgba(0, 0, 0, 0.2);
 `;
 
 const Color = styled.div.attrs(props => ({
@@ -22,11 +23,18 @@ const Color = styled.div.attrs(props => ({
     flex: 1;
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    position: relative;
+    &:first-of-type {
+        border-radius: 50px 0 0 50px;
+    }
+    &:last-of-type {
+        border-radius: 0 50px 50px 0;
+    }
     ${props =>
         props.isCurrent &&
         `
-        box-shadow: none;
-        border: 5px solid ${COLORS.blue};
+        box-shadow: inset 0 0 0 5px ${COLORS.blue};
     `};
 `;
 

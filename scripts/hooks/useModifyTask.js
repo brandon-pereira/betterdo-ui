@@ -1,50 +1,38 @@
-import { useState, useCallback } from 'react';
-import useSWR, { mutate } from 'swr';
-import useCurrentList from './useListDetails';
-import { createTask } from '@utilities/server';
+import { useCallback } from 'react';
+import { mutate } from 'swr';
+import { updateTask } from '@utilities/server';
+
+import { getListDetailUrls } from './internal/urls';
 
 function useModifyTask() {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const { currentListId } = useCurrentList();
-
-    const _modifyTask = useCallback(
-        async (taskId, task) => {
-            setLoading(true);
-            await mutate(
-                `${process.env.SERVER_URL}/api/lists/${currentListId}`,
-                async currentList => {
-                    const currentTask = currentList.tasks.find(
-                        task => task.id === taskId
-                    );
-                    return {
-                        ...currentList,
-                        tasks: [
-                            {
-                                _id: tempId,
-                                title: taskName,
-                                priority: 'normal',
-                                isLoading: true
-                            },
-                            ...currentList.tasks
-                        ]
-                    };
-                },
-                false
-            );
-            await createTask(taskName, currentListId);
-            await mutate(
-                `${process.env.SERVER_URL}/api/lists/${currentListId}`
-            );
-            setLoading(false);
-        },
-        [currentListId]
-    );
-    return {
-        loading,
-        error,
-        modifyTask: _modifyTask
-    };
+    return useCallback(async (taskId, listId, updatedProps) => {
+        const cacheMutations = getListDetailUrls(listId).map(url =>
+            mutate(url, updateTaskInCache(taskId, listId, updatedProps), false)
+        );
+        console.log('HERE');
+        await Promise.all(cacheMutations);
+        console.log('DOMNE');
+        await updateTask(taskId, updatedProps);
+        await Promise.all(getListDetailUrls(listId).map(url => mutate(url)));
+    }, []);
 }
+
+const updateTaskInCache = (
+    listId,
+    taskId,
+    updatedProps
+) => async currentList => ({
+    ...currentList,
+    tasks: currentList
+        ? currentList.tasks.map(task => {
+              if (task._id === taskId) {
+                  return { ...task, ...updatedProps };
+              }
+              return task;
+          })
+        : []
+});
+
+const getListUrl = listId => `${process.env.SERVER_URL}/api/lists/${listId}`;
 
 export default useModifyTask;

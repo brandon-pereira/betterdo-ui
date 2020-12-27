@@ -6,7 +6,7 @@ import { Header } from '@components/copy';
 import useListDetails from '@hooks/useListDetails';
 import useCurrentListId from '@hooks/useCurrentListId';
 
-function EditListModalContent({ onClose }) {
+function EditListModalContent({ setUnsavedChanges, onRequestClose }) {
     const currentListId = useCurrentListId();
     const { list } = useListDetails(currentListId);
 
@@ -19,10 +19,17 @@ function EditListModalContent({ onClose }) {
                 showTitleAbove={true}
             >
                 <Tab>
-                    <ListSettings closeModal={onClose} currentList={list} />
+                    <ListSettings
+                        setUnsavedChanges={setUnsavedChanges}
+                        onRequestClose={onRequestClose}
+                    />
                 </Tab>
                 <Tab>
-                    <ListMembers currentList={list} closeModal={onClose} />
+                    <ListMembers
+                        currentList={list}
+                        setUnsavedChanges={setUnsavedChanges}
+                        onRequestClose={onRequestClose}
+                    />
                 </Tab>
             </Tabs>
         </>
