@@ -1,6 +1,5 @@
-import { useRef, useEffect, useState, useCallback } from 'react';
-import useSWR, { mutate } from 'swr';
-import useCurrentList from './useListDetails';
+import { useState, useCallback } from 'react';
+import { mutate } from 'swr';
 import { createTask } from '@utilities/server';
 import useCurrentListId from './useCurrentListId';
 

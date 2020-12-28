@@ -1,16 +1,20 @@
-import React, { Component } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 
 import Button from '@components/Button';
 import { Form, Label, Input } from '@components/forms';
 import ProfilePic from '@components/profilePic';
+import useCurrentListId from '@hooks/useCurrentListId';
+import useListDetails from '@hooks/useListDetails';
+import { getUserByEmail } from '@utilities/server';
+import useModifyList from '@hooks/useModifyList';
 
 const UserList = styled.ol`
     list-style: none;
     padding: 0;
     margin: 0 0 1rem;
     max-height: 12.5rem;
-    overflow-y: scroll;
+    overflow-y: auto;
 `;
 const Owner = styled.div`
     color: grey;
@@ -40,125 +44,111 @@ const User = styled.li`
     }
 `;
 
-class ListMembers extends Component {
-    constructor(props) {
-        super(props);
-        const currentList = this.props.currentList;
-        this.state = {
-            isAdding: false,
-            isInvalid: false,
-            serverError: null,
-            owner: currentList.owner,
-            members: currentList.members,
-            input: '',
-            color: currentList.color
-        };
-    }
-
-    async onSubmit(e) {
-        e.preventDefault();
-        // Validate
-        if (!this.state.input) {
-            this.setState({ isInvalid: true });
-            return;
-        }
-        // Update UI to loading state
-        this.setState({ isAdding: true, isInvalid: false, serverError: null });
-        // Get user details from server
-        try {
-            // See if member exists
-            const user = await this.props.store.getUser(this.state.input);
-            // Clone members array, add new member
-            const members = Array.from(this.state.members);
-            members.push(user);
-            // Update the list with the new member
-            const updatedList = await this.props.store.updateList(
-                this.props.currentList._id,
-                {
-                    members: members.map(m => m._id)
-                }
-            );
-            // Update UI with response from server
-            this.setState({
-                members: updatedList.members,
-                isAdding: false,
-                isInvalid: false,
-                serverError: null
+function ListMembers() {
+    const [loading, setLoading] = useState(false);
+    const [isInvalid, setInvalid] = useState(false);
+    const [error, setError] = useState(null);
+    const [input, setInput] = useState('');
+    const currentListId = useCurrentListId();
+    const modifyList = useModifyList();
+    const { list } = useListDetails(currentListId);
+    const [members, setMembers] = useState(list.members);
+    const removeMember = useCallback(
+        async _id => {
+            // Temporarily update UI while request sends
+            const _members = members.filter(member => member._id !== _id);
+            setMembers(_members);
+            // Make actual request
+            await modifyList(currentListId, {
+                members: _members
             });
-        } catch (err) {
-            console.log(err);
-            this.setState({
-                isAdding: false,
-                isInvalid: true,
-                serverError: err.formattedMessage
-            });
-            return;
-        }
-    }
-
-    async removeMember(_id) {
-        // // Temporarily update UI while request sends
-        const members = this.state.members.filter(member => member._id !== _id);
-        this.setState({ members });
-        // Make actual request
-        const updatedList = await this.props.store.updateList(
-            this.props.currentList._id,
-            {
-                members: members.map(m => m._id)
+        },
+        [members, currentListId, modifyList]
+    );
+    const onSubmit = useCallback(
+        async e => {
+            e.preventDefault();
+            // Validate
+            if (!input) {
+                setInvalid(true);
+                return;
             }
-        );
-        // Update UI with response from server
-        this.setState({
-            members: updatedList.members
-        });
-    }
+            // Update UI to loading state
+            setLoading(true);
+            setInvalid(false);
+            setError(null);
+            // Get user details from server
+            try {
+                // See if member exists
+                const user = await getUserByEmail(input);
+                if (members.find(m => m._id === user._id)) {
+                    setLoading(false);
+                    setInvalid(true);
+                    setError('User already exists on list');
+                    return;
+                }
+                // Clone members array, add new member
+                // const _members = new Set(members);
+                members.push(user);
+                setMembers(members);
+                // Update the list with the new member
+                modifyList(currentListId, {
+                    members
+                });
+                // Update UI with response from server
+                setLoading(false);
+                setInvalid(false);
+                setError(null);
+            } catch (err) {
+                console.error(err);
+                setLoading(false);
+                setInvalid(true);
+                setError(err.formattedMessage || 'Unexpected Error');
+                return;
+            }
+        },
+        [members, currentListId, modifyList, input]
+    );
 
-    render() {
-        return (
-            <Form
-                onSubmit={e => this.onSubmit(e)}
-                errorMessage={this.state.serverError}
+    return (
+        <Form onSubmit={e => onSubmit(e)} errorMessage={error}>
+            <Label>Current Members</Label>
+            <UserList>
+                {list.members.map((user, index) => (
+                    <User key={index}>
+                        <ProfilePic user={user} />
+                        <UsersName>
+                            {user.firstName} {user.lastName}
+                        </UsersName>
+                        {user._id === list.owner ? (
+                            <Owner />
+                        ) : (
+                            <Button onClick={() => removeMember(user._id)}>
+                                Remove
+                            </Button>
+                        )}
+                    </User>
+                ))}
+            </UserList>
+            <Label htmlFor="email">Add Member</Label>
+            <Input
+                value={input}
+                name="email"
+                id="email"
+                invalid={Boolean(isInvalid)}
+                onChange={evt => setInput(evt.target.value)}
+                placeholder="hello@world.com"
+            />
+            <Button
+                isLoading={loading}
+                loadingText="Adding"
+                color={list.color}
+                type="submit"
             >
-                <Label>Current Members</Label>
-                <UserList>
-                    {this.state.members.map((user, index) => (
-                        <User key={index}>
-                            <ProfilePic user={user} />
-                            <UsersName>
-                                {user.firstName} {user.lastName}
-                            </UsersName>
-                            {user._id === this.state.owner ? (
-                                <Owner />
-                            ) : (
-                                <Button
-                                    onClick={() => this.removeMember(user._id)}
-                                >
-                                    Remove
-                                </Button>
-                            )}
-                        </User>
-                    ))}
-                </UserList>
-                <Label htmlFor="email">Add Member</Label>
-                <Input
-                    value={this.state.input}
-                    name="email"
-                    id="email"
-                    invalid={Boolean(this.state.isInvalid)}
-                    onChange={evt => this.setState({ input: evt.target.value })}
-                    placeholder="hello@world.com"
-                />
-                <Button
-                    isLoading={this.state.isAdding}
-                    loadingText="Adding"
-                    color={this.props.currentList.color}
-                    type="submit"
-                >
-                    Add
-                </Button>
-            </Form>
-        );
-    }
+                Add
+            </Button>
+        </Form>
+    );
 }
 
 export default ListMembers;

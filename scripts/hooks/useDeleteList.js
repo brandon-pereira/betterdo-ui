@@ -17,7 +17,6 @@ function useDeleteList() {
             try {
                 await deleteList(listId);
             } catch (err) {
-                console.log('HERE');
                 await mutate(getListsUrl());
                 throw err;
             }

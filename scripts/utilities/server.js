@@ -6,9 +6,10 @@ export const createTask = (taskName, listId) => {
         listId
     });
 };
-// createList(list) {
-//     return this.put(`lists`, list);
-// }
+
+export const createList = list => {
+    return _put(`lists`, list);
+};
 
 export const updateTask = (taskId, props) => {
     return _post(`tasks/${taskId}`, props);
@@ -30,9 +31,9 @@ export const deleteList = listId => {
 //     return this.post(`users`, props);
 // }
 
-// getUserByEmail(email) {
-//     return this.get(`users/${email}`);
-// }
+export const getUserByEmail = email => {
+    return _get(`users/${email}`);
+};
 
 function _throwError(message = 'An unexpected error ocurred', error = null) {
     const err = new Error(error || message);
@@ -48,7 +49,7 @@ function _throwError(message = 'An unexpected error ocurred', error = null) {
 function _get(url, queryParameters = {}) {
     let params = new URLSearchParams(queryParameters);
     params = params.toString() ? `?${params}` : '';
-    return this.fetch(`${this.baseUrl}/${url}${params}`);
+    return _fetch(`${baseUrl}/${url}${params}`);
 }
 
 function _delete(url) {

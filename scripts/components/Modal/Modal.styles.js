@@ -71,12 +71,12 @@ export const Content = styled.div`
 `;
 
 export const Arrow = styled.div`
-    height: 2rem;
-    width: 2rem;
+    height: 1.2rem;
+    width: 1.2rem;
     position: absolute;
     z-index: 1;
     top: 1rem;
-    left: -1rem;
+    left: -0.6rem;
     transform: rotate(45deg);
     background: #fff;
 `;

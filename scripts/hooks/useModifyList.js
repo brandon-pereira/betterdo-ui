@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { mutate } from 'swr';
 import { updateList } from '@utilities/server';
 
@@ -16,6 +16,9 @@ function useModifyList() {
             },
             false
         );
+        if (updatedProps.members) {
+            updatedProps.members = updatedProps.members.map(m => m._id);
+        }
         await updateList(listId, updatedProps);
         await mutate(getListsUrl());
         await mutate(getListUrl(listId));

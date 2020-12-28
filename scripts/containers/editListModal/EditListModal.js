@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Loader } from '@components/Modal';
 import useEditListModal from '@hooks/useEditListModal';
 import loadable from '@loadable/component';
