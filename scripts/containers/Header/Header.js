@@ -13,7 +13,7 @@ import useListDetails from '@hooks/useListDetails';
 import useCurrentListId from '@hooks/useCurrentListId';
 
 function Header() {
-    const { modalVisibility } = useModals();
+    const { modalVisibility, openModal } = useModals();
     const { openModal: openEditListModal } = useEditListModal();
     const currentListId = useCurrentListId();
     const { list, loading } = useListDetails(currentListId);
@@ -25,7 +25,7 @@ function Header() {
             <Hamburger
                 open={modalVisibility.listsView}
                 hidden={modalVisibility.listsView}
-                // onClick={() => openModal('listsView')}
+                onClick={() => openModal('listsView')}
             />
             <Loader isVisible={loading} size="2rem" />
             <Title>{list.title}</Title>

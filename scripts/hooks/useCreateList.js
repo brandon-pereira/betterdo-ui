@@ -23,9 +23,8 @@ function useCreateList() {
                 },
                 false
             );
-            // history.push('/')
             const list = await createList({ title, color });
-            history.push(`/${list._id}`);
+            history.replace(`/${list._id}`);
             console.log(list);
             await mutate(getListsUrl());
         },

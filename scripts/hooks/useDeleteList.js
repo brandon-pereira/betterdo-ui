@@ -21,7 +21,7 @@ function useDeleteList() {
                 throw err;
             }
             await mutate(getListsUrl());
-            history.replace('/inbox');
+            history.replace('/');
         },
         [history]
     );

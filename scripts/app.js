@@ -11,6 +11,7 @@ import EditListModal from './containers/EditListModal';
 import EditTaskModal from './containers/EditTaskModal';
 import { Route } from 'react-router-dom';
 import UserSettingsModal from './containers/userSettingsModal';
+import InboxRedirect from './containers/Redirects/InboxRedirect';
 
 const App = () => (
     <>
@@ -22,6 +23,7 @@ const App = () => (
             {/* <UserSettingsModal /> */}
         </Container>
         <>
+            <InboxRedirect />
             <Route
                 // eslint-disable-next-line react/no-children-prop
                 children={({ match }) => (

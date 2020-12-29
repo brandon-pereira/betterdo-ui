@@ -33,7 +33,7 @@ function useListDetails(listId) {
     useEffect(() => {
         if (error && error.message === 'Invalid List ID') {
             console.warn('Invalid list detected, redirecting to inbox.');
-            history.replace('/inbox');
+            history.replace('/');
         }
     }, [error, history]);
 

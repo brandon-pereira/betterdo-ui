@@ -15,7 +15,7 @@ const SortableItem = SortableElement(({ value }) => <Task task={value} />);
 
 const SortableList = SortableContainer(({ items }) => {
     return (
-        <>
+        <div>
             {items.map((task, index) => (
                 <SortableItem
                     key={typeof task === 'object' ? task._id : index}
@@ -23,7 +23,7 @@ const SortableList = SortableContainer(({ items }) => {
                     value={task}
                 />
             ))}
-        </>
+        </div>
     );
 });
 

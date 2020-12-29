@@ -8,5 +8,6 @@ export const Container = styled.form`
 
 export const Input = styled(FormInput)`
     margin: 0;
+    border-radius: 50px;
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
 `;

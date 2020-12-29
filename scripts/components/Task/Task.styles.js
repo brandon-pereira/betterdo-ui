@@ -6,9 +6,9 @@ export const Loader = styled(_Loader)`
 `;
 
 export const Checkbox = styled.input`
-    height: 1.6rem;
-    width: 1.6rem;
-    border-radius: 5px;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
     display: inline-block;
     appearance: none;
     background: #fff;
@@ -20,7 +20,7 @@ export const Checkbox = styled.input`
     outline: none;
     cursor: pointer;
     flex-shrink: 0;
-    margin: 1.2rem 1rem;
+    margin: 0.8rem 1rem 0.8rem 1.3rem;
     &:before {
         content: '';
         border-radius: 50%;
@@ -65,7 +65,10 @@ export const HighPriorityFlag = styled.div`
 export const Container = styled.div`
     background: linear-gradient(#fff, #eee);
     margin: 0.5rem 1rem 0;
-    border-radius: 5px;
+    border-radius: 50px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2), inset 0 -1px #fff;
     display: flex;
     align-items: center;

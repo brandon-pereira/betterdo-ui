@@ -10,9 +10,7 @@ import {
     ListsContainer,
     MobileNavigationSkirt
 } from './Navigation.styles';
-import useCurrentList from '@hooks/useListDetails';
 import useLists from '@hooks/useLists';
-import { useHistory } from 'react-router-dom';
 import useNewListModal from '@hooks/useNewListModal';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useSwitchList from '@hooks/useSwitchList';
@@ -30,7 +28,7 @@ const SortableItem = SortableElement(({ value, onClick, currentId }) => (
 
 const SortableList = SortableContainer(({ items, currentId, onClick }) => {
     return (
-        <>
+        <div>
             {items.map((task, index) => (
                 <SortableItem
                     key={typeof task === 'object' ? task._id : index}
@@ -41,7 +39,7 @@ const SortableList = SortableContainer(({ items, currentId, onClick }) => {
                     disabled={task.type !== 'default'}
                 />
             ))}
-        </>
+        </div>
     );
 });
 
