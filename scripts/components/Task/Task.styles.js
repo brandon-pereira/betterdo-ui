@@ -35,6 +35,7 @@ export const Checkbox = styled.input`
         transform: scale(1);
     }
 `;
+
 export const HighPriorityFlag = styled.div`
     align-self: flex-start;
     height: 2rem;
@@ -62,6 +63,7 @@ export const HighPriorityFlag = styled.div`
         border-color: transparent #c11010 transparent transparent;
     }
 `;
+
 export const Container = styled.div`
     background: linear-gradient(#fff, #eee);
     margin: 0.5rem 1rem 0;
@@ -76,16 +78,17 @@ export const Container = styled.div`
     ${props =>
         props.isLoading &&
         `
-    opacity: 0.5;
-    pointer-events: none;
-`}
+        opacity: 0.5;
+        pointer-events: none;
+    `}
     ${props =>
         props.priority === 'low' &&
         `
-    background: linear-gradient(#eee, #ddd);
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-`}
+        background: linear-gradient(#eee, #ddd);
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    `}
 `;
+
 export const Title = styled.span`
     flex: 1;
     text-overflow: ellipsis;

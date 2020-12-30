@@ -10,39 +10,38 @@ import {
     Loader
 } from './Task.styles';
 
-function Task({ task }) {
+function Task({ title, _id, isCompleted, list, isLoading, priority }) {
     const { openTaskModal } = useEditTaskModal();
     const modifyTask = useModifyTask();
 
     const onEditTask = useCallback(() => {
-        openTaskModal(task._id);
-    }, [openTaskModal, task]);
+        openTaskModal(_id);
+    }, [openTaskModal, _id]);
 
     const onToggleTaskCompletion = useCallback(() => {
-        const { _id, isCompleted } = task;
-        modifyTask(_id, task.list, {
+        modifyTask(_id, list, {
             isCompleted: !isCompleted
         });
-    }, [task.id]);
+    }, [_id, modifyTask, isCompleted, list]);
 
     return (
         <Container
-            isLoading={task.isLoading}
+            isLoading={isLoading}
             onClick={onEditTask}
-            priority={task.priority}
+            priority={priority}
         >
-            {task.isLoading ? (
+            {isLoading ? (
                 <Loader color="#202020" size="1.7rem" isVisible={true} />
             ) : (
                 <Checkbox
                     type="checkbox"
                     onClick={e => e.stopPropagation()}
                     onChange={onToggleTaskCompletion}
-                    checked={task.isCompleted}
+                    checked={isCompleted}
                 />
             )}
-            <Title>{task.title}</Title>
-            {task.priority === 'high' && <HighPriorityFlag />}
+            <Title>{title}</Title>
+            {priority === 'high' && <HighPriorityFlag />}
         </Container>
     );
 }

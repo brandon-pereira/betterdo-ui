@@ -12,7 +12,7 @@ import useCreateTask from '@hooks/useCreateTask';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useModifyList from '@hooks/useModifyList';
 
-const SortableItem = SortableElement(({ value }) => <Task task={value} />);
+const SortableItem = SortableElement(({ value }) => <Task {...value} />);
 
 const SortableList = SortableContainer(({ items }) => {
     return (
@@ -114,7 +114,7 @@ function Body() {
                     {currentList.completedTasks &&
                         currentList.completedTasks.map(task => {
                             if (typeof task === 'object') {
-                                return <Task key={task._id} task={task} />;
+                                return <Task key={task._id} {...task} />;
                             }
                             return null;
                         })}
