@@ -1,47 +1,31 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { mutate } from 'swr';
 import { createTask } from '@utilities/server';
-import useCurrentListId from './useCurrentListId';
 
 function useCreateTask() {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const currentListId = useCurrentListId();
-    const _createTask = useCallback(
-        async taskName => {
-            setLoading(true);
-            const tempId = Math.floor(Math.random() * 1000);
-            await mutate(
-                `${process.env.SERVER_URL}/api/lists/${currentListId}`,
-                async currentList => {
-                    return {
-                        ...currentList,
-                        tasks: [
-                            {
-                                _id: tempId,
-                                title: taskName,
-                                priority: 'normal',
-                                isLoading: true
-                            },
-                            ...currentList.tasks
-                        ]
-                    };
-                },
-                false
-            );
-            await createTask(taskName, currentListId);
-            await mutate(
-                `${process.env.SERVER_URL}/api/lists/${currentListId}`
-            );
-            setLoading(false);
-        },
-        [currentListId]
-    );
-    return {
-        loading,
-        error,
-        createTask: _createTask
-    };
+    return useCallback(async (listId, taskName) => {
+        const tempId = Math.floor(Math.random() * 1000);
+        await mutate(
+            `${process.env.SERVER_URL}/api/lists/${listId}`,
+            async currentList => {
+                return {
+                    ...currentList,
+                    tasks: [
+                        {
+                            _id: tempId,
+                            title: taskName,
+                            priority: 'normal',
+                            isLoading: true
+                        },
+                        ...currentList.tasks
+                    ]
+                };
+            },
+            false
+        );
+        await createTask(listId, taskName);
+        await mutate(`${process.env.SERVER_URL}/api/lists/${listId}`);
+    }, []);
 }
 
 export default useCreateTask;

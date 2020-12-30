@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
-import AddTask from '../../components/AddTask';
-import Banner from '../../components/banner';
-import Task from '../../components/Task';
+import React, { useCallback } from 'react';
+import AddTask from '@components/AddTask';
+import Banner from '@components/banner';
+import Task from '@components/Task';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 
 import { Container, CompletedTasksButton } from './Body.styles';
 import useListDetails from '@hooks/useListDetails';
 import useModals from '@hooks/useModals';
-import useCreateTask from '@hooks/useCreateTask';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useModifyList from '@hooks/useModifyList';
 
@@ -31,67 +30,47 @@ const SortableList = SortableContainer(({ items }) => {
 function Body() {
     const currentListId = useCurrentListId();
     const {
-        list: currentList,
+        list,
         loading,
         isCompletedTasksIncluded,
         setIncludeCompletedTasks,
         error
     } = useListDetails(currentListId);
-    const { createTask } = useCreateTask();
     const { modalVisibility } = useModals();
     const modifyList = useModifyList();
 
-    const onSortEnd = ({ oldIndex, newIndex }) => {
-        // Indexes match, no change
-        if (oldIndex === newIndex) {
-            return;
-        }
-        try {
-            modifyList(currentListId, {
-                tasks: arrayMove(currentList.tasks, oldIndex, newIndex)
-            });
-        } catch (err) {
-            console.error(err);
-        }
-    };
-
-    useEffect(() => {
-        let lastRefresh = new Date();
-        const listener = () => {
-            if (!document.hidden) {
-                const now = new Date();
-                var timeDiff = now - lastRefresh; //in ms
-                // strip the ms
-                if (!document.hidden && timeDiff >= 5 * 1000) {
-                    lastRefresh = new Date();
-                    this.props.store.reload();
-                }
+    const onSortEnd = useCallback(
+        ({ oldIndex, newIndex }) => {
+            // Indexes match, no change
+            if (oldIndex === newIndex) {
+                return;
             }
-        };
-        document.addEventListener('visibilitychange', listener);
-        return document.removeEventListener('visibilitychange', listener);
-    }, []);
+            try {
+                modifyList(currentListId, {
+                    tasks: arrayMove(list.tasks, oldIndex, newIndex)
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        },
+        [list, currentListId, modifyList]
+    );
 
-    const reloadBrowser = () => {
-        if (window && window.location) {
-            window.location.reload();
-        }
-    };
+    const reloadBrowser = useCallback(() => {
+        window.location.reload();
+    }, []);
 
     const hasServerError = Boolean(error);
     const showAllCaughtUpBanner =
         !hasServerError &&
-        currentList.tasks &&
-        currentList.tasks.length === 0 &&
-        (currentList.additionalTasks !== 0 ||
-            !currentList.completedTasks.find(task => typeof task !== 'string'));
+        list.tasks &&
+        list.tasks.length === 0 &&
+        (list.additionalTasks !== 0 ||
+            !list.completedTasks.find(task => typeof task !== 'string'));
     return (
         <Container mobileNavVisible={modalVisibility.listsView}>
             {/* {this.getNotificationBanner()} */}
-            <AddTask
-                hidden={currentList.type === 'loading' || hasServerError}
-                createTask={createTask}
-            />
+            <AddTask hidden={list.type === 'loading' || hasServerError} />
             {showAllCaughtUpBanner && (
                 <Banner icon="betterdo" body="You're all caught up!" />
             )}
@@ -108,11 +87,11 @@ function Body() {
                 <>
                     <SortableList
                         pressDelay={200}
-                        items={currentList.tasks || []}
+                        items={list.tasks || []}
                         onSortEnd={onSortEnd}
                     />
-                    {currentList.completedTasks &&
-                        currentList.completedTasks.map(task => {
+                    {list.completedTasks &&
+                        list.completedTasks.map(task => {
                             if (typeof task === 'object') {
                                 return <Task key={task._id} {...task} />;
                             }
@@ -121,16 +100,16 @@ function Body() {
                     <CompletedTasksButton
                         hidden={
                             hasServerError ||
-                            currentList.type === 'loading' ||
-                            !currentList.additionalTasks ||
-                            currentList.additionalTasks === 0
+                            list.type === 'loading' ||
+                            !list.additionalTasks ||
+                            list.additionalTasks === 0
                         }
                         hasCaughtUpBanner={showAllCaughtUpBanner}
                         isLoading={loading && isCompletedTasksIncluded}
                         color="#999999"
                         onClick={() => setIncludeCompletedTasks(true)}
                     >
-                        {currentList.additionalTasks} completed tasks
+                        {list.additionalTasks} completed tasks
                     </CompletedTasksButton>
                 </>
             )}

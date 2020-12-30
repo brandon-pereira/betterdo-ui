@@ -1,8 +1,8 @@
 const baseUrl = `${process.env.SERVER_URL}/api`;
 
-export const createTask = (taskName, listId) => {
+export const createTask = (listId, title) => {
     return _put(`tasks`, {
-        title: taskName,
+        title,
         listId
     });
 };

@@ -15,12 +15,12 @@ const Container = styled.div`
     border: 2px solid #ccc;
     border-radius: 3px;
     overflow: hidden;
-    ${Input} {
+    /* ${Input} {
         border: none;
         border-radius: 0;
         box-shadow: none;
-        margin-bottom: 0;
-    }
+        margin-bottom: 0; */
+    /* } */
 `;
 const DeleteIcon = styled(Icon)``;
 

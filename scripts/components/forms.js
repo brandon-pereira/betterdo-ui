@@ -64,8 +64,9 @@ const Form = ({ children, errorMessage, ...props }) => (
     </form>
 );
 
-const Input = styled(props => (
-    <_Input {...props} aria-label={props.placeholder} />
-))``;
+const Input = React.forwardRef((props, ref) => (
+    <_Input {...props} ref={ref} aria-label={props.placeholder} />
+));
+Input.displayName = 'Input';
 
 export { Input, Label, Form, Error, TextArea };
