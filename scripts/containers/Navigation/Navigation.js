@@ -1,6 +1,6 @@
 import React from 'react';
 import useModals from '@hooks/useModals';
-import ListItem from '@components/list';
+import ListItem from '@components/ListItem';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 
@@ -85,7 +85,7 @@ function Navigation() {
                         onClick={switchList}
                     />
 
-                    <ListItem onClick={openNewListModal} newList />
+                    <ListItem onClick={openNewListModal} type="newList" />
                 </ListsContainer>
                 <NavigationModalOverlay
                     onClick={() => closeModal('listsView')}
