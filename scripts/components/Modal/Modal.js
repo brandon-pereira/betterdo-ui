@@ -8,7 +8,9 @@ const Modal = React.forwardRef(
     ) => {
         const closeModal = useCallback(
             e => {
+                console.log('HERE');
                 const isBackgroundClick = !e || e.currentTarget === e.target;
+                console.log(isBackgroundClick);
                 if (isBackgroundClick) {
                     const _canCloseModal =
                         typeof canCloseModal === 'function'
@@ -34,7 +36,7 @@ const Modal = React.forwardRef(
                         icon="x"
                         color="#a9a9a9"
                         size="1rem"
-                        onClick={closeModal}
+                        onClick={() => closeModal()}
                     >
                         Close
                     </ModalClose>
