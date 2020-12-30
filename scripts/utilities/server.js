@@ -27,9 +27,9 @@ export const deleteList = listId => {
     return _delete(`lists/${listId}`);
 };
 
-// updateUser(props) {
-//     return this.post(`users`, props);
-// }
+export const updateUser = props => {
+    return _post(`users`, props);
+};
 
 export const getUserByEmail = email => {
     return _get(`users/${email}`);

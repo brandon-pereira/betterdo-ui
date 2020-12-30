@@ -2,9 +2,10 @@ import useSWR from 'swr';
 import ms from 'ms.macro';
 
 import createSharedHook from './internal/createSharedHook';
+import { getProfileUrl } from './internal/urls';
 
 function useProfileOnce() {
-    const { data, error } = useSWR(`${process.env.SERVER_URL}/api/user`, {
+    const { data, error } = useSWR(getProfileUrl(), {
         dedupingInterval: ms('2hr')
     });
 

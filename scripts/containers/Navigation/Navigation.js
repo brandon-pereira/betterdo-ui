@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import useModals from '@hooks/useModals';
 import ListItem from '@components/ListItem';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
@@ -14,6 +14,7 @@ import useLists from '@hooks/useLists';
 import useNewListModal from '@hooks/useNewListModal';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useSwitchList from '@hooks/useSwitchList';
+import useModifyProfile from '@hooks/useModifyProfile';
 
 const SortableItem = SortableElement(({ value, onClick, currentId }) => (
     <ListItem
@@ -46,28 +47,27 @@ const SortableList = SortableContainer(({ items, currentId, onClick }) => {
 function Navigation() {
     const { modalVisibility, closeModal } = useModals();
     const currentListId = useCurrentListId();
+    const modifyProfile = useModifyProfile();
     const switchList = useSwitchList();
     const { openModal: openNewListModal } = useNewListModal();
     const { lists } = useLists();
 
-    const onSortEnd = ({ oldIndex, newIndex }) => {
-        const store = this.props.store;
-        // Indexes match, no change
-        if (oldIndex === newIndex) {
-            return;
-        }
-        store.lists = arrayMove(store.lists, oldIndex, newIndex);
-
-        try {
-            this.props.store.updateUser({
-                lists: store.lists
-                    .filter(t => t.type === 'default')
-                    .map(t => t._id)
-            });
-        } catch (err) {
-            console.error(err);
-        }
-    };
+    const onSortEnd = useCallback(
+        ({ oldIndex, newIndex }) => {
+            // Indexes match, no change
+            if (oldIndex === newIndex) {
+                return;
+            }
+            try {
+                modifyProfile({
+                    lists: arrayMove(lists, oldIndex, newIndex);
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        },
+        [lists, modifyProfile]
+    );
 
     return (
         <>

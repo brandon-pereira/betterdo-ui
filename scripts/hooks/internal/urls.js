@@ -7,3 +7,5 @@ export const getListDetailUrl = (listId, includeCompleted) =>
     `${process.env.SERVER_URL}/api/lists/${listId}${
         includeCompleted ? `?includeCompleted=true` : ''
     }`;
+
+export const getProfileUrl = () => `${process.env.SERVER_URL}/api/user`;
