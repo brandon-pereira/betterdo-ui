@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { COLORS } from '../constants';
 
 const Container = styled.div`
+    border: none;
+    outline: none;
     height: ${props => props.size || '3rem'};
     width: ${props => props.size || '3rem'};
     background: ${COLORS.blue};
@@ -15,6 +17,10 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     position: relative;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+    &:focus-visible {
+        box-shadow: 0 0 0 2px ${COLORS.blue};
+    }
 `;
 const Img = styled.img`
     position: absolute;
@@ -32,7 +38,7 @@ const ProfilePicture = ({ user, ...props }) => {
     const lastName = user.lastName || 'A';
     const initials = firstName.charAt(0) + lastName.charAt(0);
     return (
-        <Container {...props}>
+        <Container as={props.onClick ? 'button' : 'div'} {...props}>
             {user && user.profilePicture && (
                 <Img src={FormatProfilePictureUrl(user.profilePicture)} />
             )}

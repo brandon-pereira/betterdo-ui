@@ -16,6 +16,9 @@ function useModifyList() {
             },
             false
         );
+        if (updatedProps.tasks) {
+            updatedProps.tasks = updatedProps.tasks.map(m => m._id);
+        }
         if (updatedProps.members) {
             updatedProps.members = updatedProps.members.map(m => m._id);
         }

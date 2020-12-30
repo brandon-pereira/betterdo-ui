@@ -10,6 +10,7 @@ import useListDetails from '@hooks/useListDetails';
 import useModals from '@hooks/useModals';
 import useCreateTask from '@hooks/useCreateTask';
 import useCurrentListId from '@hooks/useCurrentListId';
+import useModifyList from '@hooks/useModifyList';
 
 const SortableItem = SortableElement(({ value }) => <Task task={value} />);
 
@@ -38,16 +39,16 @@ function Body() {
     } = useListDetails(currentListId);
     const { createTask } = useCreateTask();
     const { modalVisibility } = useModals();
+    const modifyList = useModifyList();
 
     const onSortEnd = ({ oldIndex, newIndex }) => {
         // Indexes match, no change
         if (oldIndex === newIndex) {
             return;
         }
-        currentList.tasks = arrayMove(currentList.tasks, oldIndex, newIndex);
         try {
-            this.props.store.updateList(currentList._id, {
-                tasks: currentList.tasks.map(t => t._id)
+            modifyList(currentListId, {
+                tasks: arrayMove(currentList.tasks, oldIndex, newIndex)
             });
         } catch (err) {
             console.error(err);

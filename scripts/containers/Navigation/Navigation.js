@@ -60,7 +60,7 @@ function Navigation() {
             }
             try {
                 modifyProfile({
-                    lists: arrayMove(lists, oldIndex, newIndex);
+                    lists: arrayMove(lists, oldIndex, newIndex)
                 });
             } catch (err) {
                 console.error(err);

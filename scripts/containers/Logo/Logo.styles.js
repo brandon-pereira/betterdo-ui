@@ -28,7 +28,9 @@ export const Container = styled.div`
 `;
 
 export const Hamburger = styled(_Hamburger)``;
-export const ProfilePicture = styled(_ProfilePicture)``;
+export const ProfilePicture = styled(_ProfilePicture)`
+    flex-shrink: 0;
+`;
 
 export const Content = styled.div`
     height: 100%;
@@ -50,10 +52,6 @@ export const Content = styled.div`
     }
     span {
         font-weight: 600;
-    }
-    ${ProfilePicture} {
-        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
-        flex-shrink: 0;
     }
     @media ${QUERIES.medium} {
         border-radius: 0 30px 0 0;

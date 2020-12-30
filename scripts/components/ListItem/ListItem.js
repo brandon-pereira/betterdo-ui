@@ -33,6 +33,7 @@ function ListItem({ selected, onClick, title, color, type }) {
     }
     return (
         <Container
+            disabled={selected}
             selected={selected}
             // This is used for modal arrow ref tracking
             {...(type === 'newList'
