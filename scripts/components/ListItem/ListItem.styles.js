@@ -3,7 +3,13 @@ import styled from 'styled-components';
 // import SvgIcon from './icon';
 import { COLORS } from '../../constants';
 
-export const Container = styled.li`
+export const Container = styled.button`
+    border: none;
+    display: block;
+    font: inherit;
+    width: 100%;
+    text-align: left;
+    outline: none;
     user-select: none;
     z-index: 5;
     position: relative;
@@ -11,29 +17,19 @@ export const Container = styled.li`
     color: #fff;
     display: flex;
     align-items: center;
-    background: ${props =>
-        props.selected
-            ? 'linear-gradient(#006EFF, #004DB4)'
-            : COLORS.navigationBackground};
-    box-shadow: ${props =>
-        props.selected
-            ? 'inset 0 1px rgba(0,0,0,.5)'
-            : 'inset 0 1px rgba(255,255,255,.15)'};
-    &:last-of-type {
-        box-shadow: inset 0 -1px rgba(255, 255, 255, 0.15),
-            inset 0 1px rgba(255, 255, 255, 0.15);
+    background: ${COLORS.navigationBackground};
+    box-shadow: inset 0 -1px rgba(255, 255, 255, 0.15);
+    &:focus-visible {
+        background: rgba(255, 255, 255, 0.1);
     }
-
     ${({ selected }) =>
         selected &&
         `
-        margin-left: 2px;
-        border-radius: 1rem 0 0 1rem;
-        & + & {
-            box-shadow: none;
-
+        & {
+            box-shadow: inset 0 -1px rgba(0,0,0,.5);
+            background: linear-gradient(#006EFF, #004DB4) !important;
         }
-                `}
+    `}
 `;
 
 export const DotIcon = styled.div`
@@ -59,7 +55,7 @@ export const IconHolder = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
-    svg {
+    * {
         filter: drop-shadow(0 1px #000);
     }
 `;
