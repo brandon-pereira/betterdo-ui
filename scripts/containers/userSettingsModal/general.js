@@ -1,10 +1,11 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useCallback } from 'react';
 import Button from '@components/Button';
 import { Label, Error } from '@components/forms';
 import Toggle from '@components/toggle';
 import styled from 'styled-components';
 import { COLORS } from '../../constants';
 import useProfile from '@hooks/useProfile';
+import useModifyProfile from '@hooks/useModifyProfile';
 
 const OptionGroup = styled.div`
     display: flex;
@@ -28,56 +29,27 @@ const Description = styled.p`
     font-size: 0.9rem;
 `;
 
-// validate() {
-//     if (!this.state.firstName) {
-//         this.setState({ isInvalid: 'firstName' });
-//         return false;
-//     } else if (!this.state.email) {
-//         this.setState({ isInvalid: 'email' });
-//         return false;
-//     }
-//     return true;
-// }
-
-// async onSubmit() {
-//     if (this.state.isSaving) {
-//         return;
-//     }
-//     this.setState({
-//         isSaving: true,
-//         serverError: null
-//     });
-//     const store = this.props.store;
-//     try {
-//         await store.updateUser({
-//             isBeta: this.state.isBeta,
-//             isPushEnabled: this.state.isPushEnabled
-//         });
-//     } catch (err) {
-//         this.setState({
-//             isSaving: false,
-//             serverError: err.formattedMessage
-//         });
-//         return;
-//     }
-//     this.setState({ isSaving: false });
-// }
-
-// logout() {
-//     if (window) {
-//         window.location.href = `${process.env.ROOT_APP_DIR}auth/logout`;
-//     }
-// }
-
 function GeneralSettings() {
     const { logout, profile, loading } = useProfile();
-    console.log(profile, loading);
+    const modifyProfile = useModifyProfile();
     const [state, setState] = useState({
         isBeta: profile.isBeta,
         isPushEnabled: profile.isPushEnabled
     });
-    // const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    const onSubmit = useCallback(async () => {
+        try {
+            await modifyProfile({
+                isBeta: state.isBeta,
+                isPushEnabled: state.isPushEnabled
+            });
+        } catch (err) {
+            setError(err.formattedMessage || 'Unexpected Error Occurred');
+            return;
+        }
+    }, [state, modifyProfile]);
+
     if (loading) {
         return 'LOADING';
     }
@@ -94,12 +66,10 @@ function GeneralSettings() {
                 </div>
                 <Toggle
                     onChange={(e, bool) => {
-                        setState(
-                            {
-                                isPushEnabled: bool
-                            },
-                            onSubmit
-                        );
+                        setState(state => ({
+                            ...state,
+                            isPushEnabled: bool
+                        }));
                     }}
                     checked={state.isPushEnabled}
                 />

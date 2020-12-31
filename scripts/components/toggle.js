@@ -38,12 +38,16 @@ const Switch = styled.label`
     ${({ disabled }) =>
         disabled &&
         `
-        opacity: 0.7;
+        opacity: 0.2;
     `}
     input {
         position: absolute;
         top: -99999px;
         left: -99999px;
+        &:focus-visible + ${Slider}:before {
+            background: ${COLORS.blue};
+            box-shadow: inset 0 0 0 3px #fff;
+        }
         &:checked + ${Slider} {
             background-color: #2196f3;
             &:before {

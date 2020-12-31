@@ -38,6 +38,7 @@ const Modal = React.forwardRef(
                         ref={ref}
                         visible={visible}
                     >
+                        <Content>{children}</Content>
                         <ModalClose
                             icon="x"
                             color="#a9a9a9"
@@ -46,7 +47,6 @@ const Modal = React.forwardRef(
                         >
                             Close
                         </ModalClose>
-                        <Content>{children}</Content>
                         <Arrow data-betterdo-modal-arrow></Arrow>
                     </Container>
                 </FocusLock>

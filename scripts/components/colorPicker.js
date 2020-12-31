@@ -15,16 +15,21 @@ const Container = styled.div`
         0 3px 3px -2px rgba(0, 0, 0, 0.12), 0 1px 8px 0 rgba(0, 0, 0, 0.2);
 `;
 
-const Color = styled.div.attrs(props => ({
+const Color = styled.button.attrs(props => ({
     style: {
         backgroundColor: props.color
     }
 }))`
+    border: none;
+    outline: none;
     flex: 1;
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
     box-sizing: border-box;
     position: relative;
+    &:focus-visible {
+        box-shadow: inset 0 0 0 5px #fff;
+    }
     &:first-of-type {
         border-radius: 50px 0 0 50px;
     }
@@ -146,7 +151,9 @@ export default class ColorPicker extends Component {
                 <input
                     ref={this.inputColorRef}
                     value={this.state.palette[this.state.currentColor]}
-                    onChange={() => {
+                    onChange={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         if (
                             this.inputColorRef.current &&
                             this.inputColorRef.current.value
@@ -162,6 +169,7 @@ export default class ColorPicker extends Component {
                 <Container ref={this.colorPaletteRef}>
                     {this.state.palette.map((color, index) => (
                         <Color
+                            type="button"
                             key={color}
                             onClick={() => this.changeColor(color)}
                             color={color}

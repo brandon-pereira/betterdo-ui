@@ -10,7 +10,7 @@ class UserSettingsModalContent extends Component {
         return (
             <Fragment>
                 <Header>Settings</Header>
-                <Tabs titles={['Account', 'Custom Lists', 'General']}>
+                <Tabs titles={['Account', 'Custom Lists', 'General', 'About']}>
                     <Tab>
                         <AccountSettings />
                     </Tab>

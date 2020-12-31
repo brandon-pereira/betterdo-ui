@@ -1,10 +1,12 @@
-import React, { Component, useCallback, Fragment, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Body } from '../../components/copy';
 import { Error } from '../../components/forms';
 import Icon from '../../components/icon';
 import Toggle from '../../components/toggle';
 import styled from 'styled-components';
 import { COLORS } from '../../constants';
+import useProfile from '@hooks/useProfile';
+import useModifyProfile from '@hooks/useModifyProfile';
 
 const CustomListsContainer = styled.ol`
     position: relative;
@@ -37,51 +39,6 @@ const IconHolder = styled.div`
     }
 `;
 
-class ListMembers extends Component {
-    constructor(props) {
-        super(props);
-        const user = this.props.store.user;
-        this.state = {
-            serverError: null,
-            customLists: user.customLists
-        };
-        this.lists = {
-            highPriority: {
-                title: 'High Priority',
-                icon: 'bookmarks'
-            },
-            today: {
-                title: 'Today',
-                icon: 'alarm'
-            },
-            tomorrow: {
-                title: 'Tomorrow',
-                icon: 'calendar'
-            }
-        };
-    }
-
-    async onCustomListToggle(id, bool) {
-        this.setState({
-            serverError: null
-        });
-        try {
-            await this.props.store.updateUser({
-                customLists: {
-                    [id]: bool
-                }
-            });
-        } catch (err) {
-            this.setState({
-                serverError: err.formattedMessage
-            });
-            return;
-        }
-    }
-
-    // render() {}
-}
-
 const CUSTOM_LISTS = [
     {
         id: 'highPriority',
@@ -100,32 +57,32 @@ const CUSTOM_LISTS = [
     }
 ];
 function CustomListSettings() {
-    const [error, setError] = useState(null);
-    const [customLists] = useState({
-        customLists: {
-            highPriority: true
+    const { profile, loading, error } = useProfile();
+    const [customLists, setCustomLists] = useState(profile.customLists || {});
+    const modifyProfile = useModifyProfile();
+    useEffect(() => {
+        if (!loading && !error) {
+            setCustomLists(profile.customLists);
         }
-    });
-    const onCustomListToggle = useCallback(async (id, bool) => {
-        this.setState({
-            serverError: null
-        });
-        try {
-            await this.props.store.updateUser({
-                customLists: {
-                    [id]: bool
-                }
-            });
-        } catch (err) {
-            this.setState({
-                serverError: err.formattedMessage
-            });
-            return;
-        }
-    }, []);
+    }, [loading, error, profile]);
+    const onCustomListToggle = useCallback(
+        async (id, bool) => {
+            try {
+                await modifyProfile({
+                    customLists: {
+                        [id]: bool
+                    }
+                });
+            } catch (err) {
+                console.error(err);
+                return;
+            }
+        },
+        [modifyProfile]
+    );
 
     return (
-        <Fragment>
+        <>
             {error && <Error>{error}</Error>}
             <Body>
                 Enable or disable custom lists to customize your BetterDo
@@ -147,7 +104,7 @@ function CustomListSettings() {
                     </CustomList>
                 ))}
             </CustomListsContainer>
-        </Fragment>
+        </>
     );
 }
 
