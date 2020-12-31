@@ -1,15 +1,15 @@
 import React from 'react';
 
-import useModals from '@hooks/useModals';
 import { Container, Content, Hamburger, ProfilePicture } from './Logo.styles';
 import useListDetails from '@hooks/useListDetails';
 import useProfile from '@hooks/useProfile';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useGeneratedUrl from '@hooks/useGeneratedUrl';
 import { useHistory } from 'react-router-dom';
+import useHamburgerNav from '@hooks/useHamburgerNav';
 
 function Logo() {
-    const { modalVisibility, closeModal } = useModals();
+    const [isMobileNavVisible, setMobileNavVisibility] = useHamburgerNav();
     const generateUrl = useGeneratedUrl();
     const history = useHistory();
 
@@ -17,10 +17,7 @@ function Logo() {
     const currentListId = useCurrentListId();
     const { list } = useListDetails(currentListId);
     return (
-        <Container
-            color={list.color}
-            visibleOnMobile={modalVisibility.listsView}
-        >
+        <Container color={list.color} visibleOnMobile={isMobileNavVisible}>
             <Content
                 onClick={() => {
                     // TODO: Reload
@@ -28,9 +25,9 @@ function Logo() {
                 }}
             >
                 <Hamburger
-                    open={modalVisibility.listsView}
+                    open={isMobileNavVisible}
                     onClick={e => {
-                        closeModal('listsView');
+                        setMobileNavVisibility(false);
                         e.stopPropagation();
                     }}
                 />

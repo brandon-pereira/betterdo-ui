@@ -5,7 +5,7 @@ import arrayMove from 'array-move';
 
 import { Container, TaskContainer } from './Body.styles';
 import useListDetails from '@hooks/useListDetails';
-import useModals from '@hooks/useModals';
+import useHamburgerNav from '@hooks/useHamburgerNav';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useModifyList from '@hooks/useModifyList';
 import SortableList from './SortableList';
@@ -21,7 +21,7 @@ function Body() {
         setIncludeCompletedTasks,
         error
     } = useListDetails(currentListId);
-    const { modalVisibility } = useModals();
+    const [isMobileNavVisible] = useHamburgerNav();
     const modifyList = useModifyList();
 
     const onSortEnd = useCallback(
@@ -49,7 +49,7 @@ function Body() {
         (list.additionalTasks !== 0 ||
             !list.completedTasks.find(task => typeof task !== 'string'));
     return (
-        <Container mobileNavVisible={modalVisibility.listsView}>
+        <Container isMobileNavVisible={isMobileNavVisible}>
             {/* {this.getNotificationBanner()} */}
             <AddTask hidden={loading || error} />
             {isAllCaughtUp && <AllCaughtUpBanner />}

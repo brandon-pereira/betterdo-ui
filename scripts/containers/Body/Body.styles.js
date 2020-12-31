@@ -30,7 +30,7 @@ export const Container = styled.div`
     flex-direction: column;
     padding-bottom: 0.5rem;
     ${props =>
-        props.mobileNavVisible &&
+        props.isMobileNavVisible &&
         `
         grid-row: 4;
         ${Banner} {

@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { mutate } from 'swr';
-import useModals from './useModals';
+import useHamburgerNav from './useHamburgerNav';
 
 function useSwitchList() {
     const history = useHistory();
-    const { closeModal } = useModals();
+    const [, setMobileNavVisibility] = useHamburgerNav();
 
     const switchList = useCallback(
         async nextList => {
@@ -15,11 +15,11 @@ function useSwitchList() {
                 list => ({ ...nextList, ...list }),
                 false
             );
-            closeModal('listsView');
+            setMobileNavVisibility(false);
             // update url
             history.replace(`/${nextList.id}`);
         },
-        [history, closeModal]
+        [history, setMobileNavVisibility]
     );
 
     return switchList;

@@ -14,8 +14,8 @@ export const MobileNavigationSkirt = styled.div`
     grid-row: 2;
     grid-column: 2;
     background: #000;
-    ${({ visibleOnMobile }) =>
-        visibleOnMobile &&
+    ${({ isMobileNavVisible }) =>
+        isMobileNavVisible &&
         `
         display: block;
     `}
@@ -37,8 +37,8 @@ export const Container = styled.nav`
     transition: transform .2s;
     opacity: 0;
     pointer-events: none;
-    ${props =>
-        props.visibleOnMobile &&
+    ${({ isMobileNavVisible }) =>
+        isMobileNavVisible &&
         `
         display: flex;
         grid-row: 2;
