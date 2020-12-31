@@ -17,6 +17,7 @@
         "randomcolor": "^0.5.4",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
+        "react-focus-lock": "^2.5.0",
         "react-router-dom": "^5.2.0",
         "react-sortable-hoc": "^1.11.0",
         "react-transition-group": "^4.4.1",

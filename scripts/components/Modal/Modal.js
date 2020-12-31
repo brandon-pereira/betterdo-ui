@@ -1,5 +1,8 @@
 import React, { useCallback } from 'react';
+import FocusLock from 'react-focus-lock';
+
 import { Overlay, Content, Arrow, Container, ModalClose } from './Modal.styles';
+import useEscapeKey from './useEscapeKey';
 
 const Modal = React.forwardRef(
     (
@@ -22,25 +25,31 @@ const Modal = React.forwardRef(
             [canCloseModal, onRequestClose]
         );
 
+        useEscapeKey(visible ? closeModal : undefined);
+
         return (
             <Overlay visible={visible} onMouseDown={e => closeModal(e)}>
-                <Container
-                    style={style}
-                    className={`${className || ''} ${visible ? 'visible' : ''}`}
-                    ref={ref}
-                    visible={visible}
-                >
-                    <ModalClose
-                        icon="x"
-                        color="#a9a9a9"
-                        size="1rem"
-                        onClick={() => closeModal()}
+                <FocusLock disabled={Boolean(!visible)}>
+                    <Container
+                        style={style}
+                        className={`${className || ''} ${
+                            visible ? 'visible' : ''
+                        }`}
+                        ref={ref}
+                        visible={visible}
                     >
-                        Close
-                    </ModalClose>
-                    <Content>{children}</Content>
-                    <Arrow data-betterdo-modal-arrow></Arrow>
-                </Container>
+                        <ModalClose
+                            icon="x"
+                            color="#a9a9a9"
+                            size="1rem"
+                            onClick={() => closeModal()}
+                        >
+                            Close
+                        </ModalClose>
+                        <Content>{children}</Content>
+                        <Arrow data-betterdo-modal-arrow></Arrow>
+                    </Container>
+                </FocusLock>
             </Overlay>
         );
     }

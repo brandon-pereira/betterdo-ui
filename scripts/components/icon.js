@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import { COLORS } from '../constants';
 import styled from 'styled-components';
 
 const IconContainer = styled.div`
     height: ${props => props.size || '1rem'};
     width: ${props => props.size || '1rem'};
+    background: none;
+    border: none;
+    outline: none;
     cursor: ${props => (props.onClick ? 'pointer' : 'default')};
     position: relative;
     svg {
@@ -13,6 +17,11 @@ const IconContainer = styled.div`
         fill: ${props => props.color || '#000'};
         height: 100%;
         width: 100%;
+    }
+    &:focus-visible {
+        svg {
+            fill: ${COLORS.blue};
+        }
     }
 `;
 class Icon extends Component {
@@ -45,6 +54,7 @@ class Icon extends Component {
             return (
                 <IconContainer
                     {...props}
+                    as={onClick ? 'button' : 'div'}
                     className={className}
                     onClick={onClick ? e => onClick(e) : null}
                 >
