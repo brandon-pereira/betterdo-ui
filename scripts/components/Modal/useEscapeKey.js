@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 const ESCAPE_KEY = 27;
 
 function useEscapeKey(callback) {
-    console.log(callback);
     useEffect(() => {
         if (!window || !window.document || !callback) {
             return;
