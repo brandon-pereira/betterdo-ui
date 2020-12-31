@@ -36,6 +36,9 @@ export const Button = styled.button.attrs(props => ({
     &:hover:before {
         opacity: 1;
     }
+    &:focus-visible {
+        box-shadow: 0 0 0 2px ${COLORS.blue};
+    }
     ${props =>
         props.isLoading &&
         `

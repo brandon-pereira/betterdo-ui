@@ -1,31 +1,16 @@
 import React, { useCallback } from 'react';
 import AddTask from '@components/AddTask';
-import Banner from '@components/banner';
 import Task from '@components/Task';
-import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 
-import { Container, CompletedTasksButton } from './Body.styles';
+import { Container, TaskContainer } from './Body.styles';
 import useListDetails from '@hooks/useListDetails';
 import useModals from '@hooks/useModals';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useModifyList from '@hooks/useModifyList';
-
-const SortableItem = SortableElement(({ value }) => <Task {...value} />);
-
-const SortableList = SortableContainer(({ items }) => {
-    return (
-        <div>
-            {items.map((task, index) => (
-                <SortableItem
-                    key={typeof task === 'object' ? task._id : index}
-                    index={index}
-                    value={task}
-                />
-            ))}
-        </div>
-    );
-});
+import SortableList from './SortableList';
+import CompletedTasksButton from './CompletedTasksButton';
+import { AllCaughtUpBanner, ServerErrorBanner } from './Banners';
 
 function Body() {
     const currentListId = useCurrentListId();
@@ -56,13 +41,9 @@ function Body() {
         [list, currentListId, modifyList]
     );
 
-    const reloadBrowser = useCallback(() => {
-        window.location.reload();
-    }, []);
-
-    const hasServerError = Boolean(error);
-    const showAllCaughtUpBanner =
-        !hasServerError &&
+    const isAllCaughtUp =
+        !error &&
+        !loading &&
         list.tasks &&
         list.tasks.length === 0 &&
         (list.additionalTasks !== 0 ||
@@ -70,51 +51,41 @@ function Body() {
     return (
         <Container mobileNavVisible={modalVisibility.listsView}>
             {/* {this.getNotificationBanner()} */}
-            <AddTask hidden={list.type === 'loading' || hasServerError} />
-            {showAllCaughtUpBanner && (
-                <Banner icon="betterdo" body="You're all caught up!" />
-            )}
-            {hasServerError && (
-                <Banner
-                    icon="server-error"
-                    title="Oops!"
-                    body="There was an issue connecting to the server."
-                    buttonText="Reload"
-                    buttonAction={reloadBrowser}
-                />
-            )}
-            {!hasServerError && (
-                <>
-                    <SortableList
-                        pressDelay={200}
-                        items={list.tasks || []}
-                        onSortEnd={onSortEnd}
-                    />
-                    {list.completedTasks &&
-                        list.completedTasks.map(task => {
-                            if (typeof task === 'object') {
-                                return <Task key={task._id} {...task} />;
-                            }
-                            return null;
-                        })}
+            <AddTask hidden={loading || error} />
+            {isAllCaughtUp && <AllCaughtUpBanner />}
+            {error && <ServerErrorBanner />}
+            {!error && (
+                <TaskContainer>
+                    {/* Regular non-complete tasks are loaded and sortable  */}
+                    <SortableList tasks={list.tasks} onSortEnd={onSortEnd} />
+                    {/* Completed tasks are not sortable and only shown when requested */}
+                    {isCompletedTasksIncluded &&
+                        list.completedTasks.map(task => (
+                            <Task
+                                key={getTaskId(task)}
+                                isCompleted={true}
+                                {...task}
+                            />
+                        ))}
+                    {/* If not loaded, show completed tasks button */}
                     <CompletedTasksButton
-                        hidden={
-                            hasServerError ||
-                            list.type === 'loading' ||
-                            !list.additionalTasks ||
-                            list.additionalTasks === 0
-                        }
-                        hasCaughtUpBanner={showAllCaughtUpBanner}
+                        hidden={error || list.additionalTasks === 0}
+                        count={list.additionalTasks}
                         isLoading={loading && isCompletedTasksIncluded}
-                        color="#999999"
                         onClick={() => setIncludeCompletedTasks(true)}
-                    >
-                        {list.additionalTasks} completed tasks
-                    </CompletedTasksButton>
-                </>
+                    />
+                </TaskContainer>
             )}
         </Container>
     );
+}
+
+function areCompletedTasksLoaded(list) {
+    return list.completedTasks.find(task => typeof task === 'object');
+}
+
+function getTaskId(task) {
+    return typeof task === 'object' ? task._id : task;
 }
 
 export default Body;

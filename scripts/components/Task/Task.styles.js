@@ -1,3 +1,4 @@
+import { COLORS } from '../../constants';
 import styled from 'styled-components';
 import _Loader from '../Loader';
 
@@ -34,6 +35,9 @@ export const Checkbox = styled.input`
     &:checked:before {
         transform: scale(1);
     }
+    &:focus-visible {
+        box-shadow: 0 0 0 2px ${COLORS.blue}, inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+    }
 `;
 
 export const HighPriorityFlag = styled.div`
@@ -64,14 +68,22 @@ export const HighPriorityFlag = styled.div`
     }
 `;
 
-export const Container = styled.div`
+export const Container = styled.button`
+    display: block;
+    border: none;
+    font: inherit;
+    box-sizing: border-box;
+    padding: 0;
     background: linear-gradient(#fff, #eee);
-    margin: 0.5rem 1rem 0;
+    margin: 0.5rem 0 0;
     border-radius: 50px;
+    width: 100%;
+    text-align: left;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2), inset 0 -1px #fff;
+    outline: none;
     display: flex;
     align-items: center;
     flex-shrink: 0;
@@ -87,6 +99,9 @@ export const Container = styled.div`
         background: linear-gradient(#eee, #ddd);
         box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
     `}
+    &:focus-visible {
+        box-shadow: 0 0 0 2px ${COLORS.blue};
+    }
 `;
 
 export const Title = styled.span`

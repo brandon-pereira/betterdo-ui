@@ -17,8 +17,8 @@ const App = () => (
     <>
         <Container>
             <Logo />
-            <Header />
             <Navigation />
+            <Header />
             <Body />
             {/* <UserSettingsModal /> */}
         </Container>
