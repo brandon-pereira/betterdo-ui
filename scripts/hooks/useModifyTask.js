@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { mutate } from 'swr';
 import { updateTask } from '@utilities/server';
 
-import { getListDetailUrl, getListDetailUrls } from './internal/urls';
+import { getListDetailUrl } from './internal/urls';
 import useCompletedTasks from './useCompletedTasks';
 
 function useModifyTask() {

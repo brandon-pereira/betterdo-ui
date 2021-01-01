@@ -26,7 +26,7 @@ function useSwitchList() {
             // update url
             history.replace(`/${nextList.id}`);
         },
-        [history, setMobileNavVisibility]
+        [history, setMobileNavVisibility, setShowCompletedTasks]
     );
 
     return switchList;
