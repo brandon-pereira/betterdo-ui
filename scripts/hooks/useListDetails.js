@@ -3,6 +3,8 @@ import useSWR from 'swr';
 import { COLORS } from '../constants';
 
 import { useHistory } from 'react-router-dom';
+import { getListDetailUrl } from './internal/urls';
+import useCompletedTasks from './useCompletedTasks';
 
 function useListDetails(listId) {
     const previousList = useRef({
@@ -10,19 +12,15 @@ function useListDetails(listId) {
         tasks: [],
         completedTasks: []
     });
-    const [isCompletedTasksIncluded, setIncludeCompletedTasks] = useState(
-        false
-    );
+    const [isCompletedTasksIncluded] = useCompletedTasks();
     const history = useHistory();
-    const { data, error } = useSWR(getUrl(listId, isCompletedTasksIncluded), {
-        dedupingInterval: 5000,
-        refreshInterval: 30000
-    });
-
-    // cleanup on list change
-    useEffect(() => {
-        setIncludeCompletedTasks(false);
-    }, [listId]);
+    const { data, error } = useSWR(
+        getListDetailUrl(listId, isCompletedTasksIncluded),
+        {
+            dedupingInterval: 5000,
+            refreshInterval: 30000
+        }
+    );
 
     useEffect(() => {
         if (data && !error) {
@@ -40,15 +38,8 @@ function useListDetails(listId) {
     return {
         error,
         loading: Boolean(!data),
-        isCompletedTasksIncluded,
-        setIncludeCompletedTasks,
         list: data ? data : previousList.current
     };
 }
-
-const getUrl = (listId, includeCompleted) =>
-    `${process.env.SERVER_URL}/api/lists/${listId}${
-        includeCompleted ? `?includeCompleted=true` : ''
-    }`;
 
 export default useListDetails;

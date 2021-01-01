@@ -2,32 +2,44 @@ import { useCallback } from 'react';
 import { mutate } from 'swr';
 import { updateList } from '@utilities/server';
 
-import { getListsUrl } from './internal/urls';
+import { getListDetailUrl, getListsUrl } from './internal/urls';
+import useCompletedTasks from './useCompletedTasks';
 
 function useModifyList() {
-    return useCallback(async (listId, updatedProps) => {
-        await mutate(
-            getListUrl(listId),
-            async currentList => {
-                return {
-                    ...currentList,
-                    ...updatedProps
-                };
-            },
-            false
-        );
-        if (updatedProps.tasks) {
-            updatedProps.tasks = updatedProps.tasks.map(m => m._id);
-        }
-        if (updatedProps.members) {
-            updatedProps.members = updatedProps.members.map(m => m._id);
-        }
-        await updateList(listId, updatedProps);
-        await mutate(getListsUrl());
-        await mutate(getListUrl(listId));
-    }, []);
+    const [isCompletedTasksIncluded] = useCompletedTasks();
+    return useCallback(
+        async (listId, updatedProps) => {
+            // Immediately update the cached data
+            await mutate(
+                getListDetailUrl(listId, isCompletedTasksIncluded),
+                async currentList => {
+                    return {
+                        ...currentList,
+                        ...updatedProps
+                    };
+                },
+                false
+            );
+            // Special handling is needed to normalize the data for server
+            updatedProps = normalizeDataForServerCall(updatedProps);
+            // Send request to server
+            await updateList(listId, updatedProps);
+            // Now that its mutated, update cached data
+            await mutate(getListsUrl());
+            await mutate(getListDetailUrl(listId, isCompletedTasksIncluded));
+        },
+        [isCompletedTasksIncluded]
+    );
 }
 
-const getListUrl = listId => `${process.env.SERVER_URL}/api/lists/${listId}`;
+function normalizeDataForServerCall(updatedProps) {
+    if (updatedProps.tasks) {
+        updatedProps.tasks = updatedProps.tasks.map(m => m._id);
+    }
+    if (updatedProps.members) {
+        updatedProps.members = updatedProps.members.map(m => m._id);
+    }
+    return updatedProps;
+}
 
 export default useModifyList;

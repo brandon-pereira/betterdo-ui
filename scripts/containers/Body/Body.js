@@ -10,16 +10,15 @@ import useModifyList from '@hooks/useModifyList';
 import SortableList from './SortableList';
 import CompletedTasksButton from './CompletedTasksButton';
 import { AllCaughtUpBanner, ServerErrorBanner } from './Banners';
+import useCompletedTasks from '@hooks/useCompletedTasks';
 
 function Body() {
     const currentListId = useCurrentListId();
-    const {
-        list,
-        loading,
+    const { list, loading, error } = useListDetails(currentListId);
+    const [
         isCompletedTasksIncluded,
-        setIncludeCompletedTasks,
-        error
-    } = useListDetails(currentListId);
+        setIncludeCompletedTasks
+    ] = useCompletedTasks();
     const modifyList = useModifyList();
 
     const onSortEnd = useCallback(
@@ -58,6 +57,7 @@ function Body() {
                     <SortableList tasks={list.tasks} onSortEnd={onSortEnd} />
                     {/* Completed tasks are not sortable and only shown when requested */}
                     {isCompletedTasksIncluded &&
+                        list &&
                         list.completedTasks.map(task => (
                             <Task
                                 key={getTaskId(task)}
