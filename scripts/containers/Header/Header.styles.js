@@ -19,8 +19,8 @@ export const Loader = styled(_Loader)`
 `;
 
 export const Container = styled.header`
-    grid-row: 1 / 1;
-    grid-column: 2 / 3;
+    grid-row: 3;
+    grid-column: 1;
     background-color: ${({ color, theme }) =>
         color || theme.colors.defaultList};
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.2));
@@ -34,19 +34,13 @@ export const Container = styled.header`
     transition: background 0.6s;
     ${Hamburger} {
         padding: 0 0.5rem 0 0.8rem;
-        
     }
     ${Loader} {
-        filter: drop-shadow(1px 1px rgba(0,0,0,.5))
+        filter: drop-shadow(1px 1px rgba(0, 0, 0, 0.5));
     }
-    ${props =>
-        props.mobileNavVisible &&
-        `
-        // transform: translateY(50%);
-        grid-row: 3;
-    `}
     @media ${QUERIES.medium} {
         grid-row: 1;
+        grid-column: 2;
         ${Hamburger} {
             display: none;
         }

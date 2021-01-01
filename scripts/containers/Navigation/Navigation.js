@@ -72,7 +72,7 @@ function Navigation() {
 
     return (
         <>
-            <MobileNavigationSkirt isMobileNavVisible={isMobileNavVisible} />
+            {/* <MobileNavigationSkirt isMobileNavVisible={isMobileNavVisible} /> */}
             <Container isMobileNavVisible={isMobileNavVisible}>
                 <ListsContainer>
                     <SortableList

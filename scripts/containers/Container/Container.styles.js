@@ -5,16 +5,18 @@ export const _Container = styled.div`
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: 0px 1fr;
-    grid-template-rows: 4rem 1fr;
-    ${props =>
-        props.mobileNavVisible &&
+    grid-template-columns: 1fr 0;
+    grid-template-rows: 0 0 4rem 1fr;
+    transition: grid-template-columns 0.2s, grid-template-rows 0.2s;
+    ${({ isMobileNavVisible }) =>
+        isMobileNavVisible &&
         `
-          grid-template-rows: 4rem 60% 4rem 1fr;  
+        grid-template-columns: 1fr 0;
+        grid-template-rows: 4rem 60vh 4rem 1fr;  
     `}
     @media ${QUERIES.medium} {
         grid-template-columns: 10rem 1fr;
-        grid-template-rows: 4rem 1fr;
+        grid-template-rows: 4rem 1fr 0 0;
     }
     @media ${QUERIES.large} {
         grid-template-columns: 14rem 1fr;

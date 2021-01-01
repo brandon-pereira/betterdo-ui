@@ -22,23 +22,16 @@ export const CompletedTasksButton = styled(Button)`
 `;
 
 export const Container = styled.div`
-    grid-row: 2 / 3;
-    grid-column: 2 / 3;
+    grid-row: 4;
+    grid-column: 1;
     overflow-y: scroll;
     background: #e4e4e4;
     display: flex;
     flex-direction: column;
     padding-bottom: 0.5rem;
-    ${props =>
-        props.isMobileNavVisible &&
-        `
-        grid-row: 4;
-        ${Banner} {
-            opacity: 0;
-        }
-    `}
     @media ${QUERIES.medium} {
-        grid-row: 2 / 3;
+        grid-row: 2;
+        grid-column: 2;
         ${Banner} {
             opacity: 1;
         }

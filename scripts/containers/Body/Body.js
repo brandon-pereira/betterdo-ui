@@ -21,7 +21,6 @@ function Body() {
         setIncludeCompletedTasks,
         error
     } = useListDetails(currentListId);
-    const [isMobileNavVisible] = useHamburgerNav();
     const modifyList = useModifyList();
 
     const onSortEnd = useCallback(
@@ -49,7 +48,7 @@ function Body() {
         (list.additionalTasks !== 0 ||
             !list.completedTasks.find(task => typeof task !== 'string'));
     return (
-        <Container isMobileNavVisible={isMobileNavVisible}>
+        <Container>
             {/* {this.getNotificationBanner()} */}
             <AddTask hidden={loading || error} />
             {isAllCaughtUp && <AllCaughtUpBanner />}

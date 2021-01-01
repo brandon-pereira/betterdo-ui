@@ -4,22 +4,15 @@ import _Hamburger from '@components/hamburger';
 import { QUERIES } from '../../constants';
 
 export const Container = styled.div`
-    background-image: linear-gradient(transparent,rgba(0,0,0,0.2));
+    background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.2));
     background-color: ${({ color, theme }) =>
         color || theme.colors.defaultList};
     overflow: hidden;
-    transform: translateY(-100%);
     position: relative;
+    grid-row: 1;
+    grid-column: 1;
     z-index: 10;
     transition: background 0.6s;
-    /* transition: transform 0.1s 0.1s; */
-    ${props =>
-        props.visibleOnMobile &&
-        `
-        transform: translateY(0%);
-        grid-row: 1 / 1;
-        grid-column: 2 / 3;
-    `}
     @media ${QUERIES.medium} {
         transform: none;
         grid-row: 1 / 1;
