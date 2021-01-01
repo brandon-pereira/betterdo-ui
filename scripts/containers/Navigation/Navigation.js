@@ -7,8 +7,7 @@ import arrayMove from 'array-move';
 import {
     Container,
     NavigationModalOverlay,
-    ListsContainer,
-    MobileNavigationSkirt
+    ListsContainer
 } from './Navigation.styles';
 import useLists from '@hooks/useLists';
 import useNewListModal from '@hooks/useNewListModal';
@@ -72,7 +71,7 @@ function Navigation() {
 
     return (
         <>
-            <MobileNavigationSkirt isMobileNavVisible={isMobileNavVisible} />
+            {/* <MobileNavigationSkirt isMobileNavVisible={isMobileNavVisible} /> */}
             <Container isMobileNavVisible={isMobileNavVisible}>
                 <ListsContainer>
                     <SortableList

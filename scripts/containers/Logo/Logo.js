@@ -17,7 +17,7 @@ function Logo() {
     const currentListId = useCurrentListId();
     const { list } = useListDetails(currentListId);
     return (
-        <Container color={list.color} visibleOnMobile={isMobileNavVisible}>
+        <Container color={list.color}>
             <Content
                 onClick={() => {
                     // TODO: Reload

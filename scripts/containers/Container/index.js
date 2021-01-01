@@ -1,9 +1,15 @@
+import useHamburgerNav from '@hooks/useHamburgerNav';
 import React from 'react';
 
 import { _Container } from './Container.styles';
 
 function Container({ children }) {
-    return <_Container mobileNavVisible={false}>{children}</_Container>;
+    const [isMobileNavVisible] = useHamburgerNav();
+    return (
+        <_Container isMobileNavVisible={isMobileNavVisible}>
+            {children}
+        </_Container>
+    );
 }
 
 export default Container;
