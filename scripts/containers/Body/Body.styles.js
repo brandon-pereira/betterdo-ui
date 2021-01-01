@@ -37,7 +37,6 @@ export const Container = styled.div`
         }
     }
 `;
-
 export const TaskContainer = styled.div`
     margin: 0 1rem;
     text-align: center;
