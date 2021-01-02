@@ -1,10 +1,12 @@
 import { observable } from 'mobx';
-import Server from './utilities/server';
+// import Server from './utilities/server';
 import ServiceWorkerRegistrar from './utilities/sw-registrar';
 import { COLORS } from './constants';
-import Router from './utilities/router';
+// import Router from './utilities/router';
 import { setThemeColor } from './utilities/helmet';
 
+const Router = null;
+const Server = null;
 class Store {
     @observable
     lists = [];
@@ -67,9 +69,9 @@ class Store {
 
         ServiceWorkerRegistrar.onAddToHomeScreenAvailable(bool => {
             if (bool) {
-                console.log('Add to homescreen available');
+                console.log('Add to home screen available');
             } else {
-                console.log('Added to homescreen :)');
+                console.log('Added to home screen :)');
             }
             this.addToHomeScreenAvailable = bool;
         });

@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { Header } from '@components/copy';
 import Selector from '@components/selector';
 import { Label, Input } from '@components/forms';
-import Dropdown from '@components/dropdown';
 import Button from '@components/Button';
+
+import useCurrentTaskId from '@hooks/useCurrentTaskId';
+import useTaskDetails from '@hooks/useTaskDetails';
+import useCurrentListId from '@hooks/useCurrentListId';
+import useModifyTask from '@hooks/useModifyTask';
 
 import {
     Container,
     Content,
     Block,
     Notes,
-    CreatorBlock,
-    ProfilePic,
     ButtonContainer
 } from './EditTask.styles';
-import useLists from '@hooks/useLists';
-import useCurrentTaskId from '@hooks/useCurrentTaskId';
-import useTaskDetails from '@hooks/useTaskDetails';
-import useCurrentListId from '@hooks/useCurrentListId';
+import CreatorBlock from './CreatorBlock';
+import ListsDropdown from './ListsDropdown';
 import { COLORS } from '../../constants';
 
 const PRIORITIES = [
@@ -26,65 +26,15 @@ const PRIORITIES = [
     { value: 'high', label: 'High' }
 ];
 
-const defaultTask = {
-    title: '',
-    createdBy: {
-        firstName: '',
-        lastName: ''
-    }
-};
 function EditTaskContent() {
-    const currentTaskId = useCurrentTaskId();
-    const currentListId = useCurrentListId();
-    const { task: _task, loading, error } = useTaskDetails(
-        currentListId,
-        currentTaskId
-    );
-    const task = _task || defaultTask;
-    const [state, setState] = useState({
-        title: task.title,
-        priority: task.priority,
-        dueDate: task.dueDate,
-        list: task.list,
-        notes: task.notes,
-        subtasks: task.subtasks,
-        formattedCreationDate: task.creationDate,
-        createdBy: task.createdBy,
-        isSaving: false,
-        isDeleting: false
-    });
-
-    // componentDidMount() {
-    //     import('./relativeTime').then(time => {
-    //         this.relativeTime = time.default;
-    //         this.setState({
-    //             formattedCreationDate: this.relativeTime(
-    //                 this.task.creationDate,
-    //                 new Date()
-    //             )
-    //         });
-    //     });
-    // }
-
-    const { lists } = useLists();
-    const formattedLists = lists
-        .filter(list => list.type === 'default' || list.type === 'inbox')
-        .map(list => ({
-            value: list._id,
-            label: list.title
-        }));
-
-    const updatePriority = priority => {
-        updateTask({ priority });
-    };
-
-    const updateList = list => {
-        updateTask({ list });
-    };
-
-    const updateSubtasks = subtasks => {
-        updateTask({ subtasks });
-    };
+    const taskId = useCurrentTaskId();
+    const listId = useCurrentListId();
+    const { task, loading, error } = useTaskDetails(listId, taskId);
+    const modifyTask = useModifyTask();
+    const [state, setState] = useState({ ...(task || {}) });
+    const [_error, setError] = useState(null);
+    const [isSaving, setSaving] = useState(false);
+    const [isDeleting, setDeleting] = useState(false);
 
     const saveTask = () => {
         updateTask({
@@ -112,16 +62,19 @@ function EditTaskContent() {
         }
     };
 
-    const updateTask = async updatedProperties => {
-        this.setState({
-            ...updatedProperties,
-            isSaving: true
-        });
-        await this.props.store.updateTask(this.task._id, updatedProperties);
-        this.props.setUnsavedChanges(false);
-        this.setState({
-            isSaving: false
-        });
+    const updateTask = async updatedProps => {
+        setState(state => ({
+            ...state,
+            ...updatedProps
+        }));
+        setSaving(true);
+        try {
+            await modifyTask(taskId, state.list, updatedProps);
+        } catch (err) {
+            console.error(err);
+        }
+        // this.props.setUnsavedChanges(false);
+        setSaving(false);
     };
 
     const onChange = e => {
@@ -144,12 +97,11 @@ function EditTaskContent() {
         return '';
     };
 
-    // useEffect(() => {
-    //     setState(prevState => ({
-    //         ...prevState,
-    //         ...task
-    //     }));
-    // }, [task]);
+    useEffect(() => {
+        if (task) {
+            console.log('TASK');
+        }
+    }, [task]);
 
     if (!task) {
         return null;
@@ -170,7 +122,6 @@ function EditTaskContent() {
                     <Label>Title</Label>
                     <Input
                         value={state.title}
-                        id="title"
                         placeholder="Enter a title"
                         onKeyPress={onKeyPress}
                         onChange={onChange}
@@ -196,38 +147,30 @@ function EditTaskContent() {
                     <Label>Notes</Label>
                     <Notes
                         value={state.notes}
-                        id="notes"
                         onKeyPress={onKeyPress}
                         onChange={onChange}
                     />
                 </Block>
                 <Block>
                     <Label>List</Label>
-                    <Dropdown
-                        values={formattedLists}
+                    <ListsDropdown
                         onSelect={updateList}
-                        value={state.list}
+                        currentListId={listId}
                     />
                 </Block>
                 <Block>
                     <Label>Due Date</Label>
                     <Input
                         type="date"
-                        id="dueDate"
                         value={formatDateForInput(state.dueDate)}
                         onKeyPress={onKeyPress}
                         onChange={onChange}
                     />
                 </Block>
-                <CreatorBlock>
-                    <ProfilePic user={state.createdBy} />
-                    <Block>
-                        Created by {state.createdBy.firstName}{' '}
-                        {state.createdBy.lastName}
-                        <br />
-                        Created {state.formattedCreationDate}
-                    </Block>
-                </CreatorBlock>
+                <CreatorBlock
+                    createdBy={task.createdBy}
+                    creationDate={task.creationDate}
+                />
             </Content>
             <ButtonContainer>
                 <Button

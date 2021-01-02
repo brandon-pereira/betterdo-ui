@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import loadable from '@loadable/component';
 import { Modal } from './EditTask.styles';
 import _Loader from '@components/Loader';
-import useCurrentListId from '@hooks/useCurrentListId';
 import useEditTaskModal from '@hooks/useEditTaskModal';
 
 const Loader = () => <_Loader color="#006fb0" size="4rem" isVisible={true} />;

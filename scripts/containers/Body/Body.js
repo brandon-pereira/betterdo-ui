@@ -48,7 +48,7 @@ function Body() {
     return (
         <Container>
             {/* {this.getNotificationBanner()} */}
-            <AddTask hidden={loading || error} />
+            <AddTask hidden={error} />
             {isAllCaughtUp && <AllCaughtUpBanner />}
             {error && <ServerErrorBanner />}
             {!error && (
@@ -67,7 +67,11 @@ function Body() {
                         ))}
                     {/* If not loaded, show completed tasks button */}
                     <CompletedTasksButton
-                        hidden={error || list.additionalTasks === 0}
+                        hidden={
+                            (loading && !isCompletedTasksIncluded) ||
+                            error ||
+                            list.additionalTasks === 0
+                        }
                         count={list.additionalTasks}
                         isLoading={loading && isCompletedTasksIncluded}
                         onClick={() => setIncludeCompletedTasks(true)}
@@ -78,9 +82,9 @@ function Body() {
     );
 }
 
-function areCompletedTasksLoaded(list) {
-    return list.completedTasks.find(task => typeof task === 'object');
-}
+// function areCompletedTasksLoaded(list) {
+//     return list.completedTasks.find(task => typeof task === 'object');
+// }
 
 function getTaskId(task) {
     return typeof task === 'object' ? task._id : task;

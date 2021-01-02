@@ -45,7 +45,7 @@ export const HighPriorityFlag = styled.div`
     height: 2rem;
     width: 1.6rem;
     background: linear-gradient(#e21d1d, #c11010);
-    margin: -1px 1rem 0 0;
+    margin: -1px 1.3rem 0 0;
     position: relative;
     filter: drop-shadow(1px 1px #840000);
     &:before,
@@ -79,9 +79,6 @@ export const Container = styled.button`
     border-radius: 50px;
     width: 100%;
     text-align: left;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2), inset 0 -1px #fff;
     outline: none;
     display: flex;
@@ -108,5 +105,6 @@ export const Title = styled.span`
     flex: 1;
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
     margin: 1rem 1rem 1rem 0;
 `;

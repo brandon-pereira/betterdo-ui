@@ -13,20 +13,22 @@ document.querySelector('#critical-css').remove();
 
 render(
     <ThemeProvider theme={createTheme()}>
-        <ErrorBoundary>
-            <BrowserRouter>
-                <Switch>
-                    <Route path="/:currentListId?">
-                        <SWRProvider>
-                            <SharedProviders>
-                                <GlobalStyles />
-                                <App />
-                            </SharedProviders>
-                        </SWRProvider>
-                    </Route>
-                </Switch>
-            </BrowserRouter>
-        </ErrorBoundary>
+        <>
+            <GlobalStyles />
+            <ErrorBoundary>
+                <BrowserRouter>
+                    <Switch>
+                        <Route path="/:currentListId?">
+                            <SWRProvider>
+                                <SharedProviders>
+                                    <App />
+                                </SharedProviders>
+                            </SWRProvider>
+                        </Route>
+                    </Switch>
+                </BrowserRouter>
+            </ErrorBoundary>
+        </>
     </ThemeProvider>,
     document.querySelector('.main-container')
 );
