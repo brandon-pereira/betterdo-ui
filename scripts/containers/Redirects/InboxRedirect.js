@@ -8,7 +8,7 @@ function InboxRedirect() {
     const history = useHistory();
     const { lists, loading } = useLists();
     useEffect(() => {
-        if (!currentListId || (currentListId === 'inbox' && !loading)) {
+        if ((!currentListId || currentListId === 'inbox') && !loading) {
             const inbox = lists.find(l => l.type === 'inbox');
             history.replace(`/${inbox.id}`);
         }

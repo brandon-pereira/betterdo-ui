@@ -114,14 +114,14 @@ export default class Subtasks extends Component {
         }
     }
 
-    onSortEnd = ({ oldIndex, newIndex }) => {
+    onSortEnd({ oldIndex, newIndex }) {
         if (oldIndex !== newIndex) {
             this.setState({
                 items: arrayMove(this.state.items, oldIndex, newIndex)
             });
             this.props.onChange(this.state.items);
         }
-    };
+    }
 
     render() {
         const SortableItem = SortableElement(({ value, sortIndex }) => (

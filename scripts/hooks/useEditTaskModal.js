@@ -11,13 +11,13 @@ function useEditTaskModal() {
         },
         [generateUrl, history]
     );
-    const closeTaskModal = useCallback(() => {
+    const closeModal = useCallback(() => {
         history.replace(generateUrl());
     }, [generateUrl, history]);
 
     return {
         openTaskModal,
-        closeTaskModal
+        closeModal
     };
 }
 export default useEditTaskModal;

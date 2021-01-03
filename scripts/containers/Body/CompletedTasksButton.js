@@ -8,6 +8,7 @@ function _CompletedTasksButton({ onClick, isLoading, count, hidden }) {
             hidden={hidden || count === 0}
             isLoading={isLoading}
             color="#999999"
+            loaderColor="#888"
             onClick={onClick}
         >
             {formatNumber(count)} completed tasks

@@ -38,13 +38,8 @@ function Body() {
         [list, currentListId, modifyList]
     );
 
-    const isAllCaughtUp =
-        !error &&
-        !loading &&
-        list.tasks &&
-        list.tasks.length === 0 &&
-        (list.additionalTasks !== 0 ||
-            !list.completedTasks.find(task => typeof task !== 'string'));
+    const isAllCaughtUp = !error && !loading && list.tasks.length === 0;
+
     return (
         <Container>
             {/* {this.getNotificationBanner()} */}
@@ -57,13 +52,8 @@ function Body() {
                     <SortableList tasks={list.tasks} onSortEnd={onSortEnd} />
                     {/* Completed tasks are not sortable and only shown when requested */}
                     {isCompletedTasksIncluded &&
-                        list &&
                         list.completedTasks.map(task => (
-                            <Task
-                                key={getTaskId(task)}
-                                isCompleted={true}
-                                {...task}
-                            />
+                            <Task key={task._id} isCompleted={true} {...task} />
                         ))}
                     {/* If not loaded, show completed tasks button */}
                     <CompletedTasksButton
@@ -80,14 +70,6 @@ function Body() {
             )}
         </Container>
     );
-}
-
-// function areCompletedTasksLoaded(list) {
-//     return list.completedTasks.find(task => typeof task === 'object');
-// }
-
-function getTaskId(task) {
-    return typeof task === 'object' ? task._id : task;
 }
 
 export default Body;

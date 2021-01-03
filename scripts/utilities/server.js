@@ -19,9 +19,9 @@ export const updateList = (listId, props) => {
     return _post(`lists/${listId}`, props);
 };
 
-// deleteTask(taskId) {
-//     return this.delete(`tasks/${taskId}`);
-// }
+export const deleteTask = taskId => {
+    return _delete(`tasks/${taskId}`);
+};
 
 export const deleteList = listId => {
     return _delete(`lists/${listId}`);

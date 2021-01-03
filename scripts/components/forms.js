@@ -55,6 +55,17 @@ const TextArea = styled.textarea`
     box-shadow: inset 0 0 0 2px #ccc;
     border-radius: 3px;
     outline: none;
+    &:focus {
+        box-shadow: inset 0 0 0 2px ${COLORS.blue};
+    }
+    &::placeholder {
+        color: #aaa;
+    }
+    ${({ invalid }) =>
+        invalid &&
+        `
+    box-shadow: inset 0 0 0 2px ${COLORS.red} !important
+    `};
 `;
 
 const Form = ({ children, errorMessage, ...props }) => (

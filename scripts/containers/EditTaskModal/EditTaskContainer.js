@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 import loadable from '@loadable/component';
 import { Modal } from './EditTask.styles';
 import _Loader from '@components/Loader';
@@ -11,18 +11,21 @@ const Content = loadable(() => import('./EditTaskContent'), {
 });
 
 function EditTaskContainer({ isOpen }) {
-    const [hasUnsavedChanges, setUnsavedChanges] = useState(false);
-    const { closeTaskModal } = useEditTaskModal();
+    const hasUnsavedChanges = useRef(false);
+    const { closeModal } = useEditTaskModal();
+    const setUnsavedChanges = useCallback(bool => {
+        hasUnsavedChanges.current = bool;
+    }, []);
 
     const onClose = useCallback(() => {
         if (canCloseModal()) {
-            closeTaskModal();
-            setUnsavedChanges(false);
+            closeModal();
+            hasUnsavedChanges.current = false;
         }
-    }, [canCloseModal, closeTaskModal]);
+    }, [canCloseModal, closeModal]);
 
     const canCloseModal = useCallback(() => {
-        if (!hasUnsavedChanges) {
+        if (!hasUnsavedChanges.current) {
             return true;
         } else {
             return Boolean(
@@ -35,12 +38,15 @@ function EditTaskContainer({ isOpen }) {
 
     return (
         <Modal
-            onRequestClose={onClose}
             canCloseModal={canCloseModal}
+            onRequestClose={closeModal}
             visible={isOpen}
         >
             {isOpen && (
-                <Content setUnsavedChanges={() => setUnsavedChanges(true)} />
+                <Content
+                    onRequestClose={onClose}
+                    setUnsavedChanges={setUnsavedChanges}
+                />
             )}
         </Modal>
     );

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Button, Loader } from './styles';
 
-const _Button = ({ children, type, ...props }) => (
+const _Button = ({ children, type, loaderColor, ...props }) => (
     <Button type={type || 'button'} {...props}>
-        {props.isLoading && <Loader isVisible={true} size="1rem" />}
+        {props.isLoading && (
+            <Loader isVisible={true} color={loaderColor} size="1rem" />
+        )}
         {props.isLoading ? (
             <span>{props.loadingText || 'Loading'}</span>
         ) : (

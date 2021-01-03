@@ -7,7 +7,7 @@ function ListsDropdown({ currentListId, onSelect }) {
     const formattedLists = lists
         .filter(list => list.type === 'default' || list.type === 'inbox')
         .map(list => ({
-            value: list._id,
+            value: list.id,
             label: list.title
         }));
 

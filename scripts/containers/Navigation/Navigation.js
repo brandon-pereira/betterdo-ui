@@ -18,8 +18,8 @@ import useHamburgerNav from '@hooks/useHamburgerNav';
 
 const SortableItem = SortableElement(({ value, onClick, currentId }) => (
     <ListItem
-        selected={value._id === currentId}
-        key={value._id}
+        selected={value.id === currentId}
+        key={value.id}
         type={value.type}
         title={value.title}
         color={value.color}
@@ -30,14 +30,14 @@ const SortableItem = SortableElement(({ value, onClick, currentId }) => (
 const SortableList = SortableContainer(({ items, currentId, onClick }) => {
     return (
         <div>
-            {items.map((task, index) => (
+            {items.map((list, index) => (
                 <SortableItem
-                    key={typeof task === 'object' ? task._id : index}
+                    key={typeof task === 'object' ? list.id : index}
                     index={index}
-                    value={task}
+                    value={list}
                     currentId={currentId}
                     onClick={onClick}
-                    disabled={task.type !== 'default'}
+                    disabled={list.type !== 'default'}
                 />
             ))}
         </div>

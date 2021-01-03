@@ -12,6 +12,7 @@ export const CompletedTasksButton = styled(Button)`
     border: 1px solid #aaa;
     box-shadow: none;
     font-size: 1.1rem;
+    line-height: 2rem;
     color: #666;
     text-shadow: 0 1px #fff;
     font-weight: 800;

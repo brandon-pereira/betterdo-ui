@@ -29,9 +29,9 @@ function EditListModalContainer({ isOpen }) {
     const onClose = useCallback(() => {
         if (canCloseModal()) {
             closeModal();
-            setUnsavedChanges(false);
+            hasUnsavedChanges.current = false;
         }
-    }, [setUnsavedChanges, canCloseModal, closeModal]);
+    }, [canCloseModal, closeModal]);
 
     return (
         <Modal

@@ -29,7 +29,11 @@ export const Loader = styled.div`
     transform: scale(0);
     opacity: 0;
     transition: all 0.5s 0.2s;
+    position: relative;
     svg {
+        position: absolute;
+        top: 0;
+        left: 0;
         height: 100%;
         width: 100%;
         animation: ${rotate} 2s linear infinite;

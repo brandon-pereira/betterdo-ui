@@ -15,7 +15,7 @@ function useCreateList() {
                     return [
                         ...lists,
                         {
-                            _id: Math.random(), // temp id
+                            id: Math.random(), // temp id
                             title,
                             color
                         }

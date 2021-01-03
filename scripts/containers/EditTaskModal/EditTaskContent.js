@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Header } from '@components/copy';
 import Selector from '@components/selector';
 import { Label, Input } from '@components/forms';
 import Button from '@components/Button';
+import Subtasks from '@components/subtasks';
 
 import useCurrentTaskId from '@hooks/useCurrentTaskId';
 import useTaskDetails from '@hooks/useTaskDetails';
@@ -19,6 +20,8 @@ import {
 import CreatorBlock from './CreatorBlock';
 import ListsDropdown from './ListsDropdown';
 import { COLORS } from '../../constants';
+import Loader from '@components/Loader';
+import useDeleteTask from '@hooks/useDeleteTask';
 
 const PRIORITIES = [
     { value: 'low', label: 'Low' },
@@ -26,18 +29,19 @@ const PRIORITIES = [
     { value: 'high', label: 'High' }
 ];
 
-function EditTaskContent() {
+function EditTaskContent({ setUnsavedChanges }) {
     const taskId = useCurrentTaskId();
     const listId = useCurrentListId();
     const { task, loading, error } = useTaskDetails(listId, taskId);
     const modifyTask = useModifyTask();
-    const [state, setState] = useState({ ...(task || {}) });
+    const deleteTask = useDeleteTask();
+    const [state, _setState] = useState({ ...(task || {}) });
     const [_error, setError] = useState(null);
     const [isSaving, setSaving] = useState(false);
     const [isDeleting, setDeleting] = useState(false);
 
-    const saveTask = () => {
-        updateTask({
+    const onSaveButtonPressed = useCallback(() => {
+        onSaveTask({
             title: state.title,
             priority: state.priority,
             dueDate: state.dueDate,
@@ -45,56 +49,68 @@ function EditTaskContent() {
             notes: state.notes,
             subtasks: state.subtasks
         });
-    };
+    }, [state, onSaveTask]);
 
-    const deleteTask = async () => {
+    const onDeleteTask = useCallback(async () => {
         const result = confirm(
-            `Are you sure you want to delete the task "${this.task.title}"? This can't be undone.`
+            `Are you sure you want to delete the task "${state.title}"? This can't be undone.`
         );
         if (result) {
-            this.setState({
-                isDeleting: true
-            });
-            await this.props.store.deleteTask(this.task._id);
-            this.setState({
-                isDeleting: false
-            });
+            setDeleting(true);
+            try {
+                await deleteTask(taskId, state.list);
+            } catch (err) {
+                console.error(err);
+                setError(err.formattedMessage || 'Unexpected Error');
+                setSaving(false);
+            }
+            setDeleting(false);
+        }
+    }, [taskId, deleteTask, state.list, state.title]);
+
+    const onSaveTask = useCallback(
+        async updatedProps => {
+            setSaving(true);
+            try {
+                await modifyTask(taskId, state.list, updatedProps);
+            } catch (err) {
+                console.error(err);
+                setError(err.formattedMessage || 'Unexpected Error');
+                setSaving(false);
+            }
+            setUnsavedChanges(false);
+            setSaving(false);
+        },
+        [modifyTask, setUnsavedChanges, state.list, taskId]
+    );
+
+    const onInputChange = id => e => {
+        // Mark content as dirty
+        setUnsavedChanges(true);
+        // Set state for re-render
+        _setValues({ [id]: e.target.value });
+    };
+
+    const onInputKeyPress = id => e => {
+        if (e.key === 'Enter') {
+            const updatedProps = { [id]: e.target.value };
+            // Set state for fast re-render
+            _setValues(updatedProps);
+            // Trigger save to server
+            onSaveTask(updatedProps);
         }
     };
 
-    const updateTask = async updatedProps => {
-        setState(state => ({
+    const onValueChange = updatedProps => {
+        setUnsavedChanges(true);
+        _setValues(updatedProps);
+    };
+
+    const _setValues = updatedProps => {
+        _setState(state => ({
             ...state,
             ...updatedProps
         }));
-        setSaving(true);
-        try {
-            await modifyTask(taskId, state.list, updatedProps);
-        } catch (err) {
-            console.error(err);
-        }
-        // this.props.setUnsavedChanges(false);
-        setSaving(false);
-    };
-
-    const onChange = e => {
-        this.props.setUnsavedChanges(true);
-        this.setState({ [e.target.id]: e.target.value });
-    };
-
-    const onKeyPress = e => {
-        if (e.key === 'Enter') {
-            this.onChange(e);
-            updateTask({ [e.target.id]: e.target.value });
-        }
-    };
-
-    const formatDateForInput = dateString => {
-        const date = new Date(dateString);
-        if (dateString && !isNaN(date.getTime())) {
-            return date.toISOString().substr(0, 10);
-        }
-        return '';
     };
 
     useEffect(() => {
@@ -103,12 +119,8 @@ function EditTaskContent() {
         }
     }, [task]);
 
-    if (!task) {
-        return null;
-    }
-
     if (loading) {
-        return 'LOADING';
+        return <Loader />;
     }
     if (error) {
         return 'ERROR';
@@ -118,43 +130,42 @@ function EditTaskContent() {
         <Container>
             <Content>
                 <Header>Edit Task</Header>
+                {_error && <span>{_error}</span>}
                 <Block>
                     <Label>Title</Label>
                     <Input
                         value={state.title}
-                        placeholder="Enter a title"
-                        onKeyPress={onKeyPress}
-                        onChange={onChange}
+                        onKeyPress={onInputKeyPress('title')}
+                        onChange={onInputChange('title')}
                     />
                 </Block>
                 <Block>
                     <Label>Priority</Label>
                     <Selector
                         values={PRIORITIES}
-                        onSelect={updatePriority}
+                        onSelect={priority => onValueChange({ priority })}
                         value={state.priority}
                     />
                 </Block>
                 <Block>
                     <Label>Subtasks</Label>
-                    TODO
-                    {/* <Subtasks
-                            subtasks={state.subtasks}
-                            onChange={this.updateSubtasks}
-                        /> */}
+                    <Subtasks
+                        subtasks={state.subtasks}
+                        onChange={subtasks => onValueChange({ subtasks })}
+                    />
                 </Block>
                 <Block>
                     <Label>Notes</Label>
                     <Notes
                         value={state.notes}
-                        onKeyPress={onKeyPress}
-                        onChange={onChange}
+                        onKeyPress={onInputKeyPress('notes')}
+                        onChange={onInputChange('notes')}
                     />
                 </Block>
                 <Block>
                     <Label>List</Label>
                     <ListsDropdown
-                        onSelect={updateList}
+                        onSelect={list => onValueChange({ list })}
                         currentListId={listId}
                     />
                 </Block>
@@ -163,8 +174,8 @@ function EditTaskContent() {
                     <Input
                         type="date"
                         value={formatDateForInput(state.dueDate)}
-                        onKeyPress={onKeyPress}
-                        onChange={onChange}
+                        onKeyPress={onInputKeyPress('dueDate')}
+                        onChange={onInputChange('dueDate')}
                     />
                 </Block>
                 <CreatorBlock
@@ -174,16 +185,16 @@ function EditTaskContent() {
             </Content>
             <ButtonContainer>
                 <Button
-                    onClick={saveTask}
-                    isLoading={state.isSaving}
+                    onClick={onSaveButtonPressed}
+                    isLoading={isSaving}
                     loadingText="Saving"
                 >
                     Save
                 </Button>
                 <Button
                     color={COLORS.red}
-                    onClick={deleteTask}
-                    isLoading={state.isDeleting}
+                    onClick={onDeleteTask}
+                    isLoading={isDeleting}
                     loadingText="Deleting"
                 >
                     Delete
@@ -192,5 +203,13 @@ function EditTaskContent() {
         </Container>
     );
 }
+
+const formatDateForInput = dateString => {
+    const date = new Date(dateString);
+    if (dateString && !isNaN(date.getTime())) {
+        return date.toISOString().substr(0, 10);
+    }
+    return '';
+};
 
 export default EditTaskContent;
