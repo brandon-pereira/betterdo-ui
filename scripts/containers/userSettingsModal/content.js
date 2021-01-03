@@ -4,6 +4,7 @@ import AccountSettings from './accountSettings';
 import CustomLists from './customLists';
 import General from './general';
 import { Header } from '../../components/copy';
+import About from './About';
 
 class UserSettingsModalContent extends Component {
     render() {
@@ -19,6 +20,9 @@ class UserSettingsModalContent extends Component {
                     </Tab>
                     <Tab>
                         <General />
+                    </Tab>
+                    <Tab>
+                        <About />
                     </Tab>
                 </Tabs>
             </Fragment>

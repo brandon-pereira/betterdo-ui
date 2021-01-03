@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from './Button';
+import _Button from './Button';
 import { QUERIES, COLORS } from '../constants';
 
 const Header = styled.h2`
@@ -14,6 +14,9 @@ const CopyContainer = styled.div`
 `;
 const ButtonContainer = styled.div`
     display: flex;
+`;
+const Button = styled(_Button)`
+    padding: 1rem;
 `;
 const SecondaryButton = styled(Button)`
     box-shadow: none;
@@ -31,6 +34,7 @@ const Container = styled.div`
     text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
     flex-shrink: 0;
     ${Button} {
+        padding: 1rem;
         margin-top: 1rem;
         margin-right: 0.5rem;
     }
@@ -76,7 +80,7 @@ const NotificationBanner = ({
                     {secondaryButtonCopy}
                 </SecondaryButton>
             )}
-            <Button>{primaryButtonCopy}</Button>
+            <Button color="rgba(0, 0, 0, 0.2)">{primaryButtonCopy}</Button>
         </ButtonContainer>
     </Container>
 );

@@ -166,7 +166,7 @@ function EditTaskContent({ setUnsavedChanges }) {
                     <Label>List</Label>
                     <ListsDropdown
                         onSelect={list => onValueChange({ list })}
-                        currentListId={listId}
+                        currentListId={state.list}
                     />
                 </Block>
                 <Block>

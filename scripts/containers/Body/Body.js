@@ -11,6 +11,7 @@ import SortableList from './SortableList';
 import CompletedTasksButton from './CompletedTasksButton';
 import { AllCaughtUpBanner, ServerErrorBanner } from './Banners';
 import useCompletedTasks from '@hooks/useCompletedTasks';
+import NotificationBanner from './NotificationBanner';
 
 function Body() {
     const currentListId = useCurrentListId();
@@ -42,7 +43,7 @@ function Body() {
 
     return (
         <Container>
-            {/* {this.getNotificationBanner()} */}
+            <NotificationBanner />
             <AddTask hidden={error} />
             {isAllCaughtUp && <AllCaughtUpBanner />}
             {error && <ServerErrorBanner />}

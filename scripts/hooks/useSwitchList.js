@@ -12,6 +12,8 @@ function useSwitchList() {
 
     const switchList = useCallback(
         async nextList => {
+            // close the hamburger nav
+            setMobileNavVisibility(false);
             // update the local data immediately, but disable the revalidation.
             // revalidation happens when useListDetails happens.
             await mutate(
@@ -21,8 +23,6 @@ function useSwitchList() {
             );
             // turn off completed tasks view
             setShowCompletedTasks(false);
-            // close the hamburger nav
-            setMobileNavVisibility(false);
             // update url
             history.replace(`/${nextList.id}`);
         },
