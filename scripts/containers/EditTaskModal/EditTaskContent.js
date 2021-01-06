@@ -31,7 +31,6 @@ const PRIORITIES = [
 
 function EditTaskContent({ setUnsavedChanges }) {
     const taskId = useCurrentTaskId();
-    const listId = useCurrentListId();
     const { task, loading, error } = useTaskDetails(taskId);
     const modifyTask = useModifyTask();
     const deleteTask = useDeleteTask();
@@ -117,7 +116,7 @@ function EditTaskContent({ setUnsavedChanges }) {
         }));
     };
 
-    if (loading) {
+    if (loading || !state.title) {
         return <Loader />;
     }
 

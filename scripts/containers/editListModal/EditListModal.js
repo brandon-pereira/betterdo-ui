@@ -19,13 +19,17 @@ function EditListModalContainer({ isOpen }) {
         if (!hasUnsavedChanges.current) {
             return true;
         } else {
-            return Boolean(
+            const status = Boolean(
                 confirm(
                     `You've made changes that aren't saved. Are you sure you want to discard them?`
                 )
             );
+            if (status) {
+                setUnsavedChanges(false);
+            }
+            return status;
         }
-    }, [hasUnsavedChanges]);
+    }, [hasUnsavedChanges, setUnsavedChanges]);
     const onClose = useCallback(() => {
         if (canCloseModal()) {
             closeModal();

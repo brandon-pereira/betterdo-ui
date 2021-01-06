@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useEffect } from 'react';
 import loadable from '@loadable/component';
 import { Modal } from './EditTask.styles';
 import Loader from './Loader';
@@ -12,6 +12,7 @@ function EditTaskContainer({ isOpen }) {
     const hasUnsavedChanges = useRef(false);
     const { closeModal } = useEditTaskModal();
     const setUnsavedChanges = useCallback(bool => {
+        console.log('SET', bool);
         hasUnsavedChanges.current = bool;
     }, []);
 
@@ -26,13 +27,17 @@ function EditTaskContainer({ isOpen }) {
         if (!hasUnsavedChanges.current) {
             return true;
         } else {
-            return Boolean(
+            const status = Boolean(
                 confirm(
                     `You've made changes that aren't saved. Are you sure you want to discard them?`
                 )
             );
+            if (status) {
+                setUnsavedChanges(false);
+            }
+            return status;
         }
-    }, [hasUnsavedChanges]);
+    }, [hasUnsavedChanges, setUnsavedChanges]);
 
     return (
         <Modal

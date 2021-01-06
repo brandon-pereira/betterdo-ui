@@ -10,7 +10,6 @@ function useTaskDetails(taskId) {
         dedupingInterval: 5000,
         refreshInterval: 30000
     });
-    console.log(data);
 
     return {
         error,
