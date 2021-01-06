@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { Header } from '@components/copy';
 import Selector from '@components/selector';
-import { Label, Input } from '@components/forms';
+import { Label, Input, Error } from '@components/forms';
 import Button from '@components/Button';
 import Subtasks from '@components/subtasks';
 
@@ -20,7 +20,7 @@ import {
 import CreatorBlock from './CreatorBlock';
 import ListsDropdown from './ListsDropdown';
 import { COLORS } from '../../constants';
-import Loader from '@components/Loader';
+import Loader from './Loader';
 import useDeleteTask from '@hooks/useDeleteTask';
 
 const PRIORITIES = [
@@ -32,13 +32,17 @@ const PRIORITIES = [
 function EditTaskContent({ setUnsavedChanges }) {
     const taskId = useCurrentTaskId();
     const listId = useCurrentListId();
-    const { task, loading, error } = useTaskDetails(listId, taskId);
+    const { task, loading, error } = useTaskDetails(taskId);
     const modifyTask = useModifyTask();
     const deleteTask = useDeleteTask();
     const [state, _setState] = useState({ ...(task || {}) });
     const [_error, setError] = useState(null);
     const [isSaving, setSaving] = useState(false);
     const [isDeleting, setDeleting] = useState(false);
+
+    useEffect(() => {
+        _setState({ ...(task || {}) });
+    }, [task]);
 
     const onSaveButtonPressed = useCallback(() => {
         onSaveTask({
@@ -113,24 +117,19 @@ function EditTaskContent({ setUnsavedChanges }) {
         }));
     };
 
-    useEffect(() => {
-        if (task) {
-            console.log('TASK');
-        }
-    }, [task]);
-
     if (loading) {
         return <Loader />;
     }
+
     if (error) {
-        return 'ERROR';
+        return <Error>Unexpected Error</Error>;
     }
 
     return (
         <Container>
             <Content>
                 <Header>Edit Task</Header>
-                {_error && <span>{_error}</span>}
+                {_error && <Error>{_error}</Error>}
                 <Block>
                     <Label>Title</Label>
                     <Input
@@ -178,10 +177,12 @@ function EditTaskContent({ setUnsavedChanges }) {
                         onChange={onInputChange('dueDate')}
                     />
                 </Block>
-                <CreatorBlock
-                    createdBy={task.createdBy}
-                    creationDate={task.creationDate}
-                />
+                {task && (
+                    <CreatorBlock
+                        createdBy={task.createdBy}
+                        creationDate={task.creationDate}
+                    />
+                )}
             </Content>
             <ButtonContainer>
                 <Button

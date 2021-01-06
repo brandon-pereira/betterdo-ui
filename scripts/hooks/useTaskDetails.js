@@ -1,25 +1,21 @@
-import useListDetails from './useListDetails';
+import { useEffect } from 'react';
+import useSWR from 'swr';
 
-const getTaskFromList = (list, id) => {
-    return (
-        list.tasks.find(task => task._id === id) ||
-        list.completedTasks.find(task => task._id === id)
-    );
-};
+import { useHistory } from 'react-router-dom';
+import { getTaskDetailUrl } from './internal/urls';
 
-// TODO: This is kinda janky, we should expose a /api/task route...
-function useTaskDetails(listId, taskId) {
-    const { list, loading } = useListDetails(listId);
-    let task = null;
-    if (!loading && list) {
-        task = getTaskFromList(list, taskId);
-    }
-    const error = !loading && list && taskId && !task;
+function useTaskDetails(taskId) {
+    const history = useHistory();
+    const { data, loading, error } = useSWR(getTaskDetailUrl(taskId), {
+        dedupingInterval: 5000,
+        refreshInterval: 30000
+    });
+    console.log(data);
 
     return {
-        task,
         error,
-        loading
+        loading,
+        task: data
     };
 }
 
