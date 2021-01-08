@@ -7,7 +7,6 @@ import Subtasks from '@components/subtasks';
 
 import useCurrentTaskId from '@hooks/useCurrentTaskId';
 import useTaskDetails from '@hooks/useTaskDetails';
-import useCurrentListId from '@hooks/useCurrentListId';
 import useModifyTask from '@hooks/useModifyTask';
 
 import {
@@ -149,15 +148,21 @@ function EditTaskContent({ setUnsavedChanges }) {
                     <Label>Subtasks</Label>
                     <Subtasks
                         subtasks={state.subtasks}
-                        onChange={subtasks => onValueChange({ subtasks })}
+                        onChange={subtasks => {
+                            onValueChange({ subtasks });
+                            onSaveTask({ subtasks });
+                        }}
                     />
                 </Block>
                 <Block>
                     <Label>Notes</Label>
                     <Notes
-                        value={state.notes}
-                        onKeyPress={onInputKeyPress('notes')}
-                        onChange={onInputChange('notes')}
+                        defaultValue={state.notes}
+                        onBlur={e => {
+                            onValueChange({
+                                notes: e.target.value
+                            });
+                        }}
                     />
                 </Block>
                 <Block>

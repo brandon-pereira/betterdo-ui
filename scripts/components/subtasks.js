@@ -5,6 +5,12 @@ import Icon from './icon';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 
+const _Input = styled(Input)`
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin-bottom: 0;
+`;
 const Container = styled.div`
     background: #fff;
     font-family: inherit;
@@ -15,12 +21,6 @@ const Container = styled.div`
     border: 2px solid #ccc;
     border-radius: 3px;
     overflow: hidden;
-    /* ${Input} {
-        border: none;
-        border-radius: 0;
-        box-shadow: none;
-        margin-bottom: 0; */
-    /* } */
 `;
 const DeleteIcon = styled(Icon)``;
 
@@ -55,7 +55,7 @@ const Checkbox = styled.input`
     appearance: none;
     background: #fff;
     margin: 0 0.8rem 0 0;
-    border: 1px solid #ccc
+    border: 1px solid #ccc;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -167,7 +167,7 @@ export default class Subtasks extends Component {
                     lockAxis="y"
                     lockToContainerEdges={true}
                 />
-                <Input
+                <_Input
                     invalid={this.state.isInvalid}
                     value={this.state.value}
                     onChange={evt => this.updateInputValue(evt.target.value)}

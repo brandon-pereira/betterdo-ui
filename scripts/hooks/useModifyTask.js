@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { mutate } from 'swr';
 import { updateTask } from '@utilities/server';
 
-import { getListDetailUrl } from './internal/urls';
+import { getListDetailUrl, getTaskDetailUrl } from './internal/urls';
 import useCompletedTasks from './useCompletedTasks';
 import { useHistory } from 'react-router-dom';
 import useGeneratedUrl from './useGeneratedUrl';
@@ -33,6 +33,7 @@ function useModifyTask() {
             );
             await updateTask(taskId, updatedProps);
             mutate(getListDetailUrl(listId, isCompletedTasksIncluded));
+            mutate(getTaskDetailUrl(taskId));
             if (updatedProps.list) {
                 history.replace(
                     generateUrl(`/edit-task/:taskId`, {
@@ -43,10 +44,8 @@ function useModifyTask() {
                 mutate(getListDetailUrl(updatedProps.list));
             }
         },
-        [isCompletedTasksIncluded, generateUrl]
+        [isCompletedTasksIncluded, history, generateUrl]
     );
 }
-
-function updateTaskInList() {}
 
 export default useModifyTask;
