@@ -2,8 +2,12 @@ import React from 'react';
 import _NotificationBanner from '@components/notificationBanner';
 import usePushNotifications from '@hooks/usePushNotifications';
 import useInstall from '@hooks/useInstall';
+import useCurrentListId from '@hooks/useCurrentListId';
+import useListDetails from '@hooks/useListDetails';
 
 function NotificationBanner() {
+    const currentListId = useCurrentListId();
+    const { list, loading, error } = useListDetails(currentListId);
     const {
         notificationStatus,
         onRequestNotificationAccess,
@@ -28,7 +32,17 @@ function NotificationBanner() {
         );
     }
 
-    if (notificationStatus === 'UNKNOWN') {
+    let doesListHaveNotifications = false;
+    if (!loading && !error && list && list.members) {
+        const isSharedList = list.members.length > 1;
+        const doesListHaveDueDates = Boolean(
+            list.tasks.find(task => task.dueDate)
+        );
+        console.log({ isSharedList, doesListHaveDueDates });
+        doesListHaveNotifications = isSharedList || doesListHaveDueDates;
+    }
+
+    if (doesListHaveNotifications && notificationStatus === 'UNKNOWN') {
         return (
             <_NotificationBanner
                 title="Get notified"
