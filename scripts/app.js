@@ -1,6 +1,7 @@
 import React from 'react';
 
 // Components
+import Helmet from './components/Helmet';
 import Container from './containers/Container';
 import Header from './containers/Header';
 import Navigation from './containers/Navigation';
@@ -15,6 +16,7 @@ import InboxRedirect from './containers/Redirects/InboxRedirect';
 
 const App = () => (
     <>
+        <Helmet />
         <Container>
             <Logo />
             <Navigation />

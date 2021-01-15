@@ -6,10 +6,12 @@ import { getListDetailUrl, getTaskDetailUrl } from './internal/urls';
 import useCompletedTasks from './useCompletedTasks';
 import { useHistory } from 'react-router-dom';
 import useGeneratedUrl from './useGeneratedUrl';
+import useCurrentListId from './useCurrentListId';
 
 function useModifyTask() {
     const history = useHistory();
     const [isCompletedTasksIncluded] = useCompletedTasks();
+    const currentListId = useCurrentListId();
     const generateUrl = useGeneratedUrl();
     return useCallback(
         async (taskId, listId, updatedProps) => {
@@ -18,17 +20,12 @@ function useModifyTask() {
             }
             await mutate(
                 getListDetailUrl(listId, isCompletedTasksIncluded),
-                async currentList => ({
-                    ...currentList,
-                    tasks: currentList
-                        ? currentList.tasks.map(task => {
-                              if (task._id === taskId) {
-                                  return { ...task, ...updatedProps };
-                              }
-                              return task;
-                          })
-                        : []
-                }),
+                updateTaskInList(taskId, updatedProps),
+                false
+            );
+            await mutate(
+                getListDetailUrl(currentListId, isCompletedTasksIncluded),
+                updateTaskInList(taskId, updatedProps),
                 false
             );
             await updateTask(taskId, updatedProps);
@@ -44,8 +41,20 @@ function useModifyTask() {
                 mutate(getListDetailUrl(updatedProps.list));
             }
         },
-        [isCompletedTasksIncluded, history, generateUrl]
+        [currentListId, isCompletedTasksIncluded, history, generateUrl]
     );
 }
+
+const updateTaskInList = (taskId, updatedProps) => list => ({
+    ...list,
+    tasks: list
+        ? list.tasks.map(task => {
+              if (task._id === taskId) {
+                  return { ...task, ...updatedProps };
+              }
+              return task;
+          })
+        : []
+});
 
 export default useModifyTask;

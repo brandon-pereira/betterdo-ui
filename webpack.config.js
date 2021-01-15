@@ -6,8 +6,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const OfflinePlugin = require('offline-plugin');
-
+const { InjectManifest } = require('workbox-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
@@ -100,22 +99,13 @@ function getPlugins() {
         })
     ];
 
-    if (!isProduction) {
-        // plugins.push(new webpack.SourceMapDevToolPlugin());
-    } else {
-        // const publicPath = isProduction ? `/app/` : '';
-        // plugins.push(
-        //     new OfflinePlugin({
-        //         ServiceWorker: {
-        //             entry: './scripts/service-worker.js',
-        //             output: 'service-worker.js',
-        //             events: true,
-        //             publicPath: `${publicPath}service-worker.js`
-        //         },
-        //         publicPath: publicPath + '/',
-        //         externals: ['../', '../manifest.json']
-        //     })
-        // );
+    if (isProduction) {
+        plugins.push(
+            new InjectManifest({
+                swSrc: './scripts/service-worker.js',
+                maximumFileSizeToCacheInBytes: 6000000
+            })
+        );
     }
 
     return plugins;

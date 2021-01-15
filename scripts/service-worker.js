@@ -1,7 +1,12 @@
-/**
- * This file gets merged with 'offline-plugin' in the webpack config. As such,
- * it's good to ensure that any modifications are tested well for mutations.
- */
+import { precacheAndRoute } from 'workbox-precaching';
+import { registerRoute } from 'workbox-routing';
+import { CacheFirst } from 'workbox-strategies';
+import { googleFontsCache } from 'workbox-recipes';
+
+googleFontsCache();
+
+precacheAndRoute(self.__WB_MANIFEST);
+registerRoute('/', CacheFirst);
 
 const multiReplyResponses = {
     'shared-list': ({ listTitle, numberOfUpdates }) =>
