@@ -17,6 +17,7 @@ const ProfilePictureBanner = styled.div`
     align-items: center;
     overflow: hidden;
     justify-content: center;
+    border-radius: 1rem;
     &:before {
         content: '';
         background: ${COLORS.blue};

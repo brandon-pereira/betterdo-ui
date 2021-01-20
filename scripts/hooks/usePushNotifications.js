@@ -20,7 +20,10 @@ function usePushNotifications() {
     useEffect(() => {
         (async () => {
             setStatus(STATES.DISABLED);
-            if (localStorage.getItem('banners.pushDisabled')) {
+            if (
+                !profile.isPushEnabled ||
+                localStorage.getItem('banners.pushDisabled')
+            ) {
                 return;
             }
             const subscription = await _getNotificationSubscription();
@@ -30,7 +33,7 @@ function usePushNotifications() {
                 setStatus(STATES.UNKNOWN);
             }
         })();
-    }, []);
+    }, [profile]);
 
     const onRequestNotificationAccess = useCallback(async () => {
         console.info('Requesting user notification subscription');

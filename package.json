@@ -1,6 +1,6 @@
 {
     "name": "betterdo-ui",
-    "version": "4.1.0",
+    "version": "5.0.0-canary.1",
     "description": "Frontend for BetterDo",
     "repository": "https://github.com/brandon-pereira/betterdo-ui",
     "dependencies": {

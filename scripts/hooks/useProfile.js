@@ -16,7 +16,7 @@ function useProfileOnce() {
 
     return {
         logout,
-        error: error,
+        error,
         loading: Boolean(!data),
         profile: data ? data : {}
     };

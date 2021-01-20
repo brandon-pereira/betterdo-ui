@@ -64,13 +64,8 @@ class Icon extends Component {
                     />
                 </IconContainer>
             );
-        } else {
-            return (
-                <div className={className} onClick={e => onClick(e)}>
-                    {this.props.children}
-                </div>
-            );
         }
+        return null;
     }
 }
 

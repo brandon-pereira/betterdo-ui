@@ -12,6 +12,7 @@ const CustomListsContainer = styled.ol`
     position: relative;
     padding: 0;
     margin: 0 -1rem;
+    border-radius: 1rem;
     background: ${COLORS.navigationBackground};
 `;
 const CustomList = styled.li`

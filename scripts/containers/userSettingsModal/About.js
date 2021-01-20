@@ -7,7 +7,7 @@ function About() {
         <Container>
             <Logo />
             <h1>BetterDo.</h1>
-            <h2>Version 5.0</h2>
+            <h2>Version {process.env.VERSION}</h2>
         </Container>
     );
 }
