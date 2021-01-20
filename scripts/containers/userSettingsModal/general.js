@@ -38,17 +38,21 @@ function GeneralSettings() {
     });
     const [error, setError] = useState(null);
 
-    const onSubmit = useCallback(async () => {
-        try {
-            await modifyProfile({
-                isBeta: state.isBeta,
-                isPushEnabled: state.isPushEnabled
-            });
-        } catch (err) {
-            setError(err.formattedMessage || 'Unexpected Error Occurred');
-            return;
-        }
-    }, [state, modifyProfile]);
+    const onChange = useCallback(
+        async newState => {
+            setState(state => ({ ...state, ...newState }));
+            try {
+                await modifyProfile({
+                    ...state,
+                    ...newState
+                });
+            } catch (err) {
+                setError(err.formattedMessage || 'Unexpected Error Occurred');
+                return;
+            }
+        },
+        [state, modifyProfile]
+    );
 
     if (loading) {
         return 'LOADING';
@@ -66,10 +70,7 @@ function GeneralSettings() {
                 </div>
                 <Toggle
                     onChange={(e, bool) => {
-                        setState(state => ({
-                            ...state,
-                            isPushEnabled: bool
-                        }));
+                        onChange({ isPushEnabled: bool });
                     }}
                     checked={state.isPushEnabled}
                 />
@@ -86,8 +87,7 @@ function GeneralSettings() {
                 <Toggle
                     disabled
                     onChange={(e, bool) => {
-                        setState({ isBeta: bool });
-                        onSubmit();
+                        onChange({ isBeta: bool });
                     }}
                     checked={state.isBeta}
                 />
