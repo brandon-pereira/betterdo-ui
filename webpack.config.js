@@ -16,7 +16,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.min.js',
-        publicPath: isProduction ? '/app' : '/'
+        publicPath: isProduction ? '/app/' : '/'
     },
     devServer: {
         hot: true,
