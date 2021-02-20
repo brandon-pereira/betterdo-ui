@@ -20,3 +20,20 @@ export const Logo = styled(_BetterDo)`
     display: block;
     margin: 2rem auto 1rem;
 `;
+
+export const ChangeLog = styled.div`
+    text-align: left;
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+    overflow: scroll;
+    border: 2px solid #ddd;
+    border-radius: 1rem;
+    margin-top: 2rem;
+    max-height: 30vh;
+    h1 {
+        margin-bottom: 1rem;
+    }
+    h2 {
+        font-weight: bold;
+    }
+`;
