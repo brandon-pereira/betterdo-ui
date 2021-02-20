@@ -7,7 +7,7 @@ function _Helmet() {
     const currentListId = useCurrentListId();
     const { list, loading, error } = useListDetails(currentListId);
 
-    if (loading || error) {
+    if (loading || error || !list) {
         return null;
     }
     return (
