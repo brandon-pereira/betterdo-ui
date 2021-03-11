@@ -4,6 +4,7 @@ bower_components/
 dist/
 script.js
 .idea/
+.env
 # Created by https://www.gitignore.io
 npm-debug.log
 
