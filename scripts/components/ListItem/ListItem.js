@@ -1,12 +1,19 @@
 import React from 'react';
 import SvgIcon from './../icon';
+import { useDroppable } from '@dnd-kit/core';
 
 import { Container, DotIcon, Title, IconHolder } from './ListItem.styles';
 
 const ListItemIcon = ({ icon }) => <SvgIcon icon={icon} color="#fff" />;
 
-function ListItem({ selected, onClick, title, color, type }) {
+function ListItem({ selected, onClick, title, color, id, type }) {
     let Icon;
+    console.log(id, title);
+    const { setNodeRef, isOver } = useDroppable({
+        id: `list:${id}`,
+        disabled: selected || !['inbox', 'default'].includes(type)
+    });
+
     switch (type) {
         case 'newList':
             title = 'New List';
@@ -33,8 +40,10 @@ function ListItem({ selected, onClick, title, color, type }) {
     }
     return (
         <Container
+            ref={setNodeRef}
             disabled={selected}
             selected={selected}
+            isOver={isOver}
             // This is used for modal arrow ref tracking
             {...(type === 'newList'
                 ? { 'data-betterdo-newlist': true }

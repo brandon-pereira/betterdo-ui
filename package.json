@@ -4,6 +4,8 @@
     "description": "Frontend for BetterDo",
     "repository": "https://github.com/brandon-pereira/betterdo-ui",
     "dependencies": {
+        "@dnd-kit/core": "^1.0.1",
+        "@dnd-kit/sortable": "^1.0.1",
         "@loadable/component": "^5.13.2",
         "array-move": "^2.2.2",
         "babel-plugin-macros": "^2.8.0",
