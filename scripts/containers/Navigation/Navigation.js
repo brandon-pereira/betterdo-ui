@@ -20,6 +20,7 @@ const SortableItem = SortableElement(({ value, onClick, currentId }) => (
     <ListItem
         selected={value.id === currentId}
         key={value.id}
+        id={value.id}
         type={value.type}
         title={value.title}
         color={value.color}

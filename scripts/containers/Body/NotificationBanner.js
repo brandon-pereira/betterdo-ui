@@ -38,7 +38,6 @@ function NotificationBanner() {
         const doesListHaveDueDates = Boolean(
             list.tasks.find(task => task.dueDate)
         );
-        console.log({ isSharedList, doesListHaveDueDates });
         doesListHaveNotifications = isSharedList || doesListHaveDueDates;
     }
 
