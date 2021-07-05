@@ -4,6 +4,7 @@ import { Input } from './forms';
 import Icon from './icon';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
+import { COLORS } from '../constants';
 
 const _Input = styled(Input)`
     border: none;
@@ -65,6 +66,9 @@ const Checkbox = styled.input`
     &:checked {
         box-shadow: inset 0 0 0 2px #fff;
         background: linear-gradient(#333, #666);
+    }
+    &:focus-visible {
+        box-shadow: inset 0 0 0 2px #fff, 0 0 0 1px ${COLORS.blue};
     }
 `;
 
@@ -130,6 +134,12 @@ export default class Subtasks extends Component {
                     type="checkbox"
                     onClick={e => e.stopPropagation()}
                     onChange={() => this.toggleCompleted(sortIndex)}
+                    onKeyDown={e => {
+                        // if space key
+                        if (e.keyCode === 13) {
+                            this.toggleCompleted(sortIndex);
+                        }
+                    }}
                     checked={value.isComplete}
                 />
                 <span>{value.title}</span>
