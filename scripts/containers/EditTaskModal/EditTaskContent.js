@@ -115,7 +115,7 @@ function EditTaskContent({ setUnsavedChanges }) {
         }));
     };
 
-    if (loading || !state.title) {
+    if (loading || !state._id) {
         return <Loader />;
     }
 
