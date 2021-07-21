@@ -39,7 +39,11 @@ function Body() {
         [list, currentListId, modifyList]
     );
 
-    const isAllCaughtUp = !error && !loading && list.tasks.length === 0;
+    const isAllCaughtUp =
+        !error &&
+        !loading &&
+        list.tasks.length === 0 &&
+        !isCompletedTasksIncluded;
 
     return (
         <Container>

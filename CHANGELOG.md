@@ -1,5 +1,12 @@
 # Changelog
 
+## v4.0.2 (2021-07-05)
+
+-   Improved app accessibility
+-   Fixed bug when deleting task title
+-   Fixed bug where "All caught up" banner shown incorrectly.
+-   Internal refactoring of state management
+
 ## v4.0.1 (2021-02-20)
 
 -   Fix bug with changing lists sometimes erroring
@@ -29,5 +36,3 @@
 ## v1.0.0
 
 -   Initial launch of application leveraging PHP and jQuery
-
-#

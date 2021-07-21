@@ -23,6 +23,9 @@ const Selection = styled.button`
         border-right: none;
         border-radius: 0 5px 5px 0;
     }
+    &:focus-visible {
+        background-image: linear-gradient(#ddd, #fff);
+    }
     ${props =>
         props.selected &&
         `
@@ -33,6 +36,9 @@ const Selection = styled.button`
         position: relative;
         z-index: 1;
         color: #fff;
+        &:focus-visible {
+            background-image: linear-gradient(rgba(0,0,0,.3), transparent);
+        }
     `}
 `;
 class Selector extends Component {

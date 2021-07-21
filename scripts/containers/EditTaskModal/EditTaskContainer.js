@@ -12,7 +12,6 @@ function EditTaskContainer({ isOpen }) {
     const hasUnsavedChanges = useRef(false);
     const { closeModal } = useEditTaskModal();
     const setUnsavedChanges = useCallback(bool => {
-        console.log('SET', bool);
         hasUnsavedChanges.current = bool;
     }, []);
 

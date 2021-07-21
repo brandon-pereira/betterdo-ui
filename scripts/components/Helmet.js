@@ -5,14 +5,16 @@ import { Helmet } from 'react-helmet-async';
 
 function _Helmet() {
     const currentListId = useCurrentListId();
-    const { list, loading, error } = useListDetails(currentListId);
+    const { list, error } = useListDetails(currentListId);
 
-    if (loading || error || !list) {
+    console.log(list);
+    if (error || !list) {
         return null;
     }
+
     return (
         <Helmet>
-            <title>BetterDo - {list.title}</title>
+            <title>BetterDo.{list.title ? ` - ${list.title}` : ''}</title>
             <meta name="theme-color" content={list.color} />
         </Helmet>
     );
