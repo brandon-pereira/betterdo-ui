@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
-import Task from '@components/Task';
+import ListItem from '@components/ListItem';
 import { CSS } from '@dnd-kit/utilities';
-import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import {
     DndContext,
     PointerSensor,
@@ -16,6 +15,10 @@ import {
     sortableKeyboardCoordinates,
     verticalListSortingStrategy
 } from '@dnd-kit/sortable';
+import {
+    restrictToVerticalAxis,
+    restrictToParentElement
+} from '@dnd-kit/modifiers';
 
 const SortableItem = function({ id, value }) {
     const {
@@ -31,23 +34,23 @@ const SortableItem = function({ id, value }) {
         transform: CSS.Transform.toString(transform),
         transition,
         pointerEvents: isDragging ? 'none' : 'all',
-        zIndex: isDragging ? '1' : undefined
+        zIndex: isDragging ? '6' : undefined
     };
 
     return (
-        <Task
+        <ListItem
             ref={setNodeRef}
             containerProps={{
                 style,
                 ...attributes,
                 ...listeners
             }}
-            {...value}
+            list={value}
         />
     );
 };
 
-function SortableList({ tasks, onSortEnd }) {
+function SortableList({ lists, onSortEnd }) {
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
@@ -64,17 +67,15 @@ function SortableList({ tasks, onSortEnd }) {
         event => {
             const { active, over } = event;
             if (active && over && active.id !== over.id) {
-                const oldIndex = tasks.findIndex(
-                    task => task._id === active.id
-                );
-                const newIndex = tasks.findIndex(task => task._id === over.id);
+                const oldIndex = lists.findIndex(list => list.id === active.id);
+                const newIndex = lists.findIndex(list => list.id === over.id);
                 return onSortEnd({ oldIndex, newIndex });
             }
         },
-        [tasks, onSortEnd]
+        [lists, onSortEnd]
     );
 
-    if (!tasks || !tasks.length) {
+    if (!lists || !lists.length) {
         return null;
     }
 
@@ -83,20 +84,17 @@ function SortableList({ tasks, onSortEnd }) {
             sensors={sensors}
             collisionDetection={closestCenter}
             onDragEnd={onDragEnd}
-            modifiers={[restrictToWindowEdges]}
+            modifiers={[restrictToParentElement, restrictToVerticalAxis]}
         >
             <SortableContext
-                items={tasks.map((task, index) =>
-                    typeof task === 'object' ? task._id : index
-                )}
+                items={lists.map(list => list.id)}
                 strategy={verticalListSortingStrategy}
             >
-                {tasks.map((task, index) => (
+                {lists.map((list, index) => (
                     <SortableItem
-                        key={typeof task === 'object' ? task._id : index}
-                        id={typeof task === 'object' ? task._id : index}
-                        index={index}
-                        value={task}
+                        key={typeof list === 'object' ? list.id : index}
+                        id={typeof list === 'object' ? list.id : index}
+                        value={list}
                     />
                 ))}
             </SortableContext>

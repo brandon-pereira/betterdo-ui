@@ -84,6 +84,8 @@ export const Container = styled.button`
     display: flex;
     align-items: center;
     flex-shrink: 0;
+    z-index: 0;
+    position: relative;
     ${props =>
         props.isLoading &&
         `

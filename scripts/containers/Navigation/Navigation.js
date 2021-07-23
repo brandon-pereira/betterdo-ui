@@ -1,49 +1,20 @@
 import React, { useCallback } from 'react';
-
-import ListItem from '@components/ListItem';
-import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 
-import {
-    Container,
-    NavigationModalOverlay,
-    ListsContainer
-} from './Navigation.styles';
 import useLists from '@hooks/useLists';
 import useNewListModal from '@hooks/useNewListModal';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useSwitchList from '@hooks/useSwitchList';
 import useModifyProfile from '@hooks/useModifyProfile';
 import useHamburgerNav from '@hooks/useHamburgerNav';
+import ListItem from '@components/ListItem';
 
-const SortableItem = SortableElement(({ value, onClick, currentId }) => (
-    <ListItem
-        selected={value.id === currentId}
-        key={value.id}
-        id={value.id}
-        type={value.type}
-        title={value.title}
-        color={value.color}
-        onClick={() => onClick(value)}
-    />
-));
-
-const SortableList = SortableContainer(({ items, currentId, onClick }) => {
-    return (
-        <div>
-            {items.map((list, index) => (
-                <SortableItem
-                    key={typeof task === 'object' ? list.id : index}
-                    index={index}
-                    value={list}
-                    currentId={currentId}
-                    onClick={onClick}
-                    disabled={list.type !== 'default'}
-                />
-            ))}
-        </div>
-    );
-});
+import SortableList from './SortableList';
+import {
+    Container,
+    NavigationModalOverlay,
+    ListsContainer
+} from './Navigation.styles';
 
 function Navigation() {
     const [isMobileNavVisible, setMobileNavVisibility] = useHamburgerNav();
@@ -71,26 +42,23 @@ function Navigation() {
     );
 
     return (
-        <>
-            {/* <MobileNavigationSkirt isMobileNavVisible={isMobileNavVisible} /> */}
-            <Container isMobileNavVisible={isMobileNavVisible}>
-                <ListsContainer>
-                    <SortableList
-                        lockAxis="y"
-                        pressDelay={200}
-                        items={lists}
-                        currentId={currentListId}
-                        onSortEnd={onSortEnd}
-                        onClick={switchList}
-                    />
-
-                    <ListItem onClick={openNewListModal} type="newList" />
-                </ListsContainer>
-                <NavigationModalOverlay
-                    onClick={() => setMobileNavVisibility(false)}
+        <Container isMobileNavVisible={isMobileNavVisible}>
+            <ListsContainer>
+                <SortableList
+                    lists={lists}
+                    currentId={currentListId}
+                    onSortEnd={onSortEnd}
+                    onClick={switchList}
                 />
-            </Container>
-        </>
+                <ListItem
+                    onClick={openNewListModal}
+                    list={{ type: 'newList' }}
+                />
+            </ListsContainer>
+            <NavigationModalOverlay
+                onClick={() => setMobileNavVisibility(false)}
+            />
+        </Container>
     );
 }
 

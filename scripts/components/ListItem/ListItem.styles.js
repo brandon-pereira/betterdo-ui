@@ -30,6 +30,14 @@ export const Container = styled.button`
             background: linear-gradient(#006EFF, #004DB4) !important;
         }
     `}
+    ${({ isOver }) =>
+        isOver &&
+        `
+        & {
+            box-shadow: inset 0 -1px rgba(255, 255, 255, 0.15), inset 0 0 0 3px #006EFF;
+            // background: linear-gradient(#006EFF, #004DB4) !important;
+        }
+    `}
 `;
 
 export const DotIcon = styled.div`
