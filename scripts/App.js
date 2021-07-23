@@ -22,7 +22,6 @@ const App = () => (
             <Navigation />
             <Header />
             <Body />
-            {/* <UserSettingsModal /> */}
         </Container>
         <>
             <InboxRedirect />

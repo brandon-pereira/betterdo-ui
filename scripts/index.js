@@ -3,8 +3,6 @@ import { render } from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 import { HashRouter, Switch, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { DndContext, DragOverlay } from '@dnd-kit/core';
-import { createPortal } from 'react-dom';
 
 import { createTheme, GlobalStyles } from './utilities/style-utils';
 import SharedProviders from '@hooks/internal/SharedProviders';
@@ -25,21 +23,9 @@ render(
                     <Switch>
                         <Route path="/:currentListId?">
                             <SWRProvider>
-                                <DndContext
-                                    onDragEnd={a =>
-                                        console.log('ON DRAG END', a)
-                                    }
-                                >
-                                    {createPortal(
-                                        <DragOverlay>
-                                            <div>HI</div>
-                                        </DragOverlay>,
-                                        document.body
-                                    )}
-                                    <SharedProviders>
-                                        <App />
-                                    </SharedProviders>
-                                </DndContext>
+                                <SharedProviders>
+                                    <App />
+                                </SharedProviders>
                             </SWRProvider>
                         </Route>
                     </Switch>

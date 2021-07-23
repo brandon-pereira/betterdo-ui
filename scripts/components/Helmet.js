@@ -7,7 +7,6 @@ function _Helmet() {
     const currentListId = useCurrentListId();
     const { list, error } = useListDetails(currentListId);
 
-    console.log(list);
     if (error || !list) {
         return null;
     }
