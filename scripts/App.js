@@ -1,3 +1,4 @@
+/* eslint react/no-children-prop: off */
 import React from 'react';
 
 // Components
@@ -26,28 +27,24 @@ const App = () => (
         <>
             <InboxRedirect />
             <Route
-                // eslint-disable-next-line react/no-children-prop
                 children={({ match }) => (
                     <AddListModal isOpen={Boolean(match)} />
                 )}
                 path="/:currentListId/create-list"
             />
             <Route
-                // eslint-disable-next-line react/no-children-prop
                 children={({ match }) => (
                     <EditListModal isOpen={Boolean(match)} />
                 )}
                 path="/:currentListId/edit-list"
             />
             <Route
-                // eslint-disable-next-line react/no-children-prop
                 children={({ match }) => (
                     <EditTaskModal isOpen={Boolean(match)} />
                 )}
                 path="/:currentListId/edit-task/:currentTaskId"
             />
             <Route
-                // eslint-disable-next-line react/no-children-prop
                 children={({ match }) => (
                     <UserSettingsModal isOpen={Boolean(match)} />
                 )}
