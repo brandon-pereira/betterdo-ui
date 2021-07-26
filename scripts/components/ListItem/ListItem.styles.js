@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { COLORS } from '../../constants';
 
 export const Container = styled.button`
-    touch-action: none;
     border: none;
     display: block;
     font: inherit;
@@ -42,6 +41,7 @@ export const Container = styled.button`
 `;
 
 export const DotIcon = styled.div`
+    touch-action: none;
     height: 1rem;
     width: 1rem;
     background-color: ${props =>
