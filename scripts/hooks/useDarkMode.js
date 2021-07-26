@@ -1,7 +1,7 @@
 import { useEffect, useCallback, useState } from 'react';
 import createSharedHook from './internal/createSharedHook';
 
-const localStorageKey = '_beta_doesBetterDoPreferDarkMode';
+const localStorageKey = 'doesBetterDoPreferDarkMode';
 
 function useDarkModeOnce() {
     const [isOSinDarkMode, setOSinDarkMode] = useState(
