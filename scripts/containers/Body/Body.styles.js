@@ -9,12 +9,14 @@ export const CompletedTasksButton = styled(Button)`
     user-select: none;
     align-self: start;
     background: rgba(0, 0, 0, 0.1) !important;
-    border: 1px solid #aaa;
+    border: 1px solid
+        ${({ theme }) => theme.colors.body.completedTasksButton.borderColor};
     box-shadow: none;
     font-size: 1.1rem;
     line-height: 2rem;
-    color: #666;
-    text-shadow: 0 1px #fff;
+    text-shadow: ${({ theme }) =>
+        theme.colors.body.completedTasksButton.textShadow};
+    color: ${({ theme }) => theme.colors.body.completedTasksButton.color};
     font-weight: 800;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.02),
         0 2px 1px -1px rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.1);
@@ -26,7 +28,7 @@ export const Container = styled.div`
     grid-row: 4;
     grid-column: 1;
     overflow-y: auto;
-    background: #e4e4e4;
+    background: ${({ theme }) => theme.colors.body.background};
     display: flex;
     flex-direction: column;
     padding-bottom: 0.5rem;

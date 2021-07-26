@@ -4,17 +4,26 @@ import { COLORS } from '../constants';
 
 const _Input = styled.input`
     appearance: none;
-    background: #fff;
+    background: ${({ theme }) => theme.colors.forms.input.background};
     width: ${props => props.width || '100%'};
     box-sizing: border-box;
     padding: 0.8rem 1rem;
     border: none;
-    box-shadow: inset 0 0 0 2px #ccc;
+    box-shadow: ${({ theme }) => theme.colors.forms.input.boxShadow};
+    color: ${({ theme }) => theme.colors.forms.input.color};
     border-radius: 3px;
     outline: none;
     font: inherit;
     font-size: 1rem;
     margin-bottom: 1rem;
+    // hack for chrome to make date picker white
+    ${({ theme }) =>
+        theme.isDarkMode &&
+        `
+        &::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+    `}
     &:focus {
         box-shadow: inset 0 0 0 2px ${COLORS.blue};
     }
@@ -37,13 +46,15 @@ const Error = styled.div`
 `;
 
 const Label = styled.label`
-    color: #666;
+    color: ${({ theme }) => theme.colors.forms.label.color};
     margin: 0 0 0.4rem;
     display: block;
 `;
 
 const TextArea = styled.textarea`
-    background: #fff;
+    box-shadow: ${({ theme }) => theme.colors.forms.input.boxShadow};
+    color: ${({ theme }) => theme.colors.forms.input.color};
+    background: ${({ theme }) => theme.colors.forms.input.background};
     font-family: inherit;
     font-size: 1rem;
     margin-bottom: 1rem;
@@ -52,7 +63,6 @@ const TextArea = styled.textarea`
     box-sizing: border-box;
     padding: 0.8rem 1rem;
     border: none;
-    box-shadow: inset 0 0 0 2px #ccc;
     border-radius: 3px;
     outline: none;
     &:focus {

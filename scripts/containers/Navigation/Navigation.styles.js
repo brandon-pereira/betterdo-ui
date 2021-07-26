@@ -1,4 +1,4 @@
-import { QUERIES, COLORS } from '../../constants';
+import { QUERIES } from '../../constants';
 import styled from 'styled-components';
 
 export const NavigationModalOverlay = styled.div`
@@ -13,7 +13,7 @@ export const NavigationModalOverlay = styled.div`
 
 export const Container = styled.nav`
     display: flex;
-    background: ${COLORS.navigationBackground};
+    background: ${({ theme }) => theme.colors.navigation.background};
     flex-direction: column;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.15), 0 1px 2px rgba(0,0,0,.9);
     position: relative;

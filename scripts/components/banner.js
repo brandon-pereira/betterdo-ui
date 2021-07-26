@@ -12,7 +12,7 @@ const Container = styled.div`
 const Icon = styled(_Icon)`
     path {
         stroke-width: 1px;
-        fill: #cacaca;
+        fill: ${({ theme }) => theme.colors.body.banner.icon.background};
         ${props =>
             props.icon === 'betterdo' &&
             `
@@ -25,7 +25,7 @@ const Button = styled(_Button)`
 `;
 
 const BodyCopy = styled.span`
-    color: grey;
+    color: ${({ theme }) => theme.colors.body.banner.color};
     font-size: 1.4rem;
     font-weight: 100;
     margin: 0.1rem 0 0 0;

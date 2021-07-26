@@ -12,7 +12,7 @@ const _header = styled.h2`
 `;
 
 const _body = styled.p`
-    color: #222;
+    color: ${({ theme }) => theme.colors.body.color}};
     margin: 0 0 1rem;
 `;
 

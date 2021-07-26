@@ -17,7 +17,7 @@ const UserList = styled.ol`
     overflow-y: auto;
 `;
 const Owner = styled.div`
-    color: grey;
+    color: ${({ theme }) => theme.colors.body.color};
     text-transform: uppercase;
     font-weight: bold;
     &:before {
@@ -36,11 +36,13 @@ const User = styled.li`
     align-items: center;
     padding: 1rem;
     border-radius: 1rem;
+    color: ${({ theme }) => theme.colors.body.color};
     ${ProfilePic} {
         margin-right: 1rem;
     }
     &:nth-of-type(odd) {
-        background: #eee;
+        background: ${({ theme }) =>
+            theme.colors.modals.listViewAlternateBackground};
     }
 `;
 

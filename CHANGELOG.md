@@ -1,5 +1,14 @@
 # Changelog
 
+## v4.1.0 (2021-07-25)
+
+-   Dark Mode 🔦
+-   Optimizations to reordering task logic
+
+## v4.0.3 (2021-07-22)
+
+-   Refactored the way reordering tasks/lists is done. Now more accessible and performant.
+
 ## v4.0.2 (2021-07-05)
 
 -   Improved app accessibility

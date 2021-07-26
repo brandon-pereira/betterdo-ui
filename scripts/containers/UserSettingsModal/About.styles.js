@@ -4,6 +4,7 @@ import _BetterDo from '../../../svgs/betterdo.svg';
 
 export const Container = styled.div`
     text-align: center;
+    color: ${({ theme }) => theme.colors.body.color};
     h1,
     h2 {
         margin: 0;

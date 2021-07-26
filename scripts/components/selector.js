@@ -11,8 +11,9 @@ const Selection = styled.button`
     appearance: none;
     border: none;
     margin: 0;
-    background: linear-gradient(#fff, #ddd);
-    box-shadow: inset 0 0 0 1px #a2a2a2, inset 0 -2px #fff;
+    background: ${({ theme }) => theme.colors.forms.selector.background};
+    color: ${({ theme }) => theme.colors.forms.selector.color};
+    box-shadow: ${({ theme }) => theme.colors.forms.selector.boxShadow};
     padding: 0.75rem 1rem;
     font: inherit;
     outline: none;

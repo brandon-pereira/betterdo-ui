@@ -11,6 +11,7 @@ const _Input = styled(Input)`
     border-radius: 0;
     box-shadow: none;
     margin-bottom: 0;
+    box-shadow: ${({ theme }) => theme.colors.forms.input.boxShadow};
 `;
 const Container = styled.div`
     background: #fff;
@@ -19,9 +20,15 @@ const Container = styled.div`
     margin-bottom: 1rem;
     width: 100%;
     box-sizing: border-box;
-    border: 2px solid #ccc;
     border-radius: 3px;
     overflow: hidden;
+    color: ${({ theme }) => theme.colors.forms.input.color};
+    background: ${({ theme }) => theme.colors.forms.input.background};
+    ${({ theme }) =>
+        theme.isDarkMode &&
+        `
+            border: none;
+        `};
 `;
 const DeleteIcon = styled(Icon)``;
 
@@ -29,7 +36,9 @@ const Task = styled.div`
     display: flex;
     align-items: center;
     padding: 0.8rem 1rem;
-    border-bottom: 1px solid #ccc;
+    border-color: #ccc;
+    border-style: solid;
+    border-width: 1px 1px 0 1px;
     z-index: 11;
     span {
         flex: 1;
@@ -47,6 +56,17 @@ const Task = styled.div`
             display: block;
         }
     }
+    &:last-of-type {
+        border-bottom: none;
+    }
+    ${({ theme }) =>
+        theme.isDarkMode &&
+        `
+            && {
+                border: none;
+                border-bottom: 1px solid rgba(255,255,255,0.5);
+            }
+        `};
 `;
 const Checkbox = styled.input`
     height: 1rem;

@@ -17,7 +17,7 @@ export const Container = styled.button`
     color: #fff;
     display: flex;
     align-items: center;
-    background: ${COLORS.navigationBackground};
+    background: ${({ theme }) => theme.colors.navigation.background};
     box-shadow: inset 0 -1px rgba(255, 255, 255, 0.15);
     &:focus-visible {
         background: rgba(255, 255, 255, 0.1);

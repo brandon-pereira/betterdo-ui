@@ -6,9 +6,11 @@ import styled from 'styled-components';
 import { COLORS } from '../../constants';
 import useProfile from '@hooks/useProfile';
 import useModifyProfile from '@hooks/useModifyProfile';
+import useDarkMode from '@hooks/useDarkMode';
 
 const OptionGroup = styled.div`
     display: flex;
+    border-radius: 1rem;
     align-items: center;
     padding: 1rem;
     margin: 0 -1rem;
@@ -16,7 +18,8 @@ const OptionGroup = styled.div`
         padding-top: 0.5rem;
     }
     &:nth-of-type(even) {
-        background: #eee;
+        background: ${({ theme }) =>
+            theme.colors.modals.listViewAlternateBackground};
     }
     > div {
         flex: 1;
@@ -27,11 +30,13 @@ const OptionGroup = styled.div`
 const Description = styled.p`
     margin-top: -0.2rem;
     font-size: 0.9rem;
+    color: ${({ theme }) => theme.colors.body.color};
 `;
 
 function GeneralSettings() {
     const { logout, profile, loading } = useProfile();
     const modifyProfile = useModifyProfile();
+    const [darkMode, doesPreferDarkMode] = useDarkMode();
     const [state, setState] = useState({
         isBeta: profile.isBeta,
         isPushEnabled: profile.isPushEnabled
@@ -73,6 +78,22 @@ function GeneralSettings() {
                         onChange({ isPushEnabled: bool });
                     }}
                     checked={state.isPushEnabled}
+                />
+            </OptionGroup>
+            <OptionGroup>
+                <div>
+                    <Label>Automatic Dark Mode</Label>
+                    <Description>
+                        BetterDo leverages your system preferences to turn dark
+                        mode on or off. However, turn this setting off to fully
+                        disable dark mode on this device.
+                    </Description>
+                </div>
+                <Toggle
+                    onChange={(e, bool) => {
+                        doesPreferDarkMode(bool);
+                    }}
+                    checked={darkMode}
                 />
             </OptionGroup>
             <OptionGroup>

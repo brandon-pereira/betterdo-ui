@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import _Button from './Button';
-import { QUERIES, COLORS } from '../constants';
+import { QUERIES } from '../constants';
 
 const Header = styled.h2`
     margin: 0 0 0.3rem;
@@ -27,7 +27,8 @@ const SecondaryButton = styled(Button)`
     }
 `;
 const Container = styled.div`
-    background: ${COLORS.blue};
+    background: ${({ theme }) =>
+        theme.colors.body.notificationBanner.background};
     box-shadow: inset 0 -1px rgba(0, 0, 0, 0.3);
     color: #fff;
     padding: 1rem;

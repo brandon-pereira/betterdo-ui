@@ -29,7 +29,8 @@ export const Content = styled.div`
     height: 100%;
     overflow: hidden;
     cursor: pointer;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.3)), #222;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.3)),
+        ${({ theme }) => theme.colors.navigation.background};
     border: none;
     box-shadow: inset 0 -1px rgba(0, 0, 0, 0.9);
     color: #fff;

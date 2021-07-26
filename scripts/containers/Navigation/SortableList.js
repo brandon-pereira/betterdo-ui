@@ -55,7 +55,7 @@ function SortableList({ lists, onSortEnd }) {
         useSensor(PointerSensor, {
             activationConstraint: {
                 delay: 100,
-                tolerance: 5
+                tolerance: 50
             }
         }),
         useSensor(KeyboardSensor, {

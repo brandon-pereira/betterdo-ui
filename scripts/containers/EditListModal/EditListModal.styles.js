@@ -23,7 +23,6 @@ export const Modal = styled(_Modal)`
         width: 1.2rem;
         left: auto;
         border-radius: 4px 0 0 0;
-        background: #fff;
     }
     @media ${QUERIES.medium} {
         right: 10px;

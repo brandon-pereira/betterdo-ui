@@ -4,7 +4,6 @@ import { Error } from '../../components/forms';
 import Icon from '../../components/icon';
 import Toggle from '../../components/toggle';
 import styled from 'styled-components';
-import { COLORS } from '../../constants';
 import useProfile from '@hooks/useProfile';
 import useModifyProfile from '@hooks/useModifyProfile';
 
@@ -13,7 +12,7 @@ const CustomListsContainer = styled.ol`
     padding: 0;
     margin: 0 -1rem;
     border-radius: 1rem;
-    background: ${COLORS.navigationBackground};
+    background: ${({ theme }) => theme.colors.navigation.background};
 `;
 const CustomList = styled.li`
     color: #fff;

@@ -12,8 +12,8 @@ export const Checkbox = styled.input`
     border-radius: 50%;
     display: inline-block;
     appearance: none;
-    background: #fff;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 1px 1px #fff;
+    background: ${({ theme }) => theme.colors.task.checkbox.background};
+    box-shadow: ${({ theme }) => theme.colors.task.checkbox.boxShadow};
     border: none;
     display: flex;
     align-items: center;
@@ -27,7 +27,10 @@ export const Checkbox = styled.input`
         border-radius: 50%;
         height: 1rem;
         width: 1rem;
-        background: linear-gradient(#333, #666);
+        background: linear-gradient(
+            rgba(255, 255, 255, 0.6),
+            rgba(255, 255, 255, 0.9)
+        );
         display: block;
         transform: scale(0);
         transition: transform 0.2s;
@@ -74,12 +77,13 @@ export const Container = styled.button`
     font: inherit;
     box-sizing: border-box;
     padding: 0;
-    background: linear-gradient(#fff, #eee);
+    background: ${({ theme }) => theme.colors.task.background};
+    color: ${({ theme }) => theme.colors.task.color};
+    box-shadow: ${({ theme }) => theme.colors.task.boxShadow};
     margin: 0.5rem 0 0;
     border-radius: 50px;
     width: 100%;
     text-align: left;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2), inset 0 -1px #fff;
     outline: none;
     display: flex;
     align-items: center;
@@ -92,10 +96,10 @@ export const Container = styled.button`
         opacity: 0.5;
         pointer-events: none;
     `}
-    ${props =>
-        props.priority === 'low' &&
+    ${({ priority, theme }) =>
+        priority === 'low' &&
         `
-        background: linear-gradient(#eee, #ddd);
+        background: ${theme.colors.task.lowPriority.background};
         box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
     `}
     &:focus-visible {

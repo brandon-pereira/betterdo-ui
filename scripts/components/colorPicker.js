@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import randomColor from 'randomcolor';
 import styled from 'styled-components';
 import { Label } from './forms';
-import Icon from './icon';
+import _Icon from './icon';
 import { COLORS } from '../constants';
 import TouchEvents from '../utilities/touchevents';
 
@@ -13,6 +13,10 @@ const Container = styled.div`
     border-radius: 50px;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14),
         0 3px 3px -2px rgba(0, 0, 0, 0.12), 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+`;
+
+const Icon = styled(_Icon)`
+    color: ${({ theme }) => theme.colors.forms.label.color};
 `;
 
 const Color = styled.button.attrs(props => ({
@@ -134,7 +138,7 @@ export default class ColorPicker extends Component {
                     <Icon
                         size="1rem"
                         icon="refresh"
-                        color="#505050"
+                        color="currentColor"
                         onClick={e => this.refreshPalette(e)}
                     >
                         Refresh Palette
@@ -142,7 +146,7 @@ export default class ColorPicker extends Component {
                     <Icon
                         size="1rem"
                         icon="eyedropper"
-                        color="#505050"
+                        color="currentColor"
                         onClick={e => this.launchPicker(e)}
                     >
                         Pick a colour

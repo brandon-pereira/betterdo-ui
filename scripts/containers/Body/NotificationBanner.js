@@ -4,9 +4,11 @@ import usePushNotifications from '@hooks/usePushNotifications';
 import useInstall from '@hooks/useInstall';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useListDetails from '@hooks/useListDetails';
+import useDarkMode from '@hooks/useDarkMode';
 
 function NotificationBanner() {
     const currentListId = useCurrentListId();
+    const [darkMode, setPrefersDarkMode] = useDarkMode();
     const { list, loading, error } = useListDetails(currentListId);
     const {
         notificationStatus,
@@ -53,6 +55,20 @@ function NotificationBanner() {
             />
         );
     }
+
+    if (!darkMode && typeof darkMode === 'undefined') {
+        return (
+            <_NotificationBanner
+                title="Dark Mode"
+                description="BetterDo now offers dark mode! Would you like to try it out?"
+                primaryButtonCopy="Enable"
+                primaryButtonAction={() => setPrefersDarkMode(true)}
+                secondaryButtonCopy="Dismiss"
+                secondaryButtonAction={() => setPrefersDarkMode(false)}
+            />
+        );
+    }
+
     return null;
 }
 

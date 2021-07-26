@@ -17,12 +17,13 @@ const SelectContainer = styled.label`
 `;
 const Select = styled.select`
     appearance: none;
-    background: #fff;
+    background: ${({ theme }) => theme.colors.forms.input.background};
+    color: ${({ theme }) => theme.colors.forms.input.color};
     width: ${props => props.width || '100%'};
     box-sizing: border-box;
     padding: 0.8rem 1rem;
     border: none;
-    box-shadow: inset 0 0 0 2px #ccc;
+    box-shadow: ${({ theme }) => theme.colors.forms.input.boxShadow};
     border-radius: 3px;
     outline: none;
     font: inherit;

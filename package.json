@@ -1,6 +1,6 @@
 {
     "name": "betterdo-ui",
-    "version": "4.0.2",
+    "version": "4.1.0",
     "description": "Frontend for BetterDo",
     "repository": "https://github.com/brandon-pereira/betterdo-ui",
     "dependencies": {

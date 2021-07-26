@@ -9,7 +9,8 @@ export const Overlay = styled.div`
     right: 0;
     bottom: 0;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.5);
+    background: ${({ theme }) => theme.colors.modals.overlayBackground};
+    backdrop-filter: blur(3px);
     ${props =>
         !props.visible &&
         `
@@ -19,7 +20,7 @@ export const Overlay = styled.div`
 `;
 
 export const Container = styled.div`
-    background: #fff;
+     background: ${({ theme }) => theme.colors.modals.contentBackground};
     transition: transform 0.2s;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
@@ -78,5 +79,5 @@ export const Arrow = styled.div`
     top: 1rem;
     left: -0.6rem;
     transform: rotate(45deg);
-    background: #fff;
+    background: ${({ theme }) => theme.colors.modals.contentBackground};
 `;

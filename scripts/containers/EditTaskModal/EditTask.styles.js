@@ -6,7 +6,7 @@ import _ProfilePic from '@components/profilePic';
 import _Modal from '@components/Modal';
 
 export const Modal = styled(_Modal)`
-    background: #eee;
+    background: ${({ theme }) => theme.colors.modals.background};
     transform: none;
     right: 0;
     top: 0;
@@ -43,6 +43,13 @@ export const CreatorBlock = styled.div`
         inset 0 2px rgba(255, 255, 255, 0.2);
     padding: 1rem;
     border-radius: 3px;
+    ${({ theme }) =>
+        theme.isDarkMode &&
+        `
+        background: linear-gradient(rgba(255,255,255, 0.02), rgba(255,255,255, 0.05));
+        box-shadow: inset 0 0 0 1px rgba(255,255,255, 0.1);
+        color: ${theme.colors.body.color};
+        `}
     ${ProfilePic} {
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     }
@@ -70,11 +77,19 @@ export const ButtonContainer = styled.div`
     padding: 1rem;
     box-sizing: border-box;
     right: 0;
+    backdrop-filter: blur(10px);
     background: linear-gradient(
         rgba(255, 255, 255, 0.6),
         rgba(255, 255, 255, 0.9)
     );
-    box-shadow: 0 -1px rgba(0, 0, 0, 0.1);
+    ${({ theme }) =>
+        theme.isDarkMode &&
+        `
+        background: linear-gradient(
+        rgba(0, 0, 0, 0.3),
+        rgba(0, 0, 0, 0.7)
+        );
+        `}
 `;
 export const Notes = styled(TextArea)`
     min-height: 10rem;

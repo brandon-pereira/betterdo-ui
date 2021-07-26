@@ -1,5 +1,10 @@
-import { COLORS } from '../constants';
-import { createGlobalStyle } from 'styled-components';
+import React from 'react';
+import { LIGHT_THEME, DARK_THEME } from '../constants';
+import useDarkMode from '@hooks/useDarkMode';
+import {
+    createGlobalStyle,
+    ThemeProvider as _ThemeProvider
+} from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
     html {
@@ -30,6 +35,12 @@ export const GlobalStyles = createGlobalStyle`
 
 export const getColor = colorName => ({ theme }) => theme.colors[colorName];
 
-export const createTheme = () => ({
-    colors: COLORS
-});
+export function ThemeProvider({ children }) {
+    const [isDarkMode] = useDarkMode();
+
+    return (
+        <_ThemeProvider theme={isDarkMode ? DARK_THEME : LIGHT_THEME}>
+            {children}
+        </_ThemeProvider>
+    );
+}
