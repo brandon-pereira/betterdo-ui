@@ -72,6 +72,7 @@ export const HighPriorityFlag = styled.div`
 `;
 
 export const Container = styled.button`
+    touch-action: none;
     display: block;
     border: none;
     font: inherit;

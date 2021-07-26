@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { COLORS } from '../../constants';
 
 export const Container = styled.button`
+    touch-action: none;
     border: none;
     display: block;
     font: inherit;
