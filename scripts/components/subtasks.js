@@ -192,7 +192,7 @@ export default class Subtasks extends Component {
             <Container>
                 <SortableList
                     items={this.state.items || []}
-                    onSortEnd={this.onSortEnd}
+                    onSortEnd={this.onSortEnd.bind(this)}
                     pressDelay={200}
                     lockAxis="y"
                     lockToContainerEdges={true}
