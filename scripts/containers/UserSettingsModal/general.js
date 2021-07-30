@@ -3,7 +3,6 @@ import Button from '@components/Button';
 import { Label, Error } from '@components/forms';
 import Toggle from '@components/toggle';
 import styled from 'styled-components';
-import { COLORS } from '../../constants';
 import useProfile from '@hooks/useProfile';
 import useModifyProfile from '@hooks/useModifyProfile';
 import useDarkMode from '@hooks/useDarkMode';
@@ -137,7 +136,7 @@ function GeneralSettings() {
                         Clear your current session and return to login screen.
                     </Description>
                 </div>
-                <Button onClick={logout} color={COLORS.red}>
+                <Button onClick={logout} color={'red'}>
                     Logout
                 </Button>
             </OptionGroup>

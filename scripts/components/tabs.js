@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { COLORS } from '../constants';
 
 const Container = styled.div``;
 const TabsHeader = styled.div`
@@ -8,7 +7,7 @@ const TabsHeader = styled.div`
     display: flex;
     margin: 0;
     padding: 0;
-    border: 2px solid ${props => props.color};
+    border: 2px solid ${props => props.color || props.theme.colors.general.blue};
     border-radius: 3px;
     margin-bottom: 1rem;
     overflow-x: auto;
@@ -20,15 +19,16 @@ const TabHeaderItem = styled.button`
     white-space: nowrap;
     flex: 1;
     text-align: center;
-    border-right: 1px solid ${props => props.color};
+    border-right: 1px solid
+        ${props => props.color || props.theme.colors.general.blue};
     padding: 0.6rem 0.4rem;
     cursor: pointer;
-    color: ${props => props.color};
+    color: ${props => props.color || props.theme.colors.general.blue};
     outline: none;
     ${props =>
         props.selected &&
         `
-        background-color: ${props.color};
+        background-color: ${props.color || props.theme.colors.general.blue};
         color: #fff;
         cursor: default;
     `}
@@ -63,7 +63,7 @@ class Tabs extends Component {
     }
 
     render() {
-        const color = this.props.color || COLORS.blue;
+        const color = this.props.color;
         return (
             <Container>
                 <TabsHeader color={color}>

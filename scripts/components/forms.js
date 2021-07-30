@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { COLORS } from '../constants';
 
 const _Input = styled.input`
     appearance: none;
@@ -25,20 +24,20 @@ const _Input = styled.input`
         }
     `}
     &:focus {
-        box-shadow: inset 0 0 0 2px ${COLORS.blue};
+        box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.general.blue};
     }
     &::placeholder {
         color: #aaa;
     }
-    ${({ invalid }) =>
+    ${({ theme, invalid }) =>
         invalid &&
         `
-    box-shadow: inset 0 0 0 2px ${COLORS.red} !important
+    box-shadow: inset 0 0 0 2px ${theme.colors.general.red}; !important;
     `};
 `;
 
 const Error = styled.div`
-    background: ${COLORS.red};
+    background: ${({ theme }) => theme.colors.general.red};
     color: #fff;
     padding: 0.5rem;
     margin: 1rem 0;
@@ -66,15 +65,15 @@ const TextArea = styled.textarea`
     border-radius: 3px;
     outline: none;
     &:focus {
-        box-shadow: inset 0 0 0 2px ${COLORS.blue};
+        box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.general.blue};
     }
     &::placeholder {
         color: #aaa;
     }
-    ${({ invalid }) =>
+    ${({ theme, invalid }) =>
         invalid &&
         `
-    box-shadow: inset 0 0 0 2px ${COLORS.red} !important
+    box-shadow: inset 0 0 0 2px ${theme.colors.general.red} !important;
     `};
 `;
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { COLORS } from '../constants';
 import styled from 'styled-components';
 
 const IconContainer = styled.div`
@@ -20,7 +19,7 @@ const IconContainer = styled.div`
     }
     &:focus-visible {
         svg {
-            fill: ${COLORS.blue};
+            fill: ${({ theme }) => theme.colors.general.blue};
         }
     }
 `;

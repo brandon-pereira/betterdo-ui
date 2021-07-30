@@ -3,7 +3,6 @@ import randomColor from 'randomcolor';
 import styled from 'styled-components';
 import { Label } from './forms';
 import _Icon from './icon';
-import { COLORS } from '../constants';
 import TouchEvents from '../utilities/touchevents';
 
 const Container = styled.div`
@@ -43,7 +42,7 @@ const Color = styled.button.attrs(props => ({
     ${props =>
         props.isCurrent &&
         `
-        box-shadow: inset 0 0 0 5px ${COLORS.blue};
+        box-shadow: inset 0 0 0 5px ${props.theme.colors.general.blue};
     `};
 `;
 

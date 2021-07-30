@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import _Loader from '../Loader';
-import { COLORS } from '../../constants';
 
 export const Button = styled.button.attrs(props => ({
     style: {
-        backgroundColor: props.color || COLORS.blue
+        backgroundColor:
+            props.theme.colors.general[props.color] ||
+            props.color ||
+            props.theme.colors.general.blue
     }
 }))`
     border: none;
@@ -37,7 +39,7 @@ export const Button = styled.button.attrs(props => ({
         opacity: 1;
     }
     &:focus-visible {
-        box-shadow: 0 0 0 2px ${COLORS.blue};
+        box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.general.blue};
     }
     ${props =>
         props.isLoading &&

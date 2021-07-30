@@ -3,7 +3,6 @@ import Button from '@components/Button';
 import { Form, Label, Input } from '@components/forms';
 import ColorPicker from '@components/colorPicker';
 import styled from 'styled-components';
-import { COLORS } from '../../constants';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useModifyList from '@hooks/useModifyList';
 import useListDetails from '@hooks/useListDetails';
@@ -119,7 +118,7 @@ function ListSettings({ setUnsavedChanges, onRequestClose }) {
                     isLoading={isDeleting}
                     loadingText="Deleting"
                     onClick={deleteList}
-                    color={COLORS.red}
+                    color={'red'}
                     type="button"
                 >
                     Delete

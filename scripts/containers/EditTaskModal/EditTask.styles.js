@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import { TextArea } from '@components/forms';
-// import Subtasks from '@components/subtasks';
-// import { COLORS } from '../../constants';
 import _ProfilePic from '@components/profilePic';
 import _Modal from '@components/Modal';
 

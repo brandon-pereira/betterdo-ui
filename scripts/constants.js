@@ -8,12 +8,7 @@ export const QUERIES = {
 
 export const BASE_THEME = {};
 
-// DEPRECATED
-export const COLORS = {
-    defaultList: '#666666',
-    red: '#c62828',
-    blue: '#2979ff'
-};
+export const DEFAULT_LIST_COLOR = '#666666';
 
 export const LIGHT_THEME = {
     isDarkMode: false,
@@ -50,9 +45,6 @@ export const LIGHT_THEME = {
                     background: '#cacaca'
                 }
             },
-            notificationBanner: {
-                background: '#2979ff'
-            },
             completedTasksButton: {
                 borderColor: '#aaa',
                 color: '#666',
@@ -70,6 +62,10 @@ export const LIGHT_THEME = {
             lowPriority: {
                 background: 'linear-gradient(#eee, #ddd)'
             }
+        },
+        general: {
+            blue: '#2979ff',
+            red: '#c62828'
         }
     }
 };
@@ -111,9 +107,6 @@ export const DARK_THEME = {
                     background: '#191919'
                 }
             },
-            notificationBanner: {
-                background: '#0d3e90'
-            },
             completedTasksButton: {
                 borderColor: '#313131',
                 color: '#616161',
@@ -133,6 +126,10 @@ export const DARK_THEME = {
             lowPriority: {
                 background: 'linear-gradient(#151515,#131313)'
             }
+        },
+        general: {
+            blue: '#0d3e90',
+            red: '#c62828'
         }
     }
 };

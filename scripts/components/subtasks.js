@@ -4,7 +4,6 @@ import { Input } from './forms';
 import Icon from './icon';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
-import { COLORS } from '../constants';
 
 const _Input = styled(Input)`
     border: none;
@@ -88,7 +87,8 @@ const Checkbox = styled.input`
         background: linear-gradient(#333, #666);
     }
     &:focus-visible {
-        box-shadow: inset 0 0 0 2px #fff, 0 0 0 1px ${COLORS.blue};
+        box-shadow: inset 0 0 0 2px #fff,
+            0 0 0 2px ${({ theme }) => theme.colors.general.blue};
     }
 `;
 

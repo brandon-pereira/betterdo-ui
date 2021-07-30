@@ -1,4 +1,3 @@
-import { COLORS } from '../../constants';
 import styled from 'styled-components';
 import _Loader from '../Loader';
 
@@ -39,7 +38,8 @@ export const Checkbox = styled.input`
         transform: scale(1);
     }
     &:focus-visible {
-        box-shadow: 0 0 0 2px ${COLORS.blue}, inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.general.blue},
+            inset 0 0 0 1px rgba(0, 0, 0, 0.2);
     }
 `;
 
@@ -104,7 +104,7 @@ export const Container = styled.button`
         box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
     `}
     &:focus-visible {
-        box-shadow: 0 0 0 2px ${COLORS.blue};
+        box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.general.blue};
     }
 `;
 

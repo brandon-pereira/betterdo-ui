@@ -18,7 +18,6 @@ import {
 } from './EditTask.styles';
 import CreatorBlock from './CreatorBlock';
 import ListsDropdown from './ListsDropdown';
-import { COLORS } from '../../constants';
 import Loader from './Loader';
 import useDeleteTask from '@hooks/useDeleteTask';
 
@@ -197,7 +196,7 @@ function EditTaskContent({ setUnsavedChanges }) {
                     Save
                 </Button>
                 <Button
-                    color={COLORS.red}
+                    color={'red'}
                     onClick={onDeleteTask}
                     isLoading={isDeleting}
                     loadingText="Deleting"

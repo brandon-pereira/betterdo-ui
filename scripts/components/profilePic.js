@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { COLORS } from '../constants';
 
 const Container = styled.div`
     border: none;
     outline: none;
     height: ${props => props.size || '3rem'};
     width: ${props => props.size || '3rem'};
-    background: ${COLORS.blue};
+    background: ${({ theme }) => theme.colors.general.blue};
     border-radius: 50%;
     overflow: hidden;
     font-size: 1.5rem;
@@ -19,7 +18,7 @@ const Container = styled.div`
     position: relative;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
     &:focus-visible {
-        box-shadow: 0 0 0 2px ${COLORS.blue};
+        box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.general.blue};
     }
 `;
 const Img = styled.img`

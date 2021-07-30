@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { COLORS } from '../constants';
 
 const Slider = styled.div`
     position: absolute;
@@ -9,7 +8,7 @@ const Slider = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: ${COLORS.red};
+    background-color: ${({ theme }) => theme.colors.general.red};
     transition: 0.4s;
     border-radius: 34px;
     ${({ disabled }) =>
@@ -45,11 +44,11 @@ const Switch = styled.label`
         top: -99999px;
         left: -99999px;
         &:focus-visible + ${Slider}:before {
-            background: ${COLORS.blue};
+            background: ${({ theme }) => theme.colors.general.blue};
             box-shadow: inset 0 0 0 3px #fff;
         }
         &:checked + ${Slider} {
-            background-color: #2196f3;
+            background-color: ${({ theme }) => theme.colors.general.blue};
             &:before {
                 transform: translateX(26px);
             }

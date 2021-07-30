@@ -1,7 +1,5 @@
-// import React from 'react';
 import styled from 'styled-components';
-// import SvgIcon from './icon';
-import { COLORS } from '../../constants';
+import { DEFAULT_LIST_COLOR } from '../../constants';
 
 export const Container = styled.button`
     border: none;
@@ -45,7 +43,7 @@ export const DotIcon = styled.div`
     height: 1rem;
     width: 1rem;
     background-color: ${props =>
-        props.color ? props.color : COLORS.defaultList};
+        props.color ? props.color : DEFAULT_LIST_COLOR};
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.2));
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5),
         0 1px 10px rgba(0, 0, 0, 0.4);

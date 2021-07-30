@@ -3,7 +3,7 @@ import Button from '@components/Button';
 import Icon from '@components/icon';
 import _Loader from '@components/Loader';
 import _Hamburger from '@components/hamburger';
-import { QUERIES } from '../../constants';
+import { DEFAULT_LIST_COLOR, QUERIES } from '../../constants';
 
 export { Icon, Button };
 
@@ -21,8 +21,7 @@ export const Loader = styled(_Loader)`
 export const Container = styled.header`
     grid-row: 3;
     grid-column: 1;
-    background-color: ${({ color, theme }) =>
-        color || theme.colors.defaultList};
+    background-color: ${({ color }) => color || DEFAULT_LIST_COLOR};
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.2));
     box-shadow: inset 0 -1px rgba(0, 0, 0, 0.3);
     color: #fff;

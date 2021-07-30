@@ -11,7 +11,7 @@ export const Container = styled.div`
     bottom: 0;
     overflow-y: scroll;
     padding: 2rem;
-    background: #c63e3e;
+    background: ${({ theme }) => theme.colors.general.red};
     flex-direction: column;
     h1 {
         text-shadow: 1px 1px black;

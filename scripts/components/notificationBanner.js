@@ -27,8 +27,7 @@ const SecondaryButton = styled(Button)`
     }
 `;
 const Container = styled.div`
-    background: ${({ theme }) =>
-        theme.colors.body.notificationBanner.background};
+    background: ${({ theme }) => theme.colors.general.blue};
     box-shadow: inset 0 -1px rgba(0, 0, 0, 0.3);
     color: #fff;
     padding: 1rem;

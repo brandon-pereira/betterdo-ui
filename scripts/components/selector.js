@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { COLORS } from '../constants';
+
 const SelectorContainer = styled.div`
     display: flex;
     border-radius: 3px;
@@ -30,7 +30,7 @@ const Selection = styled.button`
     ${props =>
         props.selected &&
         `
-        background-color: ${COLORS.blue};
+        background-color: ${props.theme.colors.general.blue};
         background-image: linear-gradient(transparent, rgba(0,0,0,.3));
         box-shadow: inset 0 0 0 1px rgba(0,0,0,0.9), inset 0 -2px rgba(255,255,255,.3);
         text-shadow: 1px 1px rgba(0,0,0,.9);

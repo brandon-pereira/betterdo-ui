@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import ProfilePic, {
     FormatProfilePictureUrl
 } from '../../components/profilePic';
-import { COLORS } from '../../constants';
 import useProfile from '@hooks/useProfile';
 import useModifyProfile from '@hooks/useModifyProfile';
 
@@ -20,7 +19,7 @@ const ProfilePictureBanner = styled.div`
     border-radius: 1rem;
     &:before {
         content: '';
-        background: ${COLORS.blue};
+        background: ${({ theme }) => theme.colors.general.blue};
         width: 100%;
         height: 100%;
         position: absolute;
@@ -154,7 +153,7 @@ function AccountSettings() {
                 <Button isLoading={isSaving} loadingText="Saving" type="Save">
                     Save
                 </Button>
-                <Button onClick={logout} color={COLORS.red}>
+                <Button onClick={logout} color={'red'}>
                     Logout
                 </Button>
             </ButtonContainer>

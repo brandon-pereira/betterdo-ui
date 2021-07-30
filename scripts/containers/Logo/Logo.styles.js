@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 import _ProfilePicture from '@components/profilePic';
 import _Hamburger from '@components/hamburger';
-import { QUERIES } from '../../constants';
+import { DEFAULT_LIST_COLOR, QUERIES } from '../../constants';
 
 export const Container = styled.div`
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.2));
-    background-color: ${({ color, theme }) =>
-        color || theme.colors.defaultList};
+    background-color: ${({ color }) => color || DEFAULT_LIST_COLOR};
     overflow: hidden;
     position: relative;
     grid-row: 1;

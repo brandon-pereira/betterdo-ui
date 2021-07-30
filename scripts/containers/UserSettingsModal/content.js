@@ -8,6 +8,7 @@ import About from './About';
 import useProfile from '@hooks/useProfile';
 import Loader from '@components/Loader';
 import { Error } from '@components/forms';
+import { LIGHT_THEME } from '../../constants';
 
 function UserSettingsModalContent() {
     const { loading, error } = useProfile();
@@ -21,8 +22,11 @@ function UserSettingsModalContent() {
     }
     return (
         <Fragment>
-            <Header>Settings</Header>
-            <Tabs titles={['Account', 'Custom Lists', 'General', 'About']}>
+            <Header color={LIGHT_THEME.colors.general.blue}>Settings</Header>
+            <Tabs
+                color={LIGHT_THEME.colors.general.blue}
+                titles={['Account', 'Custom Lists', 'General', 'About']}
+            >
                 <Tab>
                     <AccountSettings />
                 </Tab>
