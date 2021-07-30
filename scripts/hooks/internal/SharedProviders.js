@@ -4,15 +4,13 @@ import { ModalsProvider } from '../useHamburgerNav';
 import { ProfileProvider } from '../useProfile';
 import { ListsProvider } from '../useLists';
 import { CompletedTasksProvider } from '../useCompletedTasks';
-import { DarkModeProvider } from '@hooks/useDarkMode';
 
 // Order matters for some of these!
 const Providers = [
     ModalsProvider,
     ProfileProvider,
     ListsProvider,
-    CompletedTasksProvider,
-    DarkModeProvider
+    CompletedTasksProvider
 ].reverse();
 
 function SharedProviders({ children }) {

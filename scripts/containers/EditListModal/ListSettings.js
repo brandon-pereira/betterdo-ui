@@ -93,8 +93,9 @@ function ListSettings({ setUnsavedChanges, onRequestClose }) {
                 id="name"
                 invalid={isInvalid}
                 onChange={evt => {
+                    const title = evt.target.value;
                     setUnsavedChanges(true);
-                    setState(state => ({ ...state, title: evt.target.value }));
+                    setState(state => ({ ...state, title }));
                 }}
                 placeholder="ex. Groceries"
             />
