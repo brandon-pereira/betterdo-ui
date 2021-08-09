@@ -57,7 +57,9 @@ export const Title = styled.span`
     white-space: nowrap;
 `;
 export const IconHolder = styled.div`
+    touch-action: none;
     width: 50px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;

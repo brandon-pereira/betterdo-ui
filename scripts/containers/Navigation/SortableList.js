@@ -42,9 +42,9 @@ const SortableItem = function({ id, value }) {
             ref={setNodeRef}
             containerProps={{
                 style,
-                ...attributes,
-                ...listeners
+                ...attributes
             }}
+            touchEvents={listeners}
             list={value}
         />
     );
