@@ -39,7 +39,6 @@ export const Container = styled.button`
 `;
 
 export const DotIcon = styled.div`
-    touch-action: none;
     height: 1rem;
     width: 1rem;
     background-color: ${props =>

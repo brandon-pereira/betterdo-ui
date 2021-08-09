@@ -6,6 +6,7 @@ export const Loader = styled(_Loader)`
 `;
 
 export const Checkbox = styled.input`
+    touch-action: none;
     height: 2rem;
     width: 2rem;
     border-radius: 50%;
@@ -72,7 +73,6 @@ export const HighPriorityFlag = styled.div`
 `;
 
 export const Container = styled.button`
-    touch-action: none;
     display: block;
     border: none;
     font: inherit;

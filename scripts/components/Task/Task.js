@@ -12,7 +12,16 @@ import {
 
 const Task = React.forwardRef(
     (
-        { title, _id, isCompleted, list, isLoading, priority, containerProps },
+        {
+            title,
+            _id,
+            isCompleted,
+            list,
+            isLoading,
+            priority,
+            containerProps,
+            touchEvents
+        },
         ref
     ) => {
         const { openTaskModal } = useEditTaskModal();
@@ -44,6 +53,7 @@ const Task = React.forwardRef(
                         onClick={e => e.stopPropagation()}
                         onChange={onToggleTaskCompletion}
                         checked={isCompleted}
+                        {...touchEvents}
                     />
                 )}
                 <Title>{title}</Title>
