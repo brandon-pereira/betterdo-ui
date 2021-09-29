@@ -4,7 +4,7 @@ import { HashRouter, Switch, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { DarkModeProvider } from '@hooks/useDarkMode';
 
-import { ThemeProvider, GlobalStyles } from './utilities/style-utils';
+import { ThemeProvider, GlobalStyles } from './utilities/ThemeProvider';
 import SharedProviders from '@hooks/internal/SharedProviders';
 import App from './App';
 import ErrorBoundary from '@components/ErrorBoundary';

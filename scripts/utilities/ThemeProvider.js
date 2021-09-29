@@ -6,6 +6,16 @@ import {
     ThemeProvider as _ThemeProvider
 } from 'styled-components';
 
+export function ThemeProvider({ children }) {
+    const [isDarkMode] = useDarkMode();
+
+    return (
+        <_ThemeProvider theme={isDarkMode ? DARK_THEME : LIGHT_THEME}>
+            {children}
+        </_ThemeProvider>
+    );
+}
+
 export const GlobalStyles = createGlobalStyle`
     html {
         overflow: hidden;
@@ -32,15 +42,3 @@ export const GlobalStyles = createGlobalStyle`
         height: 100vh;
     }
 `;
-
-export const getColor = colorName => ({ theme }) => theme.colors[colorName];
-
-export function ThemeProvider({ children }) {
-    const [isDarkMode] = useDarkMode();
-
-    return (
-        <_ThemeProvider theme={isDarkMode ? DARK_THEME : LIGHT_THEME}>
-            {children}
-        </_ThemeProvider>
-    );
-}
