@@ -1,6 +1,6 @@
 import React from 'react';
-import loadable from '@loadable/component';
 import { Block, CreatorBlock, ProfilePic } from './EditTask.styles';
+import RelativeTime from './RelativeTime';
 
 function _CreatorBlock({ createdBy, creationDate }) {
     if (!createdBy) {
@@ -16,10 +16,6 @@ function _CreatorBlock({ createdBy, creationDate }) {
             </Block>
         </CreatorBlock>
     );
-}
-
-function RelativeTime({ date }) {
-    return <div>{date}</div>;
 }
 
 export default _CreatorBlock;
