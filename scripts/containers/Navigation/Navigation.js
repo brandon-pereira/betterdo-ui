@@ -13,7 +13,7 @@ import SortableList from './SortableList';
 import {
     Container,
     NavigationModalOverlay,
-    ListsContainer,
+    ListsContainer
 } from './Navigation.styles';
 
 function Navigation() {
@@ -32,7 +32,7 @@ function Navigation() {
             }
             try {
                 modifyProfile({
-                    lists: arrayMoveImmutable(lists, oldIndex, newIndex),
+                    lists: arrayMoveImmutable(lists, oldIndex, newIndex)
                 });
             } catch (err) {
                 console.error(err);
