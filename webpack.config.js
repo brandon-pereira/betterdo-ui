@@ -16,26 +16,26 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.min.js',
-        publicPath: isProduction ? '/app/' : '/',
+        publicPath: isProduction ? '/app/' : '/'
     },
     devServer: {
         hot: true,
         historyApiFallback: true,
         static: path.resolve(__dirname, 'dist'),
         proxy: {
-            '/auth': 'http://localhost:8000',
-        },
+            '/auth': 'http://localhost:8000'
+        }
     },
     resolve: {
-        alias: createAliases(),
+        alias: createAliases()
     },
     module: {
         rules: [
             {
                 test: /\.m?js/,
                 resolve: {
-                    fullySpecified: false,
-                },
+                    fullySpecified: false
+                }
             },
             {
                 test: /\.js?$/,
@@ -47,20 +47,20 @@ module.exports = {
                             plugins: [
                                 'babel-plugin-styled-components',
                                 'react-hot-loader/babel',
-                                'macros',
+                                'macros'
                             ],
                             presets: [
                                 [
                                     '@babel/preset-env',
                                     {
-                                        exclude: ['transform-regenerator'],
-                                    },
+                                        exclude: ['transform-regenerator']
+                                    }
                                 ],
-                                '@babel/preset-react',
-                            ],
-                        },
-                    },
-                ],
+                                '@babel/preset-react'
+                            ]
+                        }
+                    }
+                ]
             },
             {
                 test: /\.svg$/,
@@ -69,28 +69,28 @@ module.exports = {
                         loader: '@svgr/webpack',
                         options: {
                             icon: true,
-                            titleProp: true,
-                        },
-                    },
-                ],
+                            titleProp: true
+                        }
+                    }
+                ]
             },
             {
                 test: /\.md$/,
                 use: [
                     {
-                        loader: 'html-loader',
+                        loader: 'html-loader'
                     },
                     {
                         loader: 'markdown-loader',
                         options: {
                             /* your options here */
-                        },
-                    },
-                ],
-            },
-        ],
+                        }
+                    }
+                ]
+            }
+        ]
     },
-    plugins: getPlugins(),
+    plugins: getPlugins()
 };
 
 function getPlugins() {
@@ -101,22 +101,22 @@ function getPlugins() {
                 ? 'http://localhost:8000'
                 : 'http://localhost:8000',
             GOOGLE_ANALYTICS_ID: undefined,
-            VERSION: process.env.npm_package_version,
+            VERSION: process.env.npm_package_version
         }),
         new CopyPlugin({ patterns: ['static'] }),
         new HtmlWebpackPlugin({
             template: 'index.html',
             base: false,
             minify: true,
-            GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
-        }),
+            GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID
+        })
     ];
 
     if (isProduction) {
         plugins.push(
             new InjectManifest({
                 swSrc: './scripts/service-worker.js',
-                maximumFileSizeToCacheInBytes: 6000000,
+                maximumFileSizeToCacheInBytes: 6000000
             })
         );
     }
@@ -129,6 +129,6 @@ function createAliases() {
         ...(isProduction ? {} : { 'react-dom': '@hot-loader/react-dom' }),
         '@components': path.resolve('./scripts/components'),
         '@hooks': path.resolve('./scripts/hooks'),
-        '@utilities': path.resolve('./scripts/utilities'),
+        '@utilities': path.resolve('./scripts/utilities')
     };
 }
