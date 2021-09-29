@@ -59,6 +59,9 @@ export const LIGHT_THEME = {
                 background: '#fff',
                 boxShadow: 'inset 0 0 0 1px rgba(0, 0, 0, 0.2), 1px 1px #fff'
             },
+            checkboxDot: {
+                background: 'linear-gradient(#333, #666)'
+            },
             lowPriority: {
                 background: 'linear-gradient(#eee, #ddd)'
             }
@@ -122,6 +125,10 @@ export const DARK_THEME = {
                     'linear-gradient(rgba(255, 255, 255, 0.07), transparent)',
                 boxShadow:
                     'inset 0 0 0 2px rgba(0, 0, 0, 0.1), 0 0 1px 1px rgba(0, 0, 0, 0.5)'
+            },
+            checkboxDot: {
+                background:
+                    'linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.9))'
             },
             lowPriority: {
                 background: 'linear-gradient(#151515,#131313)'

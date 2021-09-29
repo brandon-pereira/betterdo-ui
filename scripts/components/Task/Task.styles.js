@@ -27,10 +27,7 @@ export const Checkbox = styled.input`
         border-radius: 50%;
         height: 1rem;
         width: 1rem;
-        background: linear-gradient(
-            rgba(255, 255, 255, 0.6),
-            rgba(255, 255, 255, 0.9)
-        );
+        background: ${({ theme }) => theme.colors.task.checkboxDot.background};
         display: block;
         transform: scale(0);
         transition: transform 0.2s;
