@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Icon from './Icon/Icon';
+import _Icon from './Icon/Icon';
+
+const Icon = styled(_Icon)`
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    right: 0.8rem;
+    transform: translateY(-50%) rotate(180deg);
+`;
 
 const SelectContainer = styled.label`
     position: relative;

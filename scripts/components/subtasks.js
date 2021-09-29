@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Input } from './forms';
-import Icon from './Icon/Icon';
+import _Icon from './Icon/Icon';
 import { arrayMoveImmutable } from 'array-move';
 
 const _Input = styled(Input)`
@@ -28,7 +28,7 @@ const Container = styled.div`
             border: none;
         `};
 `;
-const DeleteIcon = styled(Icon)``;
+const DeleteIcon = styled(_Icon)``;
 
 const Task = styled.div`
     display: flex;
@@ -147,7 +147,7 @@ export default class Subtasks extends Component {
     }
 
     render() {
-        const SortableItem = SortableElement(({ value, sortIndex }) => (
+        const SortableItem = ({ value, sortIndex }) => (
             <Task checked={value.isComplete}>
                 <Checkbox
                     type="checkbox"
@@ -171,8 +171,8 @@ export default class Subtasks extends Component {
                     }}
                 />
             </Task>
-        ));
-        const SortableList = SortableContainer(({ items }) => {
+        );
+        const SortableList = ({ items }) => {
             return (
                 <div>
                     {items.map((value, index) => (
@@ -185,7 +185,7 @@ export default class Subtasks extends Component {
                     ))}
                 </div>
             );
-        });
+        };
 
         return (
             <Container>
