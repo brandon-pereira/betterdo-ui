@@ -15,7 +15,8 @@ export const Container = styled.nav`
     display: flex;
     background: ${({ theme }) => theme.colors.navigation.background};
     flex-direction: column;
-    box-shadow: inset 0 1px rgba(255, 255, 255, 0.15), 0 1px 2px rgba(0,0,0,.9);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.15),
+        0 1px 2px rgba(0, 0, 0, 0.9);
     position: relative;
     z-index: 5;
     grid-column: 1;

@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import arrayMove from 'array-move';
+import { arrayMoveImmutable } from 'array-move';
 
 import useLists from '@hooks/useLists';
 import useNewListModal from '@hooks/useNewListModal';
@@ -13,7 +13,7 @@ import SortableList from './SortableList';
 import {
     Container,
     NavigationModalOverlay,
-    ListsContainer
+    ListsContainer,
 } from './Navigation.styles';
 
 function Navigation() {
@@ -32,7 +32,7 @@ function Navigation() {
             }
             try {
                 modifyProfile({
-                    lists: arrayMove(lists, oldIndex, newIndex)
+                    lists: arrayMoveImmutable(lists, oldIndex, newIndex),
                 });
             } catch (err) {
                 console.error(err);

@@ -4,7 +4,7 @@ import useCurrentListId from '@hooks/useCurrentListId';
 
 import { Container, Input } from './styles';
 
-const AddTask = function({ hidden }) {
+const AddTask = function ({ hidden }) {
     const currentListId = useCurrentListId();
     const [invalid, setInvalid] = useState(false);
     const createTask = useCreateTask();

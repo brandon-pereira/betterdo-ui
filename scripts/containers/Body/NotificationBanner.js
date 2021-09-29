@@ -15,11 +15,8 @@ function NotificationBanner() {
         onRequestNotificationAccess,
         onDeclineNotificationAccess
     } = usePushNotifications();
-    const {
-        onRequestInstall,
-        onDeclineInstall,
-        isInstallAvailable
-    } = useInstall();
+    const { onRequestInstall, onDeclineInstall, isInstallAvailable } =
+        useInstall();
 
     if (isInstallAvailable) {
         return (

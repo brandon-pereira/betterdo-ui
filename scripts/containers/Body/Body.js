@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import AddTask from '@components/AddTask';
 import Task from '@components/Task';
-import arrayMove from 'array-move';
+import { arrayMoveImmutable } from 'array-move';
 
 import { Container, TaskContainer } from './Body.styles';
 import useListDetails from '@hooks/useListDetails';
@@ -16,10 +16,8 @@ import NotificationBanner from './NotificationBanner';
 function Body() {
     const currentListId = useCurrentListId();
     const { list, loading, error } = useListDetails(currentListId);
-    const [
-        isCompletedTasksIncluded,
-        setIncludeCompletedTasks
-    ] = useCompletedTasks();
+    const [isCompletedTasksIncluded, setIncludeCompletedTasks] =
+        useCompletedTasks();
     const modifyList = useModifyList();
 
     const onSortEnd = useCallback(
@@ -30,7 +28,7 @@ function Body() {
             }
             try {
                 modifyList(currentListId, {
-                    tasks: arrayMove(list.tasks, oldIndex, newIndex)
+                    tasks: arrayMoveImmutable(list.tasks, oldIndex, newIndex)
                 });
             } catch (err) {
                 console.error(err);

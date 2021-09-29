@@ -17,7 +17,7 @@ import {
     verticalListSortingStrategy
 } from '@dnd-kit/sortable';
 
-const SortableItem = function({ id, value }) {
+const SortableItem = function ({ id, value }) {
     const {
         attributes,
         listeners,

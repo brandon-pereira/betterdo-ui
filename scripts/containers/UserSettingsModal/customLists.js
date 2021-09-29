@@ -90,16 +90,16 @@ function CustomListSettings() {
             </Body>
             <CustomListsContainer>
                 {CUSTOM_LISTS.map(list => (
-                    <CustomList key={list._id}>
+                    <CustomList key={list.id}>
                         <IconHolder>
                             <Icon icon={list.icon} color="#fff" />
                         </IconHolder>
                         <Title>{list.title}</Title>
                         <Toggle
                             onChange={(e, bool) =>
-                                onCustomListToggle(list._id, bool)
+                                onCustomListToggle(list.id, bool)
                             }
-                            checked={customLists[list._id]}
+                            checked={customLists[list.id]}
                         />
                     </CustomList>
                 ))}

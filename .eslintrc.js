@@ -1,14 +1,16 @@
+/* eslint-env node */
+/* eslint-disable import/no-commonjs */
+
 module.exports = {
     plugins: ['react', 'import', 'prettier'],
+    parser: '@babel/eslint-parser',
     parserOptions: {
-        ecmaFeatures: {
-            experimentalObjectRestSpread: true,
-            experimentalDecorators: true,
-            jsx: true
+        requireConfigFile: false,
+        babelOptions: {
+            presets: ['@babel/preset-react']
         }
     },
     env: {
-        node: true,
         browser: true,
         es6: true
     },
@@ -39,13 +41,13 @@ module.exports = {
         'prettier/prettier': 'error',
         'import/no-unresolved': 1,
         'import/no-commonjs': 'error',
-        'import/no-unresolved': 1,
-        'prettier/prettier': 'error',
+
         'react/prop-types': 0,
         'react/jsx-uses-react': 'error',
         'react/jsx-uses-vars': 'error',
         'no-console': 0,
-        'eslint-comments/no-unused-disable': 'error'
+        'eslint-comments/no-unused-disable': 'error',
+        'eslint-comments/disable-enable-pair': 0
     },
     globals: {
         process: true

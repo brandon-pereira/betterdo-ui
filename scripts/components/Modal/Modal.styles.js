@@ -20,7 +20,7 @@ export const Overlay = styled.div`
 `;
 
 export const Container = styled.div`
-     background: ${({ theme }) => theme.colors.modals.contentBackground};
+    background: ${({ theme }) => theme.colors.modals.contentBackground};
     transition: transform 0.2s;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;

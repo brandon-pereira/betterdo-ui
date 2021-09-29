@@ -22,9 +22,11 @@ function useProfileOnce() {
     };
 }
 
-const { Provider, Context, useConsumer: useProfile } = createSharedHook(
-    useProfileOnce
-);
+const {
+    Provider,
+    Context,
+    useConsumer: useProfile
+} = createSharedHook(useProfileOnce);
 
 export { Provider as ProfileProvider, Context as ProfileContext };
 export default useProfile;

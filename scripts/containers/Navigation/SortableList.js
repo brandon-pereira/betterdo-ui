@@ -20,7 +20,7 @@ import {
     restrictToParentElement
 } from '@dnd-kit/modifiers';
 
-const SortableItem = function({ id, value }) {
+const SortableItem = function ({ id, value }) {
     const {
         attributes,
         listeners,

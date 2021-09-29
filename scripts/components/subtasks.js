@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Input } from './forms';
 import Icon from './Icon/Icon';
-import arrayMove from 'array-move';
+import { arrayMoveImmutable } from 'array-move';
 
 const _Input = styled(Input)`
     border: none;
@@ -140,7 +140,7 @@ export default class Subtasks extends Component {
     onSortEnd({ oldIndex, newIndex }) {
         if (oldIndex !== newIndex) {
             this.setState({
-                items: arrayMove(this.state.items, oldIndex, newIndex)
+                items: arrayMoveImmutable(this.state.items, oldIndex, newIndex)
             });
             this.props.onChange(this.state.items);
         }
