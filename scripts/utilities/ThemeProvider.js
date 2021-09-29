@@ -16,9 +16,7 @@ export function ThemeProvider({ children }) {
     );
 }
 
-export const GlobalStyles = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
-    
+export const GlobalStyles = createGlobalStyle`    
     html {
         overflow: hidden;
     }
