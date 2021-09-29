@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.2.0 (2021-09-28)
+
+-   Backend Re-written in TypeScript (no feature changes)
+-   Push notification when toggling Notifications on from off in settings
+-   Fix some style regressions introduced dark mode
+
 ## v4.1.0 (2021-07-25)
 
 -   Dark Mode 🔦
