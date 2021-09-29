@@ -14,8 +14,8 @@ const ListItem = React.forwardRef(
         const currentListId = useCurrentListId();
         const { openModal: openNewListModal } = useNewListModal();
         let Icon;
-        let { type, color, title, id } = list;
-        const selected = id === currentListId;
+        let { type, color, title, _id } = list;
+        const selected = _id === currentListId;
 
         switch (type) {
             case 'newList':

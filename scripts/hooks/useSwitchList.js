@@ -17,14 +17,14 @@ function useSwitchList() {
             // update the local data immediately, but disable the revalidation.
             // revalidation happens when useListDetails happens.
             await mutate(
-                getListDetailUrl(nextList.id),
+                getListDetailUrl(nextList._id),
                 list => ({ ...nextList, ...list }),
                 false
             );
             // turn off completed tasks view
             setShowCompletedTasks(false);
             // update url
-            history.replace(`/${nextList.id}`);
+            history.replace(`/${nextList._id}`);
         },
         [history, setMobileNavVisibility, setShowCompletedTasks]
     );

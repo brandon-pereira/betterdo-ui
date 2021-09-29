@@ -10,7 +10,7 @@ function useModifyProfile() {
             await mutate(getListsUrl(), async () => updatedProps.lists, false);
             updatedProps.lists = updatedProps.lists
                 .filter(t => t.type === 'default')
-                .map(t => t.id);
+                .map(t => t._id);
         }
         await updateUser(updatedProps);
         await mutate(getProfileUrl());

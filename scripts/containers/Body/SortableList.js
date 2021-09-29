@@ -63,11 +63,11 @@ function SortableList({ tasks, onSortEnd }) {
     const onDragEnd = useCallback(
         event => {
             const { active, over } = event;
-            if (active && over && active.id !== over.id) {
+            if (active && over && active._id !== over._id) {
                 const oldIndex = tasks.findIndex(
-                    task => task._id === active.id
+                    task => task._id === active._id
                 );
-                const newIndex = tasks.findIndex(task => task._id === over.id);
+                const newIndex = tasks.findIndex(task => task._id === over._id);
                 return onSortEnd({ oldIndex, newIndex });
             }
         },

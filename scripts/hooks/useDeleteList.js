@@ -11,7 +11,7 @@ function useDeleteList() {
         async listId => {
             await mutate(
                 getListsUrl(),
-                async lists => lists.filter(list => list.id !== listId),
+                async lists => lists.filter(list => list._id !== listId),
                 false
             );
             try {
