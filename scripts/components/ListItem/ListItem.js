@@ -1,5 +1,5 @@
 import React from 'react';
-import SvgIcon from './../icon';
+import SvgIcon from '../Icon/Icon';
 
 import { Container, DotIcon, Title, IconHolder } from './ListItem.styles';
 import useSwitchList from '@hooks/useSwitchList';

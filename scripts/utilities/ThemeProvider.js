@@ -17,15 +17,14 @@ export function ThemeProvider({ children }) {
 }
 
 export const GlobalStyles = createGlobalStyle`
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+    
     html {
         overflow: hidden;
     }
     body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        font-family:  'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
             Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-        html.wf-notosans-n4-active & {
-            font-family: 'Noto Sans', sans-serif;
-        }
         margin: 0;
         overflow: hidden;
         &.loaded {

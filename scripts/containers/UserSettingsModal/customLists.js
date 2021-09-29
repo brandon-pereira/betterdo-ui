@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { Body } from '../../components/copy';
 import { Error } from '../../components/forms';
-import Icon from '../../components/icon';
+import Icon from '../../components/Icon/Icon';
 import Toggle from '../../components/toggle';
 import styled from 'styled-components';
 import useProfile from '@hooks/useProfile';

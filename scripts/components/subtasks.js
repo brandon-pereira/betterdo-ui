@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Input } from './forms';
-import Icon from './icon';
-import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import Icon from './Icon/Icon';
 import arrayMove from 'array-move';
 
 const _Input = styled(Input)`

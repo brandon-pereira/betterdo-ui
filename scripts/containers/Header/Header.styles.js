@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Button from '@components/Button';
-import Icon from '@components/icon';
+import Icon from '@components/Icon';
 import _Loader from '@components/Loader';
 import _Hamburger from '@components/hamburger';
 import { DEFAULT_LIST_COLOR, QUERIES } from '../../constants';

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import randomColor from 'randomcolor';
 import styled from 'styled-components';
 import { Label } from './forms';
-import _Icon from './icon';
+import _Icon from './Icon/Icon';
 import TouchEvents from '../utilities/touchevents';
 
 const Container = styled.div`

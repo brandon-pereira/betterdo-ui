@@ -78,6 +78,12 @@ function SortableList({ tasks, onSortEnd }) {
         return null;
     }
 
+    console.log(
+        tasks.map((task, index) =>
+            typeof task === 'object' ? task._id : index
+        )
+    );
+
     return (
         <DndContext
             sensors={sensors}

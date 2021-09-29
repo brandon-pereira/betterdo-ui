@@ -11,9 +11,6 @@ import ErrorBoundary from '@components/ErrorBoundary';
 import SWRProvider from './utilities/SWRProvider';
 import './utilities/ServiceWorkerRegister';
 
-document.body.classList.add('loaded');
-document.querySelector('#critical-css').remove();
-
 render(
     <HelmetProvider>
         <GlobalStyles />
@@ -35,10 +32,8 @@ render(
             </ThemeProvider>
         </DarkModeProvider>
     </HelmetProvider>,
-
     document.querySelector('.main-container')
 );
 
-import('@utilities/webfontloader').then(webfontloader =>
-    webfontloader.default()
-);
+document.body.classList.add('loaded');
+document.querySelector('#critical-css').remove();

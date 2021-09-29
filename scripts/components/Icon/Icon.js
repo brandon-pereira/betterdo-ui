@@ -1,28 +1,6 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import { IconContainer } from './Icon.styles';
 
-const IconContainer = styled.div`
-    height: ${props => props.size || '1rem'};
-    width: ${props => props.size || '1rem'};
-    background: none;
-    border: none;
-    outline: none;
-    cursor: ${props => (props.onClick ? 'pointer' : 'default')};
-    position: relative;
-    svg {
-        position: absolute;
-        left: 0;
-        top: 0;
-        fill: ${props => props.color || '#000'};
-        height: 100%;
-        width: 100%;
-    }
-    &:focus-visible {
-        svg {
-            fill: ${({ theme }) => theme.colors.general.blue};
-        }
-    }
-`;
 class Icon extends Component {
     constructor(props) {
         super(props);
@@ -33,7 +11,7 @@ class Icon extends Component {
 
     async componentDidMount() {
         this._isMounted = true;
-        let icon = await import(`../../svgs/${this.props.icon}.svg`);
+        let icon = await import(`./svgs/${this.props.icon}.svg`);
         icon = icon.default;
         if (this._isMounted) {
             this.setState({
@@ -68,4 +46,4 @@ class Icon extends Component {
     }
 }
 
-export default styled(Icon)``;
+export default Icon;

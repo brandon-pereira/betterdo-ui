@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Icon from './icon';
+import Icon from './Icon/Icon';
 
 const SelectContainer = styled.label`
     position: relative;

@@ -1,5 +1,5 @@
 import React from 'react';
-import LoaderSvg from '../../../svgs/loader.svg';
+import LoaderSvg from '@components/Icon/svgs/loader.svg';
 
 import { Loader as _Loader } from './Loader.styles';
 
