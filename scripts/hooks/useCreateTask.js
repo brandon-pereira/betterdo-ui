@@ -11,9 +11,7 @@ function useCreateTask() {
             // generate a tempId for now
             const tempId = Math.floor(Math.random() * 1000);
             // get cache url
-            console.log(isCompletedTasksIncluded);
             const listUrl = getListDetailUrl(listId, isCompletedTasksIncluded);
-            console.log({ listUrl });
             // Update cache to add new temp task
             await mutate(
                 listUrl,

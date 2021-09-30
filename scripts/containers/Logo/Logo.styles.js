@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import _ProfilePicture from '@components/profilePic';
-import _Hamburger from '@components/hamburger';
+import _ProfilePicture from '@components/ProfilePic';
+import _Hamburger from '@components/Hamburger';
 import { DEFAULT_LIST_COLOR, QUERIES } from '../../constants';
 
 export const Container = styled.div`

@@ -6,8 +6,9 @@ It's recommended you run this with the REST API Server. See [betterdo-api](https
 
 ## Features
 
--   React Base Application ⚛️
--   Leverages service worker for offline support
+-   ⚛️ React Application leveraging Hooks and SWR
+-   👷‍♂️ Leverages a Service Worker for offline support, push notifications, and an installable PWA.
+-   ❄️ Uses SnowPack for blazing fast development and builds
 
 ## Running Locally
 

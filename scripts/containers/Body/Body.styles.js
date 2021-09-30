@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import Button from '../../components/Button';
 import { QUERIES } from '../../constants';
-import Banner from '../../components/banner';
+import _Banner from '../../components/Banner';
 
+export const Banner = styled(_Banner)``;
 export const CompletedTasksButton = styled(Button)`
     margin: 0.5rem auto 1rem;
     text-transform: uppercase;
