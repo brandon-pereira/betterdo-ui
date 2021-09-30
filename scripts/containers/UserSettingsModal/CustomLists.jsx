@@ -6,6 +6,9 @@ import Toggle from '@components/Toggle';
 import styled from 'styled-components';
 import useProfile from '@hooks/useProfile';
 import useModifyProfile from '@hooks/useModifyProfile';
+import Bookmarks from '@components/Icon/svgs/bookmarks.svg';
+import Alarm from '@components/Icon/svgs/alarm.svg';
+import Calendar from '@components/Icon/svgs/calendar.svg';
 
 const Icon = styled(_Icon)``;
 
@@ -45,17 +48,17 @@ const CUSTOM_LISTS = [
     {
         id: 'highPriority',
         title: 'High Priority',
-        icon: 'bookmarks'
+        icon: Bookmarks
     },
     {
         id: 'today',
         title: 'Today',
-        icon: 'alarm'
+        icon: Alarm
     },
     {
         id: 'tomorrow',
         title: 'Tomorrow',
-        icon: 'calendar'
+        icon: Calendar
     }
 ];
 function CustomListSettings() {
