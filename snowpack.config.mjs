@@ -20,9 +20,11 @@ export default {
                     titleProp: true
                 }
             }
-        ]
+        ],
+        'snowpack-plugin-markdown-import'
     ],
     env: {
+        VERSION: process.env.npm_package_version,
         SERVER_URL: 'http://localhost:8000'
     }
     // mount``: {

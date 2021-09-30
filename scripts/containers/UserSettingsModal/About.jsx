@@ -14,9 +14,9 @@ function About() {
             <h1>BetterDo.</h1>
             <h2>Version {__SNOWPACK_ENV__.VERSION}</h2>
             <ChangeLogLoader>
-                {({ default: changelogHtml }) => (
+                {({ default: changelog }) => (
                     <ChangeLog
-                        dangerouslySetInnerHTML={{ __html: changelogHtml }}
+                        dangerouslySetInnerHTML={{ __html: changelog.html }}
                     />
                 )}
             </ChangeLogLoader>

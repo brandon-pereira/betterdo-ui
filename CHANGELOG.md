@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.3.0 (Pre-Release)
+
+-   Significantly faster boot times thanks to Snowpack
+-   Dropped `date-fns` dependency in favour of vanilla Javascript
+-   Dependency upgrades
+
 ## v4.2.0 (2021-09-28)
 
 -   Backend Re-written in TypeScript (no feature changes)
