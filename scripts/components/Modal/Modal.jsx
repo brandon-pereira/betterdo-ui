@@ -47,17 +47,14 @@ const Modal = React.forwardRef(
 
         useEffect(() => {
             if (!disableHeightAnimation && contentRef.current) {
-                const _setHeight = () => {
+                setHeight(contentRef.current.getBoundingClientRect().height);
+                const resizeObserver = new ResizeObserver(() => {
                     if (contentRef.current) {
                         setHeight(
                             contentRef.current.getBoundingClientRect().height
                         );
                     }
-                };
-                setTimeout(() => {
-                    _setHeight();
-                }, 500);
-                const resizeObserver = new ResizeObserver(() => _setHeight());
+                });
                 resizeObserver.observe(contentRef.current);
                 return () => resizeObserver.disconnect();
             }
@@ -67,6 +64,7 @@ const Modal = React.forwardRef(
             <Overlay visible={visible} onMouseDown={e => closeModal(e)}>
                 <FocusLock disabled={Boolean(!visible)}>
                     <Container
+                        disableHeightAnimation={disableHeightAnimation}
                         style={style}
                         className={`${className || ''} ${
                             visible ? 'visible' : ''
