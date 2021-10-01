@@ -4,7 +4,6 @@ import { CacheFirst } from 'workbox-strategies';
 import { googleFontsCache } from 'workbox-recipes';
 
 googleFontsCache();
-
 precacheAndRoute(self.__WB_MANIFEST);
 registerRoute('/', CacheFirst);
 
