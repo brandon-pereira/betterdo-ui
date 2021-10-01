@@ -30,5 +30,6 @@ export default {
     optimize: {
         minify: true,
         target: 'es2018'
-    }
+    },
+    exclude: ['**/.git/**/*']
 };
