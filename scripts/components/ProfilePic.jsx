@@ -39,7 +39,10 @@ const ProfilePicture = ({ user, ...props }) => {
     return (
         <Container as={props.onClick ? 'button' : 'div'} {...props}>
             {user && user.profilePicture && (
-                <Img src={FormatProfilePictureUrl(user.profilePicture)} />
+                <Img
+                    alt={`${firstName} ${lastName}}`}
+                    src={FormatProfilePictureUrl(user.profilePicture)}
+                />
             )}
             {initials}
         </Container>

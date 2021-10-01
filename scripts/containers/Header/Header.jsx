@@ -29,6 +29,7 @@ function Header() {
             <Loader isVisible={loading} size="2rem" />
             <Title>{list.title}</Title>
             <SettingsButton
+                aria-label="List Settings"
                 color="rgba(0,0,0,.2)"
                 hidden={list.type !== 'default'}
                 onClick={openEditListModal}
