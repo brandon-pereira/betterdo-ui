@@ -3,6 +3,7 @@ import { Loader } from '@components/Modal';
 import { Modal } from './AddListModal.styles.js';
 import loadable from '@loadable/component';
 import useNewListModal from '@hooks/useNewListModal';
+import { MEDIUM } from '../../constants';
 
 const Content = loadable(() => import('./Content'), {
     fallback: <Loader />
@@ -18,7 +19,7 @@ function AddListModalContainer({ isOpen }) {
         const $arrow = modalRef.current.querySelector(
             '[data-betterdo-modal-arrow]'
         );
-        if (window.innerWidth >= 640) {
+        if (window.innerWidth >= MEDIUM) {
             const nlCords = $newList.getBoundingClientRect();
             $modal.style = toStyleString({
                 top: nlCords.top + 'px',
@@ -66,6 +67,7 @@ function AddListModalContainer({ isOpen }) {
 
     return (
         <Modal
+            disableHeightAnimation={true}
             ref={modalRef}
             onRequestClose={closeModal}
             onLoad={calculatePosition}

@@ -40,6 +40,7 @@ function EditTaskContainer({ isOpen }) {
 
     return (
         <Modal
+            disableHeightAnimation={true}
             canCloseModal={canCloseModal}
             onRequestClose={closeModal}
             visible={isOpen}
