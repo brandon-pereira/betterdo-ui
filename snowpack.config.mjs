@@ -26,21 +26,9 @@ export default {
     env: {
         VERSION: process.env.npm_package_version,
         SERVER_URL: 'http://localhost:8000'
+    },
+    optimize: {
+        minify: true,
+        target: 'es2018'
     }
-    // mount``: {
-    // static: { url: '/static', static: true, resolve: false }
-    /* ... */
-    // },
-    // plugins: [
-    //   /* ... */
-    // ],
-    // packageOptions: {
-    //   /* ... */
-    // },
-    // devOptions: {
-    //   /* ... */
-    // },
-    // buildOptions: {
-    //   /* ... */
-    // },
 };
