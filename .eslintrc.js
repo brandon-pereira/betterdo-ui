@@ -17,6 +17,7 @@ module.exports = {
     extends: [
         'eslint:recommended',
         'plugin:prettier/recommended',
+        'plugin:import/react',
         'plugin:import/errors',
         'plugin:import/warnings',
         'plugin:eslint-comments/recommended',
@@ -28,6 +29,9 @@ module.exports = {
             version: 'detect'
         },
         'import/resolver': {
+            node: {
+                extensions: ['.js', '.jsx']
+            },
             alias: {
                 map: [
                     ['@components', './scripts/components'],

@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "baseUrl": ".",
+        "jsx": "react",
         "paths": {
             "@hooks/*": ["./scripts/hooks/*"],
             "@components/*": ["./scripts/components/*"],
