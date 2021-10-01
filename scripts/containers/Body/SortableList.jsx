@@ -67,7 +67,7 @@ function SortableList({ tasks, onSortEnd }) {
                 const oldIndex = tasks.findIndex(
                     task => task._id === active.id
                 );
-                const newIndex = tasks.findIndex(task => task.id === over.id);
+                const newIndex = tasks.findIndex(task => task._id === over.id);
                 return onSortEnd({ oldIndex, newIndex });
             }
         },

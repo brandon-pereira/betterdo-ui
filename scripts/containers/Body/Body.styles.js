@@ -29,6 +29,7 @@ export const Container = styled.div`
     grid-row: 4;
     grid-column: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     background: ${({ theme }) => theme.colors.body.background};
     display: flex;
     flex-direction: column;
