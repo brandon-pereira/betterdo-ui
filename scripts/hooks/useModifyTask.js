@@ -28,7 +28,14 @@ function useModifyTask() {
                 updateTaskInList(taskId, updatedProps),
                 false
             );
-            await updateTask(taskId, updatedProps);
+            const updater = updateTask(taskId, updatedProps);
+            // if we update to completed, add a delay to show UI animation
+            if (updatedProps.isCompleted) {
+                const sleep = new Promise(resolve => setTimeout(resolve, 300));
+                await Promise.all([updater, sleep]);
+            } else {
+                await updater;
+            }
             mutate(getListDetailUrl(listId, isCompletedTasksIncluded));
             mutate(getTaskDetailUrl(taskId));
             if (updatedProps.list) {
