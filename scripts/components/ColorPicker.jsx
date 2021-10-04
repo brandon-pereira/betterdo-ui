@@ -137,6 +137,7 @@ export default class ColorPicker extends Component {
                 <LabelContainer>
                     <Label>List Colour</Label>
                     <Icon
+                        type="button"
                         size="1rem"
                         icon={Refresh}
                         color="currentColor"
@@ -145,6 +146,7 @@ export default class ColorPicker extends Component {
                         Refresh Palette
                     </Icon>
                     <Icon
+                        type="button"
                         size="1rem"
                         icon={Eyedropper}
                         color="currentColor"
