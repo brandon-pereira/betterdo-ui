@@ -6,7 +6,6 @@ import { Label } from '@components/Forms';
 import _Icon from '@components/Icon';
 import Refresh from '@components/Icon/svgs/refresh.svg';
 import Eyedropper from '@components/Icon/svgs/eyedropper.svg';
-
 import TouchEvents from '@utilities/touchevents';
 
 const Container = styled.div`

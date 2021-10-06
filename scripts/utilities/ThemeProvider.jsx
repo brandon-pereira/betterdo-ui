@@ -1,10 +1,12 @@
 import React from 'react';
-import { LIGHT_THEME, DARK_THEME } from '../constants';
-import useDarkMode from '@hooks/useDarkMode';
 import {
     createGlobalStyle,
     ThemeProvider as _ThemeProvider
 } from 'styled-components';
+
+import { LIGHT_THEME, DARK_THEME } from '../constants';
+
+import useDarkMode from '@hooks/useDarkMode';
 
 export function ThemeProvider({ children }) {
     const [isDarkMode] = useDarkMode();

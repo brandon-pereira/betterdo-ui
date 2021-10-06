@@ -1,6 +1,6 @@
 import useSWR from 'swr';
-
 import { useCallback } from 'react';
+
 import createSharedHook from './internal/createSharedHook';
 import { getProfileUrl } from './internal/urls';
 

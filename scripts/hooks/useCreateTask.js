@@ -1,7 +1,9 @@
 import { useCallback } from 'react';
 import { mutate } from 'swr';
-import useCompletedTasks from './useCompletedTasks';
+
 import { getListDetailUrl } from './internal/urls';
+
+import useCompletedTasks from '@hooks/useCompletedTasks';
 import { createTask } from '@utilities/server';
 
 function useCreateTask() {

@@ -1,7 +1,9 @@
 import React, { useRef, useCallback } from 'react';
 import loadable from '@loadable/component';
+
 import { Modal } from './EditTask.styles.js';
 import Loader from './Loader';
+
 import useEditTaskModal from '@hooks/useEditTaskModal';
 
 const Content = loadable(() => import('./EditTaskContent'), {

@@ -1,7 +1,8 @@
 import React from 'react';
-import LoaderSvg from '@components/Icon/svgs/loader.svg';
 
 import { Loader as _Loader } from './Loader.styles.js';
+
+import LoaderSvg from '@components/Icon/svgs/loader.svg';
 
 function Loader({ className, isVisible, color, size }) {
     return (

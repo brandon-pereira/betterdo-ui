@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import Task from '@components/Task';
 import { CSS } from '@dnd-kit/utilities';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import {
@@ -16,6 +15,8 @@ import {
     sortableKeyboardCoordinates,
     verticalListSortingStrategy
 } from '@dnd-kit/sortable';
+
+import Task from '@components/Task';
 
 const SortableItem = function ({ id, value }) {
     const {

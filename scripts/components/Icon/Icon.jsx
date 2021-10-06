@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { IconContainer } from './Icon.styles.js';
 
 function Icon({ children, onClick, icon, className, ...props }) {

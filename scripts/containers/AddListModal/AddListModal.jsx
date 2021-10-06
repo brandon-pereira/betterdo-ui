@@ -1,9 +1,12 @@
 import React, { useCallback, useEffect, useRef, useLayoutEffect } from 'react';
-import { Loader } from '@components/Modal';
-import { Modal } from './AddListModal.styles.js';
 import loadable from '@loadable/component';
-import useNewListModal from '@hooks/useNewListModal';
+
 import { MEDIUM } from '../../constants';
+
+import { Modal } from './AddListModal.styles.js';
+
+import { Loader } from '@components/Modal';
+import useNewListModal from '@hooks/useNewListModal';
 
 const Content = loadable(() => import('./Content'), {
     fallback: <Loader />

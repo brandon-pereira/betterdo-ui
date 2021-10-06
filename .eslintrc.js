@@ -8,6 +8,9 @@ module.exports = {
         requireConfigFile: false,
         babelOptions: {
             presets: ['@babel/preset-react']
+        },
+        ecmaFeatures: {
+            jsx: true
         }
     },
     globals: {
@@ -48,7 +51,12 @@ module.exports = {
         'prettier/prettier': 'error',
         'import/no-unresolved': 1,
         'import/no-commonjs': 'error',
-        'import/order': 1,
+        'import/order': [
+            1,
+            {
+                'newlines-between': 'always'
+            }
+        ],
         'react/prop-types': 0,
         'react/jsx-uses-react': 'error',
         'react/jsx-uses-vars': 'error',

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+
 import { DEFAULT_LIST_COLOR, QUERIES } from '../../constants';
+
 import Button from '@components/Button';
 import Icon from '@components/Icon';
 import _Loader from '@components/Loader';

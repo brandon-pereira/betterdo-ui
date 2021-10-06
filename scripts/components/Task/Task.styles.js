@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import _Loader from '@components/Loader';
 
 export const Loader = styled(_Loader)`

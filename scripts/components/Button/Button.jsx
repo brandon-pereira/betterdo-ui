@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Button, Loader } from './Button.styles.js';
 
 const _Button = ({ children, type, loaderColor, ...props }) => (

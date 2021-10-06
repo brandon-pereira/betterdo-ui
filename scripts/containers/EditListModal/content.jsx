@@ -1,7 +1,9 @@
 import React from 'react';
-import Tabs, { Tab } from '@components/Tabs';
+
 import ListSettings from './ListSettings';
 import ListMembers from './ListMembers';
+
+import Tabs, { Tab } from '@components/Tabs';
 import { Header } from '@components/Copy';
 import useListDetails from '@hooks/useListDetails';
 import useCurrentListId from '@hooks/useCurrentListId';

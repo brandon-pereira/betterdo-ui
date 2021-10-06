@@ -1,6 +1,8 @@
-import formatNumber from '@utilities/formatNumber';
 import React from 'react';
+
 import { CompletedTasksButton } from './Body.styles.js';
+
+import formatNumber from '@utilities/formatNumber';
 
 function _CompletedTasksButton({ onClick, isLoading, count, hidden }) {
     return (

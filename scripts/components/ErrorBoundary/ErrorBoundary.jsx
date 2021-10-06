@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Container, Icon, Button } from './ErrorBoundary.styles.js';
+
 import ServerError from '@components/Icon/svgs/server-error.svg';
 
 class ErrorBoundary extends React.Component {

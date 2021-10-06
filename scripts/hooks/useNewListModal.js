@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import useGeneratedUrl from './useGeneratedUrl';
+import useGeneratedUrl from '@hooks/useGeneratedUrl';
 
 function useNewListModal() {
     const generateUrl = useGeneratedUrl();

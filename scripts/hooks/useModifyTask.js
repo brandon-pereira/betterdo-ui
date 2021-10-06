@@ -1,11 +1,12 @@
 import { useCallback } from 'react';
 import { mutate } from 'swr';
-
 import { useHistory } from 'react-router-dom';
+
 import { getListDetailUrl, getTaskDetailUrl } from './internal/urls';
-import useCompletedTasks from './useCompletedTasks';
-import useGeneratedUrl from './useGeneratedUrl';
-import useCurrentListId from './useCurrentListId';
+
+import useCompletedTasks from '@hooks/useCompletedTasks';
+import useGeneratedUrl from '@hooks/useGeneratedUrl';
+import useCurrentListId from '@hooks/useCurrentListId';
 import { updateTask } from '@utilities/server';
 
 function useModifyTask() {

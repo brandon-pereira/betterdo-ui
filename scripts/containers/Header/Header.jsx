@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
     Container,
     Hamburger,
@@ -7,6 +8,7 @@ import {
     SettingsButton,
     Icon
 } from './Header.styles.js';
+
 import useEditListModal from '@hooks/useEditListModal';
 import useListDetails from '@hooks/useListDetails';
 import useCurrentListId from '@hooks/useCurrentListId';

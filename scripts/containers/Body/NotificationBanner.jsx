@@ -1,4 +1,5 @@
 import React from 'react';
+
 import _NotificationBanner from '@components/NotificationBanner';
 import usePushNotifications from '@hooks/usePushNotifications';
 import useInstall from '@hooks/useInstall';

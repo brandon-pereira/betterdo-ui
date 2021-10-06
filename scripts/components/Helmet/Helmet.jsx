@@ -1,7 +1,8 @@
-import useCurrentListId from '@hooks/useCurrentListId';
-import useListDetails from '@hooks/useListDetails';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+
+import useCurrentListId from '@hooks/useCurrentListId';
+import useListDetails from '@hooks/useListDetails';
 
 function _Helmet() {
     const currentListId = useCurrentListId();

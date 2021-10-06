@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useRef } from 'react';
-import useCreateTask from '@hooks/useCreateTask';
-import useCurrentListId from '@hooks/useCurrentListId';
 
 import { Container, Input } from './AddTask.styles.js';
+
+import useCreateTask from '@hooks/useCreateTask';
+import useCurrentListId from '@hooks/useCurrentListId';
 
 const AddTask = function ({ hidden }) {
     const currentListId = useCurrentListId();

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import _Button from '@components/Button';
-
 import { QUERIES } from '../../constants';
+
+import _Button from '@components/Button';
 
 const Header = styled.h2`
     margin: 0 0 0.3rem;

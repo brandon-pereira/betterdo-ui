@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react';
+import styled from 'styled-components';
+
 import Button from '@components/Button';
 import { Form, Label, Input } from '@components/Forms';
 import ColorPicker from '@components/ColorPicker';
-import styled from 'styled-components';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useModifyList from '@hooks/useModifyList';
 import useListDetails from '@hooks/useListDetails';

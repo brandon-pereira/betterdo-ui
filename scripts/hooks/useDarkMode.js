@@ -1,4 +1,5 @@
 import { useEffect, useCallback, useState } from 'react';
+
 import createSharedHook from './internal/createSharedHook';
 
 const localStorageKey = 'doesBetterDoPreferDarkMode';

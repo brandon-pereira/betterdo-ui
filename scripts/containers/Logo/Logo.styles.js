@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+
 import { DEFAULT_LIST_COLOR, QUERIES } from '../../constants';
+
 import _ProfilePicture from '@components/ProfilePic';
 import _Hamburger from '@components/Hamburger';
 

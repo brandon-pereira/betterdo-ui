@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import ListItem from '@components/ListItem';
 import { CSS } from '@dnd-kit/utilities';
 import {
     DndContext,
@@ -19,6 +18,8 @@ import {
     restrictToVerticalAxis,
     restrictToParentElement
 } from '@dnd-kit/modifiers';
+
+import ListItem from '@components/ListItem';
 
 const SortableItem = function ({ id, value }) {
     const {

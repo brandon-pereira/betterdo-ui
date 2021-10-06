@@ -1,17 +1,18 @@
 import React, { useCallback } from 'react';
-import AddTask from '@components/AddTask';
-import Task from '@components/Task';
 import { arrayMoveImmutable } from 'array-move';
 
 import { Container, TaskContainer } from './Body.styles.js';
-import useListDetails from '@hooks/useListDetails';
-import useCurrentListId from '@hooks/useCurrentListId';
-import useModifyList from '@hooks/useModifyList';
 import SortableList from './SortableList';
 import CompletedTasksButton from './CompletedTasksButton';
 import { AllCaughtUpBanner, ServerErrorBanner } from './Banners';
-import useCompletedTasks from '@hooks/useCompletedTasks';
 import NotificationBanner from './NotificationBanner';
+
+import AddTask from '@components/AddTask';
+import Task from '@components/Task';
+import useListDetails from '@hooks/useListDetails';
+import useCurrentListId from '@hooks/useCurrentListId';
+import useModifyList from '@hooks/useModifyList';
+import useCompletedTasks from '@hooks/useCompletedTasks';
 
 function Body() {
     const currentListId = useCurrentListId();

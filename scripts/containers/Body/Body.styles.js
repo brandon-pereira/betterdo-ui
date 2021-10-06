@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { QUERIES } from '../../constants';
+
 import Button from '@components/Button';
 import _Banner from '@components/Banner';
 

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+
 import { QUERIES } from '../../constants';
+
 import Icon from '@components/Icon';
 
 export const Overlay = styled.div`

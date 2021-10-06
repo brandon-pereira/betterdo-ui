@@ -1,8 +1,9 @@
 import React, { useState, Fragment, useCallback } from 'react';
+import styled from 'styled-components';
+
 import Button from '@components/Button';
 import { Label, Error } from '@components/Forms';
 import Toggle from '@components/Toggle';
-import styled from 'styled-components';
 import useProfile from '@hooks/useProfile';
 import useModifyProfile from '@hooks/useModifyProfile';
 import useDarkMode from '@hooks/useDarkMode';

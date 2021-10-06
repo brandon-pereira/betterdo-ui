@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 
+import { LIGHT_THEME } from '../../constants';
+
 import AccountSettings from './AccountSettings';
 import CustomLists from './CustomLists';
 import General from './General';
@@ -10,8 +12,6 @@ import Tabs, { Tab } from '@components/Tabs';
 import Loader from '@components/Loader';
 import { Error } from '@components/Forms';
 import { Header } from '@components/Copy';
-
-import { LIGHT_THEME } from '../../constants';
 
 function UserSettingsModalContent() {
     const { loading, error } = useProfile();

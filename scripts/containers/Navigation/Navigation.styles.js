@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { QUERIES } from '../../constants';
 
 export const NavigationModalOverlay = styled.div`

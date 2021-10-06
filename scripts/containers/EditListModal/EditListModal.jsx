@@ -1,9 +1,10 @@
 import React, { useCallback, useRef } from 'react';
-import { Loader } from '@components/Modal';
-import useEditListModal from '@hooks/useEditListModal';
 import loadable from '@loadable/component';
 
 import { Modal } from './EditListModal.styles.js';
+
+import { Loader } from '@components/Modal';
+import useEditListModal from '@hooks/useEditListModal';
 
 const Content = loadable(() => import('./content'), {
     fallback: <Loader />

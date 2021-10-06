@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import {
     Container,
@@ -6,11 +7,11 @@ import {
     Hamburger,
     ProfilePicture
 } from './Logo.styles.js';
+
 import useListDetails from '@hooks/useListDetails';
 import useProfile from '@hooks/useProfile';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useGeneratedUrl from '@hooks/useGeneratedUrl';
-import { useHistory } from 'react-router-dom';
 import useHamburgerNav from '@hooks/useHamburgerNav';
 
 function Logo() {

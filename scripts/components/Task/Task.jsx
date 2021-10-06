@@ -1,5 +1,3 @@
-import useEditTaskModal from '@hooks/useEditTaskModal';
-import useModifyTask from '@hooks/useModifyTask';
 import React, { useCallback } from 'react';
 
 import {
@@ -9,6 +7,9 @@ import {
     HighPriorityFlag,
     Loader
 } from './Task.styles.js';
+
+import useEditTaskModal from '@hooks/useEditTaskModal';
+import useModifyTask from '@hooks/useModifyTask';
 
 const Task = React.forwardRef(
     (

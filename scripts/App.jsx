@@ -2,7 +2,8 @@
 import React from 'react';
 
 // Components
-import Helmet from '@components/Helmet';
+import { Route } from 'react-router-dom';
+
 import Container from './containers/Container';
 import Header from './containers/Header';
 import Navigation from './containers/Navigation';
@@ -11,9 +12,10 @@ import Body from './containers/Body';
 import AddListModal from './containers/AddListModal';
 import EditListModal from './containers/EditListModal';
 import EditTaskModal from './containers/EditTaskModal';
-import { Route } from 'react-router-dom';
 import UserSettingsModal from './containers/UserSettingsModal';
 import InboxRedirect from './containers/Redirects/InboxRedirect';
+
+import Helmet from '@components/Helmet';
 
 const App = () => (
     <>

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import FocusLock from 'react-focus-lock';
 
+import useEscapeKey from './useEscapeKey';
 import {
     Overlay,
     Content,
@@ -9,7 +10,7 @@ import {
     ModalClose,
     ContentContainer
 } from './Modal.styles.js';
-import useEscapeKey from './useEscapeKey';
+
 import x from '@components/Icon/svgs/x.svg';
 
 const Modal = React.forwardRef(

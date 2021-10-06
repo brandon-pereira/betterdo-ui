@@ -1,9 +1,11 @@
 import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { mutate } from 'swr';
+
 import { getListDetailUrl } from './internal/urls';
-import useCompletedTasks from './useCompletedTasks';
-import useHamburgerNav from './useHamburgerNav';
+
+import useCompletedTasks from '@hooks/useCompletedTasks';
+import useHamburgerNav from '@hooks/useHamburgerNav';
 
 function useSwitchList() {
     const history = useHistory();

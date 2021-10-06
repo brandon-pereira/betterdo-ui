@@ -1,7 +1,8 @@
 import React from 'react';
-import _Loader from '@components/Loader';
 
 import { LoaderContainer } from './EditTask.styles.js';
+
+import _Loader from '@components/Loader';
 
 const Loader = () => (
     <LoaderContainer>

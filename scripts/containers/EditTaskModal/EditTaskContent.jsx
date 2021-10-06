@@ -1,13 +1,4 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { Header } from '@components/Copy';
-import Selector from '@components/Selector';
-import { Label, Input, Error } from '@components/Forms';
-import Button from '@components/Button';
-import Subtasks from '@components/Subtasks';
-
-import useCurrentTaskId from '@hooks/useCurrentTaskId';
-import useTaskDetails from '@hooks/useTaskDetails';
-import useModifyTask from '@hooks/useModifyTask';
 
 import {
     Container,
@@ -19,6 +10,15 @@ import {
 import CreatorBlock from './CreatorBlock';
 import ListsDropdown from './ListsDropdown';
 import Loader from './Loader';
+
+import { Header } from '@components/Copy';
+import Selector from '@components/Selector';
+import { Label, Input, Error } from '@components/Forms';
+import Button from '@components/Button';
+import Subtasks from '@components/Subtasks';
+import useCurrentTaskId from '@hooks/useCurrentTaskId';
+import useTaskDetails from '@hooks/useTaskDetails';
+import useModifyTask from '@hooks/useModifyTask';
 import useDeleteTask from '@hooks/useDeleteTask';
 
 const PRIORITIES = [

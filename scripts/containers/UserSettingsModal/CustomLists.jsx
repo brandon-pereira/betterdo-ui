@@ -1,9 +1,10 @@
 import React, { useCallback, useState, useEffect } from 'react';
+import styled from 'styled-components';
+
+import _Icon from '@components/Icon';
 import { Body } from '@components/Copy';
 import { Error } from '@components/Forms';
-import _Icon from '@components/Icon/Icon';
 import Toggle from '@components/Toggle';
-import styled from 'styled-components';
 import useProfile from '@hooks/useProfile';
 import useModifyProfile from '@hooks/useModifyProfile';
 import Bookmarks from '@components/Icon/svgs/bookmarks.svg';
