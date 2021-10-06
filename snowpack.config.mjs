@@ -29,7 +29,7 @@ export default {
     },
     optimize: {
         minify: true,
-        target: 'es2018'
+        target: 'es2020'
     },
     exclude: ['**/.git/**/*']
 };
