@@ -10,7 +10,7 @@ export const TabsHeader = styled.div`
     border: 2px solid ${props => props.color || props.theme.colors.general.blue};
     border-radius: 3px;
     margin-bottom: 1rem;
-    overflow-x: auto;
+    overflow-x: hidden;
 `;
 export const ActiveTabHeaderBackground = styled.div`
     position: absolute;
@@ -18,9 +18,9 @@ export const ActiveTabHeaderBackground = styled.div`
     top: 0;
     bottom: 0;
     left: 0;
-    transform: translateX(${props => props.selectedIndex * '100' || 0}%);
+    transform: translateX(${props => props.left || 0}px);
     transition: transform 0.2s;
-    width: ${props => (1 / props.numberOfTabs) * 100}%;
+    width: ${props => props.width}px;
     background-color: ${props =>
         props.color || props.theme.colors.general.blue};
 `;

@@ -11,18 +11,33 @@ import {
 
 function Tabs({ selectedIndex: _selectedIndex, color, children, titles }) {
     const [selectedIndex, setSelectedIndex] = useState(_selectedIndex || 0);
+    const activeElement = useRef();
+    const headerContainerRef = useRef();
+    const [activeElementCoords, setActiveElementCoords] = useState();
+
+    useEffect(() => {
+        const getCoords = () => {
+            const viewport = headerContainerRef.current.getBoundingClientRect();
+            const elem = activeElement.current.getBoundingClientRect();
+            // gotta love magic number calculations, fix this one day!
+            const left = elem.left - viewport.left - 3;
+            return { width: elem.width, left };
+        };
+        setActiveElementCoords(getCoords());
+    }, [selectedIndex]);
 
     return (
         <Container>
-            <TabsHeader color={color}>
+            <TabsHeader ref={headerContainerRef} color={color}>
                 <ActiveTabHeaderBackground
-                    selectedIndex={selectedIndex}
-                    numberOfTabs={titles.length}
+                    left={activeElementCoords?.left}
+                    width={activeElementCoords?.width}
                     color={color}
                 />
                 {titles.map((title, index) => (
                     <TabHeaderItem
                         key={index}
+                        ref={selectedIndex === index ? activeElement : null}
                         selected={selectedIndex === index}
                         onClick={() => setSelectedIndex(index)}
                         color={color}
