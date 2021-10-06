@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { mutate } from 'swr';
-import { createTask } from '@utilities/server';
 import useCompletedTasks from './useCompletedTasks';
 import { getListDetailUrl } from './internal/urls';
+import { createTask } from '@utilities/server';
 
 function useCreateTask() {
     const [isCompletedTasksIncluded] = useCompletedTasks();

@@ -1,5 +1,5 @@
-import { QUERIES } from '../../constants';
 import styled from 'styled-components';
+import { QUERIES } from '../../constants';
 
 export const NavigationModalOverlay = styled.div`
     background: rgba(0, 0, 0, 0.5);

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Icon from '@components/Icon';
 import { QUERIES } from '../../constants';
+import Icon from '@components/Icon';
 
 export const Overlay = styled.div`
     position: fixed;

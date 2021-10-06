@@ -1,9 +1,8 @@
 import { useCallback } from 'react';
 import { mutate } from 'swr';
-import { createList } from '@utilities/server';
-
-import { getListsUrl } from './internal/urls';
 import { useHistory } from 'react-router-dom';
+import { getListsUrl } from './internal/urls';
+import { createList } from '@utilities/server';
 
 function useCreateList() {
     const history = useHistory();

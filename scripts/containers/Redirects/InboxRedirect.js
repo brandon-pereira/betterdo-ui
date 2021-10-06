@@ -1,7 +1,7 @@
-import useCurrentListId from '@hooks/useCurrentListId';
-import useLists from '@hooks/useLists';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import useCurrentListId from '@hooks/useCurrentListId';
+import useLists from '@hooks/useLists';
 
 function InboxRedirect() {
     const currentListId = useCurrentListId();

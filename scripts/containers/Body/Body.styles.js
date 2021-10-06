@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
+import { QUERIES } from '../../constants';
 import Button from '@components/Button';
 import _Banner from '@components/Banner';
-
-import { QUERIES } from '../../constants';
 
 export const Banner = styled(_Banner)``;
 

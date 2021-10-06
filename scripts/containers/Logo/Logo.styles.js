@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+import { DEFAULT_LIST_COLOR, QUERIES } from '../../constants';
 import _ProfilePicture from '@components/ProfilePic';
 import _Hamburger from '@components/Hamburger';
-import { DEFAULT_LIST_COLOR, QUERIES } from '../../constants';
 
 export const Container = styled.div`
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.2));

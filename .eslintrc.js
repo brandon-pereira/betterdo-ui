@@ -48,7 +48,7 @@ module.exports = {
         'prettier/prettier': 'error',
         'import/no-unresolved': 1,
         'import/no-commonjs': 'error',
-
+        'import/order': 1,
         'react/prop-types': 0,
         'react/jsx-uses-react': 'error',
         'react/jsx-uses-vars': 'error',

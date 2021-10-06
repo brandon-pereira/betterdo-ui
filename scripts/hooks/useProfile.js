@@ -1,8 +1,8 @@
 import useSWR from 'swr';
 
+import { useCallback } from 'react';
 import createSharedHook from './internal/createSharedHook';
 import { getProfileUrl } from './internal/urls';
-import { useCallback } from 'react';
 
 function useProfileOnce() {
     const { data, error } = useSWR(getProfileUrl(), {
