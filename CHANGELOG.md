@@ -1,9 +1,15 @@
 # Changelog
 
-## v4.3.0 (Pre-Release)
+## v5.0.0 (Pre-Release)
 
--   Significantly faster boot times thanks to Snowpack
--   Dropped `date-fns` dependency in favour of vanilla Javascript
+-   Significantly faster development boot times thanks to Snowpack
+-   Significantly smaller bundle size by only supporting modern browsers
+-   Added modal height animations
+-   Added tab animations
+-   Improved complete task animation
+-   Fix error when changing personal information
+-   Improved drag and drop logic within tasks sometimes being janky
+-   Dropped `date-fns` dependency in favour of vanilla Javascript relative time formatting
 -   Dependency upgrades
 
 ## v4.2.0 (2021-09-28)
