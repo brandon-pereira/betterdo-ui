@@ -23,7 +23,11 @@ function Tabs({ selectedIndex: _selectedIndex, color, children, titles }) {
             const left = elem.left - viewport.left - 3;
             return { width: elem.width, left };
         };
-        setActiveElementCoords(getCoords());
+        const setCoords = () => setActiveElementCoords(getCoords());
+        // initial render calculation
+        setCoords();
+        window.addEventListener('resize', setCoords);
+        return () => window.removeEventListener('resize', setCoords);
     }, [selectedIndex]);
 
     return (
