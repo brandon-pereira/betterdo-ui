@@ -1,7 +1,5 @@
-/* eslint react/no-children-prop: off */
+/* eslint-disable react/no-children-prop */
 import React from 'react';
-
-// Components
 import { Route } from 'react-router-dom';
 
 import Container from './containers/Container';
