@@ -7,5 +7,6 @@
             "@components/*": ["./scripts/components/*"],
             "@utilities/*": ["./scripts/utilities/*"]
         }
-    }
+    },
+    "exclude": ["node_modules"]
 }

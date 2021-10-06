@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Input } from './Forms';
-import _Icon from './Icon/Icon';
 import { arrayMoveImmutable } from 'array-move';
+
+import { Input } from '@components/Forms';
+import _Icon from '@components/Icon';
 import x from '@components/Icon/svgs/x.svg';
 
 const _Input = styled(Input)`

@@ -1,10 +1,9 @@
 import React, { useCallback, useState } from 'react';
-import Button from '../../components/Button';
-import { Form, Label, Input } from '../../components/Forms';
 import styled from 'styled-components';
-import ProfilePic, {
-    FormatProfilePictureUrl
-} from '../../components/ProfilePic';
+
+import Button from '@components/Button';
+import { Form, Label, Input } from '@components/Forms';
+import ProfilePic, { FormatProfilePictureUrl } from '@components/ProfilePic';
 import useProfile from '@hooks/useProfile';
 import useModifyProfile from '@hooks/useModifyProfile';
 

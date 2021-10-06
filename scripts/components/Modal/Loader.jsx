@@ -1,6 +1,6 @@
 import React from 'react';
 import { LoaderContainer } from './Modal.styles.js';
-import Loader from '../Loader';
+import Loader from '@components/Loader';
 
 function ModalLoader() {
     return (

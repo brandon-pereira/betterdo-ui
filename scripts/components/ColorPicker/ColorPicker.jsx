@@ -1,11 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import randomColor from 'randomcolor';
 import styled from 'styled-components';
-import { Label } from './Forms';
-import _Icon from './Icon/Icon';
-import TouchEvents from '../utilities/touchevents';
+
+import { Label } from '@components/Forms';
+import _Icon from '@components/Icon';
 import Refresh from '@components/Icon/svgs/refresh.svg';
 import Eyedropper from '@components/Icon/svgs/eyedropper.svg';
+
+import TouchEvents from '@utilities/touchevents';
 
 const Container = styled.div`
     display: flex;

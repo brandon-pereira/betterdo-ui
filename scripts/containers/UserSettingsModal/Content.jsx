@@ -1,13 +1,16 @@
 import React, { Fragment } from 'react';
-import Tabs, { Tab } from '@components/Tabs';
+
 import AccountSettings from './AccountSettings';
 import CustomLists from './CustomLists';
 import General from './General';
-import { Header } from '../../components/Copy';
 import About from './About';
+
 import useProfile from '@hooks/useProfile';
+import Tabs, { Tab } from '@components/Tabs';
 import Loader from '@components/Loader';
 import { Error } from '@components/Forms';
+import { Header } from '@components/Copy';
+
 import { LIGHT_THEME } from '../../constants';
 
 function UserSettingsModalContent() {

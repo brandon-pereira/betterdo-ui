@@ -1,9 +1,9 @@
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import randomColor from 'randomcolor';
-import Button from '../../components/Button';
-import { Body, Header } from '../../components/Copy';
-import { Form, Label, Input } from '../../components/Forms';
-import ColorPicker from '../../components/ColorPicker';
+import Button from '@components/Button';
+import { Body, Header } from '@components/Copy';
+import { Form, Label, Input } from '@components/Forms';
+import ColorPicker from '@components/ColorPicker';
 import styled from 'styled-components';
 import useCreateList from '@hooks/useCreateList';
 

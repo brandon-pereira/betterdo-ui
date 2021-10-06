@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import _Loader from '../Loader';
+import _Loader from '@components/Loader';
 
 export const Loader = styled(_Loader)`
     margin: 0.9rem 1.3rem 1rem;

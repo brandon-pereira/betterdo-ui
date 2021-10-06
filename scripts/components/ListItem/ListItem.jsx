@@ -1,11 +1,11 @@
 import React from 'react';
-import SvgIcon from '../Icon/Icon';
 
 import { Container, DotIcon, Title, IconHolder } from './ListItem.styles.js';
+
 import useSwitchList from '@hooks/useSwitchList';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useNewListModal from '@hooks/useNewListModal';
-
+import SvgIcon from '@components/Icon';
 import Quill from '@components/Icon/svgs/quill.svg';
 import Drawer from '@components/Icon/svgs/drawer.svg';
 import Alarm from '@components/Icon/svgs/alarm.svg';

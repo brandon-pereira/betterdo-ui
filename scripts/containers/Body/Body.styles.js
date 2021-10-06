@@ -1,9 +1,12 @@
 import styled from 'styled-components';
-import Button from '../../components/Button';
+
+import Button from '@components/Button';
+import _Banner from '@components/Banner';
+
 import { QUERIES } from '../../constants';
-import _Banner from '../../components/Banner';
 
 export const Banner = styled(_Banner)``;
+
 export const CompletedTasksButton = styled(Button)`
     margin: 0.5rem auto 1rem;
     text-transform: uppercase;
@@ -42,6 +45,7 @@ export const Container = styled.div`
         }
     }
 `;
+
 export const TaskContainer = styled.div`
     margin: 0 1rem;
     text-align: center;

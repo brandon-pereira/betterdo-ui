@@ -10,6 +10,9 @@ module.exports = {
             presets: ['@babel/preset-react']
         }
     },
+    globals: {
+        __SNOWPACK_ENV__: 'readonly'
+    },
     env: {
         browser: true,
         es6: true
@@ -52,8 +55,5 @@ module.exports = {
         'no-console': 0,
         'eslint-comments/no-unused-disable': 'error',
         'eslint-comments/disable-enable-pair': 0
-    },
-    globals: {
-        process: true
     }
 };
