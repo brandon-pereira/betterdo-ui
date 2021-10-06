@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -29,17 +29,22 @@ const Img = styled.img`
     height: 100%;
     right: 0;
     bottom: 0;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 `;
 
 const ProfilePicture = ({ user, ...props }) => {
     user = user || {};
+    const [error, setError] = useState(false);
     const firstName = user.firstName || 'A';
     const lastName = user.lastName || 'A';
     const initials = firstName.charAt(0) + lastName.charAt(0);
     return (
         <Container as={props.onClick ? 'button' : 'div'} {...props}>
-            {user && user.profilePicture && (
+            {user && user.profilePicture && !error && (
                 <Img
+                    onError={setError}
                     alt={`${firstName} ${lastName}}`}
                     src={FormatProfilePictureUrl(user.profilePicture)}
                 />
