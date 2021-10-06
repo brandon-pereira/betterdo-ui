@@ -50,11 +50,15 @@ const Modal = React.forwardRef(
             if (!disableHeightAnimation && contentRef.current) {
                 setHeight(contentRef.current.getBoundingClientRect().height);
                 const resizeObserver = new ResizeObserver(() => {
-                    if (contentRef.current) {
-                        setHeight(
-                            contentRef.current.getBoundingClientRect().height
-                        );
-                    }
+                    // fixes ResizeObserver: loop limit exceeded error
+                    window.requestAnimationFrame(() => {
+                        if (contentRef.current) {
+                            setHeight(
+                                contentRef.current.getBoundingClientRect()
+                                    .height
+                            );
+                        }
+                    });
                 });
                 resizeObserver.observe(contentRef.current);
                 return () => resizeObserver.disconnect();
