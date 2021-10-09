@@ -1,3 +1,5 @@
+/* global process */
+
 // Snowpack Configuration File
 // See all supported options: https://www.snowpack.dev/reference/configuration
 
@@ -25,7 +27,10 @@ export default {
     ],
     env: {
         VERSION: process.env.npm_package_version,
-        SERVER_URL: 'http://localhost:8000'
+        SERVER_URL:
+            process.env.NODE_ENV === 'production'
+                ? 'https://betterdo.app/'
+                : 'http://localhost:8000'
     },
     optimize: {
         minify: true,
