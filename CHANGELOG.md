@@ -1,6 +1,6 @@
 # Changelog
 
-## v5.0.0 (Pre-Release)
+## v5.0.0
 
 -   Significantly faster development boot times thanks to Snowpack
 -   Significantly smaller bundle size by only supporting modern browsers
