@@ -61,7 +61,7 @@ export const ContentContainer = styled.div`
             ? `${props.height}px`
             : `auto`;
     }};
-    transition: height 0.2s;
+    transition: height 0.1s;
 `;
 
 export const LoaderContainer = styled.div`
