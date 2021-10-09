@@ -4,6 +4,8 @@ import loadable from '@loadable/component';
 
 import { Container, Logo, ChangeLog } from './About.styles.js';
 
+import { VERSION } from '@utilities/env';
+
 const ChangeLogLoader = loadable.lib(() => import('../../../CHANGELOG.md'));
 
 function About() {
@@ -12,7 +14,7 @@ function About() {
         <Container>
             <Logo />
             <h1>BetterDo.</h1>
-            <h2>Version {__SNOWPACK_ENV__.VERSION}</h2>
+            <h2>Version {VERSION}</h2>
             <ChangeLogLoader>
                 {({ default: changelog }) => (
                     <ChangeLog

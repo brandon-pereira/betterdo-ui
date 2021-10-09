@@ -29,7 +29,7 @@ export default {
         VERSION: process.env.npm_package_version,
         SERVER_URL:
             process.env.NODE_ENV === 'production'
-                ? 'https://betterdo.app/'
+                ? 'https://betterdo.app'
                 : 'http://localhost:8000'
     },
     optimize: {

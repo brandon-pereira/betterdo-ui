@@ -1,5 +1,3 @@
-import.meta.hot;
-
 import React from 'react';
 import { render } from 'react-dom';
 import { HashRouter, Switch, Route } from 'react-router-dom';
@@ -11,7 +9,6 @@ import App from './App';
 
 import { DarkModeProvider } from '@hooks/useDarkMode';
 import SharedProviders from '@hooks/internal/SharedProviders';
-// import App from './App';
 import ErrorBoundary from '@components/ErrorBoundary';
 import './utilities/ServiceWorkerRegister';
 
