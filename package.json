@@ -43,7 +43,7 @@
     },
     "scripts": {
         "build": "NODE_ENV='production' snowpack build && npm run build:service-worker",
-        "build:service-worker": "NODE_ENV='production' esbuild service-worker.js --bundle --minify --bundle --define:process.env.NODE_ENV=\\\"production\\\" --outfile=build/service-worker.js && workbox injectManifest ./workbox-config.js",
+        "build:service-worker": "NODE_ENV='production' esbuild service-worker.js --bundle --minify --bundle --define:process.env.NODE_ENV=\\\"production\\\" --outfile=dist/service-worker.js && workbox injectManifest ./workbox-config.js",
         "start": "snowpack dev",
         "test": "eslint . --ext .jsx,.js"
     },

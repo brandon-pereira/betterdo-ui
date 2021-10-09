@@ -36,5 +36,8 @@ export default {
         minify: true,
         target: 'es2020'
     },
-    exclude: ['**/.git/**/*']
+    exclude: ['**/.git/**/*'],
+    buildOptions: {
+        out: 'dist'
+    }
 };
