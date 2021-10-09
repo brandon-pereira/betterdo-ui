@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { ModalsProvider } from '../useHamburgerNav';
-import { ProfileProvider } from '../useProfile';
-import { ListsProvider } from '../useLists';
-import { CompletedTasksProvider } from '../useCompletedTasks';
+import { ModalsProvider } from '@hooks/useHamburgerNav';
+import { ProfileProvider } from '@hooks/useProfile';
+import { ListsProvider } from '@hooks/useLists';
+import { CompletedTasksProvider } from '@hooks/useCompletedTasks';
 
 // Order matters for some of these!
 const Providers = [

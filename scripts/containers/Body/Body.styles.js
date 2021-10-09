@@ -1,7 +1,11 @@
 import styled from 'styled-components';
-import Button from '../../components/Button';
+
 import { QUERIES } from '../../constants';
-import Banner from '../../components/banner';
+
+import Button from '@components/Button';
+import _Banner from '@components/Banner';
+
+export const Banner = styled(_Banner)``;
 
 export const CompletedTasksButton = styled(Button)`
     margin: 0.5rem auto 1rem;
@@ -28,6 +32,7 @@ export const Container = styled.div`
     grid-row: 4;
     grid-column: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     background: ${({ theme }) => theme.colors.body.background};
     display: flex;
     flex-direction: column;
@@ -40,6 +45,7 @@ export const Container = styled.div`
         }
     }
 `;
+
 export const TaskContainer = styled.div`
     margin: 0 1rem;
     text-align: center;

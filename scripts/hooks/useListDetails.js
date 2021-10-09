@@ -1,10 +1,12 @@
 import { useRef, useEffect } from 'react';
 import useSWR from 'swr';
+import { useHistory } from 'react-router-dom';
+
 import { DEFAULT_LIST_COLOR } from '../constants';
 
-import { useHistory } from 'react-router-dom';
 import { getListDetailUrl } from './internal/urls';
-import useCompletedTasks from './useCompletedTasks';
+
+import useCompletedTasks from '@hooks/useCompletedTasks';
 
 function useListDetails(listId) {
     const previousList = useRef({

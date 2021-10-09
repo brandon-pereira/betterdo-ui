@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import Icon from '../icon';
+
 import { QUERIES } from '../../constants';
+
+import Icon from '@components/Icon';
 
 export const Overlay = styled.div`
     position: fixed;
@@ -20,8 +22,12 @@ export const Overlay = styled.div`
 `;
 
 export const Container = styled.div`
-     background: ${({ theme }) => theme.colors.modals.contentBackground};
-    transition: transform 0.2s;
+    background: ${({ theme }) => theme.colors.modals.contentBackground};
+    ${props =>
+        props.disableHeightAnimation &&
+        `
+        transition: transform 0.2s;
+    `}
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
     position: absolute;
@@ -30,7 +36,6 @@ export const Container = styled.div`
     transform: translate(-50%, -50%) scale(0);
     transform-origin: center;
     visibility: hidden;
-    transition: transform 0.2s;
     backface-visibility: hidden;
     width: 100%;
     max-width: 500px;
@@ -44,6 +49,19 @@ export const Container = styled.div`
     @media ${QUERIES.medium} {
         width: 60%;
     }
+`;
+
+export const ContentContainer = styled.div`
+    overflow: hidden;
+    height: ${props => {
+        if (props.disableHeightAnimation) {
+            return '100%';
+        }
+        return typeof props.height === 'number' && props.height !== 0
+            ? `${props.height}px`
+            : `auto`;
+    }};
+    transition: height 0.2s;
 `;
 
 export const LoaderContainer = styled.div`
@@ -63,12 +81,16 @@ export const ModalClose = styled(Icon)`
 export const Content = styled.div`
     position: relative;
     z-index: 2;
-    height: 100%;
     padding: 1rem;
     max-height: 100vh;
     width: 100%;
     box-sizing: border-box;
     overflow: auto;
+    ${props =>
+        props.disableHeightAnimation &&
+        `
+     height: 100%;
+    `}
 `;
 
 export const Arrow = styled.div`

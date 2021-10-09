@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { TextArea } from '@components/forms';
-import _ProfilePic from '@components/profilePic';
+
+import { TextArea } from '@components/Forms';
+import _ProfilePic from '@components/ProfilePic';
 import _Modal from '@components/Modal';
 
 export const Modal = styled(_Modal)`

@@ -1,4 +1,6 @@
-const baseUrl = `${process.env.SERVER_URL}/api`;
+import { SERVER_URL } from '@utilities/env';
+
+const baseUrl = `${SERVER_URL}/api`;
 
 export const createTask = (listId, title) => {
     return _put(`tasks`, {
@@ -88,7 +90,7 @@ async function _fetch(url, data) {
     }
     if (!response.ok) {
         if (response.status === 401) {
-            window.location = process.env.ROOT_APP_DIR;
+            window.location = SERVER_URL;
         }
         const message = (await response.json()).error;
         _throwError(message);

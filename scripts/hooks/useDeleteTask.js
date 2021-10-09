@@ -1,10 +1,11 @@
 import { useCallback } from 'react';
 import { mutate } from 'swr';
-import { deleteTask } from '@utilities/server';
 
 import { getListDetailUrl, getListsUrl } from './internal/urls';
-import useEditTaskModal from './useEditTaskModal';
-import useCompletedTasks from './useCompletedTasks';
+
+import useEditTaskModal from '@hooks/useEditTaskModal';
+import useCompletedTasks from '@hooks/useCompletedTasks';
+import { deleteTask } from '@utilities/server';
 
 function useDeleteTask() {
     const { closeModal } = useEditTaskModal();

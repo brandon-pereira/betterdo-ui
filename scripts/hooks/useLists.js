@@ -1,12 +1,11 @@
 import useSWR from 'swr';
-import ms from 'ms.macro';
 
 import createSharedHook from './internal/createSharedHook';
 import { getListsUrl } from './internal/urls';
 
 function useListsOnce() {
     const { data, error } = useSWR(getListsUrl(), {
-        dedupingInterval: ms('10m')
+        dedupingInterval: 600000 //10min
     });
 
     if (error) {

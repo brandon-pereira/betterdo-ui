@@ -3,8 +3,9 @@ import {
     requestNotificationAccess as _requestNotificationAccess,
     getNotificationSubscription as _getNotificationSubscription
 } from 'web-notifier/web';
-import useModifyProfile from './useModifyProfile';
-import useProfile from './useProfile';
+
+import useModifyProfile from '@hooks/useModifyProfile';
+import useProfile from '@hooks/useProfile';
 
 const STATES = {
     UNKNOWN: 'UNKNOWN',

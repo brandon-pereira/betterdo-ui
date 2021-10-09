@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
 import { mutate } from 'swr';
-import { updateUser } from '@utilities/server';
 
 import { getListsUrl, getProfileUrl } from './internal/urls';
+
+import { updateUser } from '@utilities/server';
 
 function useModifyProfile() {
     return useCallback(async updatedProps => {

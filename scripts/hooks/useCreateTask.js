@@ -1,8 +1,10 @@
 import { useCallback } from 'react';
 import { mutate } from 'swr';
-import { createTask } from '@utilities/server';
-import useCompletedTasks from './useCompletedTasks';
+
 import { getListDetailUrl } from './internal/urls';
+
+import useCompletedTasks from '@hooks/useCompletedTasks';
+import { createTask } from '@utilities/server';
 
 function useCreateTask() {
     const [isCompletedTasksIncluded] = useCompletedTasks();
@@ -11,9 +13,7 @@ function useCreateTask() {
             // generate a tempId for now
             const tempId = Math.floor(Math.random() * 1000);
             // get cache url
-            console.log(isCompletedTasksIncluded);
             const listUrl = getListDetailUrl(listId, isCompletedTasksIncluded);
-            console.log({ listUrl });
             // Update cache to add new temp task
             await mutate(
                 listUrl,

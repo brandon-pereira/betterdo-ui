@@ -1,9 +1,10 @@
 import { useCallback } from 'react';
 import { mutate } from 'swr';
-import { updateList } from '@utilities/server';
 
 import { getListDetailUrl, getListsUrl } from './internal/urls';
-import useCompletedTasks from './useCompletedTasks';
+
+import useCompletedTasks from '@hooks/useCompletedTasks';
+import { updateList } from '@utilities/server';
 
 function useModifyList() {
     const [isCompletedTasksIncluded] = useCompletedTasks();
