@@ -105,7 +105,7 @@ function CustomListSettings() {
                             onChange={(e, bool) =>
                                 onCustomListToggle(list.id, bool)
                             }
-                            checked={customLists[list.id]}
+                            value={customLists[list.id]}
                         />
                     </CustomList>
                 ))}

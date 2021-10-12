@@ -1,92 +1,32 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { useCallback, useState } from 'react';
 
-const Slider = styled.div`
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: ${({ theme }) => theme.colors.general.red};
-    transition: 0.4s;
-    border-radius: 34px;
-    ${({ disabled }) =>
-        disabled &&
-        `
-        background-color: #ccc !important;
-    `}
-    &:before {
-        position: absolute;
-        content: '';
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        transition: 0.4s;
-        border-radius: 50%;
-    }
-`;
-const Switch = styled.label`
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-    outline: none;
-    ${({ disabled }) =>
-        disabled &&
-        `
-        opacity: 0.2;
-    `}
-    input {
-        position: absolute;
-        top: -99999px;
-        left: -99999px;
-        &:focus-visible + ${Slider}:before {
-            background: ${({ theme }) => theme.colors.general.blue};
-            box-shadow: inset 0 0 0 3px #fff;
-        }
-        &:checked + ${Slider} {
-            background-color: ${({ theme }) => theme.colors.general.blue};
-            &:before {
-                transform: translateX(26px);
+import { Switch, Slider } from './Toggle.styles.js';
+
+function Toggle({ value, onChange, disabled }) {
+    const [checked, setChecked] = useState(value || false);
+
+    const _onChange = useCallback(
+        e => {
+            const newState = e.target.checked;
+            setChecked(newState);
+            if (onChange) {
+                onChange(e, newState);
             }
-        }
-    }
-`;
+        },
+        [onChange]
+    );
 
-class Toggle extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            checked: props.checked || false
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(e) {
-        const newState = !this.state.checked;
-        this.setState({ checked: newState });
-        if (this.props.onChange) {
-            this.props.onChange(e, newState);
-        }
-    }
-
-    render() {
-        return (
-            <Switch disabled={this.props.disabled}>
-                <input
-                    type="checkbox"
-                    checked={this.state.checked}
-                    onChange={this.handleChange}
-                    disabled={this.props.disabled}
-                />
-                <Slider disabled={this.props.disabled} />
-            </Switch>
-        );
-    }
+    return (
+        <Switch disabled={disabled}>
+            <input
+                type="checkbox"
+                checked={checked}
+                onChange={_onChange}
+                disabled={disabled}
+            />
+            <Slider disabled={disabled} />
+        </Switch>
+    );
 }
 
 export default Toggle;

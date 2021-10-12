@@ -77,7 +77,7 @@ function GeneralSettings() {
                     onChange={(e, bool) => {
                         onChange({ isPushEnabled: bool });
                     }}
-                    checked={state.isPushEnabled}
+                    value={true}
                 />
             </OptionGroup>
             <OptionGroup>
@@ -93,7 +93,7 @@ function GeneralSettings() {
                     onChange={(e, bool) => {
                         doesPreferDarkMode(bool);
                     }}
-                    checked={darkMode}
+                    value={darkMode}
                 />
             </OptionGroup>
             <OptionGroup>
@@ -110,7 +110,7 @@ function GeneralSettings() {
                     onChange={(e, bool) => {
                         onChange({ isBeta: bool });
                     }}
-                    checked={state.isBeta}
+                    value={state.isBeta}
                 />
             </OptionGroup>
             {/* <OptionGroup>
