@@ -78,7 +78,7 @@ function ColorPicker({ value, onChange }) {
             );
             return events.destroy();
         }
-    }, []);
+    }, [onRefreshPalette]);
 
     return (
         <>
