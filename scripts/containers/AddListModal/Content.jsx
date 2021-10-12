@@ -73,7 +73,7 @@ function AddListModalContent({ onRequestClose, onLoad }) {
                     placeholder="ex. Groceries"
                 />
                 <ColorPicker
-                    currentColor={color}
+                    value={color}
                     onChange={color => {
                         setColor(color);
                     }}

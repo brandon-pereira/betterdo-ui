@@ -101,7 +101,7 @@ function ListSettings({ setUnsavedChanges, onRequestClose }) {
                 placeholder="ex. Groceries"
             />
             <ColorPicker
-                currentColor={state.color}
+                value={state.color}
                 onChange={color => {
                     setUnsavedChanges(true);
                     setState(state => ({ ...state, color }));
