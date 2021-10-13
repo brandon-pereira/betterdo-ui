@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { arrayMoveImmutable } from 'array-move';
 
-import { Container, TaskContainer } from './Body.styles.js';
+import { Container, TaskContainer, Scroller } from './Body.styles.js';
 import SortableList from './SortableList';
 import CompletedTasksButton from './CompletedTasksButton';
 import { AllCaughtUpBanner, ServerErrorBanner } from './Banners';
@@ -46,32 +46,41 @@ function Body() {
 
     return (
         <Container>
-            <NotificationBanner />
-            <AddTask hidden={error} />
-            {isAllCaughtUp && <AllCaughtUpBanner />}
-            {error && <ServerErrorBanner />}
-            {!error && (
-                <TaskContainer>
-                    {/* Regular non-complete tasks are loaded and sortable  */}
-                    <SortableList tasks={list.tasks} onSortEnd={onSortEnd} />
-                    {/* Completed tasks are not sortable and only shown when requested */}
-                    {isCompletedTasksIncluded &&
-                        list.completedTasks.map(task => (
-                            <Task key={task._id} isCompleted={true} {...task} />
-                        ))}
-                    {/* If not loaded, show completed tasks button */}
-                    <CompletedTasksButton
-                        hidden={
-                            (loading && !isCompletedTasksIncluded) ||
-                            error ||
-                            list.additionalTasks === 0
-                        }
-                        count={list.additionalTasks}
-                        isLoading={loading && isCompletedTasksIncluded}
-                        onClick={() => setIncludeCompletedTasks(true)}
-                    />
-                </TaskContainer>
-            )}
+            <Scroller>
+                <NotificationBanner />
+                <AddTask hidden={error} />
+                {isAllCaughtUp && <AllCaughtUpBanner />}
+                {error && <ServerErrorBanner />}
+                {!error && (
+                    <TaskContainer>
+                        {/* Regular non-complete tasks are loaded and sortable  */}
+                        <SortableList
+                            tasks={list.tasks}
+                            onSortEnd={onSortEnd}
+                        />
+                        {/* Completed tasks are not sortable and only shown when requested */}
+                        {isCompletedTasksIncluded &&
+                            list.completedTasks.map(task => (
+                                <Task
+                                    key={task._id}
+                                    isCompleted={true}
+                                    {...task}
+                                />
+                            ))}
+                        {/* If not loaded, show completed tasks button */}
+                        <CompletedTasksButton
+                            hidden={
+                                (loading && !isCompletedTasksIncluded) ||
+                                error ||
+                                list.additionalTasks === 0
+                            }
+                            count={list.additionalTasks}
+                            isLoading={loading && isCompletedTasksIncluded}
+                            onClick={() => setIncludeCompletedTasks(true)}
+                        />
+                    </TaskContainer>
+                )}
+            </Scroller>
         </Container>
     );
 }

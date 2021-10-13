@@ -4,8 +4,18 @@ import { QUERIES } from '../../constants';
 
 import Button from '@components/Button';
 import _Banner from '@components/Banner';
+import _Scroller from '@components/Scroller';
 
 export const Banner = styled(_Banner)``;
+
+export const Scroller = styled(_Scroller)`
+    margin-bottom: 0.5rem;
+    .simplebar-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+`;
 
 export const CompletedTasksButton = styled(Button)`
     margin: 0.5rem auto 1rem;
@@ -31,12 +41,8 @@ export const CompletedTasksButton = styled(Button)`
 export const Container = styled.div`
     grid-row: 4;
     grid-column: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     background: ${({ theme }) => theme.colors.body.background};
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 0.5rem;
     @media ${QUERIES.medium} {
         grid-row: 2;
         grid-column: 2;

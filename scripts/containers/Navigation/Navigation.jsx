@@ -15,6 +15,7 @@ import useSwitchList from '@hooks/useSwitchList';
 import useModifyProfile from '@hooks/useModifyProfile';
 import useHamburgerNav from '@hooks/useHamburgerNav';
 import ListItem from '@components/ListItem';
+import Scroller from '@components/Scroller';
 
 function Navigation() {
     const [isMobileNavVisible, setMobileNavVisibility] = useHamburgerNav();
@@ -43,18 +44,20 @@ function Navigation() {
 
     return (
         <Container isMobileNavVisible={isMobileNavVisible}>
-            <ListsContainer>
-                <SortableList
-                    lists={lists}
-                    currentId={currentListId}
-                    onSortEnd={onSortEnd}
-                    onClick={switchList}
-                />
-                <ListItem
-                    onClick={openNewListModal}
-                    list={{ type: 'newList' }}
-                />
-            </ListsContainer>
+            <Scroller>
+                <ListsContainer>
+                    <SortableList
+                        lists={lists}
+                        currentId={currentListId}
+                        onSortEnd={onSortEnd}
+                        onClick={switchList}
+                    />
+                    <ListItem
+                        onClick={openNewListModal}
+                        list={{ type: 'newList' }}
+                    />
+                </ListsContainer>
+            </Scroller>
             <NavigationModalOverlay
                 onClick={() => setMobileNavVisibility(false)}
             />
