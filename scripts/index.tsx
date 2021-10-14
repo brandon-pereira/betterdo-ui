@@ -37,4 +37,4 @@ render(
 );
 
 document.body.classList.add('loaded');
-document.querySelector('#critical-css').remove();
+document.querySelector('#critical-css')?.remove();

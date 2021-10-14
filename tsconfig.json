@@ -1,0 +1,26 @@
+{
+    "exclude": ["node_modules", "types"],
+    "compilerOptions": {
+        "outDir": "dist",
+        "typeRoots": ["./types", "./node_modules/@types"],
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "module": "esnext",
+        "target": "es5",
+        "paths": {
+            "@components/*": ["./scripts/components/*"],
+            "@hooks/*": ["./scripts/hooks/*"]
+        },
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+        "jsx": "react-jsx",
+        "moduleResolution": "node",
+        "noEmit": true,
+        "noFallthroughCasesInSwitch": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "strict": true
+    }
+}

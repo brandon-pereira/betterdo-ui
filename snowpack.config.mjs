@@ -14,6 +14,7 @@ export default {
         polyfillNode: true
     },
     plugins: [
+        '@snowpack/plugin-typescript',
         [
             'snowpack-plugin-svgr',
             {
