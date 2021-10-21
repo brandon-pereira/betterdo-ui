@@ -1,0 +1,21 @@
+name: Deploy
+on:
+    push:
+        branches:
+            - master
+jobs:
+    deploy:
+        name: Deploy
+        runs-on: ubuntu-latest
+        steps:
+            - name: executing remote ssh commands using password
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.SSH_HOST }}
+                  key: ${{ secrets.SSH_KEY }}
+                  username: ${{ secrets.SSH_USERNAME }}
+                  script: |
+                      cd www/betterdo-ui
+                      git pull
+                      npm install
+                      npm run build
