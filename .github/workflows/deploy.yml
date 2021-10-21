@@ -16,6 +16,8 @@ jobs:
                   username: ${{ secrets.SSH_USERNAME }}
                   script: |
                       cd www/betterdo-ui
+                      node -v
+                      nvm use
                       git checkout .
                       git pull
                       npm install
