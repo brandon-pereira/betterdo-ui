@@ -16,11 +16,7 @@ jobs:
                   username: ${{ secrets.SSH_USERNAME }}
                   script: |
                       cd www/betterdo-ui
-                      node -v
-                      echo "$SHELL"
-                      whoami
-                      nvm use
                       git checkout .
                       git pull
-                      npm install
+                      npm install --production=false
                       npm run build
