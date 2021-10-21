@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.1.1
+
+-   Fix notification icon being broken
+
 ## v5.1.0
 
 -   Added back sorting to subtasks
