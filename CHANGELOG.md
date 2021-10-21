@@ -1,5 +1,13 @@
 # Changelog
 
+## v5.1.0
+
+-   Added back sorting to subtasks
+-   Automated deploys to production
+-   Custom scrollbars on some elements
+-   Initial plumbing for Typescript migration
+-   Various Bug Fixes
+
 ## v5.0.0
 
 -   Significantly faster development boot times thanks to Snowpack
