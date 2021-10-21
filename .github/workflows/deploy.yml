@@ -17,6 +17,8 @@ jobs:
                   script: |
                       cd www/betterdo-ui
                       node -v
+                      echo "$SHELL"
+                      whoami
                       nvm use
                       git checkout .
                       git pull
