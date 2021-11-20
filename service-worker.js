@@ -2,7 +2,7 @@ import { precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { CacheFirst } from 'workbox-strategies';
 import { googleFontsCache } from 'workbox-recipes';
-
+import { SERVER_URL } from 
 googleFontsCache();
 precacheAndRoute(self.__WB_MANIFEST);
 registerRoute('/', CacheFirst);
@@ -11,6 +11,7 @@ const multiReplyResponses = {
     'shared-list': ({ listTitle, numberOfUpdates }) =>
         `${listTitle} has been updated ${numberOfUpdates} times.`
 };
+
 self.addEventListener('push', event => {
     let notification = {};
     try {
@@ -78,8 +79,8 @@ self.onnotificationclick = event => {
             })
             .then(clientList => {
                 const openClient = clientList.find(client => {
-                    if (url.startsWith('https://branclon.com')) {
-                        url = url.split('https://branclon.com')[1];
+                    if (url.startsWith('https://betterdo.app/')) {
+                        url = url.split('https://betterdo.app/')[1];
                     }
                     if (url === '/') {
                         return true;
