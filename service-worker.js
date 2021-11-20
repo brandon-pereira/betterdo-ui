@@ -67,13 +67,7 @@ self.addEventListener('activate', event => {
 self.onnotificationclick = event => {
     const notification = event.notification;
     const clients = self.clients;
-    // let url = event.notification.data.url;
-    // if (url.startsWith('https://betterdo.app/')) {
-    //     url = url.split('https://betterdo.app/')[1];
-    // }
-    // if (url.startsWith('app')) {
-    //     url = url.split('app')[1];
-    // }
+
     notification.close();
 
     // This looks to see if the current is already open and
@@ -88,12 +82,10 @@ self.onnotificationclick = event => {
                 const openClient = clientList.find(client => {
                     return Boolean(client.url);
                 });
-                console.log('Open', openClient);
                 if (openClient) {
                     openClient.focus();
-                    return openClient.navigate('/');
                 } else {
-                    clients.openWindow('/');
+                    clients.openWindow('/app');
                 }
             })
     );
