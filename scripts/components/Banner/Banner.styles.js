@@ -15,15 +15,11 @@ export const Icon = styled(_Icon)`
         stroke-width: 1px;
         fill: ${({ theme }) => theme.colors.body.banner.icon.background};
         stroke: ${({ theme }) => theme.colors.body.banner.icon.stroke};
-        ${({ icon }) => {
-            console.log(icon);
-            return (
-                icon.name === 'SvgBetterdo' &&
-                `
+        ${({ icon }) =>
+            icon.name === 'SvgBetterdo' &&
+            `
             stroke-width: 6px;
-       `
-            );
-        }}
+       `}
     }
 `;
 export const Button = styled(_Button)`
