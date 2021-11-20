@@ -74,8 +74,7 @@ self.onnotificationclick = event => {
     event.waitUntil(
         clients
             .matchAll({
-                type: 'window',
-                includeUncontrolled: true
+                type: 'window'
             })
             .then(clientList => {
                 const openClient = clientList.find(client => {
