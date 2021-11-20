@@ -20,9 +20,7 @@ function useDarkModeOnce() {
     }, []);
 
     const shouldUseDarkMode =
-        isOSinDarkMode && doesUserPreferDarkMode
-            ? true
-            : doesUserPreferDarkMode;
+        isOSinDarkMode && doesUserPreferDarkMode ? true : isOSinDarkMode;
     const setPrefersDarkMode = useCallback(bool => {
         if (bool) {
             setUserDarkPreference(true);
