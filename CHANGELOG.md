@@ -1,5 +1,12 @@
 # Changelog
 
+## v5.1.2
+
+-   Improve DX when running app locally
+-   Improve notification handling
+-   Dark mode improvements
+-   Accessibility improvements
+
 ## v5.1.1
 
 -   Fix notification icon being broken
