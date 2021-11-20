@@ -24,7 +24,10 @@ export const Selection = styled.button`
         border-radius: 0 5px 5px 0;
     }
     &:focus-visible {
-        background-image: linear-gradient(#ddd, #fff);
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.2)
+        );
     }
     ${props =>
         props.selected &&
