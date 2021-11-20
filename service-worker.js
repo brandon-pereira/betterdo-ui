@@ -68,6 +68,9 @@ self.onnotificationclick = event => {
     const notification = event.notification;
     const clients = self.clients;
     let url = event.notification.data.url;
+    if (url.startsWith('https://betterdo.app/')) {
+        url = url.split('https://betterdo.app/')[1];
+    }
     notification.close();
 
     // This looks to see if the current is already open and
@@ -75,20 +78,18 @@ self.onnotificationclick = event => {
     event.waitUntil(
         clients
             .matchAll({
-                type: 'window'
+                type: 'window',
+                includeUncontrolled: true
             })
             .then(clientList => {
                 const openClient = clientList.find(client => {
-                    if (url.startsWith('https://betterdo.app/')) {
-                        url = url.split('https://betterdo.app/')[1];
-                    }
-                    if (url === '/') {
-                        return true;
-                    }
+                    console.log(client.url, url);
                     return client.url.endsWith(url);
                 });
-                if (openClient) {
+                console.log('Open', openClient);
+                if (openClient && openClient.navigate) {
                     openClient.focus();
+                    return openClient.navigate(url);
                 } else {
                     clients.openWindow(url);
                 }
