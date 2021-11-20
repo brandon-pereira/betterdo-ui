@@ -42,7 +42,8 @@ export const LIGHT_THEME = {
             banner: {
                 color: '#999',
                 icon: {
-                    background: '#cacaca'
+                    background: '#cfcfcf',
+                    stroke: '#b5b5b5'
                 }
             },
             completedTasksButton: {
@@ -107,7 +108,8 @@ export const DARK_THEME = {
             banner: {
                 color: '#9e9e9e',
                 icon: {
-                    background: '#191919'
+                    background: '#191919',
+                    stroke: '#686868'
                 }
             },
             completedTasksButton: {
