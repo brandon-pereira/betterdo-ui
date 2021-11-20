@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.2.0 (beta)
+
+-   Custom lists now display their respective date in the navigation.
+
 ## v5.1.2
 
 -   Improve DX when running app locally
