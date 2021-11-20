@@ -3,6 +3,7 @@
 ## v5.2.0 (beta)
 
 -   Custom lists now display their respective date in the navigation.
+-   Custom lists tasks states should not update more reliably
 
 ## v5.1.2
 
