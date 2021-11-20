@@ -1,6 +1,8 @@
 import React from 'react';
 import { SWRConfig } from 'swr';
 
+import { SERVER_URL } from '@utilities/env';
+
 function SWRProvider({ children }) {
     return (
         <SWRConfig
@@ -11,8 +13,7 @@ function SWRProvider({ children }) {
                     });
                     if (res.status >= 400) {
                         if (res.status === 401) {
-                            window.location.href =
-                                window.origin + '/auth/google';
+                            window.location.href = SERVER_URL + '/auth/google';
                         }
                         let error = 'Unexpected Error';
                         try {
