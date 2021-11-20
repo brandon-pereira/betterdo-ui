@@ -1,6 +1,12 @@
 import React from 'react';
 
-import { Container, DotIcon, Title, IconHolder } from './ListItem.styles.js';
+import {
+    Container,
+    DotIcon,
+    DateIcon,
+    Title,
+    IconHolder
+} from './ListItem.styles.js';
 
 import useSwitchList from '@hooks/useSwitchList';
 import useCurrentListId from '@hooks/useCurrentListId';
@@ -8,8 +14,6 @@ import useNewListModal from '@hooks/useNewListModal';
 import SvgIcon from '@components/Icon';
 import Quill from '@components/Icon/svgs/quill.svg';
 import Drawer from '@components/Icon/svgs/drawer.svg';
-import Alarm from '@components/Icon/svgs/alarm.svg';
-import Calendar from '@components/Icon/svgs/calendar.svg';
 import Bookmarks from '@components/Icon/svgs/bookmarks.svg';
 
 const ListItemIcon = ({ icon }) => <SvgIcon icon={icon} color="#fff" />;
@@ -34,11 +38,11 @@ const ListItem = React.forwardRef(
                 break;
             case 'today':
                 title = 'Today';
-                Icon = <ListItemIcon icon={Alarm} />;
+                Icon = <DateIcon>{getCurrentDay()}</DateIcon>;
                 break;
             case 'tomorrow':
                 title = 'Tomorrow';
-                Icon = <ListItemIcon icon={Calendar} />;
+                Icon = <DateIcon>{getTomorrowDay()}</DateIcon>;
                 break;
             case 'highPriority':
                 title = 'High Priority';
@@ -69,6 +73,17 @@ const ListItem = React.forwardRef(
         );
     }
 );
+
+function getCurrentDay() {
+    const today = new Date();
+    return today.getDate();
+}
+
+function getTomorrowDay() {
+    const result = new Date();
+    result.setDate(result.getDate() + 1);
+    return result.getDate();
+}
 
 ListItem.displayName = 'ListItem';
 

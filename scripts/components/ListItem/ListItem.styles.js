@@ -49,6 +49,19 @@ export const DotIcon = styled.div`
         0 1px 10px rgba(0, 0, 0, 0.4);
     border-radius: 50%;
 `;
+
+export const DateIcon = styled.div`
+    height: 1.4rem;
+    width: 1.1rem;
+    overflow: hidden;
+    /* Using the 2 values on box-shadow gave me more flexibility */
+    box-shadow: inset 0 0 0 1px #fff, inset 0 -3px 0 1px #fff;
+    font-weight: 800;
+    font-size: 12px;
+    /* height of container - bottom border */
+    line-height: calc(1.4rem - 3px);
+`;
+
 export const Title = styled.span`
     flex: 1;
     padding: 1rem 1rem 1rem 0;
