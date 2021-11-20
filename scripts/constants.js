@@ -109,7 +109,7 @@ export const DARK_THEME = {
                 color: '#9e9e9e',
                 icon: {
                     background: '#191919',
-                    stroke: '#686868'
+                    stroke: '#282828'
                 }
             },
             completedTasksButton: {
