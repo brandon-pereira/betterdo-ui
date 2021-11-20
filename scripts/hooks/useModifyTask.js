@@ -37,7 +37,7 @@ function useModifyTask() {
             } else {
                 await updater;
             }
-            mutate(getListDetailUrl(listId, isCompletedTasksIncluded));
+            mutate(getListDetailUrl(currentListId, isCompletedTasksIncluded));
             mutate(getTaskDetailUrl(taskId));
             if (updatedProps.list) {
                 history.replace(

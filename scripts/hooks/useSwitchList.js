@@ -17,7 +17,6 @@ function useSwitchList() {
             // close the hamburger nav
             setMobileNavVisibility(false);
             // update the local data immediately, but disable the revalidation.
-            // revalidation happens when useListDetails happens.
             await mutate(
                 getListDetailUrl(nextList._id),
                 list => ({ ...nextList, ...list }),
@@ -27,6 +26,8 @@ function useSwitchList() {
             setShowCompletedTasks(false);
             // update url
             history.replace(`/${nextList._id}`);
+            // Force a network refresh when changing lists
+            await mutate(getListDetailUrl(nextList._id));
         },
         [history, setMobileNavVisibility, setShowCompletedTasks]
     );

@@ -75,7 +75,7 @@ function EditTaskContent({ setUnsavedChanges }) {
         if (result) {
             setDeleting(true);
             try {
-                await deleteTask(taskId, state.list);
+                await deleteTask(taskId);
             } catch (err) {
                 console.error(err);
                 setError(err.formattedMessage || 'Unexpected Error');

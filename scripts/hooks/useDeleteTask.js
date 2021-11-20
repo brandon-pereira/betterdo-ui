@@ -6,18 +6,22 @@ import { getListDetailUrl, getListsUrl } from './internal/urls';
 import useEditTaskModal from '@hooks/useEditTaskModal';
 import useCompletedTasks from '@hooks/useCompletedTasks';
 import { deleteTask } from '@utilities/server';
+import useCurrentListId from '@hooks/useCurrentListId';
 
 function useDeleteTask() {
     const { closeModal } = useEditTaskModal();
+    const currentListId = useCurrentListId();
     const [isCompletedTasksIncluded] = useCompletedTasks();
     return useCallback(
-        async (taskId, listId) => {
+        async taskId => {
             await deleteTask(taskId);
             closeModal();
-            await mutate(getListDetailUrl(listId, isCompletedTasksIncluded));
-            await mutate(getListsUrl());
+            // Update current task list
+            await mutate(
+                getListDetailUrl(currentListId, isCompletedTasksIncluded)
+            );
         },
-        [isCompletedTasksIncluded, closeModal]
+        [currentListId, isCompletedTasksIncluded, closeModal]
     );
 }
 
