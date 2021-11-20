@@ -85,7 +85,7 @@ self.onnotificationclick = event => {
                 if (openClient) {
                     openClient.focus();
                 } else {
-                    clients.openWindow('/app');
+                    clients.openWindow('https://betterdo.app/app');
                 }
             })
     );
