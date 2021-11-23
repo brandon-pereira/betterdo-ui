@@ -53,7 +53,7 @@ function useModifyTask() {
             }
             mutate(getListDetailUrl(currentListId, isCompletedTasksIncluded));
             mutate(getTaskDetailUrl(taskId));
-            if (updatedProps.list) {
+            if (updatedProps.list && updatedProps.list !== currentListId) {
                 history.replace(
                     generateUrl(`/edit-task/:taskId`, {
                         currentListId: updatedProps.list,
