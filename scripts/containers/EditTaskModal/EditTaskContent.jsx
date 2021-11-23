@@ -85,7 +85,7 @@ function EditTaskContent({ setUnsavedChanges }) {
             }
             setDeleting(false);
         }
-    }, [taskId, deleteTask, state.list, state.title]);
+    }, [taskId, deleteTask, state.title]);
 
     const onInputChange = id => e => {
         // Mark content as dirty

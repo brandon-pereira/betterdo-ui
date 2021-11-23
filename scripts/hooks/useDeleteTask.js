@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { mutate } from 'swr';
 
-import { getListDetailUrl, getListsUrl } from './internal/urls';
+import { getListDetailUrl } from './internal/urls';
 
 import useEditTaskModal from '@hooks/useEditTaskModal';
 import useCompletedTasks from '@hooks/useCompletedTasks';
