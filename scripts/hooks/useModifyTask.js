@@ -16,8 +16,22 @@ function useModifyTask() {
     const generateUrl = useGeneratedUrl();
     return useCallback(
         async (taskId, listId, updatedProps) => {
-            if (updatedProps.list) {
-                console.log('CHANGED LIST');
+            if (
+                // If dueDate is passed in and format is 'YYYY-MM-DD' then
+                // we need to create a date obj using CURRENT timezone
+                // (strings generate with UTC by default) then pass the UTC
+                // version to server (since current timezone to UTC will include timezone)
+                updatedProps.dueDate &&
+                typeof updatedProps.dueDate === 'string' &&
+                // make sure its in 'YYYY-MM-DD' not already ISO string
+                updatedProps.dueDate.length === 10
+            ) {
+                const [year, month, day] = updatedProps.dueDate.split('-');
+                updatedProps.dueDate = new Date(
+                    year,
+                    month - 1,
+                    day
+                ).toUTCString();
             }
             await mutate(
                 getListDetailUrl(listId, isCompletedTasksIncluded),

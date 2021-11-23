@@ -3,7 +3,9 @@
 ## v5.2.0 (beta)
 
 -   Custom lists now display their respective date in the navigation.
--   Custom lists tasks states should not update more reliably
+-   Custom lists tasks states should now update more reliably
+-   Added timezone setting to improve reliability of date based custom lists
+-   Fix bug when editing task details from custom lists would navigate to original list
 
 ## v5.1.2
 

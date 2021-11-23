@@ -36,6 +36,7 @@ export const Select = styled.select`
     font: inherit;
     font-size: 1rem;
     padding: 1rem;
+    padding-right: 2.8rem;
     &:focus {
         box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.general.blue};
     }

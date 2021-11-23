@@ -62,11 +62,13 @@ function EditTaskContent({ setUnsavedChanges }) {
             title: state.title,
             priority: state.priority,
             dueDate: state.dueDate,
-            list: state.list,
             notes: state.notes,
-            subtasks: state.subtasks
+            subtasks: state.subtasks,
+            // we only mutate list if changed, or else we automatically
+            // redirect which isn't ideal (custom lists)
+            ...(state.list !== task.list ? { list: state.list } : {})
         });
-    }, [state, onSaveTask]);
+    }, [state, task, onSaveTask]);
 
     const onDeleteTask = useCallback(async () => {
         const result = confirm(

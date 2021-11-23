@@ -1,6 +1,6 @@
 {
     "name": "betterdo-ui",
-    "version": "5.2.0-beta.1",
+    "version": "5.2.0-beta.2",
     "description": "Frontend for BetterDo",
     "repository": "https://github.com/brandon-pereira/betterdo-ui",
     "dependencies": {
@@ -8,6 +8,7 @@
         "@dnd-kit/modifiers": "^4.0.0",
         "@dnd-kit/sortable": "^5.0.0",
         "@loadable/component": "^5.15.0",
+        "@vvo/tzdb": "^6.33.0",
         "array-move": "^4.0.0",
         "lodash.get": "^4.4.2",
         "randomcolor": "^0.6.2",
@@ -27,12 +28,11 @@
         "@babel/core": "^7.15.5",
         "@babel/eslint-parser": "^7.15.7",
         "@babel/preset-react": "^7.14.5",
-        "@svgr/webpack": "^5.5.0",
         "@snowpack/plugin-typescript": "^1.2.1",
+        "@svgr/webpack": "^5.5.0",
         "@types/react": "^17.0.29",
         "@types/react-dom": "^17.0.9",
         "@types/react-router-dom": "^5.3.1",
-        "typescript": "^4.4.4",
         "eslint": "^7.32.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-import-resolver-alias": "^1.1.2",
@@ -45,6 +45,7 @@
         "snowpack": "^3.8.8",
         "snowpack-plugin-markdown-import": "^0.2.0",
         "snowpack-plugin-svgr": "^0.1.2",
+        "typescript": "^4.4.4",
         "workbox-cli": "^6.3.0"
     },
     "scripts": {

@@ -1,12 +1,14 @@
 import React, { useState, Fragment, useCallback } from 'react';
 import styled from 'styled-components';
 
+import { timeZones } from '@utilities/timezones.ts';
 import Button from '@components/Button';
 import { Label, Error } from '@components/Forms';
 import Toggle from '@components/Toggle';
 import useProfile from '@hooks/useProfile';
 import useModifyProfile from '@hooks/useModifyProfile';
 import useDarkMode from '@hooks/useDarkMode';
+import Dropdown from '@components/Dropdown';
 
 const OptionGroup = styled.div`
     display: flex;
@@ -20,6 +22,9 @@ const OptionGroup = styled.div`
     &:nth-of-type(even) {
         background: ${({ theme }) =>
             theme.colors.modals.listViewAlternateBackground};
+    }
+    select {
+        max-width: 15rem;
     }
     > div {
         flex: 1;
@@ -39,7 +44,8 @@ function GeneralSettings() {
     const [darkMode, doesPreferDarkMode] = useDarkMode();
     const [state, setState] = useState({
         isBeta: profile.isBeta,
-        isPushEnabled: profile.isPushEnabled
+        isPushEnabled: profile.isPushEnabled,
+        timeZone: profile.timeZone
     });
     const [error, setError] = useState(null);
 
@@ -113,23 +119,25 @@ function GeneralSettings() {
                     value={state.isBeta}
                 />
             </OptionGroup>
-            {/* <OptionGroup>
+            <OptionGroup>
                 <div>
                     <Label>Timezone</Label>
                     <Description>
-                        Update your current timezone. This will affect when
-                        items appear in your custom lists as well as
-                        notification times.
+                        This will determine what timezone to use when setting
+                        due dates on tasks.
                     </Description>
                 </div>
                 <Dropdown
-                    values={[
-                        { key: 1, label: 'two' },
-                        { key: 1, label: 'three' },
-                        { key: 1, label: 'fifteen' }
-                    ]}
+                    value={state.timeZone}
+                    onSelect={v => {
+                        onChange({ timeZone: v });
+                    }}
+                    values={timeZones.map(({ name, currentTimeFormat }) => ({
+                        label: currentTimeFormat,
+                        value: name
+                    }))}
                 />
-            </OptionGroup> */}
+            </OptionGroup>
             <OptionGroup>
                 <div>
                     <Label>Logout</Label>

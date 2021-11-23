@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import _NotificationBanner from '@components/NotificationBanner';
 import usePushNotifications from '@hooks/usePushNotifications';
 import useInstall from '@hooks/useInstall';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useListDetails from '@hooks/useListDetails';
+import useProfile from '@hooks/useProfile';
 import useDarkMode from '@hooks/useDarkMode';
+import { getTimeZone } from '@utilities/timezones.ts';
+import useModifyProfile from '@hooks/useModifyProfile';
 
 function NotificationBanner() {
+    const [suppressTimeZoneBanner, setSuppressTimeZoneBanner] = useState(false);
+    const modifyProfile = useModifyProfile();
+    const { profile } = useProfile();
     const currentListId = useCurrentListId();
     const [darkMode, setPrefersDarkMode] = useDarkMode();
     const { list, loading, error } = useListDetails(currentListId);
@@ -63,6 +69,29 @@ function NotificationBanner() {
                 primaryButtonAction={() => setPrefersDarkMode(true)}
                 secondaryButtonCopy="Dismiss"
                 secondaryButtonAction={() => setPrefersDarkMode(false)}
+            />
+        );
+    }
+
+    const localTimeZone = getTimeZone(
+        Intl.DateTimeFormat().resolvedOptions().timeZone
+    ).name;
+    const serverTimeZone = profile.timeZone;
+    if (
+        !suppressTimeZoneBanner &&
+        serverTimeZone &&
+        localTimeZone !== serverTimeZone
+    ) {
+        return (
+            <_NotificationBanner
+                title="Timezone Changed"
+                description="Your browsing from a different timezone than what we have on file. Would you like us to adjust your timezone settings?"
+                primaryButtonCopy="Adjust"
+                primaryButtonAction={() =>
+                    modifyProfile({ timeZone: localTimeZone })
+                }
+                secondaryButtonCopy="Dismiss"
+                secondaryButtonAction={() => setSuppressTimeZoneBanner(true)}
             />
         );
     }
