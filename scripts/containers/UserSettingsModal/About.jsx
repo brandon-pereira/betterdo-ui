@@ -1,5 +1,5 @@
 import.meta.hot;
-import React, { useEffect } from 'react';
+import React from 'react';
 import loadable from '@loadable/component';
 
 import { Container, Logo, ChangeLog } from './About.styles.js';
@@ -9,7 +9,6 @@ import { VERSION } from '@utilities/env';
 const ChangeLogLoader = loadable.lib(() => import('../../../CHANGELOG.md'));
 
 function About() {
-    useEffect(() => {}, []);
     return (
         <Container>
             <Logo />

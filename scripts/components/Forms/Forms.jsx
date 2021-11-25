@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 
 const _Input = styled.input`
@@ -84,7 +84,7 @@ const Form = ({ children, errorMessage, ...props }) => (
     </form>
 );
 
-const Input = React.forwardRef((props, ref) => (
+const Input = forwardRef((props, ref) => (
     <_Input {...props} ref={ref} aria-label={props.placeholder} />
 ));
 Input.displayName = 'Input';

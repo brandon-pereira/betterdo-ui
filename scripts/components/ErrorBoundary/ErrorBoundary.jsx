@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import { Container, Icon, Button } from './ErrorBoundary.styles.js';
 
 import ServerError from '@components/Icon/svgs/server-error.svg';
 
-class ErrorBoundary extends React.Component {
+class ErrorBoundary extends Component {
     constructor(props) {
         super(props);
         this.state = { hasError: false };

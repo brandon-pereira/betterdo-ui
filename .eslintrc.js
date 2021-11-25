@@ -2,8 +2,8 @@
 /* eslint-disable import/no-commonjs */
 
 module.exports = {
-    plugins: ['react', 'import', 'prettier'],
-    parser: '@babel/eslint-parser',
+    plugins: ['@typescript-eslint', 'react', 'import', 'prettier'],
+    parser: '@typescript-eslint/parser',
     parserOptions: {
         requireConfigFile: false,
         babelOptions: {
@@ -21,11 +21,13 @@ module.exports = {
         es6: true
     },
     extends: [
+        'plugin:@typescript-eslint/recommended',
         'eslint:recommended',
         'plugin:prettier/recommended',
         'plugin:import/react',
         'plugin:import/errors',
         'plugin:import/warnings',
+        'plugin:import/typescript',
         'plugin:eslint-comments/recommended',
         'plugin:react/recommended',
         'plugin:react-hooks/recommended'
@@ -36,14 +38,15 @@ module.exports = {
         },
         'import/resolver': {
             node: {
-                extensions: ['.js', '.jsx']
+                extensions: ['.js', '.jsx', '.ts', '.tsx']
             },
             alias: {
                 map: [
                     ['@components', './scripts/components'],
                     ['@hooks', './scripts/hooks'],
                     ['@utilities', './scripts/utilities']
-                ]
+                ],
+                extensions: ['.ts', '.js', '.json', '.jsx', '.tsx', '.svg']
             }
         }
     },
@@ -62,6 +65,9 @@ module.exports = {
         'react/jsx-uses-vars': 'error',
         'no-console': 0,
         'eslint-comments/no-unused-disable': 'error',
-        'eslint-comments/disable-enable-pair': 0
+        'eslint-comments/disable-enable-pair': 0,
+        'no-redeclare': 0,
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': 'error'
     }
 };

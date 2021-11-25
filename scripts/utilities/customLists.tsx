@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Bookmarks from '@components/Icon/svgs/bookmarks.svg';
 import Alarm from '@components/Icon/svgs/alarm.svg';
 import Calendar from '@components/Icon/svgs/calendar.svg';
@@ -5,11 +7,12 @@ import Quill from '@components/Icon/svgs/quill.svg';
 import Drawer from '@components/Icon/svgs/drawer.svg';
 import SvgIcon from '@components/Icon';
 import { DateIcon } from '@components/ListItem/ListItem.styles.js';
-import React from 'react';
 
-const ListItemIcon = ({ icon }: { icon: any }): React.ReactNode => (
-    <SvgIcon icon={icon} color="#fff" />
-);
+const ListItemIcon = ({
+    icon
+}: {
+    icon: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
+}): React.ReactNode => <SvgIcon icon={icon} color="#fff" />;
 
 export default [
     {

@@ -1,4 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {
+    cloneElement,
+    Children,
+    useState,
+    useRef,
+    useEffect
+} from 'react';
 
 import {
     Container,
@@ -51,8 +57,8 @@ function Tabs({ selectedIndex: _selectedIndex, color, children, titles }) {
                 ))}
             </TabsHeader>
             <TabsBody>
-                {React.Children.map(children, (value, index) => {
-                    return React.cloneElement(value, {
+                {Children.map(children, (value, index) => {
+                    return cloneElement(value, {
                         index,
                         selected: index === selectedIndex
                     });

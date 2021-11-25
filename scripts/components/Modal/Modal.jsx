@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+    forwardRef,
+    useCallback,
+    useEffect,
+    useRef,
+    useState
+} from 'react';
 import FocusLock from 'react-focus-lock';
 
 import useEscapeKey from './useEscapeKey';
@@ -13,7 +19,7 @@ import {
 
 import x from '@components/Icon/svgs/x.svg';
 
-const Modal = React.forwardRef(
+const Modal = forwardRef(
     (
         {
             className,

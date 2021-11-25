@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 
 import {
     Container,
@@ -11,7 +11,7 @@ import {
 import useEditTaskModal from '@hooks/useEditTaskModal';
 import useModifyTask from '@hooks/useModifyTask';
 
-const Task = React.forwardRef(
+const Task = forwardRef(
     (
         {
             title,

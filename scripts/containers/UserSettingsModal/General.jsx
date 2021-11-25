@@ -1,7 +1,7 @@
 import React, { useState, Fragment, useCallback } from 'react';
 import styled from 'styled-components';
 
-import { timeZones } from '@utilities/timezones.ts';
+import { timeZones } from '@utilities/timezones';
 import Button from '@components/Button';
 import { Label, Error } from '@components/Forms';
 import Toggle from '@components/Toggle';

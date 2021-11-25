@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { createElement } from 'react';
 
 import { IconContainer } from './Icon.styles.js';
 
 interface Props {
-    children?: React.ReactNode;
+    children?: string;
     onClick?: (e?: React.MouseEvent<HTMLDivElement>) => void;
-    icon: any;
+    icon: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
     className?: string;
     color?: string;
 }
@@ -19,8 +19,7 @@ function Icon({ children, onClick, icon, className, color, ...props }: Props) {
             className={className}
             onClick={onClick}
         >
-            {React.createElement(icon, {
-                title: children,
+            {createElement(icon, {
                 'aria-describedby': children
             })}
         </IconContainer>

@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 
 function createSharedHook(useHookOnce) {
-    const Context = React.createContext();
+    const Context = createContext();
 
     function Provider({ children }) {
         const value = useHookOnce();
