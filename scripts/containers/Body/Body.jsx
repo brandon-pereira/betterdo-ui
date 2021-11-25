@@ -7,6 +7,7 @@ import CompletedTasksButton from './CompletedTasksButton';
 import { AllCaughtUpBanner, ServerErrorBanner } from './Banners';
 import NotificationBanner from './NotificationBanner';
 
+import customLists from '@utilities/customLists.tsx';
 import AddTask from '@components/AddTask';
 import Task from '@components/Task';
 import useListDetails from '@hooks/useListDetails';
@@ -44,11 +45,15 @@ function Body() {
         list.tasks.length === 0 &&
         !isCompletedTasksIncluded;
 
+    const customListConfig = customLists.find(cl => list._id === cl.id);
+    const hideAddTaskInput =
+        error || (customListConfig && customListConfig.disableTaskCreation);
+
     return (
         <Container>
             <Scroller>
                 <NotificationBanner />
-                <AddTask hidden={error} />
+                <AddTask hidden={hideAddTaskInput} />
                 {isAllCaughtUp && <AllCaughtUpBanner />}
                 {error && <ServerErrorBanner />}
                 {!error && (

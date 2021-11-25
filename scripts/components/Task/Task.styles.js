@@ -89,6 +89,9 @@ export const Container = styled.button`
     flex-shrink: 0;
     z-index: 0;
     position: relative;
+    &:first-of-type {
+        margin-top: 0;
+    }
     ${props =>
         props.isLoading &&
         `

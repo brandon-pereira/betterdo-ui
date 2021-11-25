@@ -1,15 +1,13 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import styled from 'styled-components';
 
+import CUSTOM_LISTS from '@utilities/customLists.tsx';
 import _Icon from '@components/Icon';
 import { Body } from '@components/Copy';
 import { Error } from '@components/Forms';
 import Toggle from '@components/Toggle';
 import useProfile from '@hooks/useProfile';
 import useModifyProfile from '@hooks/useModifyProfile';
-import Bookmarks from '@components/Icon/svgs/bookmarks.svg';
-import Alarm from '@components/Icon/svgs/alarm.svg';
-import Calendar from '@components/Icon/svgs/calendar.svg';
 
 const Icon = styled(_Icon)``;
 
@@ -45,23 +43,6 @@ const IconHolder = styled.div`
     }
 `;
 
-const CUSTOM_LISTS = [
-    {
-        id: 'highPriority',
-        title: 'High Priority',
-        icon: Bookmarks
-    },
-    {
-        id: 'today',
-        title: 'Today',
-        icon: Alarm
-    },
-    {
-        id: 'tomorrow',
-        title: 'Tomorrow',
-        icon: Calendar
-    }
-];
 function CustomListSettings() {
     const { profile, loading, error } = useProfile();
     const [customLists, setCustomLists] = useState(profile.customLists || {});
@@ -95,11 +76,9 @@ function CustomListSettings() {
                 experience.
             </Body>
             <CustomListsContainer>
-                {CUSTOM_LISTS.map(list => (
+                {CUSTOM_LISTS.filter(list => !list.required).map(list => (
                     <CustomList key={list.id}>
-                        <IconHolder>
-                            <Icon icon={list.icon} color="#fff" />
-                        </IconHolder>
+                        <IconHolder>{list.icon}</IconHolder>
                         <Title>{list.title}</Title>
                         <Toggle
                             onChange={(e, bool) =>

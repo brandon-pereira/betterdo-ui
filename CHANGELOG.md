@@ -2,6 +2,7 @@
 
 ## v5.2.0 (beta)
 
+-   Added "Overdue" and "This Week" custom lists
 -   Custom lists now display their respective date in the navigation.
 -   Custom lists tasks states should now update more reliably
 -   Added timezone setting to improve reliability of date based custom lists
