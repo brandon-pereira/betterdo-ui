@@ -1,6 +1,10 @@
 # Changelog
 
-## v5.2.0 (beta)
+## v5.2.1
+
+-   Added animation to completed tasks counter when incrementing
+
+## v5.2.0
 
 -   Added "Overdue" and "This Week" custom lists
 -   Custom lists now display their respective date in the navigation.
