@@ -8,6 +8,7 @@ interface Props {
     icon: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
     className?: string;
     color?: string;
+    size?: string;
 }
 
 function Icon({ children, onClick, icon, className, color, ...props }: Props) {
