@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import { LIGHT_THEME } from '../../constants';
+import { LIGHT_THEME } from '../../theme';
 
 import AccountSettings from './AccountSettings';
 import CustomLists from './CustomLists';
