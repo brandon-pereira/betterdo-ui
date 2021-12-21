@@ -1,5 +1,5 @@
 {
-    "exclude": ["node_modules", "dist", "types"],
+    "exclude": ["node_modules", "dist"],
     "compilerOptions": {
         "outDir": "dist",
         "typeRoots": ["./types", "./node_modules/@types"],
