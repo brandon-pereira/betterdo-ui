@@ -9,7 +9,7 @@ export const Container = styled.div`
 export const ItemContainer = styled.button<{ selected: boolean }>`
     background: none;
     border: none;
-    color: #a5a5a5;
+    color: ${({ theme }) => theme.colors.forms.label.color};
     text-align: center;
     font: inherit;
     display: flex;
