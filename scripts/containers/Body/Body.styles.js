@@ -57,3 +57,49 @@ export const TaskContainer = styled.div`
     margin: 0 1rem;
     text-align: center;
 `;
+
+export const CounterContainer = styled.span`
+    position: relative;
+`;
+
+const Counter = styled.span``;
+
+export const CurrentCounter = styled(Counter)`
+    ${({ isAnimating }) => (isAnimating ? `display: none;` : `display: inline`)}
+`;
+
+export const NextCounter = styled(Counter)`
+    position: absolute;
+    top: -1rem;
+    opacity: 0;
+    left: 0
+    transition: none;
+    ${({ isAnimating }) =>
+        isAnimating
+            ? `
+        position: relative;
+        top: 0rem;
+        left: 0;
+        opacity: 1;
+        transition: top 0.6s, opacity 0.6s;
+    `
+            : `
+        visibility: hidden;
+    `}
+`;
+
+export const PrevCounter = styled(Counter)`
+    position: absolute;
+    top: 0rem;
+    left: 0;
+    opacity: 1;
+    transition: top 0.6s, opacity 0.6s;
+    ${({ isAnimating }) =>
+        isAnimating
+            ? `
+
+        top: 1rem;
+        opacity: 0;
+    `
+            : `visibility: hidden;`};
+`;
