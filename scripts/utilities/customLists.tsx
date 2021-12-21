@@ -1,4 +1,5 @@
 import React from 'react';
+import { startOfToday, startOfTomorrow } from 'date-fns';
 
 import Bookmarks from '@components/Icon/svgs/bookmarks.svg';
 import Alarm from '@components/Icon/svgs/alarm.svg';
@@ -57,12 +58,9 @@ export default [
 ];
 
 function getCurrentDay() {
-    const today = new Date();
-    return today.getDate();
+    return startOfToday().getDate();
 }
 
 function getTomorrowDay() {
-    const result = new Date();
-    result.setDate(result.getDate() + 1);
-    return result.getDate();
+    return startOfTomorrow().getDate();
 }

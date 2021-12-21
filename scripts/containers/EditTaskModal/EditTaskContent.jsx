@@ -15,6 +15,7 @@ import { Header } from '@components/Copy';
 import Selector from '@components/Selector';
 import { Label, Input, Error } from '@components/Forms';
 import Button from '@components/Button';
+import DueDate from '@components/DueDate/DueDate';
 import Subtasks from '@components/Subtasks';
 import useCurrentTaskId from '@hooks/useCurrentTaskId';
 import useTaskDetails from '@hooks/useTaskDetails';
@@ -174,12 +175,10 @@ function EditTaskContent({ setUnsavedChanges }) {
                     />
                 </Block>
                 <Block>
-                    <Label>Due Date</Label>
-                    <Input
-                        type="date"
-                        value={formatDateForInput(state.dueDate)}
-                        onKeyPress={onInputKeyPress('dueDate')}
-                        onChange={onInputChange('dueDate')}
+                    <Label>Due By</Label>
+                    <DueDate
+                        value={new Date(state.dueDate)}
+                        onChange={dueDate => onValueChange({ dueDate })}
                     />
                 </Block>
                 {task && (
@@ -209,13 +208,5 @@ function EditTaskContent({ setUnsavedChanges }) {
         </Container>
     );
 }
-
-const formatDateForInput = dateString => {
-    const date = new Date(dateString);
-    if (dateString && !isNaN(date.getTime())) {
-        return date.toISOString().substr(0, 10);
-    }
-    return '';
-};
 
 export default EditTaskContent;
