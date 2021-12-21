@@ -5,7 +5,7 @@ import {
 } from 'styled-components';
 import 'simplebar/dist/simplebar.min.css';
 
-import { LIGHT_THEME, DARK_THEME } from '../constants';
+import { LIGHT_THEME, DARK_THEME } from '../theme';
 
 import useDarkMode from '@hooks/useDarkMode';
 
