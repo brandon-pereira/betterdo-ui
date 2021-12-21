@@ -16,9 +16,10 @@ export default function RelativeTime({ date }) {
     useEffect(() => {
         // immediately call for side effects in date prop changing
         setRelativeTime(relativeTimeFromDates(date));
-        setInterval(() => {
+        const interval = setInterval(() => {
             setRelativeTime(relativeTimeFromDates(date));
         }, 30000); // 30s
+        return () => clearInterval(interval);
     }, [date]);
     return <>{relativeTime}</>;
 }
