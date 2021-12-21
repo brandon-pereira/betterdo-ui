@@ -12,6 +12,7 @@ function useDarkModeOnce() {
         parseValue(localStorage.getItem(localStorageKey))
     );
 
+    console.log(doesUserPreferDarkMode);
     useEffect(() => {
         const matcher = window.matchMedia('(prefers-color-scheme: dark)');
         const fn = e => setOSinDarkMode(Boolean(e.matches));
@@ -20,7 +21,8 @@ function useDarkModeOnce() {
     }, []);
 
     const shouldUseDarkMode =
-        isOSinDarkMode && doesUserPreferDarkMode ? true : isOSinDarkMode;
+        isOSinDarkMode && doesUserPreferDarkMode ? true : false;
+
     const setPrefersDarkMode = useCallback(bool => {
         if (bool) {
             setUserDarkPreference(true);
