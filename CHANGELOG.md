@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.2.2
+
+-   Better "Due By" quick action toggles
+-   Fix issue which broke dark mode logic
+-   Slowly migrating codebase to TypeScript
+
 ## v5.2.1
 
 -   Added animation to completed tasks counter when incrementing
