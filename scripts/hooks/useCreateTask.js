@@ -25,7 +25,6 @@ function useCreateTask() {
                                 _id: tempId,
                                 title: taskName,
                                 priority: 'normal',
-                                isTemporaryTask: true,
                                 isLoading: true
                             },
                             ...currentList.tasks
@@ -35,7 +34,25 @@ function useCreateTask() {
                 false
             );
             // Send request to server
-            await createTask(listId, taskName);
+            const addedTask = await createTask(listId, taskName);
+            // Sync temp task with server response
+            await mutate(
+                listUrl,
+                async currentList => {
+                    const mutatedList = { ...currentList };
+                    // this could be a race, but thats a big edge case, revalidation will cleanup shortly
+                    mutatedList.tasks[0] = Object.assign(
+                        { isTemporaryTask: true },
+                        mutatedList.tasks[0],
+                        addedTask
+                    );
+                    mutatedList.tasks = [...mutatedList.tasks];
+                    return mutatedList;
+                },
+                false
+            );
+            const sleep = new Promise(resolve => setTimeout(resolve, 300));
+            await Promise.all([sleep]);
             // Update real cached data
             await mutate(listUrl);
         },

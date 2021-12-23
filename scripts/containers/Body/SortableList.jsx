@@ -118,9 +118,10 @@ function SortableList({ tasks, onSortEnd }) {
                     {tasks.map((task, index) => (
                         <motion.div
                             key={typeof task === 'object' ? task._id : index}
-                            initial="hidden"
-                            animate="visible"
-                            layout
+                            // Disable animations because ghost element probs did this already
+                            initial={task.isTemporaryTask ? false : 'hidden'}
+                            animate={task.isTemporaryTask ? false : 'visible'}
+                            layout={!task.isTemporaryTask}
                             exit={task.isCompleted ? 'exit' : undefined}
                             custom={index}
                             variants={variants}
