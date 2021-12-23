@@ -15,7 +15,6 @@ const AddTask = function ({ hidden }) {
         async e => {
             e.preventDefault();
             const title = inputRef.current.value;
-            console.log(title);
             if (!title) {
                 setInvalid(true);
                 return;

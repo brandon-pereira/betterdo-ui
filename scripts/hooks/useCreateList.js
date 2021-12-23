@@ -26,7 +26,6 @@ function useCreateList() {
             );
             const list = await createList({ title, color });
             history.replace(`/${list._id}`);
-            console.log(list);
             await mutate(getListsUrl());
         },
         [history]

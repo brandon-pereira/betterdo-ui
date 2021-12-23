@@ -12,7 +12,6 @@ function useDarkModeOnce() {
         parseValue(localStorage.getItem(localStorageKey))
     );
 
-    console.log(doesUserPreferDarkMode);
     useEffect(() => {
         const matcher = window.matchMedia('(prefers-color-scheme: dark)');
         const fn = e => setOSinDarkMode(Boolean(e.matches));
