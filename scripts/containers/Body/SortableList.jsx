@@ -31,11 +31,15 @@ const variants = {
     hidden: {
         x: -100,
         opacity: 0
+    },
+    exit: {
+        x: 100,
+        opacity: 0,
+        transition: {
+            ease: 'easeOut',
+            delay: 0.1
+        }
     }
-    // exit: {
-    //     x: 100,
-    //     opacity: 0
-    // }
 };
 
 const SortableItem = function ({ id, value }) {
@@ -116,8 +120,8 @@ function SortableList({ tasks, onSortEnd }) {
                             key={typeof task === 'object' ? task._id : index}
                             initial="hidden"
                             animate="visible"
-                            // TODO: This is hard to add, but lets add it for 'checked' state
-                            //   exit: 'exit',
+                            layout
+                            exit={task.isCompleted ? 'exit' : undefined}
                             custom={index}
                             variants={variants}
                         >
