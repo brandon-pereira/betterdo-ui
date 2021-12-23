@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 
-const _Input = styled.input`
+const _Input = styled.input<{ invalid?: boolean }>`
     appearance: none;
     background: ${({ theme }) => theme.colors.forms.input.background};
     width: ${props => props.width || '100%'};
@@ -50,7 +50,7 @@ const Label = styled.label`
     display: block;
 `;
 
-const TextArea = styled.textarea`
+const TextArea = styled.textarea<{ invalid?: boolean }>`
     box-shadow: ${({ theme }) => theme.colors.forms.input.boxShadow};
     color: ${({ theme }) => theme.colors.forms.input.color};
     background: ${({ theme }) => theme.colors.forms.input.background};
@@ -77,14 +77,30 @@ const TextArea = styled.textarea`
     `};
 `;
 
-const Form = ({ children, errorMessage, ...props }) => (
+const Form = ({
+    children,
+    errorMessage,
+    ...props
+}: {
+    children: React.ReactChildren;
+    errorMessage?: string;
+} & React.DetailedHTMLProps<
+    React.FormHTMLAttributes<HTMLFormElement>,
+    HTMLFormElement
+>) => (
     <form {...props}>
         {errorMessage ? <Error>{errorMessage}</Error> : null}
         {children}
     </form>
 );
 
-const Input = forwardRef((props, ref) => (
+const Input = forwardRef<
+    HTMLInputElement,
+    React.DetailedHTMLProps<
+        React.InputHTMLAttributes<HTMLInputElement>,
+        HTMLInputElement
+    >
+>((props, ref) => (
     <_Input {...props} ref={ref} aria-label={props.placeholder} />
 ));
 Input.displayName = 'Input';
