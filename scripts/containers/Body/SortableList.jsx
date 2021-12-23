@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { CSS } from '@dnd-kit/utilities';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import {
@@ -17,6 +18,25 @@ import {
 } from '@dnd-kit/sortable';
 
 import Task from '@components/Task';
+
+const variants = {
+    visible: i => ({
+        opacity: 1,
+        x: 0,
+        transition: {
+            ease: 'easeOut',
+            delay: Math.min(i * 0.02, 0.1)
+        }
+    }),
+    hidden: {
+        x: -100,
+        opacity: 0
+    }
+    // exit: {
+    //     x: 100,
+    //     opacity: 0
+    // }
+};
 
 const SortableItem = function ({ id, value }) {
     const {
@@ -90,14 +110,25 @@ function SortableList({ tasks, onSortEnd }) {
                 )}
                 strategy={verticalListSortingStrategy}
             >
-                {tasks.map((task, index) => (
-                    <SortableItem
-                        key={typeof task === 'object' ? task._id : index}
-                        id={typeof task === 'object' ? task._id : index}
-                        index={index}
-                        value={task}
-                    />
-                ))}
+                <AnimatePresence>
+                    {tasks.map((task, index) => (
+                        <motion.div
+                            key={typeof task === 'object' ? task._id : index}
+                            initial="hidden"
+                            animate="visible"
+                            // TODO: This is hard to add, but lets add it for 'checked' state
+                            //   exit: 'exit',
+                            custom={index}
+                            variants={variants}
+                        >
+                            <SortableItem
+                                id={typeof task === 'object' ? task._id : index}
+                                index={index}
+                                value={task}
+                            />
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
             </SortableContext>
         </DndContext>
     );

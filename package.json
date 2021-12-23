@@ -10,6 +10,7 @@
         "@loadable/component": "^5.15.0",
         "@vvo/tzdb": "^6.33.0",
         "array-move": "^4.0.0",
+        "framer-motion": "^5.5.5",
         "lodash.get": "^4.4.2",
         "randomcolor": "^0.6.2",
         "react": "17.0.2",

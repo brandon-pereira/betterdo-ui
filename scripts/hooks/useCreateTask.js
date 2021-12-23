@@ -25,6 +25,7 @@ function useCreateTask() {
                                 _id: tempId,
                                 title: taskName,
                                 priority: 'normal',
+                                isTemporaryTask: true,
                                 isLoading: true
                             },
                             ...currentList.tasks
