@@ -25,7 +25,7 @@ const variants = {
         x: 0,
         transition: {
             ease: 'easeOut',
-            delay: Math.min(i * 0.02, 0.1)
+            delay: i * 0.05
         }
     }),
     hidden: {
