@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    margin-bottom: 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
@@ -20,13 +19,20 @@ export const ItemContainer = styled.button<{ selected: boolean }>`
     flex-direction: column;
     padding: 1rem 0;
     margin: 0 1rem 1rem 0;
-    &:hover {
-        background: rgba(255, 255, 255, 0.1);
-    }
-    ${({ selected }) =>
+
+    ${({ theme, selected }) =>
         selected &&
         `
-        background: rgba(255, 255, 255, 0.1);
+        &:hover {
+            background: ${
+                theme.isDarkMode
+                    ? `rgba(255, 255, 255, 0.1)`
+                    : `rgba(0, 0, 0, 0.1)`
+            };
+        }
+        background: ${
+            theme.isDarkMode ? `rgba(255, 255, 255, 0.1)` : `rgba(0, 0, 0, 0.1)`
+        };
     `}
 `;
 

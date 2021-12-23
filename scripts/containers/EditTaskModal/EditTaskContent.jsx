@@ -177,7 +177,7 @@ function EditTaskContent({ setUnsavedChanges }) {
                 <Block>
                     <Label>Due By</Label>
                     <DueDate
-                        value={new Date(state.dueDate)}
+                        value={state.dueDate}
                         onChange={dueDate => onValueChange({ dueDate })}
                     />
                 </Block>
