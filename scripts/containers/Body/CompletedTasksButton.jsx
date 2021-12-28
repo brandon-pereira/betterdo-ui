@@ -18,10 +18,9 @@ function _CompletedTasksButton({ onClick, isLoading, count, hidden }) {
         if (count !== currentCount) {
             setPrevCount(currentCount);
             setCurrentCount(count);
-            const timeout = setTimeout(() => {
+            setTimeout(() => {
                 setPrevCount(null);
             }, 600);
-            return () => clearTimeout(timeout);
         }
     }, [count, currentCount]);
 
