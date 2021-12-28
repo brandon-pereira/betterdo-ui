@@ -44,7 +44,7 @@ export const Container = styled.div`
     overflow: hidden;
     padding-top: 1rem;
     background: ${({ theme }) => theme.colors.body.background};
-    @media ${QUERIES.medium} {
+    ${QUERIES.medium} {
         grid-row: 2;
         grid-column: 2;
         ${Banner} {

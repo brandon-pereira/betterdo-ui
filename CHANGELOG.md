@@ -1,7 +1,9 @@
 # Changelog
 
-## 5.2.2
+## 5.3.0
 
+-   Fixed issues with this week list
+-   Switched animation engines, added animations to tasks load/switching
 -   Better "Due By" quick action toggles
 -   Fix issue which broke dark mode logic
 -   Slowly migrating codebase to TypeScript

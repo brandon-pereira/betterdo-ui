@@ -39,7 +39,7 @@ export const Container = styled.header`
     ${Loader} {
         filter: drop-shadow(1px 1px rgba(0, 0, 0, 0.5));
     }
-    @media ${QUERIES.medium} {
+    ${QUERIES.medium} {
         grid-row: 1;
         grid-column: 2;
         ${Hamburger} {

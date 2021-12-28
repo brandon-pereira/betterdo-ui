@@ -26,7 +26,7 @@ export const Modal = styled(_Modal)`
         left: auto;
         border-radius: 4px 0 0 0;
     }
-    @media ${QUERIES.medium} {
+    ${QUERIES.medium} {
         right: 10px;
         & [data-betterdo-modal-arrow] {
             right: 1.2rem;

@@ -32,7 +32,7 @@ export const Container = styled.nav`
             opacity: 1;
         }
     `}
-    @media ${QUERIES.medium} {
+    ${QUERIES.medium} {
         display: flex;
         position: static;
         opacity: 1;

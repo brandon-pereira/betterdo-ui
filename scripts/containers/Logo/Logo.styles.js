@@ -14,7 +14,7 @@ export const Container = styled.div`
     grid-column: 1;
     z-index: 10;
     transition: background 0.6s;
-    @media ${QUERIES.medium} {
+    ${QUERIES.medium} {
         transform: none;
         grid-row: 1 / 1;
         grid-column: 1 / 1;
@@ -48,7 +48,7 @@ export const Content = styled.div`
     span {
         font-weight: 600;
     }
-    @media ${QUERIES.medium} {
+    ${QUERIES.medium} {
         border-radius: 0 30px 0 0;
         transform: none;
         padding: 0 0.5rem;
@@ -64,7 +64,7 @@ export const Content = styled.div`
             display: none;
         }
     }
-    @media ${QUERIES.large} {
+    ${QUERIES.large} {
         h1 {
             font-size: 1.8rem;
             margin-right: 1rem;

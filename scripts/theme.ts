@@ -1,6 +1,11 @@
-export const BASE_THEME = {};
+import { QUERIES } from './constants';
+
+export const BASE_THEME = {
+    queries: QUERIES
+};
 
 export const LIGHT_THEME = {
+    ...BASE_THEME,
     isDarkMode: false,
     colors: {
         navigation: {
@@ -67,6 +72,7 @@ export const LIGHT_THEME = {
 export type Theme = typeof LIGHT_THEME;
 
 export const DARK_THEME: Theme = {
+    ...BASE_THEME,
     isDarkMode: true,
     colors: {
         navigation: {

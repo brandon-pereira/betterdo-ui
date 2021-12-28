@@ -11,7 +11,7 @@ export const Modal = styled(_Modal)`
     [data-betterdo-modal-arrow] {
         display: none;
     }
-    @media ${QUERIES.medium} {
+    ${QUERIES.medium} {
         transform: translateX(-50px);
         opacity: 0;
         transition: transform 0.2s;

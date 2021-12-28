@@ -15,11 +15,11 @@ export const _Container = styled.div`
         grid-template-columns: 1fr 0;
         grid-template-rows: 4rem 60vh 4rem 1fr;  
     `}
-    @media ${QUERIES.medium} {
+    ${QUERIES.medium} {
         grid-template-columns: 10rem 1fr;
         grid-template-rows: 4rem 1fr 0 0;
     }
-    @media ${QUERIES.large} {
+    ${QUERIES.large} {
         grid-template-columns: 14rem 1fr;
     }
 `;

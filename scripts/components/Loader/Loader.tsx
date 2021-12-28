@@ -1,10 +1,17 @@
 import React from 'react';
 
-import { Loader as _Loader } from './Loader.styles.js';
+import { Loader as _Loader } from './Loader.styles';
 
 import LoaderSvg from '@components/Icon/svgs/loader.svg';
 
-function Loader({ className, isVisible, color, size }) {
+type Props = {
+    className?: string;
+    isVisible?: boolean;
+    color?: string;
+    size?: string;
+};
+
+function Loader({ className, isVisible, color, size }: Props) {
     return (
         <_Loader
             className={className}
@@ -16,7 +23,5 @@ function Loader({ className, isVisible, color, size }) {
         </_Loader>
     );
 }
-
-Loader.displayName = 'Loader';
 
 export default Loader;

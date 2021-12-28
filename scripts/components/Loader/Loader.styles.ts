@@ -23,7 +23,7 @@ const dashoffset = keyframes`
     }
 `;
 
-export const Loader = styled.div`
+export const Loader = styled.div<{ isVisible?: boolean; size?: string }>`
     height: 0;
     width: 0;
     transform: scale(0);

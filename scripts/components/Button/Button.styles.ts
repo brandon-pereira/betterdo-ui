@@ -1,22 +1,23 @@
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 
 import _Loader from '@components/Loader';
 
-export const Button = styled.button.attrs(props => ({
-    style: {
+export const StyledButton = styled.button.attrs(({ color, theme }) => {
+    const style = {
         backgroundColor:
-            props.theme.colors.general[props.color] ||
-            props.color ||
-            props.theme.colors.general.blue
-    }
-}))`
+            theme.colors.general[color as keyof typeof theme.colors.general] ||
+            color ||
+            theme.colors.general.blue
+    } as CSSProperties;
+    return { style };
+})<{ isLoading?: boolean }>`
     border: none;
     color: #fff;
     border-radius: 50px;
-    padding: ${props => (props.small ? '0.4rem 0.5rem' : '1rem 2rem')};
+    padding: 1rem 2rem;
     font: inherit;
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
-    font-size: ${props => (props.small ? '0.6rem' : '1rem')};
+    font-size: 1rem;
     cursor: pointer;
     position: relative;
     z-index: 0;

@@ -46,7 +46,7 @@ export const Container = styled.div`
         transform: translate(-50%, -50%);
         }
     `}
-    @media ${QUERIES.medium} {
+    ${QUERIES.medium} {
         width: 60%;
     }
 `;
