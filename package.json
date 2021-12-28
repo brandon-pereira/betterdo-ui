@@ -54,7 +54,7 @@
         "workbox-cli": "^6.4.2"
     },
     "scripts": {
-        "build": "NODE_ENV='production' snowpack build && npm run build:service-worker",
+        "build": "rm -rf node_modules/.cache && NODE_ENV='production' snowpack build && npm run build:service-worker",
         "build:service-worker": "NODE_ENV='production' esbuild service-worker.js --bundle --minify --bundle --define:process.env.NODE_ENV=\\\"production\\\" --outfile=dist/service-worker.js && workbox injectManifest ./workbox-config.js",
         "start": "snowpack dev",
         "test": "eslint . --ext .jsx,.js,.ts,.tsx && npx tsc --noemit"
