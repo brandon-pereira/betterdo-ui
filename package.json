@@ -12,7 +12,6 @@
         "array-move": "^4.0.0",
         "date-fns": "^2.28.0",
         "framer-motion": "^5.5.5",
-        "lodash.get": "^4.4.2",
         "randomcolor": "^0.6.2",
         "react": "17.0.2",
         "react-dom": "17.0.2",
@@ -23,7 +22,6 @@
         "styled-components": "^5.3.3",
         "swr": "^1.1.2",
         "web-notifier": "^1.0.2",
-        "workbox-webpack-plugin": "^6.4.2",
         "workbox-window": "^6.4.2"
     },
     "devDependencies": {
@@ -31,7 +29,6 @@
         "@babel/eslint-parser": "^7.16.5",
         "@babel/preset-react": "^7.16.5",
         "@snowpack/plugin-typescript": "^1.2.1",
-        "@svgr/webpack": "^5.5.0",
         "@types/react": "^17.0.38",
         "@types/react-dom": "^17.0.11",
         "@types/react-router-dom": "^5.3.2",
