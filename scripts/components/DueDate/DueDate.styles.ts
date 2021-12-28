@@ -5,6 +5,15 @@ export const Container = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
+export const DayIcon = styled.div`
+    height: 30px;
+    width: 30px;
+    padding-top: 3px;
+    box-sizing: border-box;
+    font-size: 16px;
+    box-shadow: inset 0 -1px 0 3px currentColor;
+`;
+
 export const ItemContainer = styled.button<{ selected: boolean }>`
     background: none;
     border: none;

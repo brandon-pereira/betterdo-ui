@@ -7,12 +7,13 @@ import {
     isSameWeek
 } from 'date-fns';
 
-import { Container, ItemContainer, ItemLabel } from './DueDate.styles';
+import { Container, DayIcon, ItemContainer, ItemLabel } from './DueDate.styles';
 
 import { Input } from '@components/Forms';
 import Calendar from '@components/Icon/svgs/calendar.svg';
 import Eyedropper from '@components/Icon/svgs/eyedropper.svg';
 import Icon from '@components/Icon';
+import { getCurrentDay, getTomorrowDay } from '@utilities/customLists';
 
 type Props = {
     onChange(date?: string): void;
@@ -66,22 +67,14 @@ function DueDate({ value, onChange }: Props) {
                     selected={isToday && !isCustomEnabled}
                     onClick={_onQuickActionSelect(today)}
                 >
-                    <Icon
-                        size={`30px`}
-                        color="currentColor"
-                        icon={Eyedropper}
-                    />
+                    <DayIcon>{getCurrentDay()}</DayIcon>
                     <ItemLabel>Today</ItemLabel>
                 </ItemContainer>
                 <ItemContainer
                     selected={isTomorrow && !isCustomEnabled}
                     onClick={_onQuickActionSelect(tomorrow)}
                 >
-                    <Icon
-                        size={`30px`}
-                        color="currentColor"
-                        icon={Eyedropper}
-                    />
+                    <DayIcon>{getTomorrowDay()}</DayIcon>
                     <ItemLabel>Tomorrow</ItemLabel>
                 </ItemContainer>
                 <ItemContainer

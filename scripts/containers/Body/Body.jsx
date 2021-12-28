@@ -7,7 +7,7 @@ import CompletedTasksButton from './CompletedTasksButton';
 import { AllCaughtUpBanner, ServerErrorBanner } from './Banners';
 import NotificationBanner from './NotificationBanner';
 
-import customLists from '@utilities/customLists.tsx';
+import customLists from '@utilities/customLists';
 import AddTask from '@components/AddTask';
 import Task from '@components/Task';
 import useListDetails from '@hooks/useListDetails';

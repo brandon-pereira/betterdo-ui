@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import CUSTOM_LISTS from '@utilities/customLists.tsx';
+import CUSTOM_LISTS from '@utilities/customLists';
 import _Icon from '@components/Icon';
 import { Body } from '@components/Copy';
 import { Error } from '@components/Forms';

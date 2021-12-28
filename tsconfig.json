@@ -7,7 +7,7 @@
         "module": "esnext",
         "target": "es5",
         "paths": {
-            "@utilities/*": ["./scripts/utilities"],
+            "@utilities/*": ["./scripts/utilities/*"],
             "@components/*": ["./scripts/components/*"],
             "@hooks/*": ["./scripts/hooks/*"]
         },

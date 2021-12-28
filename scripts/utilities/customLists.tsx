@@ -57,10 +57,10 @@ export default [
     }
 ];
 
-function getCurrentDay() {
+export function getCurrentDay() {
     return startOfToday().getDate();
 }
 
-function getTomorrowDay() {
+export function getTomorrowDay() {
     return startOfTomorrow().getDate();
 }
