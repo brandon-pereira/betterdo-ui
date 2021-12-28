@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { CSS } from '@dnd-kit/utilities';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import {
@@ -17,6 +18,29 @@ import {
 } from '@dnd-kit/sortable';
 
 import Task from '@components/Task';
+
+const variants = {
+    visible: i => ({
+        opacity: 1,
+        x: 0,
+        transition: {
+            ease: 'easeOut',
+            delay: i * 0.05
+        }
+    }),
+    hidden: {
+        x: -100,
+        opacity: 0
+    },
+    exit: {
+        x: 100,
+        opacity: 0,
+        transition: {
+            ease: 'easeOut',
+            delay: 0.1
+        }
+    }
+};
 
 const SortableItem = function ({ id, value }) {
     const {
@@ -90,14 +114,26 @@ function SortableList({ tasks, onSortEnd }) {
                 )}
                 strategy={verticalListSortingStrategy}
             >
-                {tasks.map((task, index) => (
-                    <SortableItem
-                        key={typeof task === 'object' ? task._id : index}
-                        id={typeof task === 'object' ? task._id : index}
-                        index={index}
-                        value={task}
-                    />
-                ))}
+                <AnimatePresence>
+                    {tasks.map((task, index) => (
+                        <motion.div
+                            key={typeof task === 'object' ? task._id : index}
+                            // Disable animations because ghost element probs did this already
+                            initial={task.isTemporaryTask ? false : 'hidden'}
+                            animate={task.isTemporaryTask ? false : 'visible'}
+                            layout={!task.isTemporaryTask}
+                            exit={task.isCompleted ? 'exit' : undefined}
+                            custom={index}
+                            variants={variants}
+                        >
+                            <SortableItem
+                                id={typeof task === 'object' ? task._id : index}
+                                index={index}
+                                value={task}
+                            />
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
             </SortableContext>
         </DndContext>
     );

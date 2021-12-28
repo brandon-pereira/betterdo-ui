@@ -79,7 +79,7 @@ export const Container = styled.button`
     background: ${({ theme }) => theme.colors.task.background};
     color: ${({ theme }) => theme.colors.task.color};
     box-shadow: ${({ theme }) => theme.colors.task.boxShadow};
-    margin: 0.5rem 0 0;
+    margin: 0 0 0.5rem 0;
     border-radius: 50px;
     width: 100%;
     text-align: left;
@@ -89,9 +89,6 @@ export const Container = styled.button`
     flex-shrink: 0;
     z-index: 0;
     position: relative;
-    &:first-of-type {
-        margin-top: 0;
-    }
     ${props =>
         props.isLoading &&
         `

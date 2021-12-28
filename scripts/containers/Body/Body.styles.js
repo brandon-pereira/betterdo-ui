@@ -10,6 +10,7 @@ export const Banner = styled(_Banner)``;
 
 export const Scroller = styled(_Scroller)`
     margin-bottom: 0.5rem;
+    overflow-x: hidden;
     .simplebar-content {
         display: flex;
         flex-direction: column;
