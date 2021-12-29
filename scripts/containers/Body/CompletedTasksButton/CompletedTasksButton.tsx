@@ -1,14 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-import {
-    Button,
-    CurrentCounter,
-    PrevCounter,
-    NextCounter,
-    CounterContainer
-} from './CompletedTasksButton.styles';
+import { Button } from './CompletedTasksButton.styles';
 
 import formatNumber from '@utilities/formatNumber';
+
+const variants = {
+    entering: {
+        y: -50,
+        opacity: 0
+    },
+    entered: {
+        y: 0,
+        opacity: 1
+    },
+    exiting: {
+        position: 'absolute',
+        y: 50,
+        opacity: 0
+    }
+};
 
 type Props = {
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
@@ -18,38 +29,30 @@ type Props = {
 };
 
 function CompletedTasksButton({ onClick, isLoading, count, hidden }: Props) {
-    const [prevCount, setPrevCount] = useState<number | null>(null);
-    const [currentCount, setCurrentCount] = useState<number>(count);
-
-    useEffect(() => {
-        if (count !== currentCount) {
-            setPrevCount(currentCount);
-            setCurrentCount(count);
-            setTimeout(() => {
-                setPrevCount(null);
-            }, 600);
-        }
-    }, [count, currentCount]);
-
     return (
         <Button
             hidden={hidden || count === 0}
             isLoading={isLoading}
-            color="#999999"
             loaderColor="#888"
             onClick={onClick}
         >
-            <CounterContainer>
-                <PrevCounter aria-hidden="true" isAnimating={!!prevCount}>
-                    {formatNumber(prevCount || currentCount)}
-                </PrevCounter>
-                <NextCounter aria-hidden="true" isAnimating={!!prevCount}>
-                    {formatNumber(currentCount)}
-                </NextCounter>
-                <CurrentCounter isAnimating={!!prevCount}>
-                    {formatNumber(currentCount)}
-                </CurrentCounter>
-            </CounterContainer>
+            <AnimatePresence>
+                <motion.span
+                    style={{ display: 'inline-block' }}
+                    // @ts-expect-error position is supported in browser but not types
+                    variants={variants}
+                    initial="entering"
+                    animate="entered"
+                    exit="exiting"
+                    key={count}
+                    transition={{
+                        type: 'linear',
+                        duration: 1
+                    }}
+                >
+                    {formatNumber(count)}
+                </motion.span>
+            </AnimatePresence>
             {' completed tasks'}
         </Button>
     );
