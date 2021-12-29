@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.3.1
+
+-   Improvements to animations on switching lists and adding/completing tasks
+
 ## 5.3.0
 
 -   Fixed issues with this week list
