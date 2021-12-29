@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from 'react';
 
 import {
-    CompletedTasksButton,
+    Button,
     CurrentCounter,
     PrevCounter,
     NextCounter,
     CounterContainer
-} from './Body.styles.js';
+} from './CompletedTasksButton.styles';
 
 import formatNumber from '@utilities/formatNumber';
 
-function _CompletedTasksButton({ onClick, isLoading, count, hidden }) {
-    const [prevCount, setPrevCount] = useState(null);
-    const [currentCount, setCurrentCount] = useState(count);
+type Props = {
+    onClick?: React.MouseEventHandler<HTMLButtonElement>;
+    isLoading?: boolean;
+    count: number;
+    hidden: boolean;
+};
+
+function CompletedTasksButton({ onClick, isLoading, count, hidden }: Props) {
+    const [prevCount, setPrevCount] = useState<number | null>(null);
+    const [currentCount, setCurrentCount] = useState<number>(count);
 
     useEffect(() => {
         if (count !== currentCount) {
@@ -25,7 +32,7 @@ function _CompletedTasksButton({ onClick, isLoading, count, hidden }) {
     }, [count, currentCount]);
 
     return (
-        <CompletedTasksButton
+        <Button
             hidden={hidden || count === 0}
             isLoading={isLoading}
             color="#999999"
@@ -33,19 +40,19 @@ function _CompletedTasksButton({ onClick, isLoading, count, hidden }) {
             onClick={onClick}
         >
             <CounterContainer>
-                <PrevCounter aria-hidden="true" isAnimating={prevCount}>
-                    {formatNumber(prevCount)}
+                <PrevCounter aria-hidden="true" isAnimating={!!prevCount}>
+                    {formatNumber(prevCount || currentCount)}
                 </PrevCounter>
-                <NextCounter aria-hidden="true" isAnimating={prevCount}>
+                <NextCounter aria-hidden="true" isAnimating={!!prevCount}>
                     {formatNumber(currentCount)}
                 </NextCounter>
-                <CurrentCounter isAnimating={prevCount}>
+                <CurrentCounter isAnimating={!!prevCount}>
                     {formatNumber(currentCount)}
                 </CurrentCounter>
             </CounterContainer>
             {' completed tasks'}
-        </CompletedTasksButton>
+        </Button>
     );
 }
 
-export default _CompletedTasksButton;
+export default CompletedTasksButton;
