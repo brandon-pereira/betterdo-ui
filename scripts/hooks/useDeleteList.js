@@ -1,13 +1,13 @@
 import { useCallback } from 'react';
 import { mutate } from 'swr';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { getListsUrl } from './internal/urls';
 
 import { deleteList } from '@utilities/server';
 
 function useDeleteList() {
-    const history = useHistory();
+    const navigate = useNavigate();
     return useCallback(
         async listId => {
             await mutate(
@@ -22,9 +22,9 @@ function useDeleteList() {
                 throw err;
             }
             await mutate(getListsUrl());
-            history.replace('/');
+            navigate('/');
         },
-        [history]
+        [navigate]
     );
 }
 

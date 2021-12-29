@@ -1,13 +1,13 @@
 import { useCallback } from 'react';
 import { mutate } from 'swr';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { getListsUrl } from './internal/urls';
 
 import { createList } from '@utilities/server';
 
 function useCreateList() {
-    const history = useHistory();
+    const navigate = useNavigate();
     return useCallback(
         async (title, color) => {
             await mutate(
@@ -25,10 +25,10 @@ function useCreateList() {
                 false
             );
             const list = await createList({ title, color });
-            history.replace(`/${list._id}`);
+            navigate(`/${list._id}`);
             await mutate(getListsUrl());
         },
-        [history]
+        [navigate]
     );
 }
 

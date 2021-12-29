@@ -1,19 +1,19 @@
 import { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import useGeneratedUrl from '@hooks/useGeneratedUrl';
 
 function useNewListModal() {
     const generateUrl = useGeneratedUrl();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const openModal = useCallback(() => {
-        history.replace(generateUrl('/create-list'));
-    }, [history, generateUrl]);
+        navigate(generateUrl('/create-list'));
+    }, [navigate, generateUrl]);
 
     const closeModal = useCallback(() => {
-        history.replace(generateUrl());
-    }, [history, generateUrl]);
+        navigate(generateUrl());
+    }, [navigate, generateUrl]);
 
     return {
         openModal,

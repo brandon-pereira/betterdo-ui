@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { mutate } from 'swr';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { getListDetailUrl, getTaskDetailUrl } from './internal/urls';
 
@@ -10,7 +10,7 @@ import useCurrentListId from '@hooks/useCurrentListId';
 import { updateTask } from '@utilities/server';
 
 function useModifyTask() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [isCompletedTasksIncluded] = useCompletedTasks();
     const currentListId = useCurrentListId();
     const generateUrl = useGeneratedUrl();
@@ -54,7 +54,7 @@ function useModifyTask() {
             mutate(getListDetailUrl(currentListId, isCompletedTasksIncluded));
             mutate(getTaskDetailUrl(taskId));
             if (updatedProps.list && updatedProps.list !== currentListId) {
-                history.replace(
+                navigate(
                     generateUrl(`/edit-task/:taskId`, {
                         currentListId: updatedProps.list,
                         taskId: taskId
@@ -63,7 +63,7 @@ function useModifyTask() {
                 mutate(getListDetailUrl(updatedProps.list));
             }
         },
-        [currentListId, isCompletedTasksIncluded, history, generateUrl]
+        [currentListId, isCompletedTasksIncluded, navigate, generateUrl]
     );
 }
 

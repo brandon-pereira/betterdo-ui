@@ -1,20 +1,20 @@
 import { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import useGeneratedUrl from '@hooks/useGeneratedUrl';
 
 function useEditTaskModal() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const generateUrl = useGeneratedUrl();
     const openTaskModal = useCallback(
         taskId => {
-            history.replace(generateUrl('/edit-task/' + taskId));
+            navigate(generateUrl('/edit-task/' + taskId));
         },
-        [generateUrl, history]
+        [generateUrl, navigate]
     );
     const closeModal = useCallback(() => {
-        history.replace(generateUrl());
-    }, [generateUrl, history]);
+        navigate(generateUrl());
+    }, [generateUrl, navigate]);
 
     return {
         openTaskModal,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import {
     Container,
@@ -17,7 +17,7 @@ import useHamburgerNav from '@hooks/useHamburgerNav';
 function Logo() {
     const [isMobileNavVisible, setMobileNavVisibility] = useHamburgerNav();
     const generateUrl = useGeneratedUrl();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const { profile } = useProfile();
     const currentListId = useCurrentListId();
@@ -40,7 +40,7 @@ function Logo() {
                     <ProfilePicture
                         onClick={e => {
                             e.stopPropagation();
-                            history.replace(generateUrl('/account-settings'));
+                            navigate(generateUrl('/account-settings'));
                         }}
                         user={profile}
                     />

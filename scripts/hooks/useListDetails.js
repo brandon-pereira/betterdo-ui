@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import useSWR from 'swr';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { DEFAULT_LIST_COLOR } from '../constants';
 
@@ -15,7 +15,7 @@ function useListDetails(listId) {
         completedTasks: []
     });
     const [isCompletedTasksIncluded] = useCompletedTasks();
-    const history = useHistory();
+    const navigate = useNavigate();
     const { data, error } = useSWR(
         getListDetailUrl(listId, isCompletedTasksIncluded),
         {
@@ -33,9 +33,9 @@ function useListDetails(listId) {
     useEffect(() => {
         if (error && error.message === 'Invalid List ID') {
             console.warn('Invalid list detected, redirecting to inbox.');
-            history.replace('/');
+            navigate('/');
         }
-    }, [error, history]);
+    }, [error, navigate]);
 
     return {
         error,

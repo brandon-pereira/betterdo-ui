@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { mutate } from 'swr';
 
 import { getListDetailUrl } from './internal/urls';
@@ -8,7 +8,7 @@ import useCompletedTasks from '@hooks/useCompletedTasks';
 import useHamburgerNav from '@hooks/useHamburgerNav';
 
 function useSwitchList() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [, setShowCompletedTasks] = useCompletedTasks();
     const [, setMobileNavVisibility] = useHamburgerNav();
 
@@ -25,11 +25,11 @@ function useSwitchList() {
             // turn off completed tasks view
             setShowCompletedTasks(false);
             // update url
-            history.replace(`/${nextList._id}`);
+            navigate(`/${nextList._id}`);
             // Force a network refresh when changing lists
             await mutate(getListDetailUrl(nextList._id));
         },
-        [history, setMobileNavVisibility, setShowCompletedTasks]
+        [navigate, setMobileNavVisibility, setShowCompletedTasks]
     );
 
     return switchList;

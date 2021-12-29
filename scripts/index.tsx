@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 import { ThemeProvider, GlobalStyles } from './utilities/ThemeProvider';
@@ -11,6 +11,7 @@ import { DarkModeProvider } from '@hooks/useDarkMode';
 import SharedProviders from '@hooks/internal/SharedProviders';
 import ErrorBoundary from '@components/ErrorBoundary';
 import './utilities/ServiceWorkerRegister';
+import InboxRedirect from './containers/Redirects/InboxRedirect';
 
 render(
     <HelmetProvider>
@@ -19,15 +20,30 @@ render(
             <ThemeProvider>
                 <ErrorBoundary>
                     <HashRouter>
-                        <Switch>
-                            <Route path="/:currentListId?">
-                                <SWRProvider>
-                                    <SharedProviders>
-                                        <App />
-                                    </SharedProviders>
-                                </SWRProvider>
-                            </Route>
-                        </Switch>
+                        <Routes>
+                            <Route
+                                path="/"
+                                element={
+                                    <SWRProvider>
+                                        <SharedProviders>
+                                            <InboxRedirect />
+                                        </SharedProviders>
+                                    </SWRProvider>
+                                }
+                            />
+                            <Route
+                                path=":currentListId/*"
+                                element={
+                                    <>
+                                        <SWRProvider>
+                                            <SharedProviders>
+                                                <App />
+                                            </SharedProviders>
+                                        </SWRProvider>
+                                    </>
+                                }
+                            />
+                        </Routes>
                     </HashRouter>
                 </ErrorBoundary>
             </ThemeProvider>
@@ -35,6 +51,3 @@ render(
     </HelmetProvider>,
     document.querySelector('.main-container')
 );
-
-document.body.classList.add('loaded');
-document.querySelector('#critical-css')?.remove();

@@ -1,6 +1,5 @@
-/* eslint-disable react/no-children-prop */
-import React from 'react';
-import { Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 import Container from './containers/Container';
 import Header from './containers/Header';
@@ -15,43 +14,52 @@ import InboxRedirect from './containers/Redirects/InboxRedirect';
 
 import Helmet from '@components/Helmet';
 
-const App = () => (
-    <>
-        <Helmet />
-        <Container>
-            <Logo />
-            <Navigation />
-            <Header />
-            <Body />
-        </Container>
+const App = () => {
+    useEffect(() => {
+        document.body.classList.add('loaded');
+        document.querySelector('#critical-css')?.remove();
+    }, []);
+
+    return (
         <>
-            <InboxRedirect />
-            <Route
-                children={({ match }) => (
-                    <AddListModal isOpen={Boolean(match)} />
-                )}
-                path="/:currentListId/create-list"
-            />
-            <Route
-                children={({ match }) => (
-                    <EditListModal isOpen={Boolean(match)} />
-                )}
-                path="/:currentListId/edit-list"
-            />
-            <Route
-                children={({ match }) => (
-                    <EditTaskModal isOpen={Boolean(match)} />
-                )}
-                path="/:currentListId/edit-task/:currentTaskId"
-            />
-            <Route
-                children={({ match }) => (
-                    <UserSettingsModal isOpen={Boolean(match)} />
-                )}
-                path="/:currentListId/account-settings/:subroute?"
-            />
+            <Helmet />
+            <Container>
+                <Logo />
+                <Navigation />
+                <Header />
+                <Body />
+            </Container>
+            <>
+                <InboxRedirect />
+                <Routes>
+                    <Route
+                        // element={<AddListModal isOpen={true} />}
+                        path="create-list"
+                    >
+                        <AddListModal isOpen={true} />
+                    </Route>
+                    {/* <Route
+                    children={({ match }) => (
+                        <EditListModal isOpen={Boolean(match)} />
+                    )}
+                    path="/:currentListId/edit-list"
+                />
+                <Route
+                    children={({ match }) => (
+                        <EditTaskModal isOpen={Boolean(match)} />
+                    )}
+                    path="/:currentListId/edit-task/:currentTaskId"
+                />
+                <Route
+                    children={({ match }) => (
+                        <UserSettingsModal isOpen={Boolean(match)} />
+                    )}
+                    path="/:currentListId/account-settings/:subroute?"
+                /> */}
+                </Routes>
+            </>
         </>
-    </>
-);
+    );
+};
 
 export default App;
