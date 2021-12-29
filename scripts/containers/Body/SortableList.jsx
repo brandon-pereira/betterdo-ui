@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CSS } from '@dnd-kit/utilities';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
@@ -107,6 +107,14 @@ function SortableList({ listId, tasks, onSortEnd }) {
 
     tasks = tasks || [];
 
+    // tracking of previous list length for when
+    // bouncing from 'all caught up' to tasks list
+    // for smoother transition
+    const prevLength = useRef(tasks.length);
+    useEffect(() => {
+        prevLength.current = tasks.length;
+    }, [tasks.length]);
+
     return (
         <DndContext
             sensors={sensors}
@@ -121,7 +129,7 @@ function SortableList({ listId, tasks, onSortEnd }) {
                 strategy={verticalListSortingStrategy}
             >
                 <AnimatePresence
-                    exitBeforeEnter
+                    exitBeforeEnter={prevLength.current !== 0}
                     custom={{ newListLength: tasks.length }}
                 >
                     <motion.div
