@@ -20,29 +20,24 @@ import {
 import Task from '@components/Task';
 
 const variants = {
-    visible: i => ({
+    visible: {
         opacity: 1,
-        x: 0,
-        transition: {
-            ease: 'easeOut',
-            delay: i * 0.05
-        }
-    }),
-    hidden: {
+        x: 0
+    },
+    beforeEnter: {
         x: -100,
         opacity: 0
     },
-    exit: {
+    exit: ({ newListLength }) => ({
         x: 100,
         opacity: 0,
         transition: {
-            ease: 'easeOut',
-            delay: 0.1
+            duration: newListLength ? undefined : 0
         }
-    }
+    })
 };
 
-const SortableItem = function ({ id, value }) {
+const SortableItem = function ({ id, task }) {
     const {
         attributes,
         listeners,
@@ -60,19 +55,30 @@ const SortableItem = function ({ id, value }) {
     };
 
     return (
-        <Task
-            ref={setNodeRef}
-            containerProps={{
-                style,
-                ...attributes
+        <motion.div
+            // we need to tell framer to re-calculate if isTemporary changes
+            key={task._id + task.isTemporaryTask}
+            // Disable animations because ghost element probs did this already
+            layout={!task.isTemporaryTask}
+            exit={task.isCompleted ? { x: '50vw', opacity: 0 } : undefined}
+            transition={{
+                type: 'easeOut'
             }}
-            touchEvents={listeners}
-            {...value}
-        />
+        >
+            <Task
+                ref={setNodeRef}
+                containerProps={{
+                    style,
+                    ...attributes
+                }}
+                touchEvents={listeners}
+                {...task}
+            />
+        </motion.div>
     );
 };
 
-function SortableList({ tasks, onSortEnd }) {
+function SortableList({ listId, tasks, onSortEnd }) {
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
@@ -114,25 +120,37 @@ function SortableList({ tasks, onSortEnd }) {
                 )}
                 strategy={verticalListSortingStrategy}
             >
-                <AnimatePresence>
-                    {tasks.map((task, index) => (
-                        <motion.div
-                            key={typeof task === 'object' ? task._id : index}
-                            // Disable animations because ghost element probs did this already
-                            initial={task.isTemporaryTask ? false : 'hidden'}
-                            animate={task.isTemporaryTask ? false : 'visible'}
-                            layout={!task.isTemporaryTask}
-                            exit={task.isCompleted ? 'exit' : undefined}
-                            custom={index}
-                            variants={variants}
-                        >
-                            <SortableItem
-                                id={typeof task === 'object' ? task._id : index}
-                                index={index}
-                                value={task}
-                            />
-                        </motion.div>
-                    ))}
+                <AnimatePresence
+                    exitBeforeEnter
+                    custom={{ newListLength: tasks.length }}
+                >
+                    <motion.div
+                        key={listId}
+                        initial="beforeEnter"
+                        animate="visible"
+                        exit="exit"
+                        variants={variants}
+                        custom={{ newListLength: tasks.length }}
+                    >
+                        <AnimatePresence>
+                            {tasks.map((task, index) => (
+                                <SortableItem
+                                    key={
+                                        typeof task === 'object'
+                                            ? task._id
+                                            : index
+                                    }
+                                    id={
+                                        typeof task === 'object'
+                                            ? task._id
+                                            : index
+                                    }
+                                    index={index}
+                                    task={task}
+                                />
+                            ))}
+                        </AnimatePresence>
+                    </motion.div>
                 </AnimatePresence>
             </SortableContext>
         </DndContext>
