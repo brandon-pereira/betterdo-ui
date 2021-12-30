@@ -5,7 +5,7 @@ export const Container = styled.div`
     border-radius: 3px;
     margin-bottom: 1rem;
 `;
-export const Selection = styled.button`
+export const Selection = styled.button<{ selected: boolean }>`
     flex: 1;
     appearance: none;
     border: none;

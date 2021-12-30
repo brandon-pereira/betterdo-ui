@@ -1,14 +1,24 @@
 import React, { useCallback, useState } from 'react';
 
-import { Container, Selection } from './Selector.styles.js';
+import { Container, Selection } from './Selector.styles';
 
-function Selector({ value, values, onSelect }) {
-    const [selectedValue, setSelectedValue] = useState(
+// this is a fairly primitive implementation, could this use generics?
+interface Props {
+    value: string;
+    values: {
+        value: string;
+        label: string;
+    }[];
+    onSelect: (value: string) => void;
+}
+
+function Selector({ value, values, onSelect }: Props) {
+    const [selectedValue, setSelectedValue] = useState<string>(
         value || values[0].value
     );
 
     const onChange = useCallback(
-        (e, value) => {
+        (e, value: string) => {
             setSelectedValue(value);
             if (onSelect) {
                 onSelect(value);
