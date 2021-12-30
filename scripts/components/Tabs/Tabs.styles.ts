@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 export const Container = styled.div``;
 export const TabsHeader = styled.div`
@@ -12,9 +13,7 @@ export const TabsHeader = styled.div`
     margin-bottom: 1rem;
     overflow-x: hidden;
 `;
-export const ActiveTabHeaderBackground = styled.div<{
-    left?: number;
-    width?: number;
+export const ActiveTabHeaderBackground = styled(motion.div)<{
     color?: string;
 }>`
     position: absolute;
@@ -22,9 +21,7 @@ export const ActiveTabHeaderBackground = styled.div<{
     top: 0;
     bottom: 0;
     left: 0;
-    transform: translateX(${props => props.left || 0}px);
-    transition: transform 0.2s;
-    width: ${props => props.width}px;
+    right: 0;
     background-color: ${props =>
         props.color || props.theme.colors.general.blue};
 `;
@@ -35,6 +32,7 @@ export const TabHeaderItem = styled.button<{ selected: boolean }>`
     white-space: nowrap;
     flex: 1;
     text-align: center;
+    position: relative;
     border-right: 1px solid
         ${props => props.color || props.theme.colors.general.blue};
     padding: 0.6rem 0.4rem;
