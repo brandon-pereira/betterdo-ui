@@ -24,11 +24,14 @@ const variants = {
 type Props = {
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
     isLoading?: boolean;
-    count: number;
+    count?: number;
     hidden: boolean;
 };
 
 function CompletedTasksButton({ onClick, isLoading, count, hidden }: Props) {
+    if (!count) {
+        return null;
+    }
     return (
         <Button
             hidden={hidden || count === 0}
@@ -36,7 +39,7 @@ function CompletedTasksButton({ onClick, isLoading, count, hidden }: Props) {
             loaderColor="#888"
             onClick={onClick}
         >
-            <AnimatePresence>
+            <AnimatePresence initial={false}>
                 <motion.span
                     style={{ display: 'inline-block' }}
                     // @ts-expect-error position is supported in browser but not types
