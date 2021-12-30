@@ -12,7 +12,6 @@ interface Props {
 const AddTask = function ({ isHidden }: Props) {
     const currentListId = useCurrentListId();
     const [invalid, setInvalid] = useState(false);
-    // TODO: upgrade create task to typescript
     const createTask = useCreateTask();
     const inputRef = useRef<HTMLInputElement>(null);
 

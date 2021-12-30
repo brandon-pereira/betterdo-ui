@@ -68,6 +68,7 @@ module.exports = {
         'eslint-comments/disable-enable-pair': 0,
         'no-redeclare': 0,
         'no-unused-vars': 'off',
+        'no-undef': 'off',
         '@typescript-eslint/no-unused-vars': 'error'
     }
 };
