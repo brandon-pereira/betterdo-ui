@@ -1,5 +1,11 @@
 import.meta.hot;
 
+declare const __SNOWPACK_ENV__: {
+    VERSION: string;
+    SERVER_URL: string;
+    NODE_ENV: 'production' | 'development';
+};
+
 /**
  * During the migration from Webpack to Snowpack we
  * needed to move from EnvironmentPlugin to SNOWPACK_ENV
