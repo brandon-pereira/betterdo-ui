@@ -55,8 +55,8 @@ function CompletedTasksButton({ onClick, isLoading, count, hidden }: Props) {
                         exit="exiting"
                         key={count}
                         transition={{
-                            type: 'linear',
-                            duration: 1
+                            type: 'easeIn',
+                            duration: 0.5
                         }}
                     >
                         {formatNumber(count)}
