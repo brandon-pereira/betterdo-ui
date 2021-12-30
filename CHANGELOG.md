@@ -4,6 +4,7 @@
 
 -   More improvements to animations when completing tasks
 -   Fixed gap issue on main task container
+-   Various perceived performance gains
 
 ## v5.3.1
 

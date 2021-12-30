@@ -12,7 +12,11 @@ export const TabsHeader = styled.div`
     margin-bottom: 1rem;
     overflow-x: hidden;
 `;
-export const ActiveTabHeaderBackground = styled.div`
+export const ActiveTabHeaderBackground = styled.div<{
+    left?: number;
+    width?: number;
+    color?: string;
+}>`
     position: absolute;
     z-index: -1;
     top: 0;
@@ -24,7 +28,7 @@ export const ActiveTabHeaderBackground = styled.div`
     background-color: ${props =>
         props.color || props.theme.colors.general.blue};
 `;
-export const TabHeaderItem = styled.button`
+export const TabHeaderItem = styled.button<{ selected: boolean }>`
     border: none;
     background: none;
     font: inherit;
@@ -52,7 +56,7 @@ export const TabHeaderItem = styled.button`
 `;
 
 export const TabsBody = styled.div``;
-export const TabBodyItem = styled.div`
+export const TabBodyItem = styled.div<{ selected: boolean }>`
     display: none;
     ${props =>
         props.selected &&

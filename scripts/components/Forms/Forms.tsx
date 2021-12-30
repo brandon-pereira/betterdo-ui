@@ -82,7 +82,7 @@ const Form = ({
     errorMessage,
     ...props
 }: {
-    children: React.ReactChildren;
+    children: React.ReactNode;
     errorMessage?: string;
 } & React.DetailedHTMLProps<
     React.FormHTMLAttributes<HTMLFormElement>,

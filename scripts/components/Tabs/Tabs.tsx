@@ -13,21 +13,39 @@ import {
     TabsHeader,
     ActiveTabHeaderBackground,
     TabHeaderItem
-} from './Tabs.styles.js';
+} from './Tabs.styles';
 
-function Tabs({ selectedIndex: _selectedIndex, color, children, titles }) {
+interface Props {
+    selectedIndex?: number;
+    color?: string;
+    children: React.ReactElement[];
+    titles: string[];
+}
+function Tabs({
+    selectedIndex: _selectedIndex,
+    color,
+    children,
+    titles
+}: Props) {
     const [selectedIndex, setSelectedIndex] = useState(_selectedIndex || 0);
-    const activeElement = useRef();
-    const headerContainerRef = useRef();
-    const [activeElementCoords, setActiveElementCoords] = useState();
+    const activeElement = useRef<HTMLButtonElement>(null);
+    const headerContainerRef = useRef<HTMLDivElement>(null);
+    const [activeElementCoords, setActiveElementCoords] = useState<{
+        width: number;
+        left: number;
+    } | null>(null);
 
     useEffect(() => {
         const getCoords = () => {
-            const viewport = headerContainerRef.current.getBoundingClientRect();
-            const elem = activeElement.current.getBoundingClientRect();
-            // gotta love magic number calculations, fix this one day!
-            const left = elem.left - viewport.left - 3;
-            return { width: elem.width, left };
+            if (headerContainerRef.current && activeElement.current) {
+                const viewport =
+                    headerContainerRef.current.getBoundingClientRect();
+                const elem = activeElement.current.getBoundingClientRect();
+                // gotta love magic number calculations, fix this one day!
+                const left = elem.left - viewport.left - 3;
+                return { width: elem.width, left };
+            }
+            return null;
         };
         const setCoords = () => setActiveElementCoords(getCoords());
         // initial render calculation
