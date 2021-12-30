@@ -14,6 +14,18 @@ function useSwitchList() {
 
     const switchList = useCallback(
         async nextList => {
+            if (nextList && nextList.tasks) {
+                nextList.tasks = nextList.tasks.map(_id => {
+                    if (typeof _id === 'string') {
+                        return {
+                            _id: _id,
+                            isTemporaryTask: true,
+                            isLoading: true
+                        };
+                    }
+                    return _id;
+                });
+            }
             // close the hamburger nav
             setMobileNavVisibility(false);
             // update the local data immediately, but disable the revalidation.
