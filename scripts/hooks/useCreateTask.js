@@ -44,7 +44,9 @@ function useCreateTask() {
                     mutatedList.tasks[0] = Object.assign(
                         { isTemporaryTask: true },
                         mutatedList.tasks[0],
-                        addedTask
+                        addedTask,
+                        // disable loading, user can technically interact before revalidation occurs
+                        { isLoading: false }
                     );
                     mutatedList.tasks = [...mutatedList.tasks];
                     return mutatedList;
