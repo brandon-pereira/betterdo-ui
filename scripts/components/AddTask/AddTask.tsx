@@ -1,21 +1,26 @@
 import React, { useState, useCallback, useRef } from 'react';
 
-import { Container, Input } from './AddTask.styles.js';
+import { Container, Input } from './AddTask.styles';
 
 import useCreateTask from '@hooks/useCreateTask';
 import useCurrentListId from '@hooks/useCurrentListId';
 
-const AddTask = function ({ hidden }) {
+interface Props {
+    isHidden: boolean;
+}
+
+const AddTask = function ({ isHidden }: Props) {
     const currentListId = useCurrentListId();
     const [invalid, setInvalid] = useState(false);
+    // TODO: upgrade create task to typescript
     const createTask = useCreateTask();
-    const inputRef = useRef();
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const onSubmit = useCallback(
         async e => {
             e.preventDefault();
-            const title = inputRef.current.value;
-            if (!title) {
+            const title = inputRef.current?.value;
+            if (!title || !inputRef.current) {
                 setInvalid(true);
                 return;
             }
@@ -34,11 +39,11 @@ const AddTask = function ({ hidden }) {
     );
 
     return (
-        <Container isHidden={hidden} onSubmit={onSubmit}>
+        <Container isHidden={isHidden} onSubmit={onSubmit}>
             <Input
                 ref={inputRef}
                 invalid={invalid}
-                disabled={hidden}
+                disabled={isHidden}
                 placeholder="Add Task"
             />
         </Container>

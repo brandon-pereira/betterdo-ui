@@ -7,7 +7,7 @@ export const Input = styled(FormInput)`
     border-radius: 50px;
 `;
 
-export const Container = styled.form`
+export const Container = styled.form<{ isHidden?: boolean }>`
     padding: 1rem 1rem 0.8rem;
     ${({ isHidden }) =>
         isHidden &&

@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.3.2
+
+-   More improvements to animations when completing tasks
+-   Fixed gap issue on main task container
+
 ## v5.3.1
 
 -   Improvements to animations on switching lists and adding/completing tasks

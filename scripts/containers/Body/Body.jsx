@@ -54,7 +54,7 @@ function Body() {
         <Container>
             <Scroller>
                 <NotificationBanner />
-                <AddTask hidden={hideAddTaskInput} />
+                <AddTask isHidden={hideAddTaskInput} />
                 {isAllCaughtUp && <AllCaughtUpBanner />}
                 {error && <ServerErrorBanner />}
                 {!error && (
