@@ -34,8 +34,13 @@ const AddTask = function ({ hidden }) {
     );
 
     return (
-        <Container hidden={hidden} onSubmit={onSubmit}>
-            <Input ref={inputRef} invalid={invalid} placeholder="Add Task" />
+        <Container isHidden={hidden} onSubmit={onSubmit}>
+            <Input
+                ref={inputRef}
+                invalid={invalid}
+                disabled={hidden}
+                placeholder="Add Task"
+            />
         </Container>
     );
 };

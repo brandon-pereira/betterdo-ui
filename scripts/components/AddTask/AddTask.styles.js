@@ -2,13 +2,20 @@ import styled from 'styled-components';
 
 import { Input as FormInput } from '@components/Forms';
 
-export const Container = styled.form`
-    padding: 0 1rem;
-    margin-bottom: 0.8rem;
-    display: ${({ hidden }) => (hidden ? 'none' : 'block')};
-`;
-
 export const Input = styled(FormInput)`
     margin: 0;
     border-radius: 50px;
+`;
+
+export const Container = styled.form`
+    padding: 1rem 1rem 0.8rem;
+    ${({ isHidden }) =>
+        isHidden &&
+        `
+        margin-bottom: 1rem;
+        padding: 0;
+        ${Input} {
+            display: none;
+        }
+    `}
 `;

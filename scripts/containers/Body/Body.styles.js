@@ -21,7 +21,6 @@ export const Container = styled.div`
     grid-row: 4;
     grid-column: 1;
     overflow: hidden;
-    padding-top: 1rem;
     background: ${({ theme }) => theme.colors.body.background};
     ${QUERIES.medium} {
         grid-row: 2;
