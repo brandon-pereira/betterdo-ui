@@ -33,31 +33,38 @@ function CompletedTasksButton({ onClick, isLoading, count, hidden }: Props) {
         return null;
     }
     return (
-        <Button
-            hidden={hidden || count === 0}
-            isLoading={isLoading}
-            loaderColor="#888"
-            onClick={onClick}
+        <motion.div
+            layout="position"
+            transition={{
+                type: 'easeOut'
+            }}
         >
-            <AnimatePresence initial={false}>
-                <motion.span
-                    style={{ display: 'inline-block' }}
-                    // @ts-expect-error position is supported in browser but not types
-                    variants={variants}
-                    initial="entering"
-                    animate="entered"
-                    exit="exiting"
-                    key={count}
-                    transition={{
-                        type: 'linear',
-                        duration: 1
-                    }}
-                >
-                    {formatNumber(count)}
-                </motion.span>
-            </AnimatePresence>
-            {' completed tasks'}
-        </Button>
+            <Button
+                hidden={hidden || count === 0}
+                isLoading={isLoading}
+                loaderColor="#888"
+                onClick={onClick}
+            >
+                <AnimatePresence initial={false}>
+                    <motion.span
+                        style={{ display: 'inline-block' }}
+                        // @ts-expect-error position is supported in browser but not types
+                        variants={variants}
+                        initial="entering"
+                        animate="entered"
+                        exit="exiting"
+                        key={count}
+                        transition={{
+                            type: 'linear',
+                            duration: 1
+                        }}
+                    >
+                        {formatNumber(count)}
+                    </motion.span>
+                </AnimatePresence>
+                {' completed tasks'}
+            </Button>
+        </motion.div>
     );
 }
 
