@@ -9,7 +9,7 @@ import { LIGHT_THEME, DARK_THEME } from '../theme';
 
 import useDarkMode from '@hooks/useDarkMode';
 
-export function ThemeProvider({ children }) {
+export function ThemeProvider({ children }: { children: React.ReactChild }) {
     const [isDarkMode] = useDarkMode();
 
     return (

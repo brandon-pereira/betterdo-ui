@@ -1,4 +1,4 @@
-import { createElement, cloneElement } from 'react';
+import React, { createElement, cloneElement } from 'react';
 
 import { ModalsProvider } from '@hooks/useHamburgerNav';
 import { ProfileProvider } from '@hooks/useProfile';
@@ -13,10 +13,10 @@ const Providers = [
     CompletedTasksProvider
 ].reverse();
 
-function SharedProviders({ children }) {
+function SharedProviders({ children }: { children: React.ReactElement }) {
     return cloneElement(
         Providers.reduce(
-            (acc, provider) => createElement(provider, {}, acc),
+            (acc, provider) => createElement(provider, null, acc),
             children
         )
     );
