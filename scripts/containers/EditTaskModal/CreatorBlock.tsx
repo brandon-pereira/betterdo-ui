@@ -3,7 +3,15 @@ import React from 'react';
 import { Block, CreatorBlock, ProfilePic } from './EditTask.styles.js';
 import RelativeTime from './RelativeTime';
 
-function _CreatorBlock({ createdBy, creationDate }) {
+interface Props {
+    createdBy: {
+        firstName: string;
+        lastName: string;
+    };
+    creationDate: string;
+}
+
+function _CreatorBlock({ createdBy, creationDate }: Props) {
     if (!createdBy) {
         return null;
     }

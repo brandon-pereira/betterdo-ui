@@ -1,10 +1,12 @@
 import useSWR from 'swr';
 
+import List from '../../types/list';
+
 import createSharedHook from './internal/createSharedHook';
 import { getListsUrl } from './internal/urls';
 
 function useListsOnce() {
-    const { data, error } = useSWR(getListsUrl(), {
+    const { data, error } = useSWR<List[]>(getListsUrl(), {
         dedupingInterval: 600000 //10min
     });
 

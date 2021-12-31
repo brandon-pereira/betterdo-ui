@@ -2,6 +2,9 @@ import { useCallback } from 'react';
 import { mutate } from 'swr';
 import { useHistory } from 'react-router-dom';
 
+import Task from '../../types/task';
+import List from '../../types/list';
+
 import { getListDetailUrl, getTaskDetailUrl } from './internal/urls';
 
 import useCompletedTasks from '@hooks/useCompletedTasks';
@@ -15,7 +18,7 @@ function useModifyTask() {
     const currentListId = useCurrentListId();
     const generateUrl = useGeneratedUrl();
     return useCallback(
-        async (taskId, listId, updatedProps) => {
+        async (taskId: string, listId: string, updatedProps: Partial<Task>) => {
             if (
                 // If dueDate is passed in and format is 'YYYY-MM-DD' then
                 // we need to create a date obj using CURRENT timezone
@@ -28,9 +31,9 @@ function useModifyTask() {
             ) {
                 const [year, month, day] = updatedProps.dueDate.split('-');
                 updatedProps.dueDate = new Date(
-                    year,
-                    month - 1,
-                    day
+                    parseInt(year),
+                    parseInt(month) - 1,
+                    parseInt(day)
                 ).toUTCString();
             }
             await mutate(
@@ -67,16 +70,17 @@ function useModifyTask() {
     );
 }
 
-const updateTaskInList = (taskId, updatedProps) => list => ({
-    ...list,
-    tasks: list
-        ? list.tasks.map(task => {
-              if (task._id === taskId) {
-                  return { ...task, ...updatedProps };
-              }
-              return task;
-          })
-        : []
-});
+const updateTaskInList =
+    (taskId: string, updatedProps: Partial<Task>) => (list: List) => ({
+        ...list,
+        tasks: list
+            ? list.tasks.map(task => {
+                  if (task._id === taskId) {
+                      return { ...task, ...updatedProps };
+                  }
+                  return task;
+              })
+            : []
+    });
 
 export default useModifyTask;

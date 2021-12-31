@@ -3,7 +3,12 @@ import React from 'react';
 import Dropdown from '@components/Dropdown';
 import useLists from '@hooks/useLists';
 
-function ListsDropdown({ currentListId, onSelect }) {
+interface Props {
+    currentListId: string;
+    onSelect: (newList: string) => void;
+}
+
+function ListsDropdown({ currentListId, onSelect }: Props) {
     const { lists } = useLists();
     const formattedLists = lists
         .filter(list => list.type === 'default' || list.type === 'inbox')

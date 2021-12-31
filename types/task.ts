@@ -8,12 +8,16 @@ interface Task {
     title: string;
     list: string;
     isCompleted: boolean;
-    createdBy: string;
+    createdBy: {
+        firstName: string;
+        lastName: string;
+        _id: string;
+    };
     notes: string;
     subtasks: Subtask[];
     dueDate: string;
     creationDate: string;
-    priority: 'low' | 'normal' | 'high';
+    priority: string;
     isLoading?: boolean;
     isTemporaryTask?: boolean;
 }
