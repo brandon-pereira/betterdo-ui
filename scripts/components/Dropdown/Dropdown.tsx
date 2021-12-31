@@ -1,11 +1,20 @@
 import React from 'react';
 
-import { SelectContainer, Icon, Select } from './Dropdown.styles.js';
+import { SelectContainer, Icon, Select } from './Dropdown.styles';
 
 import Chrevron from '@components/Icon/svgs/chevron.svg';
 
-function Dropdown({ onSelect, values, value }) {
-    const onChange = e => {
+interface Props {
+    value?: string;
+    values: {
+        value: string;
+        label: string;
+    }[];
+    onSelect: (value: string) => void;
+}
+
+function Dropdown({ onSelect, values, value }: Props) {
+    const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
         if (onSelect) {
             onSelect(value);

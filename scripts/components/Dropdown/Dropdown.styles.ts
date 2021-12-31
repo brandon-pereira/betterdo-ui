@@ -22,7 +22,8 @@ export const SelectContainer = styled.label`
         transform: translateY(-50%) rotate(180deg);
     }
 `;
-export const Select = styled.select`
+
+export const Select = styled.select<{ width?: string }>`
     appearance: none;
     background: ${({ theme }) => theme.colors.forms.input.background};
     color: ${({ theme }) => theme.colors.forms.input.color};
