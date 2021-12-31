@@ -3,12 +3,12 @@ import { SWRConfig } from 'swr';
 
 import { SERVER_URL } from '@utilities/env';
 
-function SWRProvider({ children }) {
+function SWRProvider({ children }: { children: React.ReactChild }) {
     return (
         <SWRConfig
             value={{
-                fetcher: async (...args) => {
-                    const res = await fetch(...args, {
+                fetcher: async (url: string) => {
+                    const res = await fetch(url, {
                         credentials: 'include'
                     });
                     if (res.status >= 400) {
@@ -22,7 +22,7 @@ function SWRProvider({ children }) {
                         } catch (err) {
                             error = 'Internal Error';
                         }
-                        console.error('API Request Failed!', ...args, error);
+                        console.error('API Request Failed!', url, error);
                         throw new Error(error);
                     }
 
