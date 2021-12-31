@@ -49,7 +49,8 @@ export const updateUser = (updatedProps: Partial<User>): Promise<User> => {
 export const getUserByEmail = (email: string): Promise<User> => {
     return _get<User>(`users/${email}`);
 };
-class ServerError extends Error {
+
+export class ServerError extends Error {
     code: number;
     formattedMessage: string;
     originalError: unknown;
@@ -63,8 +64,10 @@ class ServerError extends Error {
         this.name = 'ServerError';
         this.code = code;
         this.originalError = originalError;
-        this.formattedMessage = formattedMessage;
+        this.formattedMessage = formattedMessage || ServerError.defaultError;
     }
+
+    static defaultError = 'An unexpected error ocurred';
 }
 
 /**

@@ -6,13 +6,13 @@ interface Subtask {
 interface Task {
     _id: string;
     title: string;
-    listId: string;
+    list: string;
     isCompleted: boolean;
     createdBy: string;
     notes: string;
     subtasks: Subtask[];
-    dueDate: Date;
-    creationDate: Date;
+    dueDate: string;
+    creationDate: string;
     priority: 'low' | 'normal' | 'high';
     isLoading?: boolean;
     isTemporaryTask?: boolean;

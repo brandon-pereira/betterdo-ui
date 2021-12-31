@@ -4,7 +4,7 @@ import { Container, Selection } from './Selector.styles';
 
 // this is a fairly primitive implementation, could this use generics?
 interface Props {
-    value: string;
+    value?: string;
     values: {
         value: string;
         label: string;

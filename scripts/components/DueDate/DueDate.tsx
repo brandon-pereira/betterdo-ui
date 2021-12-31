@@ -17,12 +17,12 @@ import { getCurrentDay, getTomorrowDay } from '@utilities/customLists';
 
 type Props = {
     onChange(date?: string): void;
-    value: string;
+    value?: string;
 };
 
 function DueDate({ value, onChange }: Props) {
     // create all variables we'll need to use later
-    const currentValue = new Date(value);
+    const currentValue = new Date(value || '');
     const today = getTodaysDate();
     const tomorrow = getTomorrowsDate();
     const nextWeek = getNextWeekDate();
@@ -130,7 +130,8 @@ const formatDateValueToDate = (value: string) => {
     return '';
 };
 
-const formatDateForInput = (value: string): string => {
+const formatDateForInput = (value?: string): string => {
+    if (!value) return '';
     const date = new Date(value);
     if (value && !isNaN(date.getTime())) {
         return date.toISOString().substr(0, 10);
