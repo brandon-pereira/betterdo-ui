@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 function useInstall() {
-    const installPrompt = useRef();
+    const installPrompt = useRef<BeforeInstallPromptEvent | null>(null);
     const [isInstallAvailable, setAvailable] = useState(false);
 
     useEffect(() => {
-        window.addEventListener('beforeinstallprompt', e => {
+        window.addEventListener('beforeinstallprompt', (e: Event) => {
             // Prevent automatically showing the prompt
             e.preventDefault();
             // Store event for later use
-            installPrompt.current = e;
+            installPrompt.current = e as BeforeInstallPromptEvent;
             // Notify listeners
             if (!localStorage.getItem('banners.a2hDisabled')) {
                 setAvailable(true);
@@ -39,7 +39,7 @@ function useInstall() {
     }, []);
 
     const onDeclineInstall = useCallback(() => {
-        localStorage.setItem('banners.a2hDisabled', true);
+        localStorage.setItem('banners.a2hDisabled', 'true');
         setAvailable(false);
     }, []);
 
