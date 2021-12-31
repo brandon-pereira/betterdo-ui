@@ -13,7 +13,7 @@ function useDeleteTask() {
     const currentListId = useCurrentListId();
     const [isCompletedTasksIncluded] = useCompletedTasks();
     return useCallback(
-        async taskId => {
+        async (taskId: string) => {
             await deleteTask(taskId);
             closeModal();
             // Update current task list

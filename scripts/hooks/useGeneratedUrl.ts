@@ -6,7 +6,7 @@ function useGeneratedUrl() {
     const baseUrl = '/:currentListId';
     const params = useParams();
     const generateUrl = useCallback(
-        (url = '', _params: { [key: string]: string }) => {
+        (url = '', _params?: { [key: string]: string }) => {
             return generatePath(
                 baseUrl + url,
                 Object.assign({}, params, _params)

@@ -14,7 +14,8 @@ function useDarkModeOnce() {
 
     useEffect(() => {
         const matcher = window.matchMedia('(prefers-color-scheme: dark)');
-        const fn = e => setOSinDarkMode(Boolean(e.matches));
+        const fn = (e: MediaQueryListEvent) =>
+            setOSinDarkMode(Boolean(e.matches));
         matcher.addEventListener('change', fn);
         return () => matcher.removeEventListener('change', fn);
     }, []);
@@ -35,10 +36,10 @@ function useDarkModeOnce() {
     return [shouldUseDarkMode, setPrefersDarkMode];
 }
 
-function parseValue(val) {
+function parseValue(val: string | null): boolean {
     if (val === 'true') return true;
     else if (val === 'false') return false;
-    else return;
+    else return false;
 }
 
 const {

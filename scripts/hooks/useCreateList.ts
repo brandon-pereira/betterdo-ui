@@ -2,6 +2,8 @@ import { useCallback } from 'react';
 import { mutate } from 'swr';
 import { useHistory } from 'react-router-dom';
 
+import List from '../../types/list';
+
 import { getListsUrl } from './internal/urls';
 
 import { createList } from '@utilities/server';
@@ -9,10 +11,10 @@ import { createList } from '@utilities/server';
 function useCreateList() {
     const history = useHistory();
     return useCallback(
-        async (title, color) => {
+        async (title: string, color: string) => {
             await mutate(
                 getListsUrl(),
-                async lists => {
+                async (lists: List[]) => {
                     return [
                         ...lists,
                         {
