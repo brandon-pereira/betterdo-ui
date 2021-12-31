@@ -23,7 +23,7 @@ const ClickContainer = styled.div`
     cursor: pointer;
 `;
 
-const BarContainer = styled.div`
+const BarContainer = styled.div<{ open: boolean }>`
     flex-direction: column;
     justify-content: space-between;
     height: 1.5rem;
@@ -45,7 +45,13 @@ const BarContainer = styled.div`
     `}
 `;
 
-const Hamburger = ({ open, className, onClick }) => (
+interface Props {
+    className?: string;
+    onClick?: React.MouseEventHandler<HTMLDivElement>;
+    open: boolean;
+}
+
+const Hamburger = ({ open, className, onClick }: Props) => (
     <ClickContainer onClick={onClick} className={className}>
         <BarContainer open={open}>
             <Bar />

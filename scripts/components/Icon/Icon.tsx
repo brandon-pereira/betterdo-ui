@@ -1,6 +1,6 @@
 import React, { createElement } from 'react';
 
-import { IconContainer } from './Icon.styles.js';
+import { IconContainer } from './Icon.styles';
 
 interface Props {
     children?: string;

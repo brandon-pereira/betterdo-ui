@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 
-import { Container, Icon, Button } from './ErrorBoundary.styles.js';
+import { Container, Icon, Button } from './ErrorBoundary.styles';
 
 import ServerError from '@components/Icon/svgs/server-error.svg';
 
-class ErrorBoundary extends Component {
-    constructor(props) {
+interface Props {
+    children: React.ReactChild;
+}
+class ErrorBoundary extends Component<
+    Props,
+    { hasError: boolean; errorMessage?: string }
+> {
+    constructor(props: Props) {
         super(props);
         this.state = { hasError: false };
     }
 
-    static getDerivedStateFromError(error) {
+    static getDerivedStateFromError(error: Error) {
         // Update state so the next render will show the fallback UI.
         return {
             hasError: true,
