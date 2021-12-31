@@ -15,7 +15,8 @@ interface List {
         | 'highPriority'
         | 'week'
         | 'overdue'
-        | 'default';
+        | 'default'
+        | 'newList';
     additionalTasks?: number;
     color: string;
 }

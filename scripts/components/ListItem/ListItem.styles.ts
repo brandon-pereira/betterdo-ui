@@ -2,7 +2,10 @@ import styled from 'styled-components';
 
 import { DEFAULT_LIST_COLOR } from '../../constants';
 
-export const Container = styled.button`
+export const Container = styled.button<{
+    selected?: boolean;
+    isOver?: boolean;
+}>`
     border: none;
     display: block;
     font: inherit;
