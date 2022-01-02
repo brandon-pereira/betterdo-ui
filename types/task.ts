@@ -1,3 +1,5 @@
+import User from './user';
+
 interface Subtask {
     title: string;
     isComplete: boolean;
@@ -8,11 +10,7 @@ interface Task {
     title: string;
     list: string;
     isCompleted: boolean;
-    createdBy: {
-        firstName: string;
-        lastName: string;
-        _id: string;
-    };
+    createdBy: User;
     notes: string;
     subtasks: Subtask[];
     dueDate: string;

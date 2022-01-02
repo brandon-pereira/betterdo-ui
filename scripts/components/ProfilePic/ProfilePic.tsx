@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
+import User from '../../../types/user';
+
+const Container = styled.div<{ size?: string }>`
     border: none;
     outline: none;
     height: ${props => props.size || '3rem'};
@@ -34,17 +36,22 @@ const Img = styled.img`
     overflow: hidden;
 `;
 
-const ProfilePicture = ({ user, ...props }) => {
+interface Props {
+    user: User;
+    onClick?: () => void;
+}
+
+const ProfilePicture = ({ user, onClick, ...props }: Props) => {
     user = user || {};
     const [error, setError] = useState(false);
     const firstName = user.firstName || 'A';
     const lastName = user.lastName || 'A';
     const initials = firstName.charAt(0) + lastName.charAt(0);
     return (
-        <Container as={props.onClick ? 'button' : 'div'} {...props}>
+        <Container as={onClick ? 'button' : 'div'} onClick={onClick} {...props}>
             {user && user.profilePicture && !error && (
                 <Img
-                    onError={setError}
+                    onError={() => setError(true)}
                     alt={`${firstName} ${lastName}}`}
                     src={FormatProfilePictureUrl(user.profilePicture)}
                 />
@@ -54,11 +61,11 @@ const ProfilePicture = ({ user, ...props }) => {
     );
 };
 
-export const FormatProfilePictureUrl = (url, sizeInPx) => {
+export const FormatProfilePictureUrl = (url: string, sizeInPx?: number) => {
     if (url && typeof url === 'string') {
         return url.replace('sz=50', sizeInPx ? `sz=${sizeInPx}` : '');
     }
-    return null;
+    return undefined;
 };
 
 export default styled(ProfilePicture)``;

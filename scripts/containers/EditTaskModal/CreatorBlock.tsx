@@ -1,13 +1,12 @@
 import React from 'react';
 
+import User from '../../../types/user';
+
 import { Block, CreatorBlock, ProfilePic } from './EditTask.styles.js';
 import RelativeTime from './RelativeTime';
 
 interface Props {
-    createdBy: {
-        firstName: string;
-        lastName: string;
-    };
+    createdBy: User;
     creationDate: string;
 }
 

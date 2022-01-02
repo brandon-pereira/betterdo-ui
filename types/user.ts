@@ -2,7 +2,7 @@ interface User {
     _id: string;
     email: string;
     firstName: string;
-    lastName: string;
+    lastName?: string;
     lists: string[];
     isPushEnabled: boolean;
     pushSubscriptions: Array<string>;
