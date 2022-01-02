@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LoaderContainer } from './Modal.styles.js';
+import { LoaderContainer } from './Modal.styles';
 
 import Loader from '@components/Loader';
 

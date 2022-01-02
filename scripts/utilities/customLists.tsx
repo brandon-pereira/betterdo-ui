@@ -7,7 +7,7 @@ import Calendar from '@components/Icon/svgs/calendar.svg';
 import Quill from '@components/Icon/svgs/quill.svg';
 import Drawer from '@components/Icon/svgs/drawer.svg';
 import SvgIcon from '@components/Icon';
-import { DateIcon } from '@components/ListItem/ListItem.styles.js';
+import { DateIcon } from '@components/ListItem/ListItem.styles';
 
 const ListItemIcon = ({
     icon
