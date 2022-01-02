@@ -4,7 +4,7 @@ import { QUERIES } from '../../constants';
 
 import Icon from '@components/Icon';
 
-export const Overlay = styled.div`
+export const Overlay = styled.div<{ visible: boolean }>`
     position: fixed;
     top: 0;
     left: 0;
@@ -21,7 +21,10 @@ export const Overlay = styled.div`
     `}
 `;
 
-export const Container = styled.div`
+export const Container = styled.div<{
+    visible: boolean;
+    disableHeightAnimation: boolean;
+}>`
     background: ${({ theme }) => theme.colors.modals.contentBackground};
     ${props =>
         props.disableHeightAnimation &&
@@ -51,7 +54,10 @@ export const Container = styled.div`
     }
 `;
 
-export const ContentContainer = styled.div`
+export const ContentContainer = styled.div<{
+    height: number | 'auto';
+    disableHeightAnimation: boolean;
+}>`
     overflow: hidden;
     height: ${props => {
         if (props.disableHeightAnimation) {
@@ -78,7 +84,7 @@ export const ModalClose = styled(Icon)`
     filter: drop-shadow(0 1px #555);
 `;
 
-export const Content = styled.div`
+export const Content = styled.div<{ disableHeightAnimation: boolean }>`
     position: relative;
     z-index: 2;
     padding: 1rem;

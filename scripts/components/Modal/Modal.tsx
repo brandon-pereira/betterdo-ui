@@ -15,16 +15,26 @@ import {
     Container,
     ModalClose,
     ContentContainer
-} from './Modal.styles.js';
+} from './Modal.styles';
 
 import x from '@components/Icon/svgs/x.svg';
 
-const Modal = forwardRef(
+interface Props {
+    className?: string;
+    style?: React.CSSProperties;
+    visible: boolean;
+    children: React.ReactNode;
+    canCloseModal?: () => boolean;
+    onRequestClose: () => void;
+    // TODO: Framer motion this logic
+    disableHeightAnimation: boolean;
+}
+const Modal = forwardRef<HTMLDivElement, Props>(
     (
         {
             className,
-            style,
             visible,
+            style,
             children,
             canCloseModal,
             onRequestClose,
@@ -32,10 +42,10 @@ const Modal = forwardRef(
         },
         ref
     ) => {
-        const contentRef = useRef();
-        const [height, setHeight] = useState('auto');
+        const contentRef = useRef<HTMLDivElement>(null);
+        const [height, setHeight] = useState<number | 'auto'>('auto');
         const closeModal = useCallback(
-            e => {
+            (e?: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
                 const isBackgroundClick = !e || e.currentTarget === e.target;
                 if (isBackgroundClick) {
                     const _canCloseModal =
