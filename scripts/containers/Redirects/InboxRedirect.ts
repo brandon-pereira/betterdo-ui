@@ -11,7 +11,9 @@ function InboxRedirect() {
     useEffect(() => {
         if ((!currentListId || currentListId === 'inbox') && !loading) {
             const inbox = lists.find(l => l.type === 'inbox');
-            history.replace(`/${inbox._id}`);
+            if (inbox) {
+                history.replace(`/${inbox._id}`);
+            }
         }
     }, [currentListId, history, lists, loading]);
     return null;

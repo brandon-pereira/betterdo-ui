@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-import { QUERIES } from '../../constants';
-
-export const _Container = styled.div`
+export const _Container = styled.div<{ isMobileNavVisible: boolean }>`
     width: 100vw;
     height: 100vh;
     display: grid;
@@ -15,11 +13,11 @@ export const _Container = styled.div`
         grid-template-columns: 1fr 0;
         grid-template-rows: 4rem 60vh 4rem 1fr;  
     `}
-    ${QUERIES.medium} {
+    ${({ theme }) => theme.queries.medium} {
         grid-template-columns: 10rem 1fr;
         grid-template-rows: 4rem 1fr 0 0;
     }
-    ${QUERIES.large} {
+    ${({ theme }) => theme.queries.large} {
         grid-template-columns: 14rem 1fr;
     }
 `;

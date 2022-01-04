@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { _Container } from './Container.styles.js';
+import { _Container } from './Container.styles';
 
 import useHamburgerNav from '@hooks/useHamburgerNav';
 
-function Container({ children }) {
+function Container({ children }: { children: React.ReactNode }) {
     const [isMobileNavVisible] = useHamburgerNav();
     return (
         <_Container isMobileNavVisible={isMobileNavVisible}>
