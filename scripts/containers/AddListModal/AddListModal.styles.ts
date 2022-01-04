@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { QUERIES } from '../../constants';
-
 import _Modal from '@components/Modal';
 
 export const Modal = styled(_Modal)`
@@ -11,7 +9,7 @@ export const Modal = styled(_Modal)`
     [data-betterdo-modal-arrow] {
         display: none;
     }
-    ${QUERIES.medium} {
+    ${({ theme }) => theme.queries.medium} {
         transform: translateX(-50px);
         opacity: 0;
         transition: transform 0.2s;

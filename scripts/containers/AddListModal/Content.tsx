@@ -7,15 +7,20 @@ import { Body, Header } from '@components/Copy';
 import { Form, Label, Input } from '@components/Forms';
 import ColorPicker from '@components/ColorPicker';
 import useCreateList from '@hooks/useCreateList';
+import { ServerError } from '@utilities/server';
 
 const ButtonContainer = styled.div`
     margin-top: 1.5rem;
 `;
 
-function AddListModalContent({ onRequestClose, onLoad }) {
+export interface AddListModalProps {
+    onLoad: () => void;
+}
+
+function AddListModalContent({ onLoad }: AddListModalProps) {
     const [isSubmitting, setSubmitting] = useState(false);
     const [isInvalid, setInvalid] = useState(false);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState<string | false>(false);
     const [title, setTitle] = useState('');
     const [color, setColor] = useState(randomColor());
     const createList = useCreateList();
@@ -40,19 +45,18 @@ function AddListModalContent({ onRequestClose, onLoad }) {
                 } catch (err) {
                     console.error(err);
                     setSubmitting(false);
-                    setError(err.formattedMessage || 'Unexpected Error');
+                    if (err instanceof ServerError) {
+                        setError(err.formattedMessage);
+                    }
                     setInvalid(true);
                     return;
                 }
                 setSubmitting(false);
-                if (onRequestClose) {
-                    onRequestClose();
-                }
             } else {
                 setInvalid(true);
             }
         },
-        [isSubmitting, color, createList, onRequestClose, title]
+        [isSubmitting, color, createList, title]
     );
 
     return (
@@ -62,7 +66,10 @@ function AddListModalContent({ onRequestClose, onLoad }) {
                 Lists allow you to organize your tasks with even more detail.
                 You can create lists for almost anything.
             </Body>
-            <Form errorMessage={error} onSubmit={e => onSubmit(e)}>
+            <Form
+                errorMessage={error ? error : undefined}
+                onSubmit={e => onSubmit(e)}
+            >
                 <Label htmlFor="name">List Name</Label>
                 <Input
                     value={title}
