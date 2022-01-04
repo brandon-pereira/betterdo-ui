@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { DEFAULT_LIST_COLOR, QUERIES } from '../../constants';
+import { DEFAULT_LIST_COLOR } from '../../constants';
 
 import Button from '@components/Button';
 import Icon from '@components/Icon';
@@ -9,7 +9,7 @@ import _Hamburger from '@components/Hamburger';
 
 export { Icon, Button };
 
-export const Hamburger = styled(_Hamburger)`
+export const Hamburger = styled(_Hamburger)<{ hidden: boolean }>`
     ${({ hidden }) =>
         hidden &&
         `
@@ -39,7 +39,7 @@ export const Container = styled.header`
     ${Loader} {
         filter: drop-shadow(1px 1px rgba(0, 0, 0, 0.5));
     }
-    ${QUERIES.medium} {
+    ${({ theme }) => theme.queries.medium} {
         grid-row: 1;
         grid-column: 2;
         ${Hamburger} {

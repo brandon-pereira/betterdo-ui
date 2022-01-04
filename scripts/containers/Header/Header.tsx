@@ -7,7 +7,7 @@ import {
     Title,
     SettingsButton,
     Icon
-} from './Header.styles.js';
+} from './Header.styles';
 
 import useEditListModal from '@hooks/useEditListModal';
 import useListDetails from '@hooks/useListDetails';
@@ -22,7 +22,7 @@ function Header() {
     const currentListId = useCurrentListId();
     const { list, loading } = useListDetails(currentListId);
     return (
-        <Container mobileNavVisible={isMobileNavVisible} color={list.color}>
+        <Container color={list.color}>
             <Hamburger
                 open={isMobileNavVisible}
                 hidden={isMobileNavVisible}
