@@ -1,5 +1,20 @@
-export default class TouchEvents {
-    constructor(element, callback) {
+type Direction = 'left' | 'right' | 'up' | 'down';
+
+type CallbackPayload = {
+    direction: Direction;
+};
+type Callback = (payload: CallbackPayload, e?: TouchEvent) => void;
+
+class TouchEvents {
+    private element: HTMLElement;
+    private callback: Callback;
+
+    private touchstartX: number;
+    private touchstartY: number;
+    private touchendX: number;
+    private touchendY: number;
+
+    constructor(element: HTMLElement, callback: Callback) {
         // Define elements
         this.element = element;
         this.callback = callback;
@@ -27,12 +42,12 @@ export default class TouchEvents {
         this.element.removeEventListener('touchend', this.touchend);
     }
 
-    touchstart(event) {
+    touchstart(event: TouchEvent) {
         this.touchstartX = event.touches[0].clientX;
         this.touchstartY = event.touches[0].clientY;
     }
 
-    touchend(event) {
+    touchend(event: TouchEvent) {
         this.touchendX = event.changedTouches[0].clientX;
         this.touchendY = event.changedTouches[0].clientY;
         const direction = this.getDirection();
@@ -41,7 +56,7 @@ export default class TouchEvents {
         }
     }
 
-    getDirection() {
+    getDirection(): Direction {
         if (this.touchendX < this.touchstartX) {
             return 'left';
         } else if (this.touchendX > this.touchstartX) {
@@ -51,5 +66,9 @@ export default class TouchEvents {
         } else if (this.touchendY > this.touchstartY) {
             return 'down';
         }
+        // should this function return null here?
+        return 'down';
     }
 }
+
+export default TouchEvents;

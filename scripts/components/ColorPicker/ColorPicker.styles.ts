@@ -19,7 +19,7 @@ export const Color = styled.button.attrs(props => ({
     style: {
         backgroundColor: props.color
     }
-}))`
+}))<{ isCurrent?: boolean }>`
     border: none;
     outline: none;
     flex: 1;

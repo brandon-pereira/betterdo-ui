@@ -1,12 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import randomColor from 'randomcolor';
 
-import {
-    Icon,
-    Container,
-    Color,
-    LabelContainer
-} from './ColorPicker.styles.js';
+import { Icon, Container, Color, LabelContainer } from './ColorPicker.styles';
 
 import { Label } from '@components/Forms';
 import Refresh from '@components/Icon/svgs/refresh.svg';
@@ -17,9 +12,14 @@ function generateRandomColor() {
     return randomColor({ luminosity: 'dark' });
 }
 
-function ColorPicker({ value, onChange }) {
-    const inputColorRef = useRef();
-    const colorPaletteRef = useRef();
+interface Props {
+    value?: string;
+    onChange: (color: string) => void;
+}
+
+function ColorPicker({ value, onChange }: Props) {
+    const inputColorRef = useRef<HTMLInputElement>(null);
+    const colorPaletteRef = useRef<HTMLDivElement>(null);
     const [index, setIndex] = useState(0);
     const [palette, setPalette] = useState([
         value || generateRandomColor(),
@@ -46,7 +46,7 @@ function ColorPicker({ value, onChange }) {
     );
 
     const onRefreshPalette = useCallback(
-        e => {
+        (e?: React.MouseEvent<HTMLDivElement>) => {
             if (e) {
                 e.preventDefault();
             }
@@ -63,7 +63,9 @@ function ColorPicker({ value, onChange }) {
 
     const onLaunchPicker = useCallback(e => {
         e.preventDefault();
-        inputColorRef.current.click();
+        if (inputColorRef.current) {
+            inputColorRef.current.click();
+        }
     }, []);
 
     useEffect(() => {
@@ -85,7 +87,6 @@ function ColorPicker({ value, onChange }) {
             <LabelContainer>
                 <Label>List Colour</Label>
                 <Icon
-                    type="button"
                     size="1rem"
                     icon={Refresh}
                     color="currentColor"
@@ -94,7 +95,6 @@ function ColorPicker({ value, onChange }) {
                     Refresh Palette
                 </Icon>
                 <Icon
-                    type="button"
                     size="1rem"
                     icon={Eyedropper}
                     color="currentColor"
