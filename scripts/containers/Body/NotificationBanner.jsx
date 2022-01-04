@@ -76,7 +76,7 @@ function NotificationBanner() {
     const localTimeZone = getTimeZone(
         Intl.DateTimeFormat().resolvedOptions().timeZone
     ).name;
-    const serverTimeZone = profile.timeZone;
+    const serverTimeZone = profile?.timeZone;
     if (
         !suppressTimeZoneBanner &&
         serverTimeZone &&

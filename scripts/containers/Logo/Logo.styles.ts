@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { DEFAULT_LIST_COLOR, QUERIES } from '../../constants';
+import { DEFAULT_LIST_COLOR } from '../../constants';
 
 import _ProfilePicture from '@components/ProfilePic';
 import _Hamburger from '@components/Hamburger';
@@ -14,7 +14,7 @@ export const Container = styled.div`
     grid-column: 1;
     z-index: 10;
     transition: background 0.6s;
-    ${QUERIES.medium} {
+    ${({ theme }) => theme.queries.medium} {
         transform: none;
         grid-row: 1 / 1;
         grid-column: 1 / 1;
@@ -48,7 +48,7 @@ export const Content = styled.div`
     span {
         font-weight: 600;
     }
-    ${QUERIES.medium} {
+    ${({ theme }) => theme.queries.medium} {
         border-radius: 0 30px 0 0;
         transform: none;
         padding: 0 0.5rem;
@@ -64,7 +64,7 @@ export const Content = styled.div`
             display: none;
         }
     }
-    ${QUERIES.large} {
+    ${({ theme }) => theme.queries.large} {
         h1 {
             font-size: 1.8rem;
             margin-right: 1rem;

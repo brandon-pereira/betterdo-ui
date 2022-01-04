@@ -43,9 +43,9 @@ function GeneralSettings() {
     const modifyProfile = useModifyProfile();
     const [darkMode, doesPreferDarkMode] = useDarkMode();
     const [state, setState] = useState({
-        isBeta: profile.isBeta,
-        isPushEnabled: profile.isPushEnabled,
-        timeZone: profile.timeZone
+        isBeta: profile?.isBeta || false,
+        isPushEnabled: profile?.isPushEnabled || false,
+        timeZone: profile?.timeZone || ''
     });
     const [error, setError] = useState(null);
 

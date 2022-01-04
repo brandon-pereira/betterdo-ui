@@ -48,9 +48,9 @@ const ButtonContainer = styled.div`
 function AccountSettings() {
     const { profile, logout, loading } = useProfile();
     const [state, setState] = useState({
-        firstName: profile.firstName,
-        lastName: profile.lastName,
-        email: profile.email
+        firstName: profile?.firstName || '',
+        lastName: profile?.lastName || '',
+        email: profile?.email || ''
     });
     const modifyProfile = useModifyProfile();
     const [isSaving, setSaving] = useState(false);
@@ -102,7 +102,7 @@ function AccountSettings() {
         <Form onSubmit={e => onSubmit(e)} errorMessage={error}>
             <ProfilePictureBanner>
                 <ProfilePictureBackground
-                    src={FormatProfilePictureUrl(profile.profilePicture)}
+                    src={FormatProfilePictureUrl(profile?.profilePicture)}
                 />
                 <ProfilePic size="8rem" user={profile} />
             </ProfilePictureBanner>

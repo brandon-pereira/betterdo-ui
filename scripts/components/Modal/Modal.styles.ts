@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { QUERIES } from '../../constants';
-
 import Icon from '@components/Icon';
 
 export const Overlay = styled.div<{ visible: boolean }>`
@@ -49,7 +47,7 @@ export const Container = styled.div<{
         transform: translate(-50%, -50%);
         }
     `}
-    ${QUERIES.medium} {
+    ${({ theme }) => theme.queries.medium} {
         width: 60%;
     }
 `;

@@ -1,12 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import {
-    Container,
-    Content,
-    Hamburger,
-    ProfilePicture
-} from './Logo.styles.js';
+import { Container, Content, Hamburger, ProfilePicture } from './Logo.styles';
 
 import useListDetails from '@hooks/useListDetails';
 import useProfile from '@hooks/useProfile';
@@ -36,7 +31,7 @@ function Logo() {
                     Better
                     <span>Do.</span>
                 </h1>
-                {profile && profile.firstName && (
+                {profile?.firstName && (
                     <ProfilePicture
                         onClick={e => {
                             e.stopPropagation();

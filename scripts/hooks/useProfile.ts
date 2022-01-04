@@ -21,7 +21,7 @@ function useProfileOnce() {
         logout,
         error,
         loading: Boolean(!data),
-        profile: data ? data : {}
+        profile: data
     };
 }
 

@@ -38,7 +38,7 @@ const Img = styled.img`
 
 interface Props {
     user: User;
-    onClick?: () => void;
+    onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const ProfilePicture = ({ user, onClick, ...props }: Props) => {

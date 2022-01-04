@@ -45,11 +45,11 @@ const IconHolder = styled.div`
 
 function CustomListSettings() {
     const { profile, loading, error } = useProfile();
-    const [customLists, setCustomLists] = useState(profile.customLists || {});
+    const [customLists, setCustomLists] = useState(profile?.customLists || {});
     const modifyProfile = useModifyProfile();
     useEffect(() => {
         if (!loading && !error) {
-            setCustomLists(profile.customLists);
+            setCustomLists(profile?.customLists);
         }
     }, [loading, error, profile]);
     const onCustomListToggle = useCallback(

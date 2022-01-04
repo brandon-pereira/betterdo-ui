@@ -22,7 +22,7 @@ function usePushNotifications() {
         (async () => {
             setStatus(STATES.DISABLED);
             if (
-                !profile.isPushEnabled ||
+                !profile?.isPushEnabled ||
                 localStorage.getItem('banners.pushDisabled')
             ) {
                 return;
@@ -45,7 +45,7 @@ function usePushNotifications() {
             return;
         }
         const subscription = await _requestNotificationAccess(
-            profile.config.vapidKey
+            profile?.config.vapidKey
         );
         if (subscription) {
             console.info('Successfully got user subscription', subscription);
