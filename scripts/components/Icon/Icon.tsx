@@ -19,6 +19,8 @@ function Icon({ children, onClick, icon, className, color, ...props }: Props) {
             as={onClick ? 'button' : 'div'}
             className={className}
             onClick={onClick}
+            // add type button so it doesn't default to submit
+            type={onClick ? 'button' : undefined}
         >
             {createElement(icon, {
                 'aria-describedby': children
