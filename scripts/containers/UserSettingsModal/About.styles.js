@@ -20,6 +20,7 @@ export const Logo = styled(_BetterDo)`
     width: 8rem;
     display: block;
     margin: 2rem auto 1rem;
+    filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.5));
 `;
 
 export const ChangeLog = styled.div`
