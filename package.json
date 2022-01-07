@@ -23,7 +23,6 @@
         "simplebar-react": "^2.3.6",
         "styled-components": "^5.3.3",
         "swr": "^1.1.2",
-        "web-notifier": "^1.0.2",
         "workbox-window": "^6.4.2"
     },
     "devDependencies": {

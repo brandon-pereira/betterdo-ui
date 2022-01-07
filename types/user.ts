@@ -1,12 +1,9 @@
 interface User {
     _id: string;
-    email: string;
     firstName: string;
     lastName?: string;
-    lists: string[];
-    isPushEnabled: boolean;
-    pushSubscriptions: Array<string>;
-    timeZone: string;
+    email: string;
+    profilePicture: string;
     customLists: {
         highPriority?: boolean;
         today?: boolean;
@@ -14,12 +11,17 @@ interface User {
         overdue?: boolean;
         week?: boolean;
     };
-    pushSubscription?: string;
-    profilePicture: string;
     isBeta: boolean;
+    isPushEnabled: boolean;
     lastLogin: Date;
     creationDate: Date;
-    google_id: string;
+    timeZone: string;
+    config: {
+        vapidKey: string;
+    };
+    // lists: string[];
+    // google_id: string;
+    // pushSubscriptions?: Array<string>;
 }
 
 export default User;
