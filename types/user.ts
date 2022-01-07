@@ -1,3 +1,5 @@
+import List from './list';
+
 interface User {
     _id: string;
     firstName: string;
@@ -19,9 +21,18 @@ interface User {
     config: {
         vapidKey: string;
     };
-    // lists: string[];
-    // google_id: string;
-    // pushSubscriptions?: Array<string>;
+}
+
+// This is what should be sent to modifyProfile function
+export interface UpdateUserObject extends Partial<User> {
+    lists?: List[];
+    pushSubscription?: string;
+}
+
+// modifyProfile function should format UpdateUserObject to match this schema
+export interface _UpdateUserPayload extends Partial<User> {
+    lists?: string[];
+    pushSubscription?: string;
 }
 
 export default User;

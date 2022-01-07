@@ -1,6 +1,6 @@
 import Task from '../../types/task';
 import List from '../../types/list';
-import User from '../../types/user';
+import User, { _UpdateUserPayload } from '../../types/user';
 
 import { SERVER_URL } from '@utilities/env';
 
@@ -42,7 +42,7 @@ export const deleteList = (listId: string): Promise<void> => {
     return _delete(`lists/${listId}`);
 };
 
-export const updateUser = (updatedProps: Partial<User>): Promise<User> => {
+export const updateUser = (updatedProps: _UpdateUserPayload): Promise<User> => {
     return _post<User>(`users`, updatedProps);
 };
 
