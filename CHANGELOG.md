@@ -1,5 +1,12 @@
 # Changelog
 
+## v5.4.0
+
+-   Front-end is now primarily written in TypeScript, more migrations to follow.
+-   Rebuilt static site in Astro, now has automated deploys like the rest of the app.
+-   Migrate various legacy animations to Framer Motion
+-   Upgrade `web-notifier` dependency to v2
+
 ## v5.3.2
 
 -   More improvements to animations when completing tasks
