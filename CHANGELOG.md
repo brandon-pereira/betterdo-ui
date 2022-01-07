@@ -2,6 +2,7 @@
 
 ## v5.4.0
 
+-   We're now in the [Android Play Store](https://play.google.com/store/apps/details?id=app.betterdo.twa&hl=en_CA&gl=US), leveraging a TWA for the deploy process.
 -   Front-end is now primarily written in TypeScript, more migrations to follow.
 -   Rebuilt static site in Astro, now has automated deploys like the rest of the app.
 -   Migrate various legacy animations to Framer Motion
