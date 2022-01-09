@@ -21,7 +21,7 @@ export const Overlay = styled.div<{ visible: boolean }>`
 
 export const Container = styled.div<{
     visible: boolean;
-    disableHeightAnimation: boolean;
+    disableHeightAnimation?: boolean;
 }>`
     background: ${({ theme }) => theme.colors.modals.contentBackground};
     ${props =>
@@ -54,7 +54,7 @@ export const Container = styled.div<{
 
 export const ContentContainer = styled.div<{
     height: number | 'auto';
-    disableHeightAnimation: boolean;
+    disableHeightAnimation?: boolean;
 }>`
     overflow: hidden;
     height: ${props => {
@@ -82,7 +82,7 @@ export const ModalClose = styled(Icon)`
     filter: drop-shadow(0 1px #555);
 `;
 
-export const Content = styled.div<{ disableHeightAnimation: boolean }>`
+export const Content = styled.div<{ disableHeightAnimation?: boolean }>`
     position: relative;
     z-index: 2;
     padding: 1rem;

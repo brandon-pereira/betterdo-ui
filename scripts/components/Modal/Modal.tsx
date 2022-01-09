@@ -27,7 +27,7 @@ interface Props {
     canCloseModal?: () => boolean;
     onRequestClose: () => void;
     // TODO: Framer motion this logic
-    disableHeightAnimation: boolean;
+    disableHeightAnimation?: boolean;
 }
 const Modal = forwardRef<HTMLDivElement, Props>(
     (
