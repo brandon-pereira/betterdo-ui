@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Slider = styled.div`
+export const Slider = styled.div<{ disabled?: boolean }>`
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -27,7 +27,7 @@ export const Slider = styled.div`
         border-radius: 50%;
     }
 `;
-export const Switch = styled.label`
+export const Switch = styled.label<{ disabled?: boolean }>`
     position: relative;
     display: inline-block;
     width: 60px;

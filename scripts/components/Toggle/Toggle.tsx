@@ -1,8 +1,17 @@
 import React, { useCallback, useState } from 'react';
 
-import { Switch, Slider } from './Toggle.styles.js';
+import { Switch, Slider } from './Toggle.styles';
 
-function Toggle({ value, onChange, disabled }) {
+interface Props {
+    value: boolean;
+    onChange: (
+        e: React.ChangeEvent<HTMLInputElement>,
+        newState: boolean
+    ) => void;
+    disabled?: boolean;
+}
+
+function Toggle({ value, onChange, disabled }: Props) {
     const [checked, setChecked] = useState(value || false);
 
     const _onChange = useCallback(
