@@ -37,15 +37,15 @@ const Img = styled.img`
 `;
 
 interface Props {
-    user: User;
+    user?: User;
+    size?: string;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const ProfilePicture = ({ user, onClick, ...props }: Props) => {
-    user = user || {};
     const [error, setError] = useState(false);
-    const firstName = user.firstName || 'A';
-    const lastName = user.lastName || 'A';
+    const firstName = user?.firstName || 'A';
+    const lastName = user?.lastName || 'A';
     const initials = firstName.charAt(0) + lastName.charAt(0);
     return (
         <Container as={onClick ? 'button' : 'div'} onClick={onClick} {...props}>
@@ -61,7 +61,7 @@ const ProfilePicture = ({ user, onClick, ...props }: Props) => {
     );
 };
 
-export const FormatProfilePictureUrl = (url: string, sizeInPx?: number) => {
+export const FormatProfilePictureUrl = (url?: string, sizeInPx?: number) => {
     if (url && typeof url === 'string') {
         return url.replace('sz=50', sizeInPx ? `sz=${sizeInPx}` : '');
     }

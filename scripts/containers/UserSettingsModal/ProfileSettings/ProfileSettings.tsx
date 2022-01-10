@@ -21,8 +21,8 @@ function ProfileSettings() {
     });
     const modifyProfile = useModifyProfile();
     const [isSaving, setSaving] = useState(false);
-    const [error, setError] = useState(null);
-    const [invalid, setInvalid] = useState(null);
+    const [error, setError] = useState<string | undefined>(undefined);
+    const [invalid, setInvalid] = useState<keyof typeof state | null>(null);
 
     const validate = useCallback(() => {
         if (!state.firstName) {
@@ -43,7 +43,7 @@ function ProfileSettings() {
             }
             if (validate()) {
                 setSaving(true);
-                setError(null);
+                setError(undefined);
                 setInvalid(null);
                 try {
                     await modifyProfile({
@@ -51,7 +51,7 @@ function ProfileSettings() {
                         lastName: state.lastName,
                         email: state.email
                     });
-                } catch (err) {
+                } catch (err: any) {
                     setSaving(false);
                     setError(err.formattedMessage || err.message);
                     return;
@@ -116,7 +116,7 @@ function ProfileSettings() {
                 placeholder="hello@world.com"
             />
             <ButtonContainer>
-                <Button isLoading={isSaving} loadingText="Saving" type="Save">
+                <Button isLoading={isSaving} loadingText="Saving" type="submit">
                     Save
                 </Button>
                 <Button onClick={logout} color={'red'}>
