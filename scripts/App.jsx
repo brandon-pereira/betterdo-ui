@@ -48,7 +48,7 @@ const App = () => (
                 children={({ match }) => (
                     <UserSettingsModal isOpen={Boolean(match)} />
                 )}
-                path="/:currentListId/account-settings/:subroute?"
+                path="/:currentListId/profile-settings/:subroute?"
             />
         </>
     </>

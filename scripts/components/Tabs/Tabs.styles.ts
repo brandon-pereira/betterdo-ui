@@ -54,7 +54,7 @@ export const TabHeaderItem = styled.button<{ selected: boolean }>`
 `;
 
 export const TabsBody = styled.div``;
-export const TabBodyItem = styled.div<{ selected: boolean }>`
+export const TabBodyItem = styled.div<{ selected?: boolean }>`
     display: none;
     ${props =>
         props.selected &&

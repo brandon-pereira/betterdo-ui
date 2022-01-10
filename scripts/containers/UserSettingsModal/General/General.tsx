@@ -1,5 +1,6 @@
 import React, { useState, Fragment, useCallback } from 'react';
-import styled from 'styled-components';
+
+import { OptionGroup, Description } from './General.styles';
 
 import { timeZones } from '@utilities/timezones';
 import Button from '@components/Button';
@@ -9,34 +10,7 @@ import useProfile from '@hooks/useProfile';
 import useModifyProfile from '@hooks/useModifyProfile';
 import useDarkMode from '@hooks/useDarkMode';
 import Dropdown from '@components/Dropdown';
-
-const OptionGroup = styled.div`
-    display: flex;
-    border-radius: 1rem;
-    align-items: center;
-    padding: 1rem;
-    margin: 0 -1rem;
-    &:first-of-type {
-        padding-top: 0.5rem;
-    }
-    &:nth-of-type(even) {
-        background: ${({ theme }) =>
-            theme.colors.modals.listViewAlternateBackground};
-    }
-    select {
-        max-width: 15rem;
-    }
-    > div {
-        flex: 1;
-        margin-right: 1rem;
-    }
-`;
-
-const Description = styled.p`
-    margin-top: -0.2rem;
-    font-size: 0.9rem;
-    color: ${({ theme }) => theme.colors.body.color};
-`;
+import { ServerError } from '@utilities/server';
 
 function GeneralSettings() {
     const { logout, profile, loading } = useProfile();
@@ -47,7 +21,7 @@ function GeneralSettings() {
         isPushEnabled: profile?.isPushEnabled || false,
         timeZone: profile?.timeZone || ''
     });
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<string | null>(null);
 
     const onChange = useCallback(
         async newState => {
@@ -58,7 +32,11 @@ function GeneralSettings() {
                     ...newState
                 });
             } catch (err) {
-                setError(err.formattedMessage || 'Unexpected Error Occurred');
+                if (err instanceof ServerError) {
+                    setError(err.formattedMessage);
+                } else {
+                    setError('Unexpected Error Occurred');
+                }
                 return;
             }
         },
@@ -66,7 +44,7 @@ function GeneralSettings() {
     );
 
     if (loading) {
-        return 'LOADING';
+        return <>Loading</>;
     }
     return (
         <Fragment>

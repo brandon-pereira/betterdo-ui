@@ -2,11 +2,11 @@ import.meta.hot;
 import React from 'react';
 import loadable from '@loadable/component';
 
-import { Container, Logo, ChangeLog } from './About.styles.js';
+import { Container, Logo, ChangeLog } from './About.styles';
 
 import { VERSION } from '@utilities/env';
 
-const ChangeLogLoader = loadable.lib(() => import('../../../CHANGELOG.md'));
+const ChangeLogLoader = loadable.lib(() => import('../../../../CHANGELOG.md'));
 
 function About() {
     return (

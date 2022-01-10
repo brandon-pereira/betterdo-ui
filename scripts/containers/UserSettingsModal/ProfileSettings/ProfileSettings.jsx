@@ -1,5 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import styled from 'styled-components';
+
+import {
+    ButtonContainer,
+    ProfilePictureBackground,
+    ProfilePictureBanner
+} from './ProfileSettings.styles';
 
 import Button from '@components/Button';
 import { Form, Label, Input } from '@components/Forms';
@@ -7,45 +12,7 @@ import ProfilePic, { FormatProfilePictureUrl } from '@components/ProfilePic';
 import useProfile from '@hooks/useProfile';
 import useModifyProfile from '@hooks/useModifyProfile';
 
-const ProfilePictureBanner = styled.div`
-    position: relative;
-    padding: 1rem 0;
-    margin: 0 -1rem 1rem;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    justify-content: center;
-    border-radius: 1rem;
-    &:before {
-        content: '';
-        background: ${({ theme }) => theme.colors.general.blue};
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-    ${ProfilePic} {
-        position: relative;
-        z-index: 1;
-        border: 2px solid #fff;
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
-    }
-`;
-const ProfilePictureBackground = styled.img`
-    position: absolute;
-    top: -5%;
-    left: -5%;
-    width: 110%;
-    height: 110%;
-    filter: blur(10px);
-`;
-const ButtonContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-`;
-
-function AccountSettings() {
+function ProfileSettings() {
     const { profile, logout, loading } = useProfile();
     const [state, setState] = useState({
         firstName: profile?.firstName || '',
@@ -96,7 +63,7 @@ function AccountSettings() {
     );
 
     if (loading) {
-        return 'Loading';
+        return <>Loading</>;
     }
     return (
         <Form onSubmit={e => onSubmit(e)} errorMessage={error}>
@@ -160,4 +127,4 @@ function AccountSettings() {
     );
 }
 
-export default AccountSettings;
+export default ProfileSettings;

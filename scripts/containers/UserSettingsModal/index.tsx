@@ -1,7 +1,7 @@
 import React from 'react';
 import loadable from '@loadable/component';
 
-import { Modal } from './UserSettingsModal.styles.js';
+import { Modal } from './UserSettingsModal.styles';
 
 import { Loader } from '@components/Modal';
 import useEditListModal from '@hooks/useEditListModal';
@@ -10,11 +10,15 @@ const Content = loadable(() => import('./Content'), {
     fallback: <Loader />
 });
 
-function EditListModalContainer({ isOpen }) {
+interface Props {
+    isOpen: boolean;
+}
+
+function EditListModalContainer({ isOpen }: Props) {
     const { closeModal } = useEditListModal();
     return (
         <Modal onRequestClose={closeModal} visible={isOpen}>
-            {isOpen && <Content onClose={closeModal} />}
+            {isOpen && <Content />}
         </Modal>
     );
 }

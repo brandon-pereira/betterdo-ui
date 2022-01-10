@@ -35,7 +35,7 @@ function Logo() {
                     <ProfilePicture
                         onClick={e => {
                             e.stopPropagation();
-                            history.replace(generateUrl('/account-settings'));
+                            history.replace(generateUrl('/profile-settings'));
                         }}
                         user={profile}
                     />

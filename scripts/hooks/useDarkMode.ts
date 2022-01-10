@@ -4,7 +4,7 @@ import createSharedHook from './internal/createSharedHook';
 
 const localStorageKey = 'doesBetterDoPreferDarkMode';
 
-function useDarkModeOnce() {
+function useDarkModeOnce(): [boolean, (bool: boolean) => void] {
     const [isOSinDarkMode, setOSinDarkMode] = useState(
         window.matchMedia('(prefers-color-scheme: dark)').matches
     );
@@ -23,7 +23,7 @@ function useDarkModeOnce() {
     const shouldUseDarkMode =
         isOSinDarkMode && doesUserPreferDarkMode ? true : false;
 
-    const setPrefersDarkMode = useCallback(bool => {
+    const setPrefersDarkMode = useCallback((bool: boolean) => {
         if (bool) {
             setUserDarkPreference(true);
             localStorage.setItem(localStorageKey, 'true');

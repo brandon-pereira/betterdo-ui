@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 
 import { LIGHT_THEME } from '../../theme';
 
-import AccountSettings from './AccountSettings';
+import ProfileSettings from './ProfileSettings';
 import CustomLists from './CustomLists';
 import General from './General';
 import About from './About';
@@ -28,10 +28,10 @@ function UserSettingsModalContent() {
             <Header color={LIGHT_THEME.colors.general.blue}>Settings</Header>
             <Tabs
                 color={LIGHT_THEME.colors.general.blue}
-                titles={['Account', 'Custom Lists', 'General', 'About']}
+                titles={['Profile', 'Custom Lists', 'General', 'About']}
             >
                 <Tab>
-                    <AccountSettings />
+                    <ProfileSettings />
                 </Tab>
                 <Tab>
                     <CustomLists />
