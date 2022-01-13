@@ -1,10 +1,10 @@
-import { getTimeZones } from '@vvo/tzdb';
+import { getTimeZones, TimeZone } from '@vvo/tzdb';
 
 export const timeZones = getTimeZones();
 
-export function getTimeZone(timeZone: string) {
+export function getTimeZone(timeZone: string): TimeZone {
     const value = timeZones.find(tz => {
         return timeZone === tz.name || tz.group.includes(timeZone);
     });
-    return value || 'America/Edmonton';
+    return value || getTimeZone('America/Edmonton');
 }

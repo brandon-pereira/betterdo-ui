@@ -3,7 +3,7 @@ import React from 'react';
 import { Container, Icon, Heading, BodyCopy, Button } from './Banner.styles';
 
 interface Props {
-    title: string;
+    title?: string;
     body: string;
     buttonText?: string;
     buttonAction?: React.MouseEventHandler<HTMLButtonElement>;

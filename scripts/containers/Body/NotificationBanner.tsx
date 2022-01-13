@@ -7,7 +7,7 @@ import useCurrentListId from '@hooks/useCurrentListId';
 import useListDetails from '@hooks/useListDetails';
 import useProfile from '@hooks/useProfile';
 import useDarkMode from '@hooks/useDarkMode';
-import { getTimeZone } from '@utilities/timezones.ts';
+import { getTimeZone } from '@utilities/timezones';
 import useModifyProfile from '@hooks/useModifyProfile';
 
 function NotificationBanner() {
@@ -39,7 +39,7 @@ function NotificationBanner() {
     }
 
     let doesListHaveNotifications = false;
-    if (!loading && !error && list && list.members) {
+    if (!loading && !error && list && list.members && list.tasks) {
         const isSharedList = list.members.length > 1;
         const doesListHaveDueDates = Boolean(
             list.tasks.find(task => task.dueDate)
