@@ -7,7 +7,7 @@ interface List {
     tasks: Task[];
     completedTasks: Array<string>;
     members: User[];
-    owner: User[];
+    owner: string;
     type:
         | 'inbox'
         | 'today'

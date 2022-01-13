@@ -35,7 +35,7 @@ function GeneralSettings() {
                 if (err instanceof ServerError) {
                     setError(err.formattedMessage);
                 } else {
-                    setError('Unexpected Error Occurred');
+                    setError(ServerError.defaultError);
                 }
                 return;
             }

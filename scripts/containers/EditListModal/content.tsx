@@ -8,18 +8,19 @@ import { Header } from '@components/Copy';
 import useListDetails from '@hooks/useListDetails';
 import useCurrentListId from '@hooks/useCurrentListId';
 
-function EditListModalContent({ setUnsavedChanges, onRequestClose }) {
+export interface Props {
+    setUnsavedChanges: (bool: boolean) => void;
+    onRequestClose: () => void;
+}
+
+function EditListModalContent({ setUnsavedChanges, onRequestClose }: Props) {
     const currentListId = useCurrentListId();
     const { list } = useListDetails(currentListId);
 
     return (
         <>
             <Header color={list.color}>List Settings</Header>
-            <Tabs
-                color={list.color}
-                titles={['General', 'Members']}
-                showTitleAbove={true}
-            >
+            <Tabs color={list.color} titles={['General', 'Members']}>
                 <Tab>
                     <ListSettings
                         setUnsavedChanges={setUnsavedChanges}
@@ -27,11 +28,7 @@ function EditListModalContent({ setUnsavedChanges, onRequestClose }) {
                     />
                 </Tab>
                 <Tab>
-                    <ListMembers
-                        currentList={list}
-                        setUnsavedChanges={setUnsavedChanges}
-                        onRequestClose={onRequestClose}
-                    />
+                    <ListMembers />
                 </Tab>
             </Tabs>
         </>

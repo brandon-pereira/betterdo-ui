@@ -11,6 +11,7 @@ import { Form, Label, Input } from '@components/Forms';
 import ProfilePic, { FormatProfilePictureUrl } from '@components/ProfilePic';
 import useProfile from '@hooks/useProfile';
 import useModifyProfile from '@hooks/useModifyProfile';
+import { ServerError } from '@utilities/server';
 
 function ProfileSettings() {
     const { profile, logout, loading } = useProfile();
@@ -51,9 +52,13 @@ function ProfileSettings() {
                         lastName: state.lastName,
                         email: state.email
                     });
-                } catch (err: any) {
+                } catch (err) {
                     setSaving(false);
-                    setError(err.formattedMessage || err.message);
+                    if (err instanceof ServerError) {
+                        setError(err.formattedMessage);
+                    } else {
+                        setError(ServerError.defaultError);
+                    }
                     return;
                 }
                 setSaving(false);

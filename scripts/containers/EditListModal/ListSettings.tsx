@@ -8,6 +8,7 @@ import useCurrentListId from '@hooks/useCurrentListId';
 import useModifyList from '@hooks/useModifyList';
 import useListDetails from '@hooks/useListDetails';
 import useDeleteList from '@hooks/useDeleteList';
+import { ServerError } from '@utilities/server';
 
 const ButtonContainer = styled.div`
     display: flex;
@@ -15,7 +16,11 @@ const ButtonContainer = styled.div`
     margin-top: 1.5rem;
 `;
 
-function ListSettings({ setUnsavedChanges, onRequestClose }) {
+interface Props {
+    setUnsavedChanges: (bool: boolean) => void;
+    onRequestClose: () => void;
+}
+function ListSettings({ setUnsavedChanges, onRequestClose }: Props) {
     const currentListId = useCurrentListId();
     const { list } = useListDetails(currentListId);
     const [isSaving, setSaving] = useState(false);
@@ -23,7 +28,7 @@ function ListSettings({ setUnsavedChanges, onRequestClose }) {
     const _deleteList = useDeleteList();
     const [isDeleting, setDeleting] = useState(false);
     const [isInvalid, setInvalid] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<string | undefined>();
     const [state, setState] = useState({
         title: list.title,
         color: list.color
@@ -40,7 +45,11 @@ function ListSettings({ setUnsavedChanges, onRequestClose }) {
                 await _deleteList(currentListId);
             } catch (err) {
                 console.error(err);
-                setError(err.formattedMessage || 'Unexpected Error');
+                if (err instanceof ServerError) {
+                    setError(err.formattedMessage);
+                } else {
+                    setError(ServerError.defaultError);
+                }
                 setDeleting(false);
                 return;
             }
@@ -56,12 +65,16 @@ function ListSettings({ setUnsavedChanges, onRequestClose }) {
             if (state.title && state.title.length) {
                 setSaving(true);
                 setInvalid(false);
-                setError(false);
+                setError(undefined);
                 try {
                     await modifyList(currentListId, state);
                 } catch (err) {
                     console.error(err);
-                    setError(err.formattedMessage || 'Unexpected Error');
+                    if (err instanceof ServerError) {
+                        setError(err.formattedMessage);
+                    } else {
+                        setError(ServerError.defaultError);
+                    }
                     setSaving(false);
                     return;
                 }

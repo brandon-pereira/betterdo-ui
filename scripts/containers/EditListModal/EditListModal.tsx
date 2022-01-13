@@ -1,19 +1,24 @@
 import React, { useCallback, useRef } from 'react';
 import loadable from '@loadable/component';
 
-import { Modal } from './EditListModal.styles.js';
+import { Props as ContentProps } from './content';
+import { Modal } from './EditListModal.styles';
 
 import { Loader } from '@components/Modal';
 import useEditListModal from '@hooks/useEditListModal';
 
-const Content = loadable(() => import('./content'), {
+const Content = loadable<ContentProps>(() => import('./content'), {
     fallback: <Loader />
 });
 
-function EditListModalContainer({ isOpen }) {
-    const hasUnsavedChanges = useRef(false);
+interface Props {
+    isOpen: boolean;
+}
+
+function EditListModalContainer({ isOpen }: Props) {
+    const hasUnsavedChanges = useRef<boolean>(false);
     const { closeModal } = useEditListModal();
-    const setUnsavedChanges = useCallback(bool => {
+    const setUnsavedChanges = useCallback((bool: boolean) => {
         hasUnsavedChanges.current = bool;
     }, []);
     const canCloseModal = useCallback(() => {

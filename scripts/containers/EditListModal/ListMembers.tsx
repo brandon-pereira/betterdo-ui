@@ -6,7 +6,7 @@ import { Form, Label, Input } from '@components/Forms';
 import ProfilePic from '@components/ProfilePic';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useListDetails from '@hooks/useListDetails';
-import { getUserByEmail } from '@utilities/server';
+import { getUserByEmail, ServerError } from '@utilities/server';
 import useModifyList from '@hooks/useModifyList';
 
 const UserList = styled.ol`
@@ -49,12 +49,14 @@ const User = styled.li`
 function ListMembers() {
     const [loading, setLoading] = useState(false);
     const [isInvalid, setInvalid] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<string | undefined>();
     const [input, setInput] = useState('');
     const currentListId = useCurrentListId();
     const modifyList = useModifyList();
     const { list } = useListDetails(currentListId);
-    const [members, setMembers] = useState(list.members);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const [members, setMembers] = useState(list.members!);
+
     const removeMember = useCallback(
         async _id => {
             // Temporarily update UI while request sends
@@ -78,7 +80,7 @@ function ListMembers() {
             // Update UI to loading state
             setLoading(true);
             setInvalid(false);
-            setError(null);
+            setError(undefined);
             // Get user details from server
             try {
                 // See if member exists
@@ -100,12 +102,16 @@ function ListMembers() {
                 // Update UI with response from server
                 setLoading(false);
                 setInvalid(false);
-                setError(null);
+                setError(undefined);
             } catch (err) {
                 console.error(err);
                 setLoading(false);
                 setInvalid(true);
-                setError(err.formattedMessage || 'Unexpected Error');
+                if (err instanceof ServerError) {
+                    setError(err.formattedMessage);
+                } else {
+                    setError(ServerError.defaultError);
+                }
                 return;
             }
         },
@@ -116,7 +122,7 @@ function ListMembers() {
         <Form onSubmit={e => onSubmit(e)} errorMessage={error}>
             <Label>Current Members</Label>
             <UserList>
-                {list.members.map((user, index) => (
+                {list.members?.map((user, index) => (
                     <User key={index}>
                         <ProfilePic user={user} />
                         <UsersName>
