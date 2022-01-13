@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LoaderContainer } from './EditTask.styles.js';
+import { LoaderContainer } from './EditTask.styles';
 
 import _Loader from '@components/Loader';
 

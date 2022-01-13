@@ -6,7 +6,7 @@ import {
     Block,
     Notes,
     ButtonContainer
-} from './EditTask.styles.js';
+} from './EditTask.styles';
 import CreatorBlock from './CreatorBlock';
 import ListsDropdown from './ListsDropdown';
 import Loader from './Loader';

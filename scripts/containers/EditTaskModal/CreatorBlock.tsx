@@ -2,7 +2,7 @@ import React from 'react';
 
 import User from '../../../types/user';
 
-import { Block, CreatorBlock, ProfilePic } from './EditTask.styles.js';
+import { Block, CreatorBlock, ProfilePic } from './EditTask.styles';
 import RelativeTime from './RelativeTime';
 
 interface Props {
