@@ -5,7 +5,7 @@ import _ProfilePic from '@components/ProfilePic';
 import _Modal from '@components/Modal';
 
 export const Modal = styled(_Modal)`
-    background: ${({ theme }) => theme.colors.modals.background};
+    background: ${({ theme }) => theme.colors.modals.contentBackground};
     transform: none;
     right: 0;
     top: 0;
