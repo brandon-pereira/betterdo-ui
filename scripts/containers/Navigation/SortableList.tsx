@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { CSSProperties, useCallback } from 'react';
 import { CSS } from '@dnd-kit/utilities';
 import {
     DndContext,
@@ -19,9 +19,15 @@ import {
     restrictToParentElement
 } from '@dnd-kit/modifiers';
 
+import List from '../../../types/list';
+
 import ListItem from '@components/ListItem';
 
-const SortableItem = function ({ id, value }) {
+interface SortableItemProps {
+    id: string;
+    value: List;
+}
+const SortableItem = function ({ id, value }: SortableItemProps) {
     const {
         attributes,
         listeners,
@@ -36,7 +42,7 @@ const SortableItem = function ({ id, value }) {
         transition,
         pointerEvents: isDragging ? 'none' : 'all',
         zIndex: isDragging ? '6' : undefined
-    };
+    } as CSSProperties;
 
     return (
         <ListItem
@@ -51,7 +57,11 @@ const SortableItem = function ({ id, value }) {
     );
 };
 
-function SortableList({ lists, onSortEnd }) {
+interface SortableListProps {
+    lists: List[];
+    onSortEnd: (params: { oldIndex: number; newIndex: number }) => void;
+}
+function SortableList({ lists, onSortEnd }: SortableListProps) {
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
@@ -94,7 +104,7 @@ function SortableList({ lists, onSortEnd }) {
                 {lists.map((list, index) => (
                     <SortableItem
                         key={typeof list === 'object' ? list._id : index}
-                        id={typeof list === 'object' ? list._id : index}
+                        id={typeof list === 'object' ? list._id : `${index}`}
                         value={list}
                     />
                 ))}

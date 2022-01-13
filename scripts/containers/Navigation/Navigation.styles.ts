@@ -12,7 +12,7 @@ export const NavigationModalOverlay = styled.div`
     opacity: 0;
 `;
 
-export const Container = styled.nav`
+export const Container = styled.nav<{ isMobileNavVisible?: boolean }>`
     display: flex;
     background: ${({ theme }) => theme.colors.navigation.background};
     flex-direction: column;

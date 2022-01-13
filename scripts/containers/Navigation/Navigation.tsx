@@ -6,23 +6,17 @@ import {
     Container,
     NavigationModalOverlay,
     ListsContainer
-} from './Navigation.styles.js';
+} from './Navigation.styles';
 
 import useLists from '@hooks/useLists';
-import useNewListModal from '@hooks/useNewListModal';
-import useCurrentListId from '@hooks/useCurrentListId';
-import useSwitchList from '@hooks/useSwitchList';
 import useModifyProfile from '@hooks/useModifyProfile';
 import useHamburgerNav from '@hooks/useHamburgerNav';
-import ListItem from '@components/ListItem';
+import { NewListItem } from '@components/ListItem';
 import Scroller from '@components/Scroller';
 
 function Navigation() {
     const [isMobileNavVisible, setMobileNavVisibility] = useHamburgerNav();
-    const currentListId = useCurrentListId();
     const modifyProfile = useModifyProfile();
-    const switchList = useSwitchList();
-    const { openModal: openNewListModal } = useNewListModal();
     const { lists } = useLists();
 
     const onSortEnd = useCallback(
@@ -46,16 +40,8 @@ function Navigation() {
         <Container isMobileNavVisible={isMobileNavVisible}>
             <Scroller>
                 <ListsContainer>
-                    <SortableList
-                        lists={lists}
-                        currentId={currentListId}
-                        onSortEnd={onSortEnd}
-                        onClick={switchList}
-                    />
-                    <ListItem
-                        onClick={openNewListModal}
-                        list={{ type: 'newList' }}
-                    />
+                    <SortableList lists={lists} onSortEnd={onSortEnd} />
+                    <NewListItem />
                 </ListsContainer>
             </Scroller>
             <NavigationModalOverlay
