@@ -29,7 +29,7 @@ export const Container = styled.div`
 `;
 export const DeleteIcon = styled(_Icon)``;
 
-export const Task = styled.div`
+export const Task = styled.div<{ checked?: boolean }>`
     display: flex;
     align-items: center;
     padding: 0.8rem 1rem;

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { CSSProperties, useCallback } from 'react';
 import { CSS } from '@dnd-kit/utilities';
 import { restrictToParentElement } from '@dnd-kit/modifiers';
 import {
@@ -16,11 +16,20 @@ import {
     verticalListSortingStrategy
 } from '@dnd-kit/sortable';
 
-import { DeleteIcon, Task, Checkbox } from './Subtasks.styles.js';
+import { Subtask } from '../../../types/task';
+
+import { DeleteIcon, Task, Checkbox } from './Subtasks.styles';
 
 import x from '@components/Icon/svgs/x.svg';
 
-const SortableItem = ({ id, onDelete, onToggleCompleted, value }) => {
+interface Props {
+    id: string;
+    onDelete: (id: string) => void;
+    onToggleCompleted: (id: string) => void;
+    value: Subtask;
+}
+
+const SortableItem = ({ id, onDelete, onToggleCompleted, value }: Props) => {
     const {
         attributes,
         listeners,
@@ -35,7 +44,7 @@ const SortableItem = ({ id, onDelete, onToggleCompleted, value }) => {
         transition,
         pointerEvents: isDragging ? 'none' : 'all',
         zIndex: isDragging ? '1' : undefined
-    };
+    } as CSSProperties;
 
     return (
         <Task
@@ -53,7 +62,7 @@ const SortableItem = ({ id, onDelete, onToggleCompleted, value }) => {
                 onKeyDown={e => {
                     // if space key
                     if (e.keyCode === 13) {
-                        this.toggleCompleted(id);
+                        onToggleCompleted(id);
                     }
                 }}
                 checked={value.isComplete}
@@ -71,7 +80,19 @@ const SortableItem = ({ id, onDelete, onToggleCompleted, value }) => {
     );
 };
 
-const SortableList = ({ items, onDelete, onToggleCompleted, onSortEnd }) => {
+interface SortableListProps {
+    items: Subtask[];
+    onDelete: (id: string) => void;
+    onToggleCompleted: (id: string) => void;
+    onSortEnd: (moves: { oldIndex: number; newIndex: number }) => void;
+}
+
+const SortableList = ({
+    items,
+    onDelete,
+    onToggleCompleted,
+    onSortEnd
+}: SortableListProps) => {
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
@@ -106,7 +127,7 @@ const SortableList = ({ items, onDelete, onToggleCompleted, onSortEnd }) => {
             modifiers={[restrictToParentElement]}
         >
             <SortableContext
-                items={items.map((item, index) => item._id || index)}
+                items={items.map((item, index) => item._id || `${index}`)}
                 strategy={verticalListSortingStrategy}
             >
                 {items.map((value, index) => (
@@ -114,7 +135,7 @@ const SortableList = ({ items, onDelete, onToggleCompleted, onSortEnd }) => {
                         onDelete={onDelete}
                         onToggleCompleted={onToggleCompleted}
                         key={value._id || index}
-                        id={value._id || index}
+                        id={value._id || `${index}`}
                         value={value}
                     />
                 ))}

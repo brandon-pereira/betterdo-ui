@@ -1,10 +1,16 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { arrayMoveImmutable } from 'array-move';
 
-import { Input, Container } from './Subtasks.styles.js';
+import { Subtask } from '../../../types/task';
+
+import { Input, Container } from './Subtasks.styles';
 import SortableList from './SortableList';
 
-function Subtasks({ subtasks, onChange }) {
+interface Props {
+    subtasks: Subtask[];
+    onChange: (newList: string[]) => void;
+}
+function Subtasks({ subtasks, onChange }: Props) {
     const [value, setValue] = useState('');
     const [invalid, setInvalid] = useState(false);
     // this is an internally managed state of subtasks
@@ -22,12 +28,12 @@ function Subtasks({ subtasks, onChange }) {
         [onChange]
     );
 
-    const setInputValue = value => {
+    const setInputValue = (value: string) => {
         setValue(value);
         setInvalid(!value);
     };
 
-    const onToggleCompleted = idx => {
+    const onToggleCompleted = (idx: string) => {
         const _temp = Array.from(_subtasks);
         const index = _temp.findIndex(subtask => subtask._id === idx);
         if (Number.isInteger(index)) {
@@ -36,7 +42,7 @@ function Subtasks({ subtasks, onChange }) {
         }
     };
 
-    const onDelete = idx => {
+    const onDelete = (idx: string) => {
         const _temp = Array.from(_subtasks);
         const index = _temp.findIndex(subtask => subtask._id === idx);
         if (Number.isInteger(index)) {
@@ -45,10 +51,14 @@ function Subtasks({ subtasks, onChange }) {
         }
     };
 
-    const onKeyPress = e => {
+    const onKeyPress = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter' && value) {
             const _temp = Array.from(_subtasks);
-            _temp.push({ title: value });
+            _temp.push({
+                _id: `${Math.random()}`,
+                title: value,
+                isComplete: false
+            });
             setValue('');
             setSubtasks(_temp);
         }
