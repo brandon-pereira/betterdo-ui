@@ -2,10 +2,17 @@ import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { mutate } from 'swr';
 
+import List from '../../types/list';
+import Task from '../../types/task';
+
 import { getListDetailUrl } from './internal/urls';
 
 import useCompletedTasks from '@hooks/useCompletedTasks';
 import useHamburgerNav from '@hooks/useHamburgerNav';
+
+type DeepOptional<T> = T extends object ? DeepOptionalObject<T> : T | undefined;
+
+type DeepOptionalObject<T> = { [P in keyof T]?: DeepOptional<T[P]> };
 
 function useSwitchList() {
     const history = useHistory();
@@ -13,7 +20,11 @@ function useSwitchList() {
     const [, setMobileNavVisibility] = useHamburgerNav();
 
     const switchList = useCallback(
-        async nextList => {
+        async (nextList: DeepOptional<List>) => {
+            if (!nextList._id) {
+                console.warn('Next List ID is required!');
+                return;
+            }
             if (nextList && nextList.tasks) {
                 nextList.tasks = nextList.tasks.map(_id => {
                     if (typeof _id === 'string') {
@@ -21,7 +32,7 @@ function useSwitchList() {
                             _id: _id,
                             isTemporaryTask: true,
                             isLoading: true
-                        };
+                        } as Partial<Task>;
                     }
                     return _id;
                 });
@@ -31,7 +42,7 @@ function useSwitchList() {
             // update the local data immediately, but disable the revalidation.
             await mutate(
                 getListDetailUrl(nextList._id),
-                list => ({ ...nextList, ...list }),
+                (list: Partial<List>) => ({ ...nextList, ...list }),
                 false
             );
             // turn off completed tasks view
