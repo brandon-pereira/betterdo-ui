@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { arrayMoveImmutable } from 'array-move';
 import { LayoutGroup } from 'framer-motion';
 
-import { Container, TaskContainer, Scroller } from './Body.styles.js';
+import { Container, TaskContainer, Scroller } from './Body.styles';
 import SortableList from './SortableList';
 import CompletedTasksButton from './CompletedTasksButton';
 import { AllCaughtUpBanner, ServerErrorBanner } from './Banners';
@@ -31,7 +31,11 @@ function Body() {
             }
             try {
                 modifyList(currentListId, {
-                    tasks: arrayMoveImmutable(list.tasks, oldIndex, newIndex)
+                    tasks: arrayMoveImmutable(
+                        list.tasks || [],
+                        oldIndex,
+                        newIndex
+                    )
                 });
             } catch (err) {
                 console.error(err);
@@ -43,6 +47,7 @@ function Body() {
     const isAllCaughtUp =
         !error &&
         !loading &&
+        list.tasks &&
         list.tasks.length === 0 &&
         !isCompletedTasksIncluded;
 
@@ -68,11 +73,11 @@ function Body() {
                             />
                             {/* Completed tasks are not sortable and only shown when requested */}
                             {isCompletedTasksIncluded &&
-                                list.completedTasks.map(task => (
+                                list?.completedTasks?.map(task => (
                                     <Task
                                         key={task._id}
-                                        isCompleted={true}
                                         {...task}
+                                        isCompleted={true}
                                     />
                                 ))}
                             {/* If not loaded, show completed tasks button */}

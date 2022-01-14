@@ -16,7 +16,7 @@ interface Task {
     subtasks: Subtask[];
     dueDate: string;
     creationDate: string;
-    priority: string;
+    priority: 'low' | 'normal' | 'high';
     isLoading?: boolean;
     isTemporaryTask?: boolean;
 }

@@ -15,7 +15,15 @@ const ListItemIcon = ({
     icon: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
 }): React.ReactNode => <SvgIcon icon={icon} color="#fff" />;
 
-export default [
+export interface CustomList {
+    id: string;
+    title: string;
+    icon: React.ReactNode;
+    required: boolean;
+    disableTaskCreation?: boolean;
+}
+
+const lists: CustomList[] = [
     {
         id: 'inbox',
         title: 'Inbox',
@@ -60,7 +68,9 @@ export default [
         required: false,
         disableTaskCreation: true
     }
-] as const;
+];
+
+export default lists;
 
 export function getCurrentDay() {
     return startOfToday().getDate();

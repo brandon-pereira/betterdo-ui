@@ -5,7 +5,7 @@ interface List {
     _id: string;
     title: string;
     tasks: Task[];
-    completedTasks: Array<string>;
+    completedTasks?: Task[];
     members: User[];
     owner: string;
     type:

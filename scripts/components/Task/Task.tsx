@@ -1,17 +1,24 @@
 import React, { forwardRef, useCallback } from 'react';
 
+import TaskType from '../../../types/task';
+
 import {
     Container,
     Checkbox,
     Title,
     HighPriorityFlag,
     Loader
-} from './Task.styles.js';
+} from './Task.styles';
 
 import useEditTaskModal from '@hooks/useEditTaskModal';
 import useModifyTask from '@hooks/useModifyTask';
 
-const Task = forwardRef(
+interface Props extends TaskType {
+    containerProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
+    touchEvents?: import('@dnd-kit/core').DraggableSyntheticListeners;
+}
+
+const Task = forwardRef<HTMLButtonElement, Props>(
     (
         {
             title,

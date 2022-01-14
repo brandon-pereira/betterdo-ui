@@ -70,7 +70,10 @@ export const HighPriorityFlag = styled.div`
     }
 `;
 
-export const Container = styled.button`
+export const Container = styled.button<{
+    isLoading?: boolean;
+    priority: 'low' | 'normal' | 'high';
+}>`
     display: block;
     border: none;
     font: inherit;
