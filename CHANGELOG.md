@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.4.1
+
+-   We're not 100% Typescript!
+-   Minor bug fixes throughout app
+
 ## v5.4.0
 
 -   We're now in the [Android Play Store](https://play.google.com/store/apps/details?id=app.betterdo.twa&hl=en_CA&gl=US), leveraging a TWA for the deploy process.

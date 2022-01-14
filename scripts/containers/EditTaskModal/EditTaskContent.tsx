@@ -1,7 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react';
 
-import Task from '../../../types/task';
-
 import {
     Container,
     Content,
@@ -13,6 +11,7 @@ import CreatorBlock from './CreatorBlock';
 import ListsDropdown from './ListsDropdown';
 import Loader from './Loader';
 
+import Task from '@types/task';
 import { Header } from '@components/Copy';
 import Selector from '@components/Selector';
 import { Label, Input, Error } from '@components/Forms';

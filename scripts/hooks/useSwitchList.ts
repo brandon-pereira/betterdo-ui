@@ -2,11 +2,10 @@ import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { mutate } from 'swr';
 
-import List from '../../types/list';
-import Task from '../../types/task';
-
 import { getListDetailUrl } from './internal/urls';
 
+import List from '@types/list';
+import Task from '@types/task';
 import useCompletedTasks from '@hooks/useCompletedTasks';
 import useHamburgerNav from '@hooks/useHamburgerNav';
 

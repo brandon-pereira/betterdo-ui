@@ -44,7 +44,8 @@ module.exports = {
                 map: [
                     ['@components', './scripts/components'],
                     ['@hooks', './scripts/hooks'],
-                    ['@utilities', './scripts/utilities']
+                    ['@utilities', './scripts/utilities'],
+                    ['@types', './types']
                 ],
                 extensions: ['.ts', '.js', '.json', '.jsx', '.tsx', '.svg']
             }

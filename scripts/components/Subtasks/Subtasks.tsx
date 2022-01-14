@@ -1,10 +1,10 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { arrayMoveImmutable } from 'array-move';
 
-import { Subtask } from '../../../types/task';
-
 import { Input, Container } from './Subtasks.styles';
 import SortableList from './SortableList';
+
+import { Subtask } from '@types/task';
 
 interface Props {
     subtasks: Subtask[];

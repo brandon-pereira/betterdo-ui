@@ -1,9 +1,9 @@
 import React from 'react';
 
-import User from '../../../types/user';
-
 import { Block, CreatorBlock, ProfilePic } from './EditTask.styles';
 import RelativeTime from './RelativeTime';
+
+import User from '@types/user';
 
 interface Props {
     createdBy: User;

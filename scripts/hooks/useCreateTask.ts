@@ -1,10 +1,9 @@
 import { useCallback } from 'react';
 import { mutate } from 'swr';
 
-import List from '../../types/list';
-
 import { getListDetailUrl } from './internal/urls';
 
+import List from '@types/list';
 import useCompletedTasks from '@hooks/useCompletedTasks';
 import { createTask } from '@utilities/server';
 

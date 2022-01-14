@@ -18,8 +18,7 @@ import {
 } from '@dnd-kit/sortable';
 import { CSSProperties } from 'styled-components';
 
-import TaskType from '../../../types/task';
-
+import TaskType from '@types/task';
 import Task from '@components/Task';
 
 const variants = {

@@ -1,8 +1,8 @@
 import useSWR from 'swr';
 
-import Task from '../../types/task';
-
 import { getTaskDetailUrl } from './internal/urls';
+
+import Task from '@types/task';
 
 function useTaskDetails(taskId: string) {
     const { data, error } = useSWR<Task>(getTaskDetailUrl(taskId), {

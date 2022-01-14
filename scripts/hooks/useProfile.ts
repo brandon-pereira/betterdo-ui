@@ -1,11 +1,10 @@
 import useSWR from 'swr';
 import { useCallback } from 'react';
 
-import User from '../../types/user';
-
 import createSharedHook from './internal/createSharedHook';
 import { getProfileUrl } from './internal/urls';
 
+import User from '@types/user';
 import { SERVER_URL } from '@utilities/env';
 
 function useProfileOnce() {

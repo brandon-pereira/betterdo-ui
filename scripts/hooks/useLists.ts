@@ -1,9 +1,9 @@
 import useSWR from 'swr';
 
-import List from '../../types/list';
-
 import createSharedHook from './internal/createSharedHook';
 import { getListsUrl } from './internal/urls';
+
+import List from '@types/list';
 
 function useListsOnce() {
     const { data, error } = useSWR<List[]>(getListsUrl(), {

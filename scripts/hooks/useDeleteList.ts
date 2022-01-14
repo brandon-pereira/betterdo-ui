@@ -2,10 +2,9 @@ import { useCallback } from 'react';
 import { mutate } from 'swr';
 import { useHistory } from 'react-router-dom';
 
-import List from '../../types/list';
-
 import { getListsUrl } from './internal/urls';
 
+import List from '@types/list';
 import { deleteList } from '@utilities/server';
 
 function useDeleteList() {

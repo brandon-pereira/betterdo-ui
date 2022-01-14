@@ -16,10 +16,9 @@ import {
     verticalListSortingStrategy
 } from '@dnd-kit/sortable';
 
-import { Subtask } from '../../../types/task';
-
 import { DeleteIcon, Task, Checkbox } from './Subtasks.styles';
 
+import { Subtask } from '@types/task';
 import x from '@components/Icon/svgs/x.svg';
 
 interface Props {

@@ -1,7 +1,5 @@
 import React, { forwardRef, useCallback } from 'react';
 
-import TaskType from '../../../types/task';
-
 import {
     Container,
     Checkbox,
@@ -10,6 +8,7 @@ import {
     Loader
 } from './Task.styles';
 
+import TaskType from '@types/task';
 import useEditTaskModal from '@hooks/useEditTaskModal';
 import useModifyTask from '@hooks/useModifyTask';
 

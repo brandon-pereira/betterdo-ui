@@ -1,10 +1,9 @@
 import { useCallback } from 'react';
 import { mutate } from 'swr';
 
-import { _UpdateUserPayload, UpdateUserObject } from '../../types/user';
-
 import { getListsUrl, getProfileUrl } from './internal/urls';
 
+import { _UpdateUserPayload, UpdateUserObject } from '@types/user';
 import { updateUser } from '@utilities/server';
 
 function useModifyProfile() {

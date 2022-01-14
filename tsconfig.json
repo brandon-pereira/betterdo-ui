@@ -9,7 +9,8 @@
         "paths": {
             "@utilities/*": ["./scripts/utilities/*"],
             "@components/*": ["./scripts/components/*"],
-            "@hooks/*": ["./scripts/hooks/*"]
+            "@hooks/*": ["./scripts/hooks/*"],
+            "@types/*": ["./types"]
         },
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
