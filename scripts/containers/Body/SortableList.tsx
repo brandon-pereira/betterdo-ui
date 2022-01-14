@@ -18,6 +18,8 @@ import {
 } from '@dnd-kit/sortable';
 
 import Task from '@components/Task';
+import TaskType from '../../../types/task';
+import { CSSProperties } from 'styled-components';
 
 const variants = {
     visible: {
@@ -28,7 +30,7 @@ const variants = {
         x: -100,
         opacity: 0
     },
-    exit: ({ newListLength }) => ({
+    exit: ({ newListLength }: { newListLength: number }) => ({
         x: 100,
         opacity: 0,
         transition: {
@@ -37,7 +39,12 @@ const variants = {
     })
 };
 
-const SortableItem = function ({ id, task }) {
+interface SortableItemProps {
+    id: string;
+    task: TaskType;
+}
+
+const SortableItem = function ({ id, task }: SortableItemProps) {
     const {
         attributes,
         listeners,
@@ -47,18 +54,18 @@ const SortableItem = function ({ id, task }) {
         isDragging
     } = useSortable({ id });
 
-    const style = {
+    const style: CSSProperties = {
         transform: CSS.Transform.toString(transform),
         transition,
         pointerEvents: isDragging ? 'none' : 'all',
-        zIndex: isDragging ? '1' : undefined
+        zIndex: isDragging ? 1 : undefined
     };
 
     return (
         <motion.div
             // we need to tell framer to re-calculate if isTemporary changes
             key={task._id + task.isTemporaryTask}
-            // Disable animations because ghost element probs did this already
+            // Disable animations because ghost element prob did this already
             layout={!task.isTemporaryTask}
             exit={task.isCompleted ? { x: '50vw', opacity: 0 } : undefined}
             transition={{
@@ -78,7 +85,12 @@ const SortableItem = function ({ id, task }) {
     );
 };
 
-function SortableList({ listId, tasks, onSortEnd }) {
+interface SortableListProps {
+    listId: string;
+    tasks: TaskType[];
+    onSortEnd: (payload: { oldIndex: number; newIndex: number }) => void;
+}
+function SortableList({ listId, tasks, onSortEnd }: SortableListProps) {
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
@@ -105,8 +117,6 @@ function SortableList({ listId, tasks, onSortEnd }) {
         [tasks, onSortEnd]
     );
 
-    tasks = tasks || [];
-
     // tracking of previous list length for when
     // bouncing from 'all caught up' to tasks list
     // for smoother transition
@@ -124,7 +134,7 @@ function SortableList({ listId, tasks, onSortEnd }) {
         >
             <SortableContext
                 items={tasks.map((task, index) =>
-                    typeof task === 'object' ? task._id : index
+                    typeof task === 'object' ? task._id : `${index}`
                 )}
                 strategy={verticalListSortingStrategy}
             >
@@ -151,9 +161,8 @@ function SortableList({ listId, tasks, onSortEnd }) {
                                     id={
                                         typeof task === 'object'
                                             ? task._id
-                                            : index
+                                            : `${index}`
                                     }
-                                    index={index}
                                     task={task}
                                 />
                             ))}

@@ -67,8 +67,8 @@ function Body() {
                         <TaskContainer>
                             {/* Regular non-complete tasks are loaded and sortable  */}
                             <SortableList
-                                listId={list._id}
-                                tasks={list.tasks}
+                                listId={list._id || currentListId}
+                                tasks={list.tasks || []}
                                 onSortEnd={onSortEnd}
                             />
                             {/* Completed tasks are not sortable and only shown when requested */}
