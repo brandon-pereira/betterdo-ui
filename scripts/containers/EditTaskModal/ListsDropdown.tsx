@@ -4,7 +4,7 @@ import Dropdown from '@components/Dropdown';
 import useLists from '@hooks/useLists';
 
 interface Props {
-    currentListId: string;
+    currentListId?: string;
     onSelect: (newList: string) => void;
 }
 

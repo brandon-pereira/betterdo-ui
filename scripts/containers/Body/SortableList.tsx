@@ -16,10 +16,11 @@ import {
     sortableKeyboardCoordinates,
     verticalListSortingStrategy
 } from '@dnd-kit/sortable';
+import { CSSProperties } from 'styled-components';
+
+import TaskType from '../../../types/task';
 
 import Task from '@components/Task';
-import TaskType from '../../../types/task';
-import { CSSProperties } from 'styled-components';
 
 const variants = {
     visible: {

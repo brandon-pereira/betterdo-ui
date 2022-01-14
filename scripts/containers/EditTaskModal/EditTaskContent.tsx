@@ -1,5 +1,7 @@
 import React, { useEffect, useCallback, useState } from 'react';
 
+import Task from '../../../types/task';
+
 import {
     Container,
     Content,
@@ -21,6 +23,7 @@ import useCurrentTaskId from '@hooks/useCurrentTaskId';
 import useTaskDetails from '@hooks/useTaskDetails';
 import useModifyTask from '@hooks/useModifyTask';
 import useDeleteTask from '@hooks/useDeleteTask';
+import { ServerError } from '@utilities/server';
 
 const PRIORITIES = [
     { value: 'low', label: 'Low' },
@@ -28,13 +31,17 @@ const PRIORITIES = [
     { value: 'high', label: 'High' }
 ];
 
-function EditTaskContent({ setUnsavedChanges }) {
+export interface Props {
+    setUnsavedChanges: (bool: boolean) => void;
+}
+
+function EditTaskContent({ setUnsavedChanges }: Props) {
     const taskId = useCurrentTaskId();
     const { task, loading, error } = useTaskDetails(taskId);
     const modifyTask = useModifyTask();
     const deleteTask = useDeleteTask();
-    const [state, _setState] = useState({ ...(task || {}) });
-    const [_error, setError] = useState(null);
+    const [state, _setState] = useState<Partial<Task>>({ ...(task || {}) });
+    const [_error, setError] = useState<string | undefined>();
     const [isSaving, setSaving] = useState(false);
     const [isDeleting, setDeleting] = useState(false);
 
@@ -44,12 +51,19 @@ function EditTaskContent({ setUnsavedChanges }) {
 
     const onSaveTask = useCallback(
         async updatedProps => {
+            if (!state.list) {
+                return;
+            }
             setSaving(true);
             try {
                 await modifyTask(taskId, state.list, updatedProps);
             } catch (err) {
                 console.error(err);
-                setError(err.formattedMessage || 'Unexpected Error');
+                if (err instanceof ServerError) {
+                    setError(err.formattedMessage);
+                } else {
+                    setError(ServerError.defaultError);
+                }
                 setSaving(false);
             }
             setUnsavedChanges(false);
@@ -59,16 +73,18 @@ function EditTaskContent({ setUnsavedChanges }) {
     );
 
     const onSaveButtonPressed = useCallback(() => {
-        onSaveTask({
-            title: state.title,
-            priority: state.priority,
-            dueDate: state.dueDate,
-            notes: state.notes,
-            subtasks: state.subtasks,
-            // we only mutate list if changed, or else we automatically
-            // redirect which isn't ideal (custom lists)
-            ...(state.list !== task.list ? { list: state.list } : {})
-        });
+        if (task) {
+            onSaveTask({
+                title: state.title,
+                priority: state.priority,
+                dueDate: state.dueDate,
+                notes: state.notes,
+                subtasks: state.subtasks,
+                // we only mutate list if changed, or else we automatically
+                // redirect which isn't ideal (custom lists)
+                ...(state.list !== task.list ? { list: state.list } : {})
+            });
+        }
     }, [state, task, onSaveTask]);
 
     const onDeleteTask = useCallback(async () => {
@@ -81,36 +97,42 @@ function EditTaskContent({ setUnsavedChanges }) {
                 await deleteTask(taskId);
             } catch (err) {
                 console.error(err);
-                setError(err.formattedMessage || 'Unexpected Error');
+                if (err instanceof ServerError) {
+                    setError(err.formattedMessage);
+                } else {
+                    setError(ServerError.defaultError);
+                }
                 setSaving(false);
             }
             setDeleting(false);
         }
     }, [taskId, deleteTask, state.title]);
 
-    const onInputChange = id => e => {
-        // Mark content as dirty
-        setUnsavedChanges(true);
-        // Set state for re-render
-        _setValues({ [id]: e.target.value });
-    };
+    const onInputChange =
+        (id: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+            // Mark content as dirty
+            setUnsavedChanges(true);
+            // Set state for re-render
+            _setValues({ [id]: e.target.value });
+        };
 
-    const onInputKeyPress = id => e => {
-        if (e.key === 'Enter') {
-            const updatedProps = { [id]: e.target.value };
-            // Set state for fast re-render
-            _setValues(updatedProps);
-            // Trigger save to server
-            onSaveTask(updatedProps);
-        }
-    };
+    const onInputKeyPress =
+        (id: string) => (e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === 'Enter') {
+                const updatedProps = { [id]: e.currentTarget.value };
+                // Set state for fast re-render
+                _setValues(updatedProps);
+                // Trigger save to server
+                onSaveTask(updatedProps);
+            }
+        };
 
-    const onValueChange = updatedProps => {
+    const onValueChange = (updatedProps: Partial<Task>) => {
         setUnsavedChanges(true);
         _setValues(updatedProps);
     };
 
-    const _setValues = updatedProps => {
+    const _setValues = (updatedProps: Partial<Task>) => {
         _setState(state => ({
             ...state,
             ...updatedProps
@@ -142,14 +164,16 @@ function EditTaskContent({ setUnsavedChanges }) {
                     <Label>Priority</Label>
                     <Selector
                         values={PRIORITIES}
-                        onSelect={priority => onValueChange({ priority })}
+                        onSelect={(priority: Task['priority']) =>
+                            onValueChange({ priority })
+                        }
                         value={state.priority}
                     />
                 </Block>
                 <Block>
                     <Label>Subtasks</Label>
                     <Subtasks
-                        subtasks={state.subtasks}
+                        subtasks={state.subtasks || []}
                         onChange={subtasks => {
                             onValueChange({ subtasks });
                             onSaveTask({ subtasks });

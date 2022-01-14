@@ -10,7 +10,11 @@ const Content = loadable(() => import('./EditTaskContent'), {
     fallback: <Loader />
 });
 
-function EditTaskContainer({ isOpen }) {
+interface Props {
+    isOpen: boolean;
+}
+
+function EditTaskContainer({ isOpen }: Props) {
     const hasUnsavedChanges = useRef(false);
     const { closeModal } = useEditTaskModal();
     const setUnsavedChanges = useCallback(bool => {
@@ -33,12 +37,13 @@ function EditTaskContainer({ isOpen }) {
         }
     }, [hasUnsavedChanges, setUnsavedChanges]);
 
-    const onClose = useCallback(() => {
-        if (canCloseModal()) {
-            closeModal();
-            hasUnsavedChanges.current = false;
-        }
-    }, [canCloseModal, closeModal]);
+    // TODO: Is this function needed?
+    // const onClose = useCallback(() => {
+    //     if (canCloseModal()) {
+    //         closeModal();
+    //         hasUnsavedChanges.current = false;
+    //     }
+    // }, [canCloseModal, closeModal]);
 
     return (
         <Modal
@@ -47,12 +52,7 @@ function EditTaskContainer({ isOpen }) {
             onRequestClose={closeModal}
             visible={isOpen}
         >
-            {isOpen && (
-                <Content
-                    onRequestClose={onClose}
-                    setUnsavedChanges={setUnsavedChanges}
-                />
-            )}
+            {isOpen && <Content setUnsavedChanges={setUnsavedChanges} />}
         </Modal>
     );
 }

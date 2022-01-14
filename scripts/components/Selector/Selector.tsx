@@ -9,7 +9,8 @@ interface Props {
         value: string;
         label: string;
     }[];
-    onSelect: (value: string) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onSelect: (value: any) => void;
 }
 
 function Selector({ value, values, onSelect }: Props) {

@@ -8,7 +8,7 @@ import SortableList from './SortableList';
 
 interface Props {
     subtasks: Subtask[];
-    onChange: (newList: string[]) => void;
+    onChange: (newList: Subtask[]) => void;
 }
 function Subtasks({ subtasks, onChange }: Props) {
     const [value, setValue] = useState('');
@@ -21,7 +21,7 @@ function Subtasks({ subtasks, onChange }: Props) {
     }, [subtasks]);
 
     const setSubtasks = useCallback(
-        mutatedTasks => {
+        (mutatedTasks: Subtask[]) => {
             onChange(mutatedTasks);
             _setSubtasks(mutatedTasks);
         },
