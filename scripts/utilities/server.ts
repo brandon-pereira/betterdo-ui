@@ -1,5 +1,5 @@
 import Task from '../../types/task';
-import List from '../../types/list';
+import List, { ServerList } from '../../types/list';
 import User, { _UpdateUserPayload } from '../../types/user';
 
 import { SERVER_URL } from '@utilities/env';
@@ -29,7 +29,7 @@ export const updateTask = (
 
 export const updateList = (
     listId: string,
-    updatedProps: Partial<List>
+    updatedProps: ServerList
 ): Promise<List> => {
     return _post<List>(`lists/${listId}`, updatedProps);
 };

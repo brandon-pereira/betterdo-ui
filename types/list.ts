@@ -21,8 +21,9 @@ interface List {
     color: string;
 }
 
-export interface ServerList extends Omit<List, 'tasks'> {
+export interface ServerList extends Omit<Omit<List, 'tasks'>, 'members'> {
     tasks: string[];
+    members: string[];
 }
 
 export default List;

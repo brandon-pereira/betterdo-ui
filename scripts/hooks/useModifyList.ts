@@ -1,6 +1,8 @@
 import { useCallback } from 'react';
 import { mutate } from 'swr';
 
+import List, { ServerList } from '../../types/list';
+
 import { getListDetailUrl, getListsUrl } from './internal/urls';
 
 import useCompletedTasks from '@hooks/useCompletedTasks';
@@ -9,11 +11,11 @@ import { updateList } from '@utilities/server';
 function useModifyList() {
     const [isCompletedTasksIncluded] = useCompletedTasks();
     return useCallback(
-        async (listId, updatedProps) => {
+        async (listId: string, updatedProps: Partial<List>) => {
             // Immediately update the cached data
             await mutate(
                 getListDetailUrl(listId, isCompletedTasksIncluded),
-                async currentList => {
+                async (currentList: Partial<List>) => {
                     return {
                         ...currentList,
                         ...updatedProps
@@ -22,9 +24,9 @@ function useModifyList() {
                 false
             );
             // Special handling is needed to normalize the data for server
-            updatedProps = normalizeDataForServerCall(updatedProps);
+            const serverProps = normalizeDataForServerCall(updatedProps);
             // Send request to server
-            await updateList(listId, updatedProps);
+            await updateList(listId, serverProps);
             // Now that its mutated, update cached data
             await mutate(getListsUrl());
             await mutate(getListDetailUrl(listId, isCompletedTasksIncluded));
@@ -33,14 +35,15 @@ function useModifyList() {
     );
 }
 
-function normalizeDataForServerCall(updatedProps) {
+function normalizeDataForServerCall(updatedProps: Partial<List>): ServerList {
+    const serverData = { ...updatedProps } as unknown as ServerList;
     if (updatedProps.tasks) {
-        updatedProps.tasks = updatedProps.tasks.map(m => m._id);
+        serverData.tasks = updatedProps.tasks.map(m => m._id);
     }
     if (updatedProps.members) {
-        updatedProps.members = updatedProps.members.map(m => m._id);
+        serverData.members = updatedProps.members.map(m => m._id);
     }
-    return updatedProps;
+    return serverData;
 }
 
 export default useModifyList;
