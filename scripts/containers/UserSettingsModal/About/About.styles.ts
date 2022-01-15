@@ -38,4 +38,7 @@ export const ChangeLog = styled.div`
     h2 {
         font-weight: bold;
     }
+    a {
+        color: ${({ theme }) => theme.colors.general.blue};
+    }
 `;
