@@ -19,7 +19,7 @@ import {
     restrictToParentElement
 } from '@dnd-kit/modifiers';
 
-import List from '@types/list';
+import List from '@customTypes/list';
 import ListItem from '@components/ListItem';
 
 interface SortableItemProps {

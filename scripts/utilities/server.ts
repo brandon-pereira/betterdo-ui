@@ -1,6 +1,6 @@
-import Task from '@types/task';
-import List, { ServerList } from '@types/list';
-import User, { _UpdateUserPayload } from '@types/user';
+import Task from '@customTypes/task';
+import List, { ServerList } from '@customTypes/list';
+import User, { _UpdateUserPayload } from '@customTypes/user';
 import { SERVER_URL } from '@utilities/env';
 
 const baseUrl = `${SERVER_URL}/api`;

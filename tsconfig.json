@@ -1,8 +1,9 @@
 {
     "exclude": ["node_modules", "dist"],
     "compilerOptions": {
+        "baseUrl": ".",
         "outDir": "dist",
-        "typeRoots": ["./types", "./node_modules/@types"],
+        "typeRoots": ["./taaypes", "./node_modules/@types"],
         "lib": ["dom", "dom.iterable", "esnext"],
         "module": "esnext",
         "target": "es5",
@@ -10,7 +11,7 @@
             "@utilities/*": ["./scripts/utilities/*"],
             "@components/*": ["./scripts/components/*"],
             "@hooks/*": ["./scripts/hooks/*"],
-            "@types/*": ["./types"]
+            "@customTypes/*": ["./scripts/customTypes/*"]
         },
         "allowJs": true,
         "allowSyntheticDefaultImports": true,

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { getListsUrl } from './internal/urls';
 
-import List from '@types/list';
+import List from '@customTypes/list';
 import { createList } from '@utilities/server';
 
 function useCreateList() {

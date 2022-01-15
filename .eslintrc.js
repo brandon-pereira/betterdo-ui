@@ -45,7 +45,7 @@ module.exports = {
                     ['@components', './scripts/components'],
                     ['@hooks', './scripts/hooks'],
                     ['@utilities', './scripts/utilities'],
-                    ['@types', './types']
+                    ['@customTypes', './scripts/customTypes']
                 ],
                 extensions: ['.ts', '.js', '.json', '.jsx', '.tsx', '.svg']
             }

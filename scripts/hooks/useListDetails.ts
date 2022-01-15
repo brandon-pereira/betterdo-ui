@@ -6,7 +6,7 @@ import { DEFAULT_LIST_COLOR } from '../constants';
 
 import { getListDetailUrl } from './internal/urls';
 
-import List from '@types/list';
+import List from '@customTypes/list';
 import useCompletedTasks from '@hooks/useCompletedTasks';
 
 function useListDetails(listId: string) {

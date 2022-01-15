@@ -18,7 +18,7 @@ import {
 
 import { DeleteIcon, Task, Checkbox } from './Subtasks.styles';
 
-import { Subtask } from '@types/task';
+import { Subtask } from '@customTypes/task';
 import x from '@components/Icon/svgs/x.svg';
 
 interface Props {

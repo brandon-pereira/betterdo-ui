@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { getListsUrl } from './internal/urls';
 
-import List from '@types/list';
+import List from '@customTypes/list';
 import { deleteList } from '@utilities/server';
 
 function useDeleteList() {

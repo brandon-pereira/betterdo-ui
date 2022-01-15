@@ -8,7 +8,7 @@ import {
     Loader
 } from './Task.styles';
 
-import TaskType from '@types/task';
+import TaskType from '@customTypes/task';
 import useEditTaskModal from '@hooks/useEditTaskModal';
 import useModifyTask from '@hooks/useModifyTask';
 

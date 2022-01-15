@@ -3,7 +3,7 @@ import { mutate } from 'swr';
 
 import { getListsUrl, getProfileUrl } from './internal/urls';
 
-import { _UpdateUserPayload, UpdateUserObject } from '@types/user';
+import { _UpdateUserPayload, UpdateUserObject } from '@customTypes/user';
 import { updateUser } from '@utilities/server';
 
 function useModifyProfile() {

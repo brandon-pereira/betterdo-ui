@@ -4,8 +4,8 @@ import { useHistory } from 'react-router-dom';
 
 import { getListDetailUrl, getTaskDetailUrl } from './internal/urls';
 
-import Task from '@types/task';
-import List from '@types/list';
+import Task from '@customTypes/task';
+import List from '@customTypes/list';
 import useCompletedTasks from '@hooks/useCompletedTasks';
 import useGeneratedUrl from '@hooks/useGeneratedUrl';
 import useCurrentListId from '@hooks/useCurrentListId';

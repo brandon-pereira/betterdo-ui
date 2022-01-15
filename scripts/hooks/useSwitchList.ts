@@ -4,8 +4,8 @@ import { mutate } from 'swr';
 
 import { getListDetailUrl } from './internal/urls';
 
-import List from '@types/list';
-import Task from '@types/task';
+import List from '@customTypes/list';
+import Task from '@customTypes/task';
 import useCompletedTasks from '@hooks/useCompletedTasks';
 import useHamburgerNav from '@hooks/useHamburgerNav';
 

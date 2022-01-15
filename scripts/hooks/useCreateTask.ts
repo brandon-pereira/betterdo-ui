@@ -3,7 +3,7 @@ import { mutate } from 'swr';
 
 import { getListDetailUrl } from './internal/urls';
 
-import List from '@types/list';
+import List from '@customTypes/list';
 import useCompletedTasks from '@hooks/useCompletedTasks';
 import { createTask } from '@utilities/server';
 

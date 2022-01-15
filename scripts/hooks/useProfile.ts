@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import createSharedHook from './internal/createSharedHook';
 import { getProfileUrl } from './internal/urls';
 
-import User from '@types/user';
+import User from '@customTypes/user';
 import { SERVER_URL } from '@utilities/env';
 
 function useProfileOnce() {

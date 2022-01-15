@@ -9,7 +9,7 @@ export default {
         '@components': './scripts/components',
         '@hooks': './scripts/hooks',
         '@utilities': './scripts/utilities',
-        '@types/*': ['./types']
+        '@customTypes': './customTypes'
     },
     packageOptions: {
         polyfillNode: true

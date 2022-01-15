@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 
 import { Container, DotIcon, Title, IconHolder } from './ListItem.styles';
 
-import List from '@types/list';
+import List from '@customTypes/list';
 import customLists from '@utilities/customLists';
 import useSwitchList from '@hooks/useSwitchList';
 import useCurrentListId from '@hooks/useCurrentListId';

@@ -3,7 +3,7 @@ import React from 'react';
 import { Block, CreatorBlock, ProfilePic } from './EditTask.styles';
 import RelativeTime from './RelativeTime';
 
-import User from '@types/user';
+import User from '@customTypes/user';
 
 interface Props {
     createdBy: User;

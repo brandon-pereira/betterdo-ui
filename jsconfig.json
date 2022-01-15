@@ -6,7 +6,7 @@
             "@hooks/*": ["./scripts/hooks/*"],
             "@components/*": ["./scripts/components/*"],
             "@utilities/*": ["./scripts/utilities/*"],
-            "@types/*": ["./types"]
+            "@customTypes/*": ["./scripts/customTypes/*"]
         }
     },
     "exclude": ["node_modules"]

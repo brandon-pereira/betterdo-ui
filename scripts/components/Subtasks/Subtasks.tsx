@@ -4,7 +4,7 @@ import { arrayMoveImmutable } from 'array-move';
 import { Input, Container } from './Subtasks.styles';
 import SortableList from './SortableList';
 
-import { Subtask } from '@types/task';
+import { Subtask } from '@customTypes/task';
 
 interface Props {
     subtasks: Subtask[];
