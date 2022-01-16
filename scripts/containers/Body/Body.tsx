@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { arrayMoveImmutable } from 'array-move';
-import { LayoutGroup } from 'framer-motion';
+import { LayoutGroup, AnimatePresence } from 'framer-motion';
 
 import { Container, TaskContainer, Scroller } from './Body.styles';
 import SortableList from './SortableList';
@@ -44,12 +44,13 @@ function Body() {
         [list, currentListId, modifyList]
     );
 
-    const isAllCaughtUp =
+    const isAllCaughtUp = Boolean(
         !error &&
-        !loading &&
-        list.tasks &&
-        list.tasks.length === 0 &&
-        !isCompletedTasksIncluded;
+            !loading &&
+            list.tasks &&
+            list.tasks.length === 0 &&
+            !isCompletedTasksIncluded
+    );
 
     const customListConfig = customLists.find(cl => list._id === cl.id);
     const hideAddTaskInput =
@@ -60,8 +61,7 @@ function Body() {
             <Scroller>
                 <NotificationBanner />
                 <AddTask isHidden={hideAddTaskInput} />
-                {isAllCaughtUp && <AllCaughtUpBanner />}
-                {error && <ServerErrorBanner />}
+
                 {!error && (
                     <LayoutGroup>
                         <TaskContainer>
@@ -82,6 +82,7 @@ function Body() {
                                 ))}
                             {/* If not loaded, show completed tasks button */}
                             <CompletedTasksButton
+                                isAllCaughtUp={isAllCaughtUp}
                                 hidden={
                                     (loading && !isCompletedTasksIncluded) ||
                                     error ||
@@ -94,6 +95,10 @@ function Body() {
                         </TaskContainer>
                     </LayoutGroup>
                 )}
+                <AnimatePresence initial={false}>
+                    {isAllCaughtUp && <AllCaughtUpBanner />}
+                </AnimatePresence>
+                {error && <ServerErrorBanner />}
             </Scroller>
         </Container>
     );

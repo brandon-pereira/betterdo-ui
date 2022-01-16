@@ -1,7 +1,18 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 import _Button from '@components/Button';
 
+export const Container = styled(motion.div)<{ $isAllCaughtUp: boolean }>`
+    ${({ $isAllCaughtUp }) =>
+        $isAllCaughtUp &&
+        `
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    `}
+`;
 export const Button = styled(_Button)`
     margin: 0.5rem auto 1rem;
     text-transform: uppercase;

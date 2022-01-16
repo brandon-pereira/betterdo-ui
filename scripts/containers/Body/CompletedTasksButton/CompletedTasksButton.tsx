@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { Button } from './CompletedTasksButton.styles';
+import { Button, Container } from './CompletedTasksButton.styles';
 
 import formatNumber from '@utilities/formatNumber';
 
@@ -26,18 +26,26 @@ type Props = {
     isLoading?: boolean;
     count?: number;
     hidden: boolean;
+    isAllCaughtUp: boolean;
 };
 
-function CompletedTasksButton({ onClick, isLoading, count, hidden }: Props) {
+function CompletedTasksButton({
+    onClick,
+    isAllCaughtUp,
+    isLoading,
+    count,
+    hidden
+}: Props) {
     if (!count) {
         return null;
     }
     return (
-        <motion.div
+        <Container
             layout="position"
             transition={{
                 type: 'easeOut'
             }}
+            $isAllCaughtUp={isAllCaughtUp}
         >
             <Button
                 hidden={hidden || count === 0}
@@ -64,7 +72,7 @@ function CompletedTasksButton({ onClick, isLoading, count, hidden }: Props) {
                 </AnimatePresence>
                 {' completed tasks'}
             </Button>
-        </motion.div>
+        </Container>
     );
 }
 

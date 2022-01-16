@@ -19,7 +19,15 @@ const Banner = ({
     icon,
     className
 }: Props) => (
-    <Container className={className}>
+    <Container
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{
+            delay: 0.2,
+            duration: 0.4
+        }}
+        className={className}
+    >
         <Icon size="30vmin" icon={icon} />
         <Heading>{title}</Heading>
         <BodyCopy>{body}</BodyCopy>
