@@ -1,3 +1,7 @@
+/// <reference lib="webworker" />
+export default null;
+declare let self: ServiceWorkerGlobalScope;
+
 import { precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { CacheFirst } from 'workbox-strategies';
@@ -7,17 +11,31 @@ googleFontsCache();
 precacheAndRoute(self.__WB_MANIFEST, {
     ignoreURLParametersMatching: [/.*/]
 });
-registerRoute('/', CacheFirst);
+registerRoute('/', new CacheFirst());
 
-const multiReplyResponses = {
-    'shared-list': ({ listTitle, numberOfUpdates }) =>
-        `${listTitle} has been updated ${numberOfUpdates} times.`
-};
+interface NotificationData {
+    listId?: string;
+    listTitle?: string;
+    numberOfUpdates?: number;
+}
+interface NotificationPayload {
+    title: string;
+    body?: string;
+    icon?: string;
+    url?: string;
+    tag?: string;
+    data: NotificationData;
+}
+const multiReplyResponses: Record<string, (data: NotificationData) => string> =
+    {
+        'shared-list': ({ listTitle, numberOfUpdates }: NotificationData) =>
+            `${listTitle} has been updated ${numberOfUpdates} times.`
+    };
 
 self.addEventListener('push', event => {
-    let notification = {};
+    let notification: NotificationPayload;
     try {
-        notification = event.data.json();
+        notification = event.data?.json() as NotificationPayload;
         if (!notification || !notification.title) {
             throw new Error('Missing title or passed string instead of object');
         }
@@ -25,18 +43,23 @@ self.addEventListener('push', event => {
         console.error('Expected JSON, got text');
         return;
     }
-    let createMultiMessage;
+    let createMultiMessage: ((data: NotificationData) => string) | null = null;
     if (notification.tag) {
         // we split the tag by ":" because we pass identifiers after colon
-        createMultiMessage =
-            multiReplyResponses[notification.tag.split(':')[0]];
+        const [tagName] = notification.tag.split(':');
+        if (tagName && tagName in multiReplyResponses) {
+            createMultiMessage = multiReplyResponses[tagName];
+        }
     }
     event.waitUntil(
         getNotificationsByTag(notification.tag)
             .then(([oldNotification]) => {
                 if (oldNotification && createMultiMessage) {
                     // Increment counter
-                    if (oldNotification.data.numberOfUpdates) {
+                    if (
+                        oldNotification.data &&
+                        oldNotification.data.numberOfUpdates
+                    ) {
                         notification.data.numberOfUpdates =
                             oldNotification.data.numberOfUpdates + 1;
                     } else {
@@ -93,6 +116,6 @@ self.onnotificationclick = event => {
     );
 };
 
-function getNotificationsByTag(tag) {
+function getNotificationsByTag(tag?: string) {
     return self.registration.getNotifications({ tag });
 }
