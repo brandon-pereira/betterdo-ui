@@ -1,7 +1,8 @@
 import User from './user';
 
 export interface Subtask {
-    _id: string;
+    // Id is temporary because it could be a temp task
+    _id?: string;
     title: string;
     isComplete: boolean;
 }

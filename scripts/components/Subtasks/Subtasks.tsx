@@ -55,7 +55,6 @@ function Subtasks({ subtasks, onChange }: Props) {
         if (e.key === 'Enter' && value) {
             const _temp = Array.from(_subtasks);
             _temp.push({
-                _id: `${Math.random()}`,
                 title: value,
                 isComplete: false
             });
