@@ -2,7 +2,7 @@
 
 ## v5.4.1
 
--   We're not 100% Typescript!
+-   We're now 100% Typescript!
 -   Minor bug fixes throughout app
 
 ## v5.4.0
