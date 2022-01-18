@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CSS } from '@dnd-kit/utilities';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
@@ -16,7 +16,6 @@ import {
     sortableKeyboardCoordinates,
     verticalListSortingStrategy
 } from '@dnd-kit/sortable';
-import { CSSProperties } from 'styled-components';
 
 import TaskType from '@customTypes/task';
 import Task from '@components/Task';
@@ -54,12 +53,19 @@ const SortableItem = function ({ id, task }: SortableItemProps) {
         isDragging
     } = useSortable({ id });
 
-    const style: CSSProperties = {
-        transform: CSS.Transform.toString(transform),
-        transition,
-        pointerEvents: isDragging ? 'none' : 'all',
-        zIndex: isDragging ? 1 : undefined
-    };
+    const containerProps: React.ButtonHTMLAttributes<HTMLButtonElement> =
+        useMemo(
+            () => ({
+                style: {
+                    transform: CSS.Transform.toString(transform),
+                    transition,
+                    pointerEvents: isDragging ? 'none' : 'all',
+                    zIndex: isDragging ? 1 : undefined
+                },
+                ...attributes
+            }),
+            [attributes, transform, transition, isDragging]
+        );
 
     return (
         <motion.div
@@ -74,10 +80,7 @@ const SortableItem = function ({ id, task }: SortableItemProps) {
         >
             <Task
                 ref={setNodeRef}
-                containerProps={{
-                    style,
-                    ...attributes
-                }}
+                containerProps={containerProps}
                 touchEvents={listeners}
                 {...task}
             />
