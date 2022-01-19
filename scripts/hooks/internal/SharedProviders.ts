@@ -1,5 +1,6 @@
 import React, { createElement, cloneElement } from 'react';
 
+import { ResponsiveProvider } from '@hooks/useResponsive';
 import { ModalsProvider } from '@hooks/useHamburgerNav';
 import { ProfileProvider } from '@hooks/useProfile';
 import { ListsProvider } from '@hooks/useLists';
@@ -7,6 +8,7 @@ import { CompletedTasksProvider } from '@hooks/useCompletedTasks';
 
 // Order matters for some of these!
 const Providers = [
+    ResponsiveProvider,
     ModalsProvider,
     ProfileProvider,
     ListsProvider,
