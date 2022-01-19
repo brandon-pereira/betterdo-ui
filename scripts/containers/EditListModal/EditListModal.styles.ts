@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { QUERIES } from '../../constants';
-
 import _Modal from '@components/Modal';
 
 export const Modal = styled(_Modal)`
@@ -26,7 +24,7 @@ export const Modal = styled(_Modal)`
         left: auto;
         border-radius: 4px 0 0 0;
     }
-    ${QUERIES.medium} {
+    ${({ theme }) => theme.queries.medium} {
         right: 10px;
         & [data-betterdo-modal-arrow] {
             right: 1.2rem;

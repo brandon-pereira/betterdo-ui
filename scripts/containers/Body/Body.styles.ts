@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { QUERIES } from '../../constants';
-
 import _Banner from '@components/Banner';
 import _Scroller from '@components/Scroller';
 
@@ -22,7 +20,7 @@ export const Container = styled.div`
     grid-column: 1;
     overflow: hidden;
     background: ${({ theme }) => theme.colors.body.background};
-    ${QUERIES.medium} {
+    ${({ theme }) => theme.queries.medium} {
         grid-row: 2;
         grid-column: 2;
         ${Banner} {

@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { QUERIES } from '../../constants';
-
 export const NavigationModalOverlay = styled.div`
     background: rgba(0, 0, 0, 0.5);
     position: absolute;
@@ -32,7 +30,7 @@ export const Container = styled.nav<{ isMobileNavVisible?: boolean }>`
             opacity: 1;
         }
     `}
-    ${QUERIES.medium} {
+    ${({ theme }) => theme.queries.medium} {
         display: flex;
         position: static;
         opacity: 1;
