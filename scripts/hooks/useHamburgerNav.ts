@@ -3,7 +3,7 @@ import { useState } from 'react';
 import createSharedHook from './internal/createSharedHook';
 import useResponsive from './useResponsive';
 
-function useHamburgerNavOnce() {
+function useHamburgerNavOnce(): [boolean, (bool: boolean) => void] {
     const { currentScreen } = useResponsive();
     const [isNavOpen, setNavOpen] = useState(false);
     return [isNavOpen && currentScreen === 'small', setNavOpen];
