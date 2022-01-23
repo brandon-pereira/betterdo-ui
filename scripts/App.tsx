@@ -1,0 +1,69 @@
+import React, { useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+import Container from './containers/Container';
+import Header from './containers/Header';
+import Navigation from './containers/Navigation';
+import Logo from './containers/Logo';
+import Body from './containers/Body';
+import AddListModal from './containers/AddListModal';
+import EditListModal from './containers/EditListModal';
+import EditTaskModal from './containers/EditTaskModal';
+import UserSettingsModal from './containers/UserSettingsModal';
+import InboxRedirect from './containers/Redirects/InboxRedirect';
+
+import Helmet from '@components/Helmet';
+import { AnimatePresence } from 'framer-motion';
+
+const App = () => {
+    useEffect(() => {
+        document.body.classList.add('loaded');
+        document.querySelector('#critical-css')?.remove();
+    }, []);
+
+    return (
+        <>
+            <Helmet />
+            <Container>
+                <Logo />
+                <Navigation />
+                <Header />
+                <Body />
+            </Container>
+            <>
+                <AnimatePresence>
+                    <InboxRedirect />
+                    <Routes>
+                        <Route
+                            element={<AddListModal isOpen={true} />}
+                            path="create-list"
+                        >
+                            {/* <AddListModal isOpen={true} /> */}
+                        </Route>
+
+                        {/* <Route
+                    children={({ match }) => (
+                        <EditListModal isOpen={Boolean(match)} />
+                    )}
+                    path="/:currentListId/edit-list"
+                />
+                <Route
+                    children={({ match }) => (
+                        <EditTaskModal isOpen={Boolean(match)} />
+                    )}
+                    path="/:currentListId/edit-task/:currentTaskId"
+                />
+                <Route
+                    children={({ match }) => (
+                        <UserSettingsModal isOpen={Boolean(match)} />
+                    )}
+                    path="/:currentListId/account-settings/:subroute?"
+                /> */}
+                    </Routes>
+                </AnimatePresence>
+            </>
+        </>
+    );
+};
+
+export default App;

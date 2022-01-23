@@ -5,7 +5,8 @@
         "paths": {
             "@hooks/*": ["./scripts/hooks/*"],
             "@components/*": ["./scripts/components/*"],
-            "@utilities/*": ["./scripts/utilities/*"]
+            "@utilities/*": ["./scripts/utilities/*"],
+            "@customTypes/*": ["./scripts/customTypes/*"]
         }
     },
     "exclude": ["node_modules"]

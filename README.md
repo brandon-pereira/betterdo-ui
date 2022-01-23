@@ -4,13 +4,13 @@ The frontend for BetterDo. This repository contains the frontend user interface 
 
 It's recommended you run this with the REST API Server. See [betterdo-api](https://github.com/brandon-pereira/betterdo-api).
 
-> **Note:** This repository is actively being migrated to TypeScript. Any new features should leverage TypeScript by default.
-
 ## Features
 
 -   ⚛️ React Application leveraging Hooks and SWR.
+-   🤓 Uses TypeScript to reduce bugs and improve code satisfaction
 -   👷‍♂️ Leverages a Service Worker for offline support, push notifications, and an installable PWA.
 -   ❄️ Uses SnowPack for blazing fast development and builds
+-   🎼 Leverages GitHub actions for automated production deploys and testing
 
 ## Running Locally
 

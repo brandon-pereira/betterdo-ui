@@ -7,7 +7,7 @@ import Calendar from '@components/Icon/svgs/calendar.svg';
 import Quill from '@components/Icon/svgs/quill.svg';
 import Drawer from '@components/Icon/svgs/drawer.svg';
 import SvgIcon from '@components/Icon';
-import { DateIcon } from '@components/ListItem/ListItem.styles.js';
+import { DateIcon } from '@components/ListItem/ListItem.styles';
 
 const ListItemIcon = ({
     icon
@@ -15,7 +15,15 @@ const ListItemIcon = ({
     icon: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
 }): React.ReactNode => <SvgIcon icon={icon} color="#fff" />;
 
-export default [
+export interface CustomList {
+    id: string;
+    title: string;
+    icon: React.ReactNode;
+    required: boolean;
+    disableTaskCreation?: boolean;
+}
+
+const lists: CustomList[] = [
     {
         id: 'inbox',
         title: 'Inbox',
@@ -31,31 +39,38 @@ export default [
     {
         id: 'highPriority',
         title: 'High Priority',
-        icon: ListItemIcon({ icon: Bookmarks })
+        icon: ListItemIcon({ icon: Bookmarks }),
+        required: false
     },
     {
         id: 'today',
         title: 'Today',
-        icon: <DateIcon>{getCurrentDay()}</DateIcon>
+        icon: <DateIcon>{getCurrentDay()}</DateIcon>,
+        required: false
     },
     {
         id: 'tomorrow',
         title: 'Tomorrow',
-        icon: <DateIcon>{getTomorrowDay()}</DateIcon>
+        icon: <DateIcon>{getTomorrowDay()}</DateIcon>,
+        required: false
     },
     {
         id: 'overdue',
         title: 'Overdue',
         icon: ListItemIcon({ icon: Alarm }),
+        required: false,
         disableTaskCreation: true
     },
     {
         id: 'week',
         title: 'This Week',
         icon: ListItemIcon({ icon: Calendar }),
+        required: false,
         disableTaskCreation: true
     }
 ];
+
+export default lists;
 
 export function getCurrentDay() {
     return startOfToday().getDate();

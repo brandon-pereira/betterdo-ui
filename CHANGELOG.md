@@ -1,5 +1,28 @@
 # Changelog
 
+## v5.4.1
+
+-   We're now 100% Typescript!
+-   Minor bug fixes throughout app
+
+## v5.4.0
+
+-   We're now in the [Android Play Store](https://play.google.com/store/apps/details?id=app.betterdo.twa&hl=en_CA&gl=US), leveraging a TWA for the deploy process.
+-   Front-end is now primarily written in TypeScript, more migrations to follow.
+-   Rebuilt static site in Astro, now has automated deploys like the rest of the app.
+-   Migrate various legacy animations to Framer Motion
+-   Upgrade `web-notifier` dependency to v2
+
+## v5.3.2
+
+-   More improvements to animations when completing tasks
+-   Fixed gap issue on main task container
+-   Various perceived performance gains
+
+## v5.3.1
+
+-   Improvements to animations on switching lists and adding/completing tasks
+
 ## 5.3.0
 
 -   Fixed issues with this week list

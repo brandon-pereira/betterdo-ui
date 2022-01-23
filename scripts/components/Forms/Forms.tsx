@@ -82,7 +82,7 @@ const Form = ({
     errorMessage,
     ...props
 }: {
-    children: React.ReactChildren;
+    children: React.ReactNode;
     errorMessage?: string;
 } & React.DetailedHTMLProps<
     React.FormHTMLAttributes<HTMLFormElement>,
@@ -94,12 +94,16 @@ const Form = ({
     </form>
 );
 
+type InputProps = {
+    invalid?: boolean;
+};
 const Input = forwardRef<
     HTMLInputElement,
-    React.DetailedHTMLProps<
-        React.InputHTMLAttributes<HTMLInputElement>,
-        HTMLInputElement
-    >
+    InputProps &
+        React.DetailedHTMLProps<
+            React.InputHTMLAttributes<HTMLInputElement>,
+            HTMLInputElement
+        >
 >((props, ref) => (
     <_Input {...props} ref={ref} aria-label={props.placeholder} />
 ));

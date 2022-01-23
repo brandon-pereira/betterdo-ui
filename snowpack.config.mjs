@@ -8,7 +8,8 @@ export default {
     alias: {
         '@components': './scripts/components',
         '@hooks': './scripts/hooks',
-        '@utilities': './scripts/utilities'
+        '@utilities': './scripts/utilities',
+        '@customTypes': './customTypes'
     },
     packageOptions: {
         polyfillNode: true

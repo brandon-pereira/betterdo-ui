@@ -1,0 +1,54 @@
+import React, { useCallback } from 'react';
+import { arrayMoveImmutable } from 'array-move';
+
+import SortableList from './SortableList';
+import {
+    Container,
+    NavigationModalOverlay,
+    ListsContainer
+} from './Navigation.styles';
+
+import useLists from '@hooks/useLists';
+import useModifyProfile from '@hooks/useModifyProfile';
+import useHamburgerNav from '@hooks/useHamburgerNav';
+import { NewListItem } from '@components/ListItem';
+import Scroller from '@components/Scroller';
+
+function Navigation() {
+    const [isMobileNavVisible, setMobileNavVisibility] = useHamburgerNav();
+    const modifyProfile = useModifyProfile();
+    const { lists } = useLists();
+
+    const onSortEnd = useCallback(
+        ({ oldIndex, newIndex }) => {
+            // Indexes match, no change
+            if (oldIndex === newIndex) {
+                return;
+            }
+            try {
+                modifyProfile({
+                    lists: arrayMoveImmutable(lists, oldIndex, newIndex)
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        },
+        [lists, modifyProfile]
+    );
+
+    return (
+        <Container isMobileNavVisible={isMobileNavVisible}>
+            <Scroller>
+                <ListsContainer>
+                    <SortableList lists={lists} onSortEnd={onSortEnd} />
+                    <NewListItem />
+                </ListsContainer>
+            </Scroller>
+            <NavigationModalOverlay
+                onClick={() => setMobileNavVisibility(false)}
+            />
+        </Container>
+    );
+}
+
+export default Navigation;
