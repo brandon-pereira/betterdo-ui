@@ -4,14 +4,15 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 import { ThemeProvider, GlobalStyles } from './utilities/ThemeProvider';
+import InboxRedirect from './containers/Redirects/InboxRedirect';
 import SWRProvider from './utilities/SWRProvider';
 import App from './App';
 
 import { DarkModeProvider } from '@hooks/useDarkMode';
 import SharedProviders from '@hooks/internal/SharedProviders';
 import ErrorBoundary from '@components/ErrorBoundary';
+
 import './utilities/ServiceWorkerRegister';
-import InboxRedirect from './containers/Redirects/InboxRedirect';
 
 render(
     <HelmetProvider>

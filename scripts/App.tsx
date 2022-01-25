@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 
 import Container from './containers/Container';
 import Header from './containers/Header';
@@ -13,7 +14,6 @@ import UserSettingsModal from './containers/UserSettingsModal';
 import InboxRedirect from './containers/Redirects/InboxRedirect';
 
 import Helmet from '@components/Helmet';
-import { AnimatePresence } from 'framer-motion';
 
 const App = () => {
     useEffect(() => {
@@ -30,38 +30,33 @@ const App = () => {
                 <Header />
                 <Body />
             </Container>
-            <>
-                <AnimatePresence>
-                    <InboxRedirect />
-                    <Routes>
-                        <Route
-                            element={<AddListModal isOpen={true} />}
-                            path="create-list"
-                        >
-                            {/* <AddListModal isOpen={true} /> */}
-                        </Route>
-
-                        {/* <Route
-                    children={({ match }) => (
-                        <EditListModal isOpen={Boolean(match)} />
-                    )}
-                    path="/:currentListId/edit-list"
-                />
-                <Route
-                    children={({ match }) => (
-                        <EditTaskModal isOpen={Boolean(match)} />
-                    )}
-                    path="/:currentListId/edit-task/:currentTaskId"
-                />
-                <Route
-                    children={({ match }) => (
-                        <UserSettingsModal isOpen={Boolean(match)} />
-                    )}
-                    path="/:currentListId/account-settings/:subroute?"
-                /> */}
-                    </Routes>
-                </AnimatePresence>
-            </>
+            <AnimatePresence>
+                {/* 
+                    We can get unmount animations once this open issue is resolved:
+                    I've previously added   <Routes location={location} key={location.pathname}>
+                    which works but causes app to error when you change lists. No good.
+                    https://github.com/remix-run/react-router/issues/7117 
+                */}
+                <Routes>
+                    <Route
+                        element={<AddListModal isOpen={true} />}
+                        path="create-list"
+                        key="create-list"
+                    />
+                    <Route
+                        element={<EditListModal isOpen={true} />}
+                        path="edit-list"
+                    />
+                    <Route
+                        element={<EditTaskModal isOpen={true} />}
+                        path="edit-task/:currentTaskId"
+                    />
+                    <Route
+                        element={<UserSettingsModal isOpen={true} />}
+                        path="profile-settings"
+                    />
+                </Routes>
+            </AnimatePresence>
         </>
     );
 };
