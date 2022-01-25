@@ -41,6 +41,7 @@ function Tabs({
                                     color={color}
                                     layout
                                     layoutId="active-tab"
+                                    inherit={false}
                                 />
                             )}
                         </TabHeaderItem>

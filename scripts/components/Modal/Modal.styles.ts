@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import _FocusLock from 'react-focus-lock';
 
 import Icon from '@components/Icon';
 
@@ -8,6 +10,9 @@ export const Overlay = styled.div<{ visible: boolean }>`
     left: 0;
     right: 0;
     bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 10;
     background: ${({ theme }) => theme.colors.modals.overlayBackground};
     backdrop-filter: blur(3px);
@@ -19,33 +24,35 @@ export const Overlay = styled.div<{ visible: boolean }>`
     `}
 `;
 
-export const Container = styled.div<{
-    visible: boolean;
-    disableHeightAnimation?: boolean;
+export const FocusLock = styled(_FocusLock)`
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    pointer-events: none;
+`;
+export const Container = styled(motion.div)<{
+    $visible: boolean;
+    $disableHeightAnimation?: boolean;
 }>`
+    pointer-events: all;
     background: ${({ theme }) => theme.colors.modals.contentBackground};
     ${props =>
-        props.disableHeightAnimation &&
+        props.$disableHeightAnimation &&
         `
         transition: transform 0.2s;
     `}
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
-    box-sizing: border-box;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
+    position: relative;
+    transform: translate(-50%, -50%);
     transform-origin: center;
     visibility: hidden;
     backface-visibility: hidden;
-    width: 100%;
     max-width: 500px;
     ${props =>
-        props.visible &&
+        props.$visible &&
         `
         visibility: visible;
-        transform: translate(-50%, -50%);
-        }
     `}
     ${({ theme }) => theme.queries.medium} {
         width: 60%;
@@ -72,7 +79,7 @@ export const LoaderContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10rem;
+    height: 15rem;
 `;
 export const ModalClose = styled(Icon)`
     position: absolute;

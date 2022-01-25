@@ -14,6 +14,15 @@ interface Props {
     isOpen: boolean;
 }
 
+const variants = {
+    hidden: {
+        x: '100%'
+    },
+    visible: {
+        x: 0
+    }
+};
+
 function EditTaskContainer({ isOpen }: Props) {
     const hasUnsavedChanges = useRef(false);
     const { closeModal } = useEditTaskModal();
@@ -51,6 +60,7 @@ function EditTaskContainer({ isOpen }: Props) {
             canCloseModal={canCloseModal}
             onRequestClose={closeModal}
             visible={isOpen}
+            variants={variants}
         >
             {isOpen && <Content setUnsavedChanges={setUnsavedChanges} />}
         </Modal>

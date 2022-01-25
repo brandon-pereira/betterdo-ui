@@ -35,7 +35,7 @@ export interface Props {
 }
 
 function EditTaskContent({ setUnsavedChanges }: Props) {
-    const taskId = useCurrentTaskId();
+    const taskId = useCurrentTaskId() || '';
     const { task, loading, error } = useTaskDetails(taskId);
     const modifyTask = useModifyTask();
     const deleteTask = useDeleteTask();

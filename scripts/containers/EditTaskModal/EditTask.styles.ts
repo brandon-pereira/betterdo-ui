@@ -5,17 +5,13 @@ import _ProfilePic from '@components/ProfilePic';
 import _Modal from '@components/Modal';
 
 export const Modal = styled(_Modal)`
+    position: absolute;
     background: ${({ theme }) => theme.colors.modals.contentBackground};
     transform: none;
     right: 0;
     top: 0;
     left: auto;
     bottom: 0;
-    transform: translateX(100%);
-    &.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
     & [data-betterdo-modal-arrow] {
         display: none;
     }

@@ -18,6 +18,17 @@ interface Props {
     isOpen: boolean;
 }
 
+const variants = {
+    hidden: {
+        opacity: 0,
+        x: -100
+    },
+    visible: {
+        opacity: 1,
+        x: 0
+    }
+};
+
 function AddListModalContainer({ isOpen }: Props) {
     const modalRef = useRef<HTMLDivElement>(null);
     const { closeModal } = useNewListModal();
@@ -94,6 +105,8 @@ function AddListModalContainer({ isOpen }: Props) {
             ref={modalRef}
             onRequestClose={closeModal}
             visible={isOpen}
+            onAnimationComplete={calculatePosition}
+            variants={variants}
         >
             {isOpen && <Content onLoad={calculatePosition} />}
         </Modal>

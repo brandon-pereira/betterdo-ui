@@ -5,11 +5,12 @@ import React, {
     useRef,
     useState
 } from 'react';
-import FocusLock from 'react-focus-lock';
+import { Variant } from 'framer-motion';
 
 import useEscapeKey from './useEscapeKey';
 import {
     Overlay,
+    FocusLock,
     Content,
     Arrow,
     Container,
@@ -26,13 +27,31 @@ interface Props {
     children: React.ReactNode;
     canCloseModal?: () => boolean;
     onRequestClose: () => void;
+    variants?: {
+        visible: Variant;
+        hidden: Variant;
+    };
     // TODO: Framer motion this logic
     disableHeightAnimation?: boolean;
+    onAnimationComplete?: () => void;
 }
+
+const defaultVariant = {
+    hidden: {
+        scale: 0
+    },
+    visible: {
+        // x: '-50%',
+        // y: '-50%',
+        scale: 1
+    }
+};
 const Modal = forwardRef<HTMLDivElement, Props>(
     (
         {
+            onAnimationComplete,
             className,
+            variants,
             visible,
             style,
             children,
@@ -73,6 +92,15 @@ const Modal = forwardRef<HTMLDivElement, Props>(
                                 contentRef.current.getBoundingClientRect()
                                     .height
                             );
+                            setTimeout(() => {
+                                // TODO recalculate after a bit.. lets refactor this all plz.
+                                if (contentRef.current) {
+                                    setHeight(
+                                        contentRef.current.getBoundingClientRect()
+                                            .height
+                                    );
+                                }
+                            }, 400);
                         }
                     });
                 });
@@ -85,13 +113,19 @@ const Modal = forwardRef<HTMLDivElement, Props>(
             <Overlay visible={visible} onMouseDown={e => closeModal(e)}>
                 <FocusLock disabled={Boolean(!visible)}>
                     <Container
-                        disableHeightAnimation={disableHeightAnimation}
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
+                        transition={{ duration: 0.1, type: 'easeOut' }}
+                        variants={variants || defaultVariant}
+                        $disableHeightAnimation={disableHeightAnimation}
+                        onAnimationComplete={onAnimationComplete}
                         style={style}
                         className={`${className || ''} ${
                             visible ? 'visible' : ''
                         }`}
                         ref={ref}
-                        visible={visible}
+                        $visible={visible}
                     >
                         <ContentContainer
                             disableHeightAnimation={disableHeightAnimation}

@@ -15,6 +15,17 @@ interface Props {
     isOpen: boolean;
 }
 
+const variants = {
+    hidden: {
+        opacity: 0,
+        y: -100
+    },
+    visible: {
+        opacity: 1,
+        y: 0
+    }
+};
+
 function EditListModalContainer({ isOpen }: Props) {
     const hasUnsavedChanges = useRef<boolean>(false);
     const { closeModal } = useEditListModal();
@@ -48,6 +59,7 @@ function EditListModalContainer({ isOpen }: Props) {
             canCloseModal={canCloseModal}
             onRequestClose={closeModal}
             visible={isOpen}
+            variants={variants}
         >
             {isOpen && (
                 <Content
