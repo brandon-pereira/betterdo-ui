@@ -44,11 +44,10 @@ export const Container = styled(motion.div)<{
     `}
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
     position: relative;
-    transform: translate(-50%, -50%);
-    transform-origin: center;
     visibility: hidden;
     backface-visibility: hidden;
-    max-width: 500px;
+    max-width: min(500px, 100%);
+    box-sizing: border-box;
     ${props =>
         props.$visible &&
         `
