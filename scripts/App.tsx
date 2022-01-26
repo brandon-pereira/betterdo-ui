@@ -11,7 +11,6 @@ import AddListModal from './containers/AddListModal';
 import EditListModal from './containers/EditListModal';
 import EditTaskModal from './containers/EditTaskModal';
 import UserSettingsModal from './containers/UserSettingsModal';
-import InboxRedirect from './containers/Redirects/InboxRedirect';
 
 import Helmet from '@components/Helmet';
 
