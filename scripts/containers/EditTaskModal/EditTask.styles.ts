@@ -12,6 +12,7 @@ export const Modal = styled(_Modal)`
     top: 0;
     left: auto;
     bottom: 0;
+    width: 100%;
     & [data-betterdo-modal-arrow] {
         display: none;
     }
