@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.5.0-beta
+
+-   Upgraded `react-router` to v6.
+-   Migrated modal animations to Framer Motion
+
 ## v5.4.1
 
 -   We're now 100% Typescript!
