@@ -28,16 +28,16 @@ function UserSettingsModalContent() {
             <Header color={LIGHT_THEME.colors.general.blue}>Settings</Header>
             <Tabs
                 color={LIGHT_THEME.colors.general.blue}
-                titles={['Profile', 'Custom Lists', 'General', 'About']}
+                titles={['General', 'Profile', 'Custom Lists', 'About']}
             >
+                <Tab>
+                    <General />
+                </Tab>
                 <Tab>
                     <ProfileSettings />
                 </Tab>
                 <Tab>
                     <CustomLists />
-                </Tab>
-                <Tab>
-                    <General />
                 </Tab>
                 <Tab>
                     <About />

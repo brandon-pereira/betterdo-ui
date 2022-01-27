@@ -13,6 +13,7 @@ export const Slider = styled.div<{ disabled?: boolean }>`
     ${({ disabled }) =>
         disabled &&
         `
+        cursor: not-allowed;
         background-color: #ccc !important;
     `}
     &:before {
