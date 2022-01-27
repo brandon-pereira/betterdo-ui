@@ -31,7 +31,6 @@ interface Props {
         visible: Variant;
         hidden: Variant;
     };
-    // TODO: Framer motion this logic
     disableHeightAnimation?: boolean;
     onAnimationComplete?: () => void;
 }
@@ -41,8 +40,6 @@ const defaultVariant = {
         scale: 0
     },
     visible: {
-        // x: '-50%',
-        // y: '-50%',
         scale: 1
     }
 };
@@ -81,33 +78,22 @@ const Modal = forwardRef<HTMLDivElement, Props>(
 
         useEscapeKey(visible ? closeModal : undefined);
 
-        useEffect(() => {
+        const onContainerResize = useCallback(() => {
             if (!disableHeightAnimation && contentRef.current) {
                 setHeight(contentRef.current.getBoundingClientRect().height);
+            }
+        }, [disableHeightAnimation]);
+
+        useEffect(() => {
+            if (!disableHeightAnimation && contentRef.current) {
+                onContainerResize();
                 const resizeObserver = new ResizeObserver(() => {
-                    // fixes ResizeObserver: loop limit exceeded error
-                    window.requestAnimationFrame(() => {
-                        if (contentRef.current) {
-                            setHeight(
-                                contentRef.current.getBoundingClientRect()
-                                    .height
-                            );
-                            setTimeout(() => {
-                                // TODO recalculate after a bit.. lets refactor this all plz.
-                                if (contentRef.current) {
-                                    setHeight(
-                                        contentRef.current.getBoundingClientRect()
-                                            .height
-                                    );
-                                }
-                            }, 400);
-                        }
-                    });
+                    onContainerResize();
                 });
                 resizeObserver.observe(contentRef.current);
                 return () => resizeObserver.disconnect();
             }
-        }, [disableHeightAnimation, visible]);
+        }, [onContainerResize, disableHeightAnimation, visible]);
 
         return (
             <Overlay visible={visible} onMouseDown={e => closeModal(e)}>
@@ -119,7 +105,10 @@ const Modal = forwardRef<HTMLDivElement, Props>(
                         transition={{ duration: 0.1, type: 'easeOut' }}
                         variants={variants || defaultVariant}
                         $disableHeightAnimation={disableHeightAnimation}
-                        onAnimationComplete={onAnimationComplete}
+                        onAnimationComplete={() => {
+                            onAnimationComplete && onAnimationComplete();
+                            onContainerResize();
+                        }}
                         style={style}
                         className={`${className || ''} ${
                             visible ? 'visible' : ''
