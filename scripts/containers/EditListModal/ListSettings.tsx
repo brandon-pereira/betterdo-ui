@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 
 import Button from '@components/Button';
@@ -33,6 +33,13 @@ function ListSettings({ setUnsavedChanges, onRequestClose }: Props) {
         title: list.title,
         color: list.color
     });
+
+    useEffect(() => {
+        setState({
+            title: list.title,
+            color: list.color
+        });
+    }, [list]);
 
     const deleteList = useCallback(async () => {
         const result = confirm(
