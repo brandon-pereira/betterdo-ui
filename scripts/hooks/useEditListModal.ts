@@ -8,7 +8,7 @@ function useEditListModal() {
     const navigate = useNavigate();
 
     const openModal = useCallback(() => {
-        navigate(generateUrl('/edit-list'));
+        navigate(generateUrl('/edit-list/general'));
     }, [navigate, generateUrl]);
 
     const closeModal = useCallback(() => {
