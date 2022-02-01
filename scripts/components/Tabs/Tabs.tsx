@@ -12,18 +12,12 @@ import {
 
 interface Props {
     selectedIndex?: number;
+    onChange: (num: number) => void;
     color?: string;
     children: React.ReactElement[];
     titles: string[];
 }
-function Tabs({
-    selectedIndex: _selectedIndex,
-    color,
-    children,
-    titles
-}: Props) {
-    const [selectedIndex, setSelectedIndex] = useState(_selectedIndex || 0);
-
+function Tabs({ selectedIndex, onChange, color, children, titles }: Props) {
     return (
         <Container>
             <LayoutGroup>
@@ -32,7 +26,7 @@ function Tabs({
                         <TabHeaderItem
                             key={index}
                             selected={selectedIndex === index}
-                            onClick={() => setSelectedIndex(index)}
+                            onClick={() => onChange(index)}
                             color={color}
                         >
                             {title}

@@ -44,7 +44,7 @@ const App = () => {
                     />
                     <Route
                         element={<EditListModal isOpen={true} />}
-                        path="edit-list"
+                        path="edit-list/:section"
                     />
                     <Route
                         element={<EditTaskModal isOpen={true} />}
@@ -52,7 +52,7 @@ const App = () => {
                     />
                     <Route
                         element={<UserSettingsModal isOpen={true} />}
-                        path="profile-settings"
+                        path="profile-settings/:section"
                     />
                 </Routes>
             </AnimatePresence>

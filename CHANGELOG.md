@@ -4,6 +4,7 @@
 
 -   Upgraded `react-router` to v6.
 -   Migrated modal animations to Framer Motion
+-   Added ability to deeplink to modals
 
 ## v5.4.1
 

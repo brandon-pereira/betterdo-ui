@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { LIGHT_THEME } from '../../theme';
 
@@ -7,26 +8,30 @@ import CustomLists from './CustomLists';
 import General from './General';
 import About from './About';
 
-import useProfile from '@hooks/useProfile';
 import Tabs, { Tab } from '@components/Tabs';
-import Loader from '@components/Loader';
-import { Error } from '@components/Forms';
 import { Header } from '@components/Copy';
+import useGeneratedUrl from '@hooks/useGeneratedUrl';
+
+const tabs = ['general', 'profile', 'custom-lists', 'about'];
 
 function UserSettingsModalContent() {
-    const { loading, error } = useProfile();
+    const { section } = useParams();
+    const [selectedIndex, setSelectedIndex] = useState(() => {
+        const tab = tabs.findIndex(tab => tab === section);
+        return tab !== -1 ? tab : 0;
+    });
+    const generateUrl = useGeneratedUrl();
+    const navigate = useNavigate();
 
-    if (error) {
-        return <Error>Unexpected Error Fetching Data</Error>;
-    }
-
-    if (loading) {
-        return <Loader />;
-    }
     return (
         <Fragment>
             <Header color={LIGHT_THEME.colors.general.blue}>Settings</Header>
             <Tabs
+                onChange={index => {
+                    navigate(generateUrl(`/profile-settings/${tabs[index]}`));
+                    setSelectedIndex(index);
+                }}
+                selectedIndex={selectedIndex}
                 color={LIGHT_THEME.colors.general.blue}
                 titles={['General', 'Profile', 'Custom Lists', 'About']}
             >
