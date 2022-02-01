@@ -10,6 +10,7 @@ export const Container = styled(motion.div)`
     align-items: center;
     justify-content: center;
     flex: 1;
+    margin-bottom: 5rem;
 `;
 export const Icon = styled(_Icon)`
     path {
