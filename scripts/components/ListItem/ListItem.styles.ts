@@ -1,11 +1,9 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 import { DEFAULT_LIST_COLOR } from '../../constants';
 
-export const Container = styled.button<{
-    selected?: boolean;
-    isOver?: boolean;
-}>`
+export const Container = styled.button<{ selected: boolean }>`
     border: none;
     display: block;
     font: inherit;
@@ -21,25 +19,25 @@ export const Container = styled.button<{
     align-items: center;
     background: ${({ theme }) => theme.colors.navigation.background};
     box-shadow: inset 0 -1px rgba(255, 255, 255, 0.15);
-    &:focus-visible {
-        background: rgba(255, 255, 255, 0.1);
-    }
     ${({ selected }) =>
         selected &&
         `
-        & {
-            box-shadow: inset 0 -1px rgba(0,0,0,.5);
-            background: linear-gradient(#006EFF, #004DB4) !important;
-        }
+        z-index: 6;
     `}
-    ${({ isOver }) =>
-        isOver &&
-        `
-        & {
-            box-shadow: inset 0 -1px rgba(255, 255, 255, 0.15), inset 0 0 0 3px #006EFF;
-            // background: linear-gradient(#006EFF, #004DB4) !important;
-        }
-    `}
+    &:focus-visible,
+    &:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+`;
+
+export const SelectedItemBackground = styled(motion.div)`
+    box-shadow: inset 0 -1px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(#006eff, #004db4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 `;
 
 export const DotIcon = styled.div`
@@ -66,6 +64,8 @@ export const DateIcon = styled.div`
 `;
 
 export const Title = styled.span`
+    position: relative;
+    z-index: 1;
     flex: 1;
     padding: 1rem 1rem 1rem 0;
     text-overflow: ellipsis;
@@ -73,6 +73,8 @@ export const Title = styled.span`
     white-space: nowrap;
 `;
 export const IconHolder = styled.div`
+    position: relative;
+    z-index: 1;
     touch-action: none;
     width: 50px;
     height: 50px;

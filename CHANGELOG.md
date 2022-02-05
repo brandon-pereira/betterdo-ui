@@ -1,10 +1,11 @@
 # Changelog
 
-## v5.5.0-beta
+## v5.5.0
 
 -   Upgraded `react-router` to v6.
 -   Migrated modal animations to Framer Motion
 -   Added ability to deeplink to modals
+-   Added animation to nav when switching lists
 
 ## v5.4.1
 

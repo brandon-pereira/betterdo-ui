@@ -1,12 +1,17 @@
 import React, { forwardRef } from 'react';
 
-import { Container, DotIcon, Title, IconHolder } from './ListItem.styles';
+import {
+    Container,
+    DotIcon,
+    Title,
+    IconHolder,
+    SelectedItemBackground
+} from './ListItem.styles';
 
 import List from '@customTypes/list';
 import customLists from '@utilities/customLists';
 import useSwitchList from '@hooks/useSwitchList';
 import useCurrentListId from '@hooks/useCurrentListId';
-import useNewListModal from '@hooks/useNewListModal';
 
 const getCustomList = (id: string) => {
     return customLists.find(list => list.id === id);
@@ -22,7 +27,6 @@ const ListItem = forwardRef<HTMLButtonElement, Props>(
     ({ containerProps, touchEvents, list }, ref) => {
         const switchList = useSwitchList();
         const currentListId = useCurrentListId();
-        const { openModal: openNewListModal } = useNewListModal();
         const { type, color, _id } = list;
         const selected = _id === currentListId;
         const customList = getCustomList(type);
@@ -31,20 +35,14 @@ const ListItem = forwardRef<HTMLButtonElement, Props>(
 
         return (
             <Container
+                selected={selected}
                 {...containerProps}
                 ref={ref}
-                disabled={selected}
-                selected={selected}
-                // This is used for modal arrow ref tracking
-                {...(type === 'newList'
-                    ? { 'data-betterdo-newlist': true }
-                    : undefined)}
-                onClick={
-                    type === 'newList'
-                        ? openNewListModal
-                        : () => switchList(list)
-                }
+                onClick={() => switchList(list)}
             >
+                {selected && (
+                    <SelectedItemBackground layoutId="primary-nav-selected-div" />
+                )}
                 <IconHolder {...touchEvents}>{Icon}</IconHolder>
                 <Title>{title}</Title>
             </Container>
