@@ -107,10 +107,12 @@ self.onnotificationclick = event => {
                 const openClient = clientList.find(client => {
                     return Boolean(client.url);
                 });
+                const url = notification.data.url || 'https://betterdo.app/app';
                 if (openClient) {
                     openClient.focus();
+                    openClient.navigate(url);
                 } else {
-                    clients.openWindow('https://betterdo.app/app');
+                    clients.openWindow(url);
                 }
             })
     );
