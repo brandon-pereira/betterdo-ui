@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.5.1
+
+-   [Accessibility] Measure color contrast to ensure screens are always visible & accessible
+
 ## v5.5.0
 
 -   Upgraded `react-router` to v6.
