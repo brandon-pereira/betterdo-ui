@@ -1,4 +1,5 @@
 import React from 'react';
+import color from 'color';
 
 import {
     Container,
@@ -21,8 +22,10 @@ function Header() {
     const { openModal: openEditListModal } = useEditListModal();
     const currentListId = useCurrentListId();
     const { list, loading } = useListDetails(currentListId);
+    const isDarkColor = color(list.color).isDark();
+
     return (
-        <Container color={list.color}>
+        <Container isDarkColor={isDarkColor} color={list.color}>
             <Hamburger
                 open={isMobileNavVisible}
                 hidden={isMobileNavVisible}
@@ -32,11 +35,11 @@ function Header() {
             <Title>{list.title}</Title>
             <SettingsButton
                 aria-label="List Settings"
-                color="rgba(0,0,0,.2)"
+                color="none"
                 hidden={list.type !== 'default'}
                 onClick={openEditListModal}
             >
-                <Icon icon={Settings} color="#fff" />
+                <Icon icon={Settings} color={'currentColor'} />
             </SettingsButton>
         </Container>
     );

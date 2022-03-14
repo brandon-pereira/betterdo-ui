@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import { DEFAULT_LIST_COLOR } from '../../constants';
 
 import Button from '@components/Button';
-import Icon from '@components/Icon';
+import _Icon from '@components/Icon';
 import _Loader from '@components/Loader';
 import _Hamburger from '@components/Hamburger';
 
-export { Icon, Button };
+export const Icon = styled(_Icon)``;
+
+export { Button };
 
 export const Hamburger = styled(_Hamburger)<{ hidden: boolean }>`
     ${({ hidden }) =>
@@ -20,19 +22,24 @@ export const Loader = styled(_Loader)`
     margin-left: 0.5rem;
 `;
 
-export const Container = styled.header`
+export const Container = styled.header<{ isDarkColor: boolean }>`
     grid-row: 3;
     grid-column: 1;
     background-color: ${({ color }) => color || DEFAULT_LIST_COLOR};
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.2));
     box-shadow: inset 0 -1px rgba(0, 0, 0, 0.3);
-    color: #fff;
+    color: #1f1f1f;
     display: flex;
     align-items: center;
     padding: 0 0.8rem 0 0;
     overflow: hidden;
     transform: translateY(0%);
     transition: background 0.6s;
+    ${({ isDarkColor }) =>
+        isDarkColor &&
+        `
+        color: #fff;
+    `}
     ${Hamburger} {
         padding: 0 0.5rem 0 0.8rem;
     }
@@ -49,12 +56,22 @@ export const Container = styled.header`
 `;
 
 export const SettingsButton = styled(Button)`
+    color: currentColor;
     margin-left: 0.35rem;
-    border-radius: 20px;
+    border-radius: 50%;
     user-select: none;
-    padding: 0.8rem 1.1rem;
+    padding: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    box-shadow: none;
     box-shadow: 0px 0px 0px 1px inset rgba(0, 0, 0, 0.8),
         0px 2px inset rgba(255, 255, 255, 0.1), 0 1px rgba(255, 255, 255, 0.3);
+    ${Icon} {
+        height: 1.6rem;
+        width: 1.6rem;
+    }
 `;
 export const Title = styled.h2`
     flex: 1;
