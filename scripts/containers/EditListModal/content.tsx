@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useTheme } from 'styled-components';
 
 import ListSettings from './ListSettings';
 import ListMembers from './ListMembers';
@@ -9,6 +10,7 @@ import { Header } from '@components/Copy';
 import useListDetails from '@hooks/useListDetails';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useGeneratedUrl from '@hooks/useGeneratedUrl';
+import { checkIfColorGoodContrast } from '@utilities/colors';
 
 export interface Props {
     setUnsavedChanges: (bool: boolean) => void;
@@ -28,12 +30,19 @@ function EditListModalContent({ setUnsavedChanges, onRequestClose }: Props) {
     });
     const generateUrl = useGeneratedUrl();
     const navigate = useNavigate();
+    const theme = useTheme();
+    const isColorGoodContrast = checkIfColorGoodContrast(
+        list.color || '#000',
+        theme.colors.modals.contentBackground
+    );
 
     return (
         <>
-            <Header color={list.color}>List Settings</Header>
+            <Header color={isColorGoodContrast ? list.color : undefined}>
+                List Settings
+            </Header>
             <Tabs
-                color={list.color}
+                color={isColorGoodContrast ? list.color : undefined}
                 selectedIndex={selectedIndex}
                 onChange={index => {
                     navigate(generateUrl(`/edit-list/${tabs[index]}`));

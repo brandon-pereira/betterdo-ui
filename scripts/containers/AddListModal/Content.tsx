@@ -1,6 +1,6 @@
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import randomColor from 'randomcolor';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import Button from '@components/Button';
 import { Body, Header } from '@components/Copy';
@@ -8,6 +8,7 @@ import { Form, Label, Input } from '@components/Forms';
 import ColorPicker from '@components/ColorPicker';
 import useCreateList from '@hooks/useCreateList';
 import { ServerError } from '@utilities/server';
+import { checkIfColorGoodContrast } from '@utilities/colors';
 
 const ButtonContainer = styled.div`
     margin-top: 1.5rem;
@@ -24,6 +25,11 @@ function AddListModalContent({ onLoad }: AddListModalProps) {
     const [title, setTitle] = useState('');
     const [color, setColor] = useState(randomColor());
     const createList = useCreateList();
+    const theme = useTheme();
+    const isColorGoodContrast = checkIfColorGoodContrast(
+        color,
+        theme.colors.modals.contentBackground
+    );
 
     useEffect(() => {
         if (onLoad && typeof onLoad === 'function') {
@@ -61,7 +67,9 @@ function AddListModalContent({ onLoad }: AddListModalProps) {
 
     return (
         <Fragment>
-            <Header color={color}>Create List</Header>
+            <Header color={isColorGoodContrast ? color : undefined}>
+                Create List
+            </Header>
             <Body>
                 Lists allow you to organize your tasks with even more detail.
                 You can create lists for almost anything.
@@ -90,7 +98,7 @@ function AddListModalContent({ onLoad }: AddListModalProps) {
                         type="submit"
                         loadingText="Creating"
                         isLoading={isSubmitting}
-                        color={color}
+                        color={isColorGoodContrast ? color : undefined}
                     >
                         Create
                     </Button>
