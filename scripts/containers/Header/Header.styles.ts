@@ -66,11 +66,12 @@ export const SettingsButton = styled(Button)`
     justify-content: center;
     background: none;
     box-shadow: none;
-    box-shadow: 0px 0px 0px 1px inset rgba(0, 0, 0, 0.8),
-        0px 2px inset rgba(255, 255, 255, 0.1), 0 1px rgba(255, 255, 255, 0.3);
+    &[hidden] {
+        display: none;
+    }
     ${Icon} {
-        height: 1.6rem;
-        width: 1.6rem;
+        height: 2rem;
+        width: 2rem;
     }
 `;
 export const Title = styled.h2`

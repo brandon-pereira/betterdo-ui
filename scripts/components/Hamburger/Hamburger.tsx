@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Bar = styled.div`
     height: 4px;
     width: 100%;
-    background: #fff;
+    background: currentColor;
     border-radius: 3px;
     transition: transform 0.4s, opacity 0.2s;
     &:nth-of-type(1) {
