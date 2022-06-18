@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.5.2
+
+-   Fix small bug where "Next Week" due date would set to Tuesday if near end of the day.
+-   Sync subtask max-length with server
+-   Add back missing Input invalid styling
+
 ## v5.5.1
 
 -   [Accessibility] Measure color contrast to ensure screens are always visible & accessible
