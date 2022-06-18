@@ -1,8 +1,8 @@
 import React from 'react';
+import BetterDo from '@components/Icon/svgs/betterdo.svg?component';
+import ServerError from '@components/Icon/svgs/server-error.svg?component';
 
 import Banner from '@components/Banner';
-import BetterDo from '@components/Icon/svgs/betterdo.svg';
-import ServerError from '@components/Icon/svgs/server-error.svg';
 
 export function AllCaughtUpBanner() {
     return <Banner icon={BetterDo} body="You're all caught up!" />;

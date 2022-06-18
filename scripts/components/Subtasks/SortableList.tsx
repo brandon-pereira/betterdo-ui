@@ -15,11 +15,11 @@ import {
     sortableKeyboardCoordinates,
     verticalListSortingStrategy
 } from '@dnd-kit/sortable';
+import x from '@components/Icon/svgs/x.svg?component';
 
 import { DeleteIcon, Task, Checkbox } from './Subtasks.styles';
 
 import { Subtask } from '@customTypes/task';
-import x from '@components/Icon/svgs/x.svg';
 
 interface Props {
     id: string;

@@ -13,9 +13,6 @@ module.exports = {
             jsx: true
         }
     },
-    globals: {
-        __SNOWPACK_ENV__: 'readonly'
-    },
     env: {
         browser: true,
         es6: true
@@ -47,13 +44,13 @@ module.exports = {
                     ['@utilities', './scripts/utilities'],
                     ['@customTypes', './scripts/customTypes']
                 ],
-                extensions: ['.ts', '.js', '.json', '.jsx', '.tsx', '.svg']
+                extensions: ['.ts', '.js', '.json', '.jsx', '.tsx']
             }
         }
     },
     rules: {
         'prettier/prettier': 'error',
-        'import/no-unresolved': 1,
+        'import/no-unresolved': ['error', { ignore: ['\\.svg'] }],
         'import/no-commonjs': 'error',
         'import/order': [
             1,

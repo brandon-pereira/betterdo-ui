@@ -1,5 +1,6 @@
 import React from 'react';
 import color from 'color';
+import Settings from '@components/Icon/svgs/settings.svg?component';
 
 import {
     Container,
@@ -14,7 +15,6 @@ import useEditListModal from '@hooks/useEditListModal';
 import useListDetails from '@hooks/useListDetails';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useHamburgerNav from '@hooks/useHamburgerNav';
-import Settings from '@components/Icon/svgs/settings.svg';
 
 function Header() {
     const [isMobileNavVisible, setMobileNavVisibility] = useHamburgerNav();

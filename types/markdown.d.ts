@@ -1,11 +1,10 @@
 declare module '*.md' {
-    const result: {
-        // raw .md file content
-        raw: string;
-        // parsed html
-        html: string;
-        // markdown file name (basename)
-        fileName: string;
-    };
-    export default result;
+    // "unknown" would be more detailed depends on how you structure frontmatter
+    const attributes: Record<string, unknown>;
+
+    // When "Mode.HTML" is requested
+    const html: string;
+
+    // Modify below per your usage
+    export { attributes, html };
 }

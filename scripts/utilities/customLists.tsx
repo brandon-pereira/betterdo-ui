@@ -1,11 +1,11 @@
 import React from 'react';
 import { startOfToday, startOfTomorrow } from 'date-fns';
+import Bookmarks from '@components/Icon/svgs/bookmarks.svg?component';
+import Alarm from '@components/Icon/svgs/alarm.svg?component';
+import Calendar from '@components/Icon/svgs/calendar.svg?component';
+import Quill from '@components/Icon/svgs/quill.svg?component';
+import Drawer from '@components/Icon/svgs/drawer.svg?component';
 
-import Bookmarks from '@components/Icon/svgs/bookmarks.svg';
-import Alarm from '@components/Icon/svgs/alarm.svg';
-import Calendar from '@components/Icon/svgs/calendar.svg';
-import Quill from '@components/Icon/svgs/quill.svg';
-import Drawer from '@components/Icon/svgs/drawer.svg';
 import SvgIcon from '@components/Icon';
 import { DateIcon } from '@components/ListItem/ListItem.styles';
 

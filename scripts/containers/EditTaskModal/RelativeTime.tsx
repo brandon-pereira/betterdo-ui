@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import { formatRelative } from 'date-fns';
 
 export default function RelativeTime({ date }: { date: Date }) {

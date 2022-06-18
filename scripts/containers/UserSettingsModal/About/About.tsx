@@ -1,4 +1,3 @@
-import.meta.hot;
 import React from 'react';
 import loadable from '@loadable/component';
 
@@ -15,9 +14,9 @@ function About() {
             <h1>BetterDo.</h1>
             <h2>Version {VERSION}</h2>
             <ChangeLogLoader>
-                {({ default: changelog }) => (
+                {({ html: changelog }) => (
                     <ChangeLog
-                        dangerouslySetInnerHTML={{ __html: changelog.html }}
+                        dangerouslySetInnerHTML={{ __html: changelog }}
                     />
                 )}
             </ChangeLogLoader>

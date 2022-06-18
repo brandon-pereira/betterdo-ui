@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-import _BetterDo from '@components/Icon/svgs/betterdo.svg';
+import _BetterDo from '@components/Icon/svgs/betterdo.svg?component';
 
 export const Container = styled.div`
     text-align: center;
