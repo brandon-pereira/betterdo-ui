@@ -32,7 +32,7 @@ const _Input = styled.input<{ invalid?: boolean }>`
     ${({ theme, invalid }) =>
         invalid &&
         `
-    box-shadow: inset 0 0 0 2px ${theme.colors.general.red}; !important;
+      box-shadow: inset 0 0 0 2px ${theme.colors.general.red} !important;
     `};
 `;
 

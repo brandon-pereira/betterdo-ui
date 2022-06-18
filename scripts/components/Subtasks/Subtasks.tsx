@@ -29,7 +29,9 @@ function Subtasks({ subtasks, onChange }: Props) {
     );
 
     const setInputValue = (value: string) => {
-        setValue(value);
+        if (value.length <= 200) {
+            setValue(value);
+        }
         setInvalid(!value);
     };
 
