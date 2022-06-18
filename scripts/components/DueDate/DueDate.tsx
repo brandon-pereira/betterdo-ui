@@ -147,6 +147,6 @@ const getTomorrowsDate = () => {
     return startOfTomorrow();
 };
 const getNextWeekDate = () => {
-    return nextMonday(new Date());
+    return nextMonday(startOfToday());
 };
 export default DueDate;
