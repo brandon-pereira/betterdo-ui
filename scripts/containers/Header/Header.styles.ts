@@ -58,20 +58,21 @@ export const Container = styled.header<{ isDarkColor: boolean }>`
 export const SettingsButton = styled(Button)`
     color: currentColor;
     margin-left: 0.35rem;
-    border-radius: 50%;
+    border-radius: 2rem;
     user-select: none;
-    padding: 0.8rem;
+    padding: 0.6rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: none;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: none;
     &[hidden] {
         display: none;
     }
     ${Icon} {
-        height: 2rem;
-        width: 2rem;
+        height: 1.6rem;
+        width: 1.6rem;
     }
 `;
 export const Title = styled.h2`
