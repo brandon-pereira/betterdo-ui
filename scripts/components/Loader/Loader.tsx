@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Loader as _Loader } from './Loader.styles';
 
-import LoaderSvg from '@components/Icon/svgs/Loader.svg';
+import LoaderSvg from '@components/Icon/svgs/loader.svg';
 
 type Props = {
     className?: string;
