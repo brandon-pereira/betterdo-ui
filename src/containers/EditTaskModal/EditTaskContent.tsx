@@ -11,7 +11,7 @@ import CreatorBlock from './CreatorBlock';
 import ListsDropdown from './ListsDropdown';
 import Loader from './Loader';
 
-import Task from 'src/customTypes/task';
+import Task from '@customTypes/task';
 import { Header } from '@components/Copy';
 import Selector from '@components/Selector';
 import { Label, Input, Error } from '@components/Forms';

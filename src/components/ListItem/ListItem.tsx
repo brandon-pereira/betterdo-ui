@@ -8,7 +8,7 @@ import {
     SelectedItemBackground
 } from './ListItem.styles';
 
-import List from 'src/customTypes/list';
+import List from '@customTypes/list';
 import customLists from '@utilities/customLists';
 import useSwitchList from '@hooks/useSwitchList';
 import useCurrentListId from '@hooks/useCurrentListId';

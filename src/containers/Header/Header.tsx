@@ -1,6 +1,5 @@
 import React from 'react';
 import color from 'color';
-import Settings from '@components/Icon/svgs/settings.svg';
 
 import {
     Container,
@@ -11,6 +10,7 @@ import {
     Icon
 } from './Header.styles';
 
+import Settings from '@components/Icon/svgs/settings.svg';
 import useEditListModal from '@hooks/useEditListModal';
 import useListDetails from '@hooks/useListDetails';
 import useCurrentListId from '@hooks/useCurrentListId';

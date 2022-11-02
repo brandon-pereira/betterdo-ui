@@ -6,11 +6,11 @@ import {
     startOfTomorrow,
     isSameWeek
 } from 'date-fns';
-import Calendar from '@components/Icon/svgs/calendar.svg';
-import Eyedropper from '@components/Icon/svgs/eyedropper.svg';
 
 import { Container, DayIcon, ItemContainer, ItemLabel } from './DueDate.styles';
 
+import Calendar from '@components/Icon/svgs/calendar.svg';
+import Eyedropper from '@components/Icon/svgs/eyedropper.svg';
 import { Input } from '@components/Forms';
 import Icon from '@components/Icon';
 import { getCurrentDay, getTomorrowDay } from '@utilities/customLists';

@@ -17,7 +17,7 @@ import {
     verticalListSortingStrategy
 } from '@dnd-kit/sortable';
 
-import TaskType from 'src/customTypes/task';
+import TaskType from '@customTypes/task';
 import Task from '@components/Task';
 
 const variants = {

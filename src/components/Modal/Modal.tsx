@@ -6,7 +6,6 @@ import React, {
     useState
 } from 'react';
 import { Variant } from 'framer-motion';
-import x from '@components/Icon/svgs/x.svg';
 
 import useEscapeKey from './useEscapeKey';
 import {
@@ -18,6 +17,8 @@ import {
     ModalClose,
     ContentContainer
 } from './Modal.styles';
+
+import x from '@components/Icon/svgs/x.svg';
 
 interface Props {
     className?: string;

@@ -1,4 +1,4 @@
-import React, { createElement, cloneElement } from 'react';
+import { createElement, cloneElement } from 'react';
 
 import { ResponsiveProvider } from '@hooks/useResponsive';
 import { ModalsProvider } from '@hooks/useHamburgerNav';

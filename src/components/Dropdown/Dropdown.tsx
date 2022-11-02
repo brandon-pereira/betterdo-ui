@@ -1,7 +1,8 @@
 import React from 'react';
-import Chrevron from '@components/Icon/svgs/chevron.svg';
 
 import { SelectContainer, Icon, Select } from './Dropdown.styles';
+
+import Chrevron from '@components/Icon/svgs/chevron.svg';
 
 interface Props {
     value?: string;
