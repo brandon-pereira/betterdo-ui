@@ -37,6 +37,7 @@ export default defineConfig({
                 : 'http://localhost:8000'
         }"`
     },
+    base: './',
     server: {
         port: 8080
     }
