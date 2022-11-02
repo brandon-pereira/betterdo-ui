@@ -50,12 +50,12 @@
         "prettier": "^2.7.1",
         "typescript": "^4.8.4",
         "vite": "^3.2.2",
-        "vite-plugin-svgr": "^2.2.2",
         "vite-plugin-markdown": "^2.1.0",
-        "workbox-cli": "^6.5.4"
+        "vite-plugin-pwa": "^0.13.1",
+        "vite-plugin-svgr": "^2.2.2"
     },
     "scripts": {
-        "build": "rm -rf node_modules/.cache && NODE_ENV='production' snowpack build && npm run build:service-worker",
+        "build": "vite build",
         "build:service-worker": "NODE_ENV='production' esbuild service-worker.js --bundle --minify --bundle --define:process.env.NODE_ENV=\\\"production\\\" --outfile=dist/service-worker.js && workbox injectManifest ./workbox-config.js",
         "start": "vite",
         "test": "eslint . --ext .jsx,.js,.ts,.tsx && npx tsc --noemit"

@@ -1,12 +1,17 @@
 /// <reference lib="webworker" />
-export default null;
+
 declare let self: ServiceWorkerGlobalScope;
 
-import { precacheAndRoute } from 'workbox-precaching';
+import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { CacheFirst } from 'workbox-strategies';
 import { googleFontsCache } from 'workbox-recipes';
+import { clientsClaim } from 'workbox-core';
 
+self.skipWaiting();
+clientsClaim();
+
+cleanupOutdatedCaches();
 googleFontsCache();
 precacheAndRoute(self.__WB_MANIFEST, {
     ignoreURLParametersMatching: [/.*/]
