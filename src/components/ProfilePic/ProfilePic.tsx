@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import User from '@customTypes/user';
+import User from 'src/customTypes/user';
 
 const Container = styled.div<{ size?: string }>`
     border: none;

@@ -8,10 +8,10 @@
         "module": "esnext",
         "target": "es5",
         "paths": {
-            "@utilities/*": ["./scripts/utilities/*"],
-            "@components/*": ["./scripts/components/*"],
-            "@hooks/*": ["./scripts/hooks/*"],
-            "@customTypes/*": ["./scripts/customTypes/*"]
+            "@utilities/*": ["src/utilities/*"],
+            "@components/*": ["src/components/*"],
+            "@hooks/*": ["src/hooks/*"],
+            "@customTypes/*": ["src/customTypes/*"]
         },
         "allowJs": true,
         "allowSyntheticDefaultImports": true,

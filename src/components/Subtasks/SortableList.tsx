@@ -19,7 +19,7 @@ import x from '@components/Icon/svgs/x.svg';
 
 import { DeleteIcon, Task, Checkbox } from './Subtasks.styles';
 
-import { Subtask } from '@customTypes/task';
+import { Subtask } from 'src/customTypes/task';
 
 interface Props {
     id: string;

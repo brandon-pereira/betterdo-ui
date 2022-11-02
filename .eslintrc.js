@@ -39,10 +39,10 @@ module.exports = {
             },
             alias: {
                 map: [
-                    ['@components', './scripts/components'],
-                    ['@hooks', './scripts/hooks'],
-                    ['@utilities', './scripts/utilities'],
-                    ['@customTypes', './scripts/customTypes']
+                    ['@components', './src/components'],
+                    ['@hooks', './src/hooks'],
+                    ['@utilities', './src/utilities'],
+                    ['@customTypes', './src/customTypes']
                 ],
                 extensions: ['.ts', '.js', '.json', '.jsx', '.tsx']
             }

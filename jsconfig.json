@@ -3,10 +3,10 @@
         "baseUrl": ".",
         "jsx": "react",
         "paths": {
-            "@hooks/*": ["./scripts/hooks/*"],
-            "@components/*": ["./scripts/components/*"],
-            "@utilities/*": ["./scripts/utilities/*"],
-            "@customTypes/*": ["./scripts/customTypes/*"]
+            "@hooks/*": ["./src/hooks/*"],
+            "@components/*": ["./src/components/*"],
+            "@utilities/*": ["./src/utilities/*"],
+            "@customTypes/*": ["./src/customTypes/*"]
         }
     },
     "exclude": ["node_modules"]

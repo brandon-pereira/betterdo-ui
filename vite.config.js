@@ -13,10 +13,10 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            '@components': path.resolve(__dirname, '/scripts/components'),
-            '@hooks': path.resolve(__dirname, '/scripts/hooks'),
-            '@utilities': path.resolve(__dirname, '/scripts/utilities'),
-            '@customTypes': path.resolve(__dirname, '/scripts/customTypes')
+            '@components': path.resolve(__dirname, '/src/components'),
+            '@hooks': path.resolve(__dirname, '/src/hooks'),
+            '@utilities': path.resolve(__dirname, '/src/utilities'),
+            '@customTypes': path.resolve(__dirname, '/src/customTypes')
         }
     },
     esbuild: {
