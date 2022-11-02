@@ -1,5 +1,9 @@
 # Changelog
 
+## v6.0.1
+
+-   Fix subtask UX on mobile
+
 ## v6.0.0
 
 -   Upgrade from Snowpack to Vite since that seems to be the industry standard these days
