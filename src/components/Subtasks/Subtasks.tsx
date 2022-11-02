@@ -66,7 +66,7 @@ function Subtasks({ subtasks, onChange }: Props) {
     };
 
     const onSortEnd = useCallback(
-        ({ oldIndex, newIndex }) => {
+        ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
             if (oldIndex !== newIndex) {
                 const mutatedArray = arrayMoveImmutable(
                     _subtasks,

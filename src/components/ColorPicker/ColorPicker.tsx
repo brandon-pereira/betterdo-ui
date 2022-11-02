@@ -29,7 +29,7 @@ function ColorPicker({ value, onChange }: Props) {
     ]);
 
     const onChangeColor = useCallback(
-        color => {
+        (color: string) => {
             onChange(color);
             setIndex(palette.findIndex(curr => color === curr));
             setPalette(palette.map(curr => (curr === color ? color : curr)));
@@ -38,7 +38,7 @@ function ColorPicker({ value, onChange }: Props) {
     );
 
     const onChangeColorFromPicker = useCallback(
-        color => {
+        (color: string) => {
             onChange(color);
             setPalette(palette.map((curr, i) => (index === i ? color : curr)));
         },
@@ -61,12 +61,17 @@ function ColorPicker({ value, onChange }: Props) {
         [palette, index]
     );
 
-    const onLaunchPicker = useCallback(e => {
-        e.preventDefault();
-        if (inputColorRef.current) {
-            inputColorRef.current.click();
-        }
-    }, []);
+    const onLaunchPicker = useCallback(
+        (e?: React.MouseEvent<HTMLDivElement>) => {
+            if (e) {
+                e.preventDefault();
+            }
+            if (inputColorRef.current) {
+                inputColorRef.current.click();
+            }
+        },
+        []
+    );
 
     useEffect(() => {
         if (colorPaletteRef.current) {

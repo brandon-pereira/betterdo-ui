@@ -37,7 +37,7 @@ function ProfileSettings() {
     }, [state]);
 
     const onSubmit = useCallback(
-        async e => {
+        async (e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             if (isSaving) {
                 return;
@@ -71,7 +71,7 @@ function ProfileSettings() {
         return <>Loading</>;
     }
     return (
-        <Form onSubmit={e => onSubmit(e)} errorMessage={error}>
+        <Form onSubmit={onSubmit} errorMessage={error}>
             <ProfilePictureBanner>
                 <ProfilePictureBackground
                     src={FormatProfilePictureUrl(profile?.profilePicture)}

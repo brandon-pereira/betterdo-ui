@@ -49,7 +49,7 @@ function EditTaskContent({ setUnsavedChanges }: Props) {
     }, [task]);
 
     const onSaveTask = useCallback(
-        async updatedProps => {
+        async (updatedProps: Partial<Task>) => {
             if (!state.list) {
                 return;
             }

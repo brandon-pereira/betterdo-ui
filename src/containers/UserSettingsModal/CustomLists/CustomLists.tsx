@@ -24,7 +24,7 @@ function CustomListSettings() {
         }
     }, [loading, error, profile]);
     const onCustomListToggle = useCallback(
-        async (id, bool) => {
+        async (id: string, bool: boolean) => {
             try {
                 await modifyProfile({
                     customLists: {

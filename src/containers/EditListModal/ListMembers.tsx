@@ -58,7 +58,7 @@ function ListMembers() {
     const [members, setMembers] = useState(list.members!);
 
     const removeMember = useCallback(
-        async _id => {
+        async (_id: string) => {
             // Temporarily update UI while request sends
             const _members = members.filter(member => member._id !== _id);
             setMembers(_members);
@@ -70,7 +70,7 @@ function ListMembers() {
         [members, currentListId, modifyList]
     );
     const onSubmit = useCallback(
-        async e => {
+        async (e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             // Validate
             if (!input) {

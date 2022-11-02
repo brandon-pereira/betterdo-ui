@@ -15,7 +15,7 @@ function Toggle({ value, onChange, disabled }: Props) {
     const [checked, setChecked] = useState(value || false);
 
     const _onChange = useCallback(
-        e => {
+        (e: React.ChangeEvent<HTMLInputElement>) => {
             const newState = e.target.checked;
             setChecked(newState);
             if (onChange) {

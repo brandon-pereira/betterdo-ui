@@ -20,7 +20,7 @@ function Navigation() {
     const { lists } = useLists();
 
     const onSortEnd = useCallback(
-        ({ oldIndex, newIndex }) => {
+        ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
             // Indexes match, no change
             if (oldIndex === newIndex) {
                 return;

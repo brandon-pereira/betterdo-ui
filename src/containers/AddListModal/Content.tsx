@@ -38,7 +38,7 @@ function AddListModalContent({ onLoad }: AddListModalProps) {
     }, [onLoad]);
 
     const onSubmit = useCallback(
-        async e => {
+        async (e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             if (isSubmitting) {
                 return;

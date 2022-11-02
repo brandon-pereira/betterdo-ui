@@ -24,7 +24,7 @@ function GeneralSettings() {
     const [error, setError] = useState<string | null>(null);
 
     const onChange = useCallback(
-        async newState => {
+        async (newState: Partial<typeof state>) => {
             setState(state => ({ ...state, ...newState }));
             try {
                 await modifyProfile({

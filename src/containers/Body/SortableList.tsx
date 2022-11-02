@@ -8,7 +8,8 @@ import {
     KeyboardSensor,
     closestCenter,
     useSensor,
-    useSensors
+    useSensors,
+    DragEndEvent
 } from '@dnd-kit/core';
 import {
     useSortable,
@@ -107,7 +108,7 @@ function SortableList({ listId, tasks, onSortEnd }: SortableListProps) {
     );
 
     const onDragEnd = useCallback(
-        event => {
+        (event: DragEndEvent) => {
             const { active, over } = event;
             if (active && over && active.id !== over.id) {
                 const oldIndex = tasks.findIndex(

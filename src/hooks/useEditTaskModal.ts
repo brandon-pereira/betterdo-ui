@@ -7,7 +7,7 @@ function useEditTaskModal() {
     const navigate = useNavigate();
     const generateUrl = useGeneratedUrl();
     const openTaskModal = useCallback(
-        taskId => {
+        (taskId: string) => {
             navigate(generateUrl('/edit-task/' + taskId));
         },
         [generateUrl, navigate]

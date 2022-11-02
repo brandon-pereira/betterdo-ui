@@ -64,7 +64,7 @@ function ListSettings({ setUnsavedChanges, onRequestClose }: Props) {
     }, [_deleteList, currentListId, state.title]);
 
     const onSubmit = useCallback(
-        async e => {
+        async (e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             if (isSaving || isDeleting) {
                 return;

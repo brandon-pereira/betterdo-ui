@@ -26,7 +26,7 @@ const variants = {
 function EditTaskContainer({ isOpen }: Props) {
     const hasUnsavedChanges = useRef(false);
     const { closeModal } = useEditTaskModal();
-    const setUnsavedChanges = useCallback(bool => {
+    const setUnsavedChanges = useCallback((bool: boolean) => {
         hasUnsavedChanges.current = bool;
     }, []);
 

@@ -16,7 +16,7 @@ const AddTask = function ({ isHidden }: Props) {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const onSubmit = useCallback(
-        async e => {
+        async (e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             const title = inputRef.current?.value;
             if (!title || !inputRef.current) {

@@ -19,7 +19,7 @@ function Selector({ value, values, onSelect }: Props) {
     );
 
     const onChange = useCallback(
-        (e, value: string) => {
+        (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, value: string) => {
             setSelectedValue(value);
             if (onSelect) {
                 onSelect(value);
