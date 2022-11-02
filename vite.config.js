@@ -33,7 +33,7 @@ export default defineConfig({
         __VERSION__: `"${process.env.npm_package_version}"`,
         __SERVER_URL__: `"${
             process.env.NODE_ENV === 'production'
-                ? 'http://localhost:8000'
+                ? 'https://betterdo.app'
                 : 'http://localhost:8000'
         }"`
     },
