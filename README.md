@@ -9,7 +9,7 @@ It's recommended you run this with the REST API Server. See [betterdo-api](https
 -   ⚛️ React Application leveraging Hooks and SWR.
 -   🤓 Uses TypeScript to reduce bugs and improve code satisfaction
 -   👷‍♂️ Leverages a Service Worker for offline support, push notifications, and an installable PWA.
--   ❄️ Uses SnowPack for blazing fast development and builds
+-   🧱 Uses Vite for blazing fast development and builds
 -   🎼 Leverages GitHub actions for automated production deploys and testing
 
 ## Running Locally
