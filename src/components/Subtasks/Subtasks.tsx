@@ -95,7 +95,7 @@ function Subtasks({ subtasks, onChange }: Props) {
                 onChange={evt => setInputValue(evt.target.value)}
                 onKeyPress={onKeyPress}
                 placeholder="New Subtask"
-                enterKeyHint="enter"
+                enterKeyHint="go"
             />
         </Container>
     );
