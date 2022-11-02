@@ -1,5 +1,11 @@
 # Changelog
 
+## v6.0.0
+
+-   Upgrade from Snowpack to Vite since that seems to be the industry standard these days
+-   Upgrade to React 18
+-   Spring Cleaning
+
 ## v5.5.2
 
 -   Fix small bug where "Next Week" due date would set to Tuesday if near end of the day.
