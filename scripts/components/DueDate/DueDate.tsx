@@ -6,8 +6,8 @@ import {
     startOfTomorrow,
     isSameWeek
 } from 'date-fns';
-import Calendar from '@components/Icon/svgs/calendar.svg?component';
-import Eyedropper from '@components/Icon/svgs/eyedropper.svg?component';
+import Calendar from '@components/Icon/svgs/calendar.svg';
+import Eyedropper from '@components/Icon/svgs/eyedropper.svg';
 
 import { Container, DayIcon, ItemContainer, ItemLabel } from './DueDate.styles';
 

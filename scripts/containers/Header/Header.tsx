@@ -1,6 +1,6 @@
 import React from 'react';
 import color from 'color';
-import Settings from '@components/Icon/svgs/settings.svg?component';
+import Settings from '@components/Icon/svgs/settings.svg';
 
 import {
     Container,

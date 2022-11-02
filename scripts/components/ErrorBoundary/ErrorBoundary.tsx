@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ServerError from '@components/Icon/svgs/server-error.svg?component';
+import ServerError from '@components/Icon/svgs/server-error.svg';
 
 import { Container, Icon, Button } from './ErrorBoundary.styles';
 

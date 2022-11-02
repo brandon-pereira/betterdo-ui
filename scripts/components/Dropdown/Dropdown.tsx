@@ -1,5 +1,5 @@
 import React from 'react';
-import Chrevron from '@components/Icon/svgs/chevron.svg?component';
+import Chrevron from '@components/Icon/svgs/chevron.svg';
 
 import { SelectContainer, Icon, Select } from './Dropdown.styles';
 

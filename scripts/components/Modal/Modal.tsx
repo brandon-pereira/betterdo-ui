@@ -6,7 +6,7 @@ import React, {
     useState
 } from 'react';
 import { Variant } from 'framer-motion';
-import x from '@components/Icon/svgs/x.svg?component';
+import x from '@components/Icon/svgs/x.svg';
 
 import useEscapeKey from './useEscapeKey';
 import {

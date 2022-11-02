@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import randomColor from 'randomcolor';
-import Refresh from '@components/Icon/svgs/refresh.svg?component';
-import Eyedropper from '@components/Icon/svgs/eyedropper.svg?component';
+import Refresh from '@components/Icon/svgs/refresh.svg';
+import Eyedropper from '@components/Icon/svgs/eyedropper.svg';
 
 import { Icon, Container, Color, LabelContainer } from './ColorPicker.styles';
 
