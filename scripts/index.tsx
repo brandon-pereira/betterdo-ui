@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
+import * as ReactDOM from 'react-dom/client';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -14,7 +14,8 @@ import ErrorBoundary from '@components/ErrorBoundary';
 
 import './utilities/ServiceWorkerRegister';
 
-render(
+const root = ReactDOM.createRoot(document.querySelector('.main-container')!);
+root.render(
     <HelmetProvider>
         <GlobalStyles />
         <DarkModeProvider>
@@ -49,6 +50,5 @@ render(
                 </ErrorBoundary>
             </ThemeProvider>
         </DarkModeProvider>
-    </HelmetProvider>,
-    document.querySelector('.main-container')
+    </HelmetProvider>
 );
