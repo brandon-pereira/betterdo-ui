@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+import { Input } from '@components/Forms';
+
+export const DueDateInput = styled(Input)`
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+`;
 export const Container = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -15,6 +23,7 @@ export const DayIcon = styled.div`
 `;
 
 export const ItemContainer = styled.button<{ selected: boolean }>`
+    position: relative;
     background: none;
     border: none;
     color: ${({ theme }) => theme.colors.forms.label.color};

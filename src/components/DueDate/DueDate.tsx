@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useRef } from 'react';
 import {
     nextMonday,
     isSameDay,
@@ -7,11 +7,16 @@ import {
     isSameWeek
 } from 'date-fns';
 
-import { Container, DayIcon, ItemContainer, ItemLabel } from './DueDate.styles';
+import {
+    Container,
+    DayIcon,
+    ItemContainer,
+    ItemLabel,
+    DueDateInput
+} from './DueDate.styles';
 
 import Calendar from '@components/Icon/svgs/calendar.svg';
 import Eyedropper from '@components/Icon/svgs/eyedropper.svg';
-import { Input } from '@components/Forms';
 import Icon from '@components/Icon';
 import { getCurrentDay, getTomorrowDay } from '@utilities/customLists';
 
@@ -23,22 +28,18 @@ type Props = {
 function DueDate({ value, onChange }: Props) {
     // create all variables we'll need to use later
     const currentValue = new Date(value || '');
+    const dateInputRef = useRef<HTMLInputElement>(null);
     const today = getTodaysDate();
     const tomorrow = getTomorrowsDate();
     const nextWeek = getNextWeekDate();
     const isToday = isSameDay(today, currentValue);
     const isTomorrow = isSameDay(tomorrow, currentValue);
-    const isNextWeek = isSameWeek(nextWeek, currentValue);
+    const isNextWeek = !isTomorrow && isSameWeek(nextWeek, currentValue);
     const isSet = !!value;
-    const isOther = !isToday && !isTomorrow && !isNextWeek;
-    const [isCustomEnabled, setCustomEnabled] = useState(false);
-    const isCustomSelected =
-        isCustomEnabled || (!isCustomEnabled && isSet && isOther);
+    const isOther = isSet && !isToday && !isTomorrow && !isNextWeek;
 
     // a light wrapper around the onChange prop for tweaking value
     const _onQuickActionSelect = (newValue: Date) => () => {
-        // disable custom if it was selected
-        setCustomEnabled(false);
         // if already selected, unselect
         if (isSameDay(currentValue, newValue)) {
             // toggle ui, switch to unset
@@ -50,44 +51,45 @@ function DueDate({ value, onChange }: Props) {
     };
 
     const _onCustomDateSelect = () => {
-        // set the due date to undefined triggering the date picker to be shown
-        if (!isCustomEnabled) {
-            onChange(undefined);
-            setCustomEnabled(true);
-        } else {
-            onChange(undefined);
-            setCustomEnabled(false);
-        }
+        dateInputRef.current?.showPicker();
     };
 
     return (
         <>
             <Container>
                 <ItemContainer
-                    selected={isToday && !isCustomEnabled}
+                    selected={isToday}
                     onClick={_onQuickActionSelect(today)}
                 >
                     <DayIcon>{getCurrentDay()}</DayIcon>
                     <ItemLabel>Today</ItemLabel>
                 </ItemContainer>
                 <ItemContainer
-                    selected={isTomorrow && !isCustomEnabled}
+                    selected={isTomorrow}
                     onClick={_onQuickActionSelect(tomorrow)}
                 >
                     <DayIcon>{getTomorrowDay()}</DayIcon>
                     <ItemLabel>Tomorrow</ItemLabel>
                 </ItemContainer>
                 <ItemContainer
-                    selected={isNextWeek && !isCustomEnabled}
+                    selected={isNextWeek}
                     onClick={_onQuickActionSelect(getNextWeekDate())}
                 >
                     <Icon size={`30px`} color="currentColor" icon={Calendar} />
                     <ItemLabel>Next Week</ItemLabel>
                 </ItemContainer>
                 <ItemContainer
-                    selected={Boolean(isCustomSelected)}
+                    selected={Boolean(isOther)}
                     onClick={_onCustomDateSelect}
                 >
+                    <DueDateInput
+                        ref={dateInputRef}
+                        type="date"
+                        value={formatDateForInput(value)}
+                        onChange={e =>
+                            onChange(formatDateValueToDate(e.target.value))
+                        }
+                    />
                     <Icon
                         size={`30px`}
                         color="currentColor"
@@ -96,15 +98,6 @@ function DueDate({ value, onChange }: Props) {
                     <ItemLabel>Custom</ItemLabel>
                 </ItemContainer>
             </Container>
-            {isCustomSelected && (
-                <Input
-                    type="date"
-                    value={formatDateForInput(value)}
-                    onChange={e =>
-                        onChange(formatDateValueToDate(e.target.value))
-                    }
-                />
-            )}
         </>
     );
 }
