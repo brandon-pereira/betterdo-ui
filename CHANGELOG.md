@@ -1,5 +1,11 @@
 # Changelog
 
+## v6.0.2
+
+-   Use `showPicker` api on DueDate component in Task
+-   Fix some relative import issues during Vite upgrade
+-   Use React 17 jsx runtime, and removed need to import React from components
+
 ## v6.0.1
 
 -   Fix subtask UX on mobile
