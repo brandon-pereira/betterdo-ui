@@ -39,7 +39,8 @@ function useDarkModeOnce(): [boolean, (bool: boolean) => void] {
 function parseValue(val: string | null): boolean {
     if (val === 'true') return true;
     else if (val === 'false') return false;
-    else return false;
+    // if no pref set, assume dark mode enabled
+    else return true;
 }
 
 const {
