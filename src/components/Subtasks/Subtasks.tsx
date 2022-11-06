@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import { arrayMoveImmutable } from 'array-move';
 
 import { Input, Container } from './Subtasks.styles';

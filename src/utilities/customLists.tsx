@@ -1,4 +1,3 @@
-import React from 'react';
 import { startOfToday, startOfTomorrow } from 'date-fns';
 
 import Bookmarks from '@components/Icon/svgs/bookmarks.svg';

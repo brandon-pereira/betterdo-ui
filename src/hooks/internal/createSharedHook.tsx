@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import { createContext, useContext } from 'react';
 
 function createSharedHook<response>(useHookOnce: () => response) {
     const Context = createContext<response | undefined>(undefined);

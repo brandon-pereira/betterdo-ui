@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Container, Icon, Heading, BodyCopy, Button } from './Banner.styles';
 
 interface Props {

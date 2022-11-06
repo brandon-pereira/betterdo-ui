@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { SelectContainer, Icon, Select } from './Dropdown.styles';
 
 import Chrevron from '@components/Icon/svgs/chevron.svg';

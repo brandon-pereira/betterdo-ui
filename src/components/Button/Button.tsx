@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { StyledButton, Loader } from './Button.styles';
 
 interface Props {

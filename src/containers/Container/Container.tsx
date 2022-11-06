@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { _Container } from './Container.styles';
 
 import useHamburgerNav from '@hooks/useHamburgerNav';

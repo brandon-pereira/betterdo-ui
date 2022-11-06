@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import { useState, Fragment } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { LIGHT_THEME } from '../../theme';

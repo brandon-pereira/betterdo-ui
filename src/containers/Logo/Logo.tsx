@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Container, Content, Hamburger, ProfilePicture } from './Logo.styles';

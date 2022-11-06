@@ -27,7 +27,8 @@ module.exports = {
         'plugin:import/typescript',
         'plugin:eslint-comments/recommended',
         'plugin:react/recommended',
-        'plugin:react-hooks/recommended'
+        'plugin:react-hooks/recommended',
+        'plugin:react/jsx-runtime'
     ],
     settings: {
         react: {

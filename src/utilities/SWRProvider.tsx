@@ -1,4 +1,3 @@
-import React from 'react';
 import { SWRConfig } from 'swr';
 
 import { SERVER_URL } from '@utilities/env';

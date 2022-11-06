@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { arrayMoveImmutable } from 'array-move';
 import { LayoutGroup, AnimatePresence } from 'framer-motion';
 

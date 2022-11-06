@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Dropdown from '@components/Dropdown';
 import useLists from '@hooks/useLists';
 

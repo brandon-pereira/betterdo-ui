@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Block, CreatorBlock, ProfilePic } from './EditTask.styles';
 import RelativeTime from './RelativeTime';
 

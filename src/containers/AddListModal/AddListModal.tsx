@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useLayoutEffect } from 'react';
+import { useCallback, useEffect, useRef, useLayoutEffect } from 'react';
 import loadable from '@loadable/component';
 import { CSSProp } from 'styled-components';
 

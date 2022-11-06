@@ -1,4 +1,4 @@
-import React, { CSSProperties, useCallback } from 'react';
+import { CSSProperties, useCallback } from 'react';
 import { CSS } from '@dnd-kit/utilities';
 import { restrictToParentElement } from '@dnd-kit/modifiers';
 import {

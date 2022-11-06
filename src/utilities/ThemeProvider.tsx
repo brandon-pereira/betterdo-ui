@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     createGlobalStyle,
     ThemeProvider as _ThemeProvider

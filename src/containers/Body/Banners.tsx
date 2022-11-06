@@ -1,5 +1,3 @@
-import React from 'react';
-
 import BetterDo from '@components/Icon/svgs/betterdo.svg';
 import ServerError from '@components/Icon/svgs/server-error.svg';
 import Banner from '@components/Banner';

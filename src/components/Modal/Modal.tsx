@@ -1,10 +1,4 @@
-import React, {
-    forwardRef,
-    useCallback,
-    useEffect,
-    useRef,
-    useState
-} from 'react';
+import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 import { Variant } from 'framer-motion';
 
 import useEscapeKey from './useEscapeKey';

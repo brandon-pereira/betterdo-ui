@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import _NotificationBanner from '@components/NotificationBanner';
 import usePushNotifications from '@hooks/usePushNotifications';

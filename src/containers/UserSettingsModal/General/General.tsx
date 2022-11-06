@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useCallback } from 'react';
+import { useState, Fragment, useCallback } from 'react';
 
 import { OptionGroup, Description } from './General.styles';
 
