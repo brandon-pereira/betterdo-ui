@@ -2,6 +2,7 @@
 
 ## v6.0.2
 
+-   Fix missing notification icons in Vite migrations
 -   Use `showPicker` api on DueDate component in Task
 -   Enable dark mode by default on new devices
 -   Fix some relative import issues during Vite upgrade
