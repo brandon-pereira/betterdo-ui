@@ -57,6 +57,9 @@ const Task = forwardRef<HTMLButtonElement, Props>(
                 ) : (
                     <Checkbox
                         type="checkbox"
+                        aria-label={`Mark ${title} ${
+                            isCompleted ? 'incomplete' : 'complete'
+                        }`}
                         onClick={e => e.stopPropagation()}
                         onChange={onToggleTaskCompletion}
                         checked={isCompleted}
