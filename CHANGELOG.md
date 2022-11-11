@@ -1,5 +1,9 @@
 # Changelog
 
+## v6.0.3
+
+-   Reduce core bundle size by 25%, increasing initial load time
+
 ## v6.0.2
 
 -   Fix missing notification icons in Vite migrations

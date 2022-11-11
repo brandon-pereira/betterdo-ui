@@ -1,7 +1,8 @@
+import loadable from '@loadable/component';
 import { useCallback } from 'react';
 import { arrayMoveImmutable } from 'array-move';
 
-import SortableList from './SortableList';
+import type { SortableListProps } from './SortableList';
 import {
     Container,
     NavigationModalOverlay,
@@ -13,6 +14,10 @@ import useModifyProfile from '@hooks/useModifyProfile';
 import useHamburgerNav from '@hooks/useHamburgerNav';
 import { NewListItem } from '@components/ListItem';
 import Scroller from '@components/Scroller';
+
+const SortableList = loadable<SortableListProps>(
+    () => import('./SortableList')
+);
 
 function Navigation() {
     const [isMobileNavVisible, setMobileNavVisibility] = useHamburgerNav();

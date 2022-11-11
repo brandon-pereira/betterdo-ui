@@ -4,9 +4,9 @@ import { LayoutGroup, AnimatePresence } from 'framer-motion';
 import loadable from '@loadable/component';
 
 import { Container, TaskContainer, Scroller } from './Body.styles';
-import SortableList from './SortableList';
 import CompletedTasksButton from './CompletedTasksButton';
 import { AllCaughtUpBanner, ServerErrorBanner } from './Banners';
+import type { SortableListProps } from './SortableList';
 
 import customLists from '@utilities/customLists';
 import AddTask from '@components/AddTask';
@@ -18,6 +18,10 @@ import useCompletedTasks from '@hooks/useCompletedTasks';
 
 const NotificationBanner = loadable<Record<string, never>>(
     () => import('./NotificationBanner')
+);
+
+const SortableList = loadable<SortableListProps>(
+    () => import('./SortableList')
 );
 
 function Body() {
