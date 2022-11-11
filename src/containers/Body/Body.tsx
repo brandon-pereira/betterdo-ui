@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
 import { arrayMoveImmutable } from 'array-move';
 import { LayoutGroup, AnimatePresence } from 'framer-motion';
+import loadable from '@loadable/component';
 
 import { Container, TaskContainer, Scroller } from './Body.styles';
 import SortableList from './SortableList';
 import CompletedTasksButton from './CompletedTasksButton';
 import { AllCaughtUpBanner, ServerErrorBanner } from './Banners';
-import NotificationBanner from './NotificationBanner';
 
 import customLists from '@utilities/customLists';
 import AddTask from '@components/AddTask';
@@ -15,6 +15,10 @@ import useListDetails from '@hooks/useListDetails';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useModifyList from '@hooks/useModifyList';
 import useCompletedTasks from '@hooks/useCompletedTasks';
+
+const NotificationBanner = loadable<Record<string, never>>(
+    () => import('./NotificationBanner')
+);
 
 function Body() {
     const currentListId = useCurrentListId();
