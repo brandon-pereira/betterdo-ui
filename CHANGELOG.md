@@ -3,6 +3,8 @@
 ## v6.0.3
 
 -   Reduce core bundle size by 25%, increasing initial load time
+-   Enable gzip compression for faster page loads
+-   Initial site SEO/A11Y improvements, more could be done on color contrast
 
 ## v6.0.2
 
