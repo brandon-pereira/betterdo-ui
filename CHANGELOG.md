@@ -18,7 +18,7 @@
 
 -   Fix subtask UX on mobile
 
-## v6.0.0
+## v6.0.0 (2022-11-01)
 
 -   Upgrade from Snowpack to Vite since that seems to be the industry standard these days
 -   Upgrade to React 18
@@ -34,7 +34,7 @@
 
 -   [Accessibility] Measure color contrast to ensure screens are always visible & accessible
 
-## v5.5.0
+## v5.5.0 (2022-03-01)
 
 -   Upgraded `react-router` to v6.
 -   Migrated modal animations to Framer Motion
@@ -46,7 +46,7 @@
 -   We're now 100% Typescript!
 -   Minor bug fixes throughout app
 
-## v5.4.0
+## v5.4.0 (2022-01-20)
 
 -   We're now in the [Android Play Store](https://play.google.com/store/apps/details?id=app.betterdo.twa&hl=en_CA&gl=US), leveraging a TWA for the deploy process.
 -   Front-end is now primarily written in TypeScript, more migrations to follow.
@@ -64,7 +64,7 @@
 
 -   Improvements to animations on switching lists and adding/completing tasks
 
-## 5.3.0
+## 5.3.0 (2022-01-03)
 
 -   Fixed issues with this week list
 -   Switched animation engines, added animations to tasks load/switching
@@ -76,7 +76,7 @@
 
 -   Added animation to completed tasks counter when incrementing
 
-## v5.2.0
+## v5.2.0 (2021-12-17)
 
 -   Added "Overdue" and "This Week" custom lists
 -   Custom lists now display their respective date in the navigation.
@@ -95,7 +95,7 @@
 
 -   Fix notification icon being broken
 
-## v5.1.0
+## v5.1.0 (2021-10-20)
 
 -   Added back sorting to subtasks
 -   Automated deploys to production
@@ -103,7 +103,7 @@
 -   Initial plumbing for Typescript migration
 -   Various Bug Fixes
 
-## v5.0.0
+## v5.0.0 (2021-10-09)
 
 -   Significantly faster development boot times thanks to Snowpack
 -   Significantly smaller bundle size by only supporting modern browsers
@@ -159,10 +159,10 @@
 -   Migrate from PHP to Node
 -   Migrate from Angular to React
 
-## v2.0.0
+## v2.0.0 (2015-08-31)
 
 -   Rebuild application using Angular
 
-## v1.0.0
+## v1.0.0 (2013-06-13)
 
 -   Initial launch of application leveraging PHP and jQuery
