@@ -3,7 +3,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 import { ThemeProvider, GlobalStyles } from './utilities/ThemeProvider';
-import InboxRedirect from './containers/Redirects/InboxRedirect';
+import InitialListRedirect from './containers/Redirects/InitialListRedirect';
 import SWRProvider from './utilities/SWRProvider';
 import App from './App';
 
@@ -29,7 +29,7 @@ root.render(
                                 element={
                                     <SWRProvider>
                                         <SharedProviders>
-                                            <InboxRedirect />
+                                            <InitialListRedirect />
                                         </SharedProviders>
                                     </SWRProvider>
                                 }

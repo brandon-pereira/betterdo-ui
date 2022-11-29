@@ -1,5 +1,9 @@
 # Changelog
 
+## v6.0.4
+
+-   App now defaults to loading last viewed list
+
 ## v6.0.3
 
 -   Reduce core bundle size by 25%, increasing initial load time
