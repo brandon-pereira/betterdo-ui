@@ -1,5 +1,9 @@
 # Changelog
 
+## v6.0.5
+
+-   Upgrade Dependencies
+
 ## v6.0.4
 
 -   App now defaults to loading last viewed list
