@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { mutate } from 'swr';
+import { useSWRConfig } from 'swr';
 
 import { getListDetailUrl, getListsUrl } from './internal/urls';
 
@@ -8,17 +8,18 @@ import useCompletedTasks from '@hooks/useCompletedTasks';
 import { updateList } from '@utilities/server';
 
 function useModifyList() {
+    const { mutate } = useSWRConfig();
     const [isCompletedTasksIncluded] = useCompletedTasks();
     return useCallback(
         async (listId: string, updatedProps: Partial<List>) => {
             // Immediately update the cached data
             await mutate(
                 getListDetailUrl(listId, isCompletedTasksIncluded),
-                async (currentList: Partial<List>) => {
+                async (currentList?: Partial<List>) => {
                     return {
                         ...currentList,
                         ...updatedProps
-                    };
+                    } as Partial<List>;
                 },
                 false
             );
@@ -30,7 +31,7 @@ function useModifyList() {
             await mutate(getListsUrl());
             await mutate(getListDetailUrl(listId, isCompletedTasksIncluded));
         },
-        [isCompletedTasksIncluded]
+        [isCompletedTasksIncluded, mutate]
     );
 }
 

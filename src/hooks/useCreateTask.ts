@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { mutate } from 'swr';
+import { useSWRConfig } from 'swr';
 
 import { getListDetailUrl } from './internal/urls';
 
@@ -8,6 +8,7 @@ import useCompletedTasks from '@hooks/useCompletedTasks';
 import { createTask } from '@utilities/server';
 
 function useCreateTask() {
+    const { mutate } = useSWRConfig();
     const [isCompletedTasksIncluded] = useCompletedTasks();
     return useCallback(
         async (listId: string, taskName: string) => {
@@ -18,7 +19,7 @@ function useCreateTask() {
             // Update cache to add new temp task
             await mutate(
                 listUrl,
-                async (currentList: List) => {
+                async (currentList?: List) => {
                     return {
                         ...currentList,
                         tasks: [
@@ -28,19 +29,19 @@ function useCreateTask() {
                                 priority: 'normal',
                                 isLoading: true
                             },
-                            ...currentList.tasks
+                            ...(currentList?.tasks || [])
                         ]
-                    };
+                    } as List;
                 },
-                false
+                { revalidate: false }
             );
             // Send request to server
             const addedTask = await createTask(listId, taskName);
             // Sync temp task with server response
             const mutation = mutate(
                 listUrl,
-                async (currentList: List) => {
-                    const mutatedList = { ...currentList };
+                async (currentList?: List) => {
+                    const mutatedList = { tasks: [], ...currentList };
                     // this could be a race, but thats a big edge case, revalidation will cleanup shortly
                     mutatedList.tasks[0] = {
                         isTemporaryTask: true,
@@ -52,7 +53,7 @@ function useCreateTask() {
                         isLoading: false
                     };
                     mutatedList.tasks = [...mutatedList.tasks];
-                    return mutatedList;
+                    return mutatedList as List;
                 },
                 false
             );
@@ -61,7 +62,7 @@ function useCreateTask() {
             // Update real cached data
             await mutate(listUrl);
         },
-        [isCompletedTasksIncluded]
+        [isCompletedTasksIncluded, mutate]
     );
 }
 

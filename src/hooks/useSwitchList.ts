@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { mutate } from 'swr';
+import { useSWRConfig } from 'swr';
 
 import { getListDetailUrl } from './internal/urls';
 
@@ -14,6 +14,7 @@ type DeepOptional<T> = T extends object ? DeepOptionalObject<T> : T | undefined;
 type DeepOptionalObject<T> = { [P in keyof T]?: DeepOptional<T[P]> };
 
 function useSwitchList() {
+    const { mutate } = useSWRConfig();
     const navigate = useNavigate();
     const [, setShowCompletedTasks] = useCompletedTasks();
     const [, setMobileNavVisibility] = useHamburgerNav();
@@ -41,7 +42,11 @@ function useSwitchList() {
             // update the local data immediately, but disable the revalidation.
             await mutate(
                 getListDetailUrl(nextList._id),
-                (list: Partial<List>) => ({ ...nextList, ...list }),
+                (list?: Partial<List>) =>
+                    ({
+                        ...nextList,
+                        ...list
+                    } as Partial<List>),
                 false
             );
             // turn off completed tasks view
@@ -51,7 +56,7 @@ function useSwitchList() {
             // Force a network refresh when changing lists
             await mutate(getListDetailUrl(nextList._id));
         },
-        [navigate, setMobileNavVisibility, setShowCompletedTasks]
+        [navigate, mutate, setMobileNavVisibility, setShowCompletedTasks]
     );
 
     return switchList;

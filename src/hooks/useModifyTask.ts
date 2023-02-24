@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { mutate } from 'swr';
+import { useSWRConfig } from 'swr';
 import { useNavigate } from 'react-router-dom';
 
 import { getListDetailUrl, getTaskDetailUrl } from './internal/urls';
@@ -12,6 +12,7 @@ import useCurrentListId from '@hooks/useCurrentListId';
 import { updateTask } from '@utilities/server';
 
 function useModifyTask() {
+    const { mutate } = useSWRConfig();
     const navigate = useNavigate();
     const [isCompletedTasksIncluded] = useCompletedTasks();
     const currentListId = useCurrentListId();
@@ -65,21 +66,22 @@ function useModifyTask() {
                 mutate(getListDetailUrl(updatedProps.list));
             }
         },
-        [currentListId, isCompletedTasksIncluded, navigate, generateUrl]
+        [currentListId, mutate, isCompletedTasksIncluded, navigate, generateUrl]
     );
 }
 
 const updateTaskInList =
-    (taskId: string, updatedProps: Partial<Task>) => (list: List) => ({
-        ...list,
-        tasks: list
-            ? list.tasks.map(task => {
-                  if (task._id === taskId) {
-                      return { ...task, ...updatedProps };
-                  }
-                  return task;
-              })
-            : []
-    });
+    (taskId: string, updatedProps: Partial<Task>) => (list?: List) =>
+        ({
+            ...list,
+            tasks: list
+                ? list.tasks.map(task => {
+                      if (task._id === taskId) {
+                          return { ...task, ...updatedProps };
+                      }
+                      return task;
+                  })
+                : []
+        } as List);
 
 export default useModifyTask;
