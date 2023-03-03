@@ -143,7 +143,7 @@ function SortableList({ listId, tasks, onSortEnd }: SortableListProps) {
                 strategy={verticalListSortingStrategy}
             >
                 <AnimatePresence
-                    mode="wait"
+                    mode={prevLength.current === 0 ? 'sync' : 'wait'}
                     custom={{ newListLength: tasks.length }}
                 >
                     <motion.div

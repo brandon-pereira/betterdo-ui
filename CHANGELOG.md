@@ -1,5 +1,9 @@
 # Changelog
 
+## v6.0.6
+
+-   Fix layout animation bug
+
 ## v6.0.5
 
 -   Upgrade Dependencies
