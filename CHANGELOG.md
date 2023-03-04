@@ -1,5 +1,9 @@
 # Changelog
 
+## v6.1.0
+
+-   Add confetti animation when clearing lists (Thanks for the suggestion Emma!)
+
 ## v6.0.6
 
 -   Fix layout animation bug

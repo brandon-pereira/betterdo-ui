@@ -7,7 +7,10 @@ export const Input = styled(FormInput)`
     border-radius: 50px;
 `;
 
-export const Container = styled.form<{ isHidden?: boolean }>`
+export const Container = styled.form<{
+    isHidden?: boolean;
+    isAbsolute?: boolean;
+}>`
     padding: 1rem 1rem 0.8rem;
     ${({ isHidden }) =>
         isHidden &&
@@ -17,5 +20,13 @@ export const Container = styled.form<{ isHidden?: boolean }>`
         ${Input} {
             display: none;
         }
+    `}
+    ${({ isAbsolute }) =>
+        isAbsolute &&
+        `position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
     `}
 `;

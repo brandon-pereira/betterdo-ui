@@ -8,6 +8,7 @@ export const Container = styled(motion.div)<{ $isAllCaughtUp: boolean }>`
         $isAllCaughtUp &&
         `
         position: absolute;
+        z-index: 1;
         bottom: 0;
         left: 0;
         right: 0;

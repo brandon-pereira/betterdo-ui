@@ -5,7 +5,7 @@ import loadable from '@loadable/component';
 
 import { Container, TaskContainer, Scroller } from './Body.styles';
 import CompletedTasksButton from './CompletedTasksButton';
-import { AllCaughtUpBanner, ServerErrorBanner } from './Banners';
+import { ServerErrorBanner } from './Banners';
 import type { SortableListProps } from './SortableList';
 
 import customLists from '@utilities/customLists';
@@ -23,6 +23,8 @@ const NotificationBanner = loadable<Record<string, never>>(
 const SortableList = loadable<SortableListProps>(
     () => import('./SortableList')
 );
+
+const AllCaughtUpBanner = loadable(() => import('./AllCaughtUp'));
 
 function Body() {
     const currentListId = useCurrentListId();
@@ -68,7 +70,10 @@ function Body() {
         <Container>
             <Scroller>
                 <NotificationBanner />
-                <AddTask isHidden={hideAddTaskInput} />
+                <AddTask
+                    isAbsolute={isAllCaughtUp}
+                    isHidden={hideAddTaskInput}
+                />
 
                 {!error && (
                     <LayoutGroup>
@@ -104,7 +109,8 @@ function Body() {
                     </LayoutGroup>
                 )}
                 <AnimatePresence initial={false}>
-                    {isAllCaughtUp && <AllCaughtUpBanner />}
+                    {/* AllCaughtUpBanner will manage unmounting internally for animations */}
+                    <AllCaughtUpBanner />
                 </AnimatePresence>
                 {error && <ServerErrorBanner />}
             </Scroller>

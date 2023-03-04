@@ -7,9 +7,10 @@ import useCurrentListId from '@hooks/useCurrentListId';
 
 interface Props {
     isHidden: boolean;
+    isAbsolute: boolean;
 }
 
-const AddTask = function ({ isHidden }: Props) {
+const AddTask = function ({ isHidden, isAbsolute }: Props) {
     const currentListId = useCurrentListId();
     const [invalid, setInvalid] = useState(false);
     const createTask = useCreateTask();
@@ -38,7 +39,11 @@ const AddTask = function ({ isHidden }: Props) {
     );
 
     return (
-        <Container isHidden={isHidden} onSubmit={onSubmit}>
+        <Container
+            isAbsolute={isAbsolute}
+            isHidden={isHidden}
+            onSubmit={onSubmit}
+        >
             <Input
                 ref={inputRef}
                 invalid={invalid}
