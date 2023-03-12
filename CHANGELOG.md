@@ -1,5 +1,9 @@
 # Changelog
 
+## v6.2.0
+
+-   Swipe the hamburger nav left or right to quickly change lists on mobile
+
 ## v6.1.0
 
 -   Add confetti animation when clearing lists (Thanks for the suggestion Emma!)
