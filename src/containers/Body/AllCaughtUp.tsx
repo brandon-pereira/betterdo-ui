@@ -63,12 +63,12 @@ export default function AllCaughtUpBanner() {
                               color(list.color).darken(0.5).hex(),
                               color(list.color).lighten(0.5).hex()
                           ]
-                        : undefined
+                        : ['#228BE6', '#66A80F', '#F03E3E', '#FAB005']
                 }
-                particleCount={300}
+                particleCount={50}
                 shapes={['square']}
-                spread={90}
-                scalar={0.8}
+                spread={80}
+                scalar={1.8}
                 fire={triggerFire}
             />
             <Banner icon={BetterDo} body="You're all caught up!" />
