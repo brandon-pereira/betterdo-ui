@@ -1,5 +1,11 @@
 # Changelog
 
+## v6.3.0
+
+-   Fix bugs when timezone banner active
+-   Ability to suppress timezone notifications
+-   Better confetti
+
 ## v6.2.0
 
 -   Swipe the hamburger nav left or right to quickly change lists on mobile
