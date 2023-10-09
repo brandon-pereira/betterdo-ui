@@ -68,13 +68,17 @@ function Body() {
 
     return (
         <Container>
-            <Scroller>
-                <NotificationBanner />
+            <NotificationBanner />
+            <Scroller
+                ref={ref => {
+                    console.log(ref);
+                    console.log(ref?.contentWrapperEl);
+                }}
+            >
                 <AddTask
                     isAbsolute={isAllCaughtUp}
                     isHidden={hideAddTaskInput}
                 />
-
                 {!error && (
                     <LayoutGroup>
                         <TaskContainer>

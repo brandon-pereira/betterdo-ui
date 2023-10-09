@@ -1,19 +1,15 @@
-import { useState } from 'react';
-
 import _NotificationBanner from '@components/NotificationBanner';
 import usePushNotifications from '@hooks/usePushNotifications';
 import useInstall from '@hooks/useInstall';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useListDetails from '@hooks/useListDetails';
-import useProfile from '@hooks/useProfile';
 import useDarkMode from '@hooks/useDarkMode';
 import { getTimeZone } from '@utilities/timezones';
 import useModifyProfile from '@hooks/useModifyProfile';
+import useTimezones from '@hooks/useTimezones';
 
 function NotificationBanner() {
-    const [suppressTimeZoneBanner, setSuppressTimeZoneBanner] = useState(false);
     const modifyProfile = useModifyProfile();
-    const { profile } = useProfile();
     const currentListId = useCurrentListId();
     const [darkMode, setPrefersDarkMode] = useDarkMode();
     const { list, loading, error } = useListDetails(currentListId);
@@ -24,6 +20,7 @@ function NotificationBanner() {
     } = usePushNotifications();
     const { onRequestInstall, onDeclineInstall, isInstallAvailable } =
         useInstall();
+    const { isTimezoneChanged, setDismissed } = useTimezones();
 
     if (isInstallAvailable) {
         return (
@@ -76,12 +73,7 @@ function NotificationBanner() {
     const localTimeZone = getTimeZone(
         Intl.DateTimeFormat().resolvedOptions().timeZone
     ).name;
-    const serverTimeZone = profile?.timeZone;
-    if (
-        !suppressTimeZoneBanner &&
-        serverTimeZone &&
-        localTimeZone !== serverTimeZone
-    ) {
+    if (isTimezoneChanged) {
         return (
             <_NotificationBanner
                 title="Timezone Changed"
@@ -91,7 +83,7 @@ function NotificationBanner() {
                     modifyProfile({ timeZone: localTimeZone })
                 }
                 secondaryButtonCopy="Dismiss"
-                secondaryButtonAction={() => setSuppressTimeZoneBanner(true)}
+                secondaryButtonAction={() => setDismissed(true)}
             />
         );
     }
