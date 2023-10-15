@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
 import useLocalStorage from './useLocalStorage';
 import useProfile from './useProfile';
+
 import { getTimeZone } from '@utilities/timezones';
 
 function useTimezones() {
