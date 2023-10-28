@@ -5,6 +5,7 @@
 -   [Internal] Change Hosting Provider
 -   [Internal] Update Dependencies
 -   [Internal] Remove Babel from build process
+-   [Internal] Bump node to 18
 
 ## v6.3.0
 
