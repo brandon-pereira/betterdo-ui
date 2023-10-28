@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import _Banner from '@components/Banner';
 import _Scroller from '@components/Scroller';

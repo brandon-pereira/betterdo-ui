@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import _Loader from '@components/Loader';
 
@@ -37,7 +37,8 @@ export const Checkbox = styled.input`
         transform: scale(1);
     }
     &:focus-visible {
-        box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.general.blue},
+        box-shadow:
+            0 0 0 2px ${({ theme }) => theme.colors.general.blue},
             inset 0 0 0 1px rgba(0, 0, 0, 0.2);
     }
 `;

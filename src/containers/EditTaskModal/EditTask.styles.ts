@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { TextArea } from '@components/Forms';
 import _ProfilePic from '@components/ProfilePic';
@@ -35,7 +35,8 @@ export const CreatorBlock = styled.div`
     align-items: center;
     margin-bottom: 5rem;
     background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1));
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2),
+    box-shadow:
+        inset 0 0 0 1px rgba(0, 0, 0, 0.2),
         inset 0 2px rgba(255, 255, 255, 0.2);
     padding: 1rem;
     border-radius: 3px;

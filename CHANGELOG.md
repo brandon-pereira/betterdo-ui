@@ -1,5 +1,11 @@
 # Changelog
 
+## v6.4.0
+
+-   [Internal] Change Hosting Provider
+-   [Internal] Update Dependencies
+-
+
 ## v6.3.0
 
 -   Fix bugs when timezone banner active

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { DEFAULT_LIST_COLOR } from '../../constants';
 

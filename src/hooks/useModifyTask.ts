@@ -82,6 +82,6 @@ const updateTaskInList =
                       return task;
                   })
                 : []
-        } as List);
+        }) as List;
 
 export default useModifyTask;

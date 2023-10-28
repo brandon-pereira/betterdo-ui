@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 const _Input = styled.input<{ invalid?: boolean }>`
     appearance: none;

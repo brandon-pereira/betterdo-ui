@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useLayoutEffect } from 'react';
 import loadable from '@loadable/component';
-import { CSSProp } from 'styled-components';
 
 import { MEDIUM } from '../../constants';
 
@@ -113,7 +112,7 @@ function AddListModalContainer({ isOpen }: Props) {
     );
 }
 
-const toStyleString = (styles: CSSProp) =>
+const toStyleString = (styles: Record<string, string | number>) =>
     Object.entries(styles)
         .map(([k, v]) => `${k}:${v}`)
         .join(';');

@@ -5,10 +5,6 @@ module.exports = {
     plugins: ['@typescript-eslint', 'react', 'import', 'prettier'],
     parser: '@typescript-eslint/parser',
     parserOptions: {
-        requireConfigFile: false,
-        babelOptions: {
-            presets: ['@babel/preset-react']
-        },
         ecmaFeatures: {
             jsx: true
         }

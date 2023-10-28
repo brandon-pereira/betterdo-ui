@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 const Header = styled.h2`
     color: ${props => props.color || props.theme.colors.general.blue};

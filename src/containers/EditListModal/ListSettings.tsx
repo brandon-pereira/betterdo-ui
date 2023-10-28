@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import Button from '@components/Button';
 import { Form, Label, Input } from '@components/Forms';

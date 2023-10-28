@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import SimpleBar from 'simplebar-react';
 
 export default styled(SimpleBar)`

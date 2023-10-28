@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import Button from '@components/Button';
 import { Form, Label, Input } from '@components/Forms';
@@ -54,7 +54,6 @@ function ListMembers() {
     const currentListId = useCurrentListId();
     const modifyList = useModifyList();
     const { list } = useListDetails(currentListId);
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const [members, setMembers] = useState(list.members!);
 
     const removeMember = useCallback(

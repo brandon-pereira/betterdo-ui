@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { DEFAULT_LIST_COLOR } from '../../constants';
 
@@ -46,7 +46,8 @@ export const DotIcon = styled.div`
     background-color: ${props =>
         props.color ? props.color : DEFAULT_LIST_COLOR};
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.2));
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5),
+    box-shadow:
+        inset 0 0 0 1px rgba(0, 0, 0, 0.5),
         0 1px 10px rgba(0, 0, 0, 0.4);
     border-radius: 50%;
 `;
@@ -56,7 +57,9 @@ export const DateIcon = styled.div`
     width: 1.1rem;
     overflow: hidden;
     /* Using the 2 values on box-shadow gave me more flexibility */
-    box-shadow: inset 0 0 0 1px #fff, inset 0 -3px 0 1px #fff;
+    box-shadow:
+        inset 0 0 0 1px #fff,
+        inset 0 -3px 0 1px #fff;
     font-weight: 800;
     font-size: 12px;
     /* height of container - bottom border */

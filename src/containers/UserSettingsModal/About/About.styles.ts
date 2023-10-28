@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import _BetterDo from '@components/Icon/svgs/betterdo.svg';
 

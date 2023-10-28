@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { Input as _Input } from '@components/Forms';
 import _Icon from '@components/Icon';
@@ -85,7 +85,8 @@ export const Checkbox = styled.input`
         background: linear-gradient(#333, #666);
     }
     &:focus-visible {
-        box-shadow: inset 0 0 0 2px #fff,
+        box-shadow:
+            inset 0 0 0 2px #fff,
             0 0 0 2px ${({ theme }) => theme.colors.general.blue};
     }
 `;

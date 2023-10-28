@@ -1,4 +1,4 @@
-import styled, { CSSProperties } from 'styled-components';
+import { styled, CSSProperties } from 'styled-components';
 
 import _Loader from '@components/Loader';
 
@@ -25,7 +25,9 @@ export const StyledButton = styled.button.attrs(({ color, theme }) => {
     outline: none;
     display: ${({ hidden }) => (hidden ? 'none' : 'inline-flex')};
     align-items: center;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    box-shadow:
+        0 3px 6px rgba(0, 0, 0, 0.16),
+        0 3px 6px rgba(0, 0, 0, 0.23);
     &:before {
         content: '';
         opacity: 0;

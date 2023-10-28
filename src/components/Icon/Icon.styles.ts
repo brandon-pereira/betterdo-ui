@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 export const IconContainer = styled.div<{ size?: string }>`
     height: ${props => props.size || '1rem'};

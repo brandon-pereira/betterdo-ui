@@ -46,7 +46,7 @@ function useSwitchList() {
                     ({
                         ...nextList,
                         ...list
-                    } as Partial<List>),
+                    }) as Partial<List>,
                 false
             );
             // turn off completed tasks view

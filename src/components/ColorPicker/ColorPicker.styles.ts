@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import _Icon from '@components/Icon';
 
@@ -7,8 +7,10 @@ export const Container = styled.div`
     height: 3rem;
     overflow: hidden;
     border-radius: 50px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14),
-        0 3px 3px -2px rgba(0, 0, 0, 0.12), 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow:
+        0 3px 4px 0 rgba(0, 0, 0, 0.14),
+        0 3px 3px -2px rgba(0, 0, 0, 0.12),
+        0 1px 8px 0 rgba(0, 0, 0, 0.2);
 `;
 
 export const Icon = styled(_Icon)`

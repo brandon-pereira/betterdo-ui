@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import useCurrentListId from '@hooks/useCurrentListId';
 import useLists from '@hooks/useLists';
@@ -10,7 +10,9 @@ const Bar = styled.div`
     width: 100%;
     background: currentColor;
     border-radius: 3px;
-    transition: transform 0.4s, opacity 0.2s;
+    transition:
+        transform 0.4s,
+        opacity 0.2s;
     &:nth-of-type(1) {
         transform-origin: top left;
     }

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import BaseReactCanvasConfetti from 'react-canvas-confetti';
 import color from 'color';
 import { useEffect, useRef, useState } from 'react';

@@ -1,6 +1,6 @@
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import randomColor from 'randomcolor';
-import styled, { useTheme } from 'styled-components';
+import { styled, useTheme } from 'styled-components';
 
 import Button from '@components/Button';
 import { Body, Header } from '@components/Copy';

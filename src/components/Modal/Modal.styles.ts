@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import { motion } from 'framer-motion';
 import _FocusLock from 'react-focus-lock';
 
