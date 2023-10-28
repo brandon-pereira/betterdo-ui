@@ -29,8 +29,8 @@ const _Input = styled.input<{ $invalid?: boolean }>`
     &::placeholder {
         color: #aaa;
     }
-    ${({ theme, invalid }) =>
-        invalid &&
+    ${({ theme, $invalid }) =>
+        $invalid &&
         `
       box-shadow: inset 0 0 0 2px ${theme.colors.general.red} !important;
     `};
@@ -70,8 +70,8 @@ const TextArea = styled.textarea<{ $invalid?: boolean }>`
     &::placeholder {
         color: #aaa;
     }
-    ${({ theme, invalid }) =>
-        invalid &&
+    ${({ theme, $invalid }) =>
+        $invalid &&
         `
     box-shadow: inset 0 0 0 2px ${theme.colors.general.red} !important;
     `};
