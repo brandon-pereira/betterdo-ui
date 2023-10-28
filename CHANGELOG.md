@@ -4,7 +4,7 @@
 
 -   [Internal] Change Hosting Provider
 -   [Internal] Update Dependencies
--
+-   [Internal] Remove Babel from build process
 
 ## v6.3.0
 
