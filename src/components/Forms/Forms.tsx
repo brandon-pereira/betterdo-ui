@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { styled } from 'styled-components';
 
-const _Input = styled.input<{ invalid?: boolean }>`
+const _Input = styled.input<{ $invalid?: boolean }>`
     appearance: none;
     background: ${({ theme }) => theme.colors.forms.input.background};
     width: ${props => props.width || '100%'};
@@ -50,7 +50,7 @@ const Label = styled.label`
     display: block;
 `;
 
-const TextArea = styled.textarea<{ invalid?: boolean }>`
+const TextArea = styled.textarea<{ $invalid?: boolean }>`
     box-shadow: ${({ theme }) => theme.colors.forms.input.boxShadow};
     color: ${({ theme }) => theme.colors.forms.input.color};
     background: ${({ theme }) => theme.colors.forms.input.background};
@@ -104,8 +104,8 @@ const Input = forwardRef<
             React.InputHTMLAttributes<HTMLInputElement>,
             HTMLInputElement
         >
->((props, ref) => (
-    <_Input {...props} ref={ref} aria-label={props.placeholder} />
+>(({ placeholder, invalid, ...props }, ref) => (
+    <_Input {...props} ref={ref} aria-label={placeholder} $invalid={invalid} />
 ));
 Input.displayName = 'Input';
 

@@ -22,7 +22,7 @@ export const Loader = styled(_Loader)`
     margin-left: 0.5rem;
 `;
 
-export const Container = styled.header<{ isDarkColor: boolean }>`
+export const Container = styled.header<{ $isDarkColor: boolean }>`
     grid-row: 3;
     grid-column: 1;
     background-color: ${({ color }) => color || DEFAULT_LIST_COLOR};
@@ -35,8 +35,8 @@ export const Container = styled.header<{ isDarkColor: boolean }>`
     overflow: hidden;
     transform: translateY(0%);
     transition: background 0.6s;
-    ${({ isDarkColor }) =>
-        isDarkColor &&
+    ${({ $isDarkColor }) =>
+        $isDarkColor &&
         `
         color: #fff;
     `}

@@ -42,7 +42,7 @@ function Navigation() {
     );
 
     return (
-        <Container isMobileNavVisible={isMobileNavVisible}>
+        <Container $isMobileNavVisible={isMobileNavVisible}>
             <Scroller>
                 <ListsContainer>
                     <SortableList lists={lists} onSortEnd={onSortEnd} />

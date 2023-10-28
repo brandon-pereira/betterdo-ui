@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const _Container = styled.div<{ isMobileNavVisible: boolean }>`
+export const _Container = styled.div<{ $isMobileNavVisible: boolean }>`
     width: 100vw;
     height: 100vh;
     display: grid;
@@ -9,8 +9,8 @@ export const _Container = styled.div<{ isMobileNavVisible: boolean }>`
     transition:
         grid-template-columns 0.2s,
         grid-template-rows 0.2s;
-    ${({ isMobileNavVisible }) =>
-        isMobileNavVisible &&
+    ${({ $isMobileNavVisible }) =>
+        $isMobileNavVisible &&
         `
         grid-template-columns: 1fr 0;
         grid-template-rows: 4rem 60vh 4rem 1fr;  

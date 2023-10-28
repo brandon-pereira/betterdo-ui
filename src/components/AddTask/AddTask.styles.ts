@@ -8,12 +8,12 @@ export const Input = styled(FormInput)`
 `;
 
 export const Container = styled.form<{
-    isHidden?: boolean;
-    isAbsolute?: boolean;
+    $isHidden?: boolean;
+    $isAbsolute?: boolean;
 }>`
     padding: 1rem 1rem 0.8rem;
-    ${({ isHidden }) =>
-        isHidden &&
+    ${({ $isHidden }) =>
+        $isHidden &&
         `
         margin-bottom: 1rem;
         padding: 0;
@@ -21,8 +21,8 @@ export const Container = styled.form<{
             display: none;
         }
     `}
-    ${({ isAbsolute }) =>
-        isAbsolute &&
+    ${({ $isAbsolute }) =>
+        $isAbsolute &&
         `position: absolute;
         top: 0;
         left: 0;

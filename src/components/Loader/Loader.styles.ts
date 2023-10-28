@@ -23,7 +23,7 @@ const dashoffset = keyframes`
     }
 `;
 
-export const Loader = styled.div<{ isVisible?: boolean; size?: string }>`
+export const Loader = styled.div<{ $isVisible?: boolean; $size?: string }>`
     height: 0;
     width: 0;
     transform: scale(0);
@@ -47,13 +47,13 @@ export const Loader = styled.div<{ isVisible?: boolean; size?: string }>`
         stroke: ${props => props.color || '#fff'};
         animation: ${dashoffset} 2s linear infinite;
     }
-    ${({ isVisible, size }) =>
-        isVisible &&
+    ${({ $isVisible, $size }) =>
+        $isVisible &&
         `
         transition: all 0s 0s, width 0.2s !important;
         transform: scale(1);
         opacity: 1;
-        height: ${size || '1rem'};
-        width: ${size || '1rem'};
+        height: ${$size || '1rem'};
+        width: ${$size || '1rem'};
     `};
 `;

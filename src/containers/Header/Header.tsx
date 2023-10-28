@@ -24,7 +24,7 @@ function Header() {
     const isDarkColor = color(list.color).isDark();
 
     return (
-        <Container isDarkColor={isDarkColor} color={list.color}>
+        <Container $isDarkColor={isDarkColor} color={list.color}>
             <Hamburger
                 open={isMobileNavVisible}
                 hidden={isMobileNavVisible}

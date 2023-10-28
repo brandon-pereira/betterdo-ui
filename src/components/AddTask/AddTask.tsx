@@ -40,8 +40,8 @@ const AddTask = function ({ isHidden, isAbsolute }: Props) {
 
     return (
         <Container
-            isAbsolute={isAbsolute}
-            isHidden={isHidden}
+            $isAbsolute={isAbsolute}
+            $isHidden={isHidden}
             onSubmit={onSubmit}
         >
             <Input

@@ -10,7 +10,7 @@ export const NavigationModalOverlay = styled.div`
     opacity: 0;
 `;
 
-export const Container = styled.nav<{ isMobileNavVisible?: boolean }>`
+export const Container = styled.nav<{ $isMobileNavVisible?: boolean }>`
     display: flex;
     background: ${({ theme }) => theme.colors.navigation.background};
     flex-direction: column;
@@ -23,8 +23,8 @@ export const Container = styled.nav<{ isMobileNavVisible?: boolean }>`
     grid-row: 2;
     max-height: 100%;
     pointer-events: none;
-    ${({ isMobileNavVisible }) =>
-        isMobileNavVisible &&
+    ${({ $isMobileNavVisible }) =>
+        $isMobileNavVisible &&
         `
         pointer-events: all;
         ${NavigationModalOverlay} {

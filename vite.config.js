@@ -8,7 +8,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
     plugins: [
-        svgr({ exportAsDefault: true }),
+        svgr({ include: '**/*.svg' }),
         react(),
         markdown({ mode: 'html' }),
         VitePWA({
