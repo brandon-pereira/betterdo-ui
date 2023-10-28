@@ -13,10 +13,11 @@ jobs:
         env:
             NODE_ENV: test
         steps:
-            - uses: actions/checkout@v2
-            - run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+            - uses: actions/checkout@v4
+            - run: echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_OUTPUT
               id: nvm
-            - uses: actions/setup-node@v2
+            - name: Setup Environment
+              uses: actions/setup-node@v3
               with:
                   node-version: '${{ steps.nvm.outputs.NVMRC }}'
             - run: npm install

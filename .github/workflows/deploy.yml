@@ -3,6 +3,7 @@ on:
     push:
         branches:
             - master
+
 jobs:
     deploy:
         name: Deploy
@@ -16,8 +17,8 @@ jobs:
                   username: ${{ secrets.SSH_USERNAME }}
                   script_stop: true
                   script: |
-                      cd www/betterdo-ui
+                      cd /home/www/betterdo-ui
                       git checkout .
                       git pull
-                      npm install --production=false
+                      npm install
                       npm run build
