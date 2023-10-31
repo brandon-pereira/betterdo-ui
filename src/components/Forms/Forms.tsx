@@ -105,7 +105,13 @@ const Input = forwardRef<
             HTMLInputElement
         >
 >(({ placeholder, invalid, ...props }, ref) => (
-    <_Input {...props} ref={ref} aria-label={placeholder} $invalid={invalid} />
+    <_Input
+        {...props}
+        ref={ref}
+        aria-label={placeholder}
+        placeholder={placeholder}
+        $invalid={invalid}
+    />
 ));
 Input.displayName = 'Input';
 
