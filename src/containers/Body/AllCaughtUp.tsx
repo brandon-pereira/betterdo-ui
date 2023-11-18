@@ -30,7 +30,7 @@ const ReactCanvasConfetti = styled(BaseReactCanvasConfetti)`
 
 export default function AllCaughtUpBanner() {
     const currentListId = useCurrentListId();
-    const { list } = useListDetails(currentListId);
+    const { error, list } = useListDetails(currentListId);
     const prevTaskLength = useRef(list?.tasks?.length || 0);
     const prevListId = useRef(list?._id);
     const [triggerFire, setState] = useState(0);
@@ -49,7 +49,7 @@ export default function AllCaughtUpBanner() {
         prevTaskLength.current = list?.tasks?.length || 0;
     }, [list]);
 
-    if (list.tasks?.length !== 0) {
+    if (list.tasks?.length !== 0 || error) {
         return null;
     }
 
