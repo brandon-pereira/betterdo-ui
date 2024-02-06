@@ -16,6 +16,5 @@
         }
     ],
     "display": "standalone",
-    "scope": "https://betterdo.app/app/",
-    "theme_color": "#666666"
+    "scope": "https://betterdo.app/app/"
 }
