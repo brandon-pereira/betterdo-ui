@@ -1,7 +1,13 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import randomColor from 'randomcolor';
 
-import { Icon, Container, Color, LabelContainer } from './ColorPicker.styles';
+import {
+    Icon,
+    Container,
+    Color,
+    LabelContainer,
+    TooltipContainer
+} from './ColorPicker.styles';
 
 import Refresh from '@components/Icon/svgs/refresh.svg';
 import Eyedropper from '@components/Icon/svgs/eyedropper.svg';
@@ -67,6 +73,8 @@ function ColorPicker({ value, onChange }: Props) {
                 e.preventDefault();
             }
             if (inputColorRef.current) {
+                console.log('HERE');
+                inputColorRef.current.focus();
                 inputColorRef.current.click();
             }
         },
@@ -99,28 +107,41 @@ function ColorPicker({ value, onChange }: Props) {
                 >
                     Refresh Palette
                 </Icon>
-                <Icon
-                    size="1rem"
-                    icon={Eyedropper}
-                    color="currentColor"
-                    onClick={onLaunchPicker}
-                >
-                    Pick a colour
-                </Icon>
+                <TooltipContainer>
+                    <Icon
+                        size="1rem"
+                        icon={Eyedropper}
+                        color="currentColor"
+                        onClick={onLaunchPicker}
+                    >
+                        Pick a colour
+                    </Icon>
+                    <input
+                        ref={inputColorRef}
+                        value={palette[index]}
+                        onChange={e => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            if (
+                                inputColorRef.current &&
+                                inputColorRef.current.value
+                            ) {
+                                onChangeColorFromPicker(
+                                    inputColorRef.current.value
+                                );
+                            }
+                        }}
+                        type="color"
+                        style={{
+                            position: 'absolute',
+                            visibility: 'hidden',
+                            left: '50%',
+                            transform: 'translateX(-50%)'
+                        }}
+                    />
+                </TooltipContainer>
             </LabelContainer>
-            <input
-                ref={inputColorRef}
-                value={palette[index]}
-                onChange={e => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (inputColorRef.current && inputColorRef.current.value) {
-                        onChangeColorFromPicker(inputColorRef.current.value);
-                    }
-                }}
-                type="color"
-                style={{ display: 'none' }}
-            />
+
             <Container ref={colorPaletteRef}>
                 {palette.map((color, idx) => (
                     <Color

@@ -45,6 +45,14 @@ export const Color = styled.button.attrs(props => ({
     `};
 `;
 
+export const TooltipContainer = styled.div`
+    position: relative;
+    height: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 export const LabelContainer = styled.div`
     display: flex;
     margin-bottom: 0.5rem;
