@@ -27,6 +27,8 @@ export const GlobalStyles = createGlobalStyle`
             Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
         margin: 0;
         overflow: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
         &.loaded {
             .loader {
                 display: none;
