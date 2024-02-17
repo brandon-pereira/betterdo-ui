@@ -10,7 +10,7 @@ export default defineConfig({
     plugins: [
         svgr({ include: '**/*.svg' }),
         react(),
-        markdown({ mode: 'html' }),
+        markdown.plugin({ mode: markdown.Mode.HTML }),
         VitePWA({
             strategies: 'injectManifest',
             srcDir: 'src',
