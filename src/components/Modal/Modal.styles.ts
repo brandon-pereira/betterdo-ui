@@ -4,7 +4,7 @@ import _FocusLock from 'react-focus-lock';
 
 import Icon from '@components/Icon';
 
-export const Overlay = styled.div<{ visible: boolean }>`
+export const Overlay = styled.div<{ $isVisible: boolean }>`
     position: fixed;
     top: 0;
     left: 0;
@@ -17,7 +17,7 @@ export const Overlay = styled.div<{ visible: boolean }>`
     background: ${({ theme }) => theme.colors.modals.overlayBackground};
     backdrop-filter: blur(3px);
     ${props =>
-        !props.visible &&
+        !props.$isVisible &&
         `
         visibility: hidden;
         pointer-events: none;
@@ -59,16 +59,16 @@ export const Container = styled(motion.div)<{
 `;
 
 export const ContentContainer = styled.div<{
-    height: number | 'auto';
-    disableHeightAnimation?: boolean;
+    $height: number | 'auto';
+    $disableHeightAnimation?: boolean;
 }>`
     overflow: hidden;
     height: ${props => {
-        if (props.disableHeightAnimation) {
+        if (props.$disableHeightAnimation) {
             return '100%';
         }
-        return typeof props.height === 'number' && props.height !== 0
-            ? `${props.height}px`
+        return typeof props.$height === 'number' && props.$height !== 0
+            ? `${props.$height}px`
             : `auto`;
     }};
     transition: height 0.1s;
@@ -88,7 +88,7 @@ export const ModalClose = styled(Icon)`
     filter: drop-shadow(0 1px #555);
 `;
 
-export const Content = styled.div<{ disableHeightAnimation?: boolean }>`
+export const Content = styled.div<{ $disableHeightAnimation?: boolean }>`
     position: relative;
     z-index: 2;
     padding: 1rem;
@@ -97,7 +97,7 @@ export const Content = styled.div<{ disableHeightAnimation?: boolean }>`
     box-sizing: border-box;
     overflow: auto;
     ${props =>
-        props.disableHeightAnimation &&
+        props.$disableHeightAnimation &&
         `
      height: 100%;
     `}

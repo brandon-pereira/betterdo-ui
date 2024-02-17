@@ -73,7 +73,6 @@ function ColorPicker({ value, onChange }: Props) {
                 e.preventDefault();
             }
             if (inputColorRef.current) {
-                console.log('HERE');
                 inputColorRef.current.focus();
                 inputColorRef.current.click();
             }
@@ -149,7 +148,7 @@ function ColorPicker({ value, onChange }: Props) {
                         key={color}
                         onClick={() => onChangeColor(color)}
                         color={color}
-                        isCurrent={index === idx}
+                        $isCurrent={index === idx}
                     />
                 ))}
             </Container>

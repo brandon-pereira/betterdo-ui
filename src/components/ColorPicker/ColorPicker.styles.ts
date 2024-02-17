@@ -21,7 +21,7 @@ export const Color = styled.button.attrs(props => ({
     style: {
         backgroundColor: props.color
     }
-}))<{ isCurrent?: boolean }>`
+}))<{ $isCurrent?: boolean }>`
     border: none;
     outline: none;
     flex: 1;
@@ -39,7 +39,7 @@ export const Color = styled.button.attrs(props => ({
         border-radius: 0 50px 50px 0;
     }
     ${props =>
-        props.isCurrent &&
+        props.$isCurrent &&
         `
         box-shadow: inset 0 0 0 5px ${props.theme.colors.general.blue};
     `};

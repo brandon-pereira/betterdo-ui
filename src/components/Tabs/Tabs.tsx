@@ -25,7 +25,7 @@ function Tabs({ selectedIndex, onChange, color, children, titles }: Props) {
                     {titles.map((title, index) => (
                         <TabHeaderItem
                             key={index}
-                            selected={selectedIndex === index}
+                            $selected={selectedIndex === index}
                             onClick={() => onChange(index)}
                             color={color}
                         >
@@ -45,8 +45,7 @@ function Tabs({ selectedIndex, onChange, color, children, titles }: Props) {
             <TabsBody>
                 {Children.map(children, (value, index) => {
                     return cloneElement(value, {
-                        index,
-                        selected: index === selectedIndex
+                        $selected: index === selectedIndex
                     });
                 })}
             </TabsBody>

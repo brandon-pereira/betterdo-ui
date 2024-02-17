@@ -1,6 +1,8 @@
 import { Colord, colord, extend } from 'colord';
 import a11yPlugin from 'colord/plugins/a11y';
 
+import { DEFAULT_LIST_COLOR } from '../constants';
+
 extend([a11yPlugin]);
 
 export function checkIfColorGoodContrast(
@@ -18,7 +20,9 @@ export function getAccessibleAccent(color: string | Colord) {
     if (typeof color === 'string') {
         color = colord(color);
     }
-    console.log(color.toHex());
+    if (!color) {
+        return colord(DEFAULT_LIST_COLOR);
+    }
     const isDarkMode = window.matchMedia(
         '(prefers-color-scheme: dark)'
     ).matches;

@@ -47,9 +47,9 @@ const Task = forwardRef<HTMLButtonElement, Props>(
         return (
             <Container
                 ref={ref}
-                isLoading={isLoading}
+                $isLoading={isLoading}
                 onClick={onEditTask}
-                priority={priority}
+                $priority={priority}
                 {...containerProps}
             >
                 {isLoading ? (

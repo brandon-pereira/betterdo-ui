@@ -25,7 +25,7 @@ export const ActiveTabHeaderBackground = styled(motion.div)<{
     background-color: ${props =>
         props.color || props.theme.colors.general.blue};
 `;
-export const TabHeaderItem = styled.button<{ selected: boolean }>`
+export const TabHeaderItem = styled.button<{ $selected: boolean }>`
     border: none;
     background: none;
     font: inherit;
@@ -40,7 +40,7 @@ export const TabHeaderItem = styled.button<{ selected: boolean }>`
     color: ${props => props.color || props.theme.colors.general.blue};
     outline: none;
     ${props =>
-        props.selected &&
+        props.$selected &&
         `
         color: #fff;
         cursor: default;
@@ -54,10 +54,10 @@ export const TabHeaderItem = styled.button<{ selected: boolean }>`
 `;
 
 export const TabsBody = styled.div``;
-export const TabBodyItem = styled.div<{ selected?: boolean }>`
+export const TabBodyItem = styled.div<{ $selected?: boolean }>`
     display: none;
     ${props =>
-        props.selected &&
+        props.$selected &&
         `
         display: block;
     `}

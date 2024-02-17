@@ -72,8 +72,8 @@ export const HighPriorityFlag = styled.div`
 `;
 
 export const Container = styled.button<{
-    isLoading?: boolean;
-    priority: 'low' | 'normal' | 'high';
+    $isLoading?: boolean;
+    $priority: 'low' | 'normal' | 'high';
 }>`
     display: block;
     border: none;
@@ -94,13 +94,13 @@ export const Container = styled.button<{
     z-index: 0;
     position: relative;
     ${props =>
-        props.isLoading &&
+        props.$isLoading &&
         `
         opacity: 0.5;
         pointer-events: none;
     `}
-    ${({ priority, theme }) =>
-        priority === 'low' &&
+    ${({ $priority, theme }) =>
+        $priority === 'low' &&
         `
         background: ${theme.colors.task.lowPriority.background};
         box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
