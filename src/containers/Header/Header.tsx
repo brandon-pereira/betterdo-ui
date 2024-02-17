@@ -1,5 +1,3 @@
-import color from 'color';
-
 import {
     Container,
     Hamburger,
@@ -14,6 +12,7 @@ import useEditListModal from '@hooks/useEditListModal';
 import useListDetails from '@hooks/useListDetails';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useHamburgerNav from '@hooks/useHamburgerNav';
+import { getAccessibleAccent } from '@utilities/colors';
 
 function Header() {
     const [isMobileNavVisible, setMobileNavVisibility] = useHamburgerNav();
@@ -21,10 +20,11 @@ function Header() {
     const { openModal: openEditListModal } = useEditListModal();
     const currentListId = useCurrentListId();
     const { list, loading } = useListDetails(currentListId);
-    const isDarkColor = color(list.color).isDark();
+    const color = getAccessibleAccent(list.color!);
+    const isDarkColor = color.isDark();
 
     return (
-        <Container $isDarkColor={isDarkColor} color={list.color}>
+        <Container $isDarkColor={isDarkColor} color={color.toHex()}>
             <Hamburger
                 open={isMobileNavVisible}
                 hidden={isMobileNavVisible}

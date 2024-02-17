@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 import BaseReactCanvasConfetti from 'react-canvas-confetti';
-import color from 'color';
+import { colord } from 'colord';
 import { useEffect, useRef, useState } from 'react';
 
 import BetterDo from '@components/Icon/svgs/betterdo.svg';
@@ -60,8 +60,8 @@ export default function AllCaughtUpBanner() {
                     list?.color && list?.type === 'default'
                         ? [
                               list.color,
-                              color(list.color).darken(0.5).hex(),
-                              color(list.color).lighten(0.5).hex()
+                              colord(list.color).darken(0.5).toHex(),
+                              colord(list.color).lighten(0.5).toHex()
                           ]
                         : ['#228BE6', '#66A80F', '#F03E3E', '#FAB005']
                 }

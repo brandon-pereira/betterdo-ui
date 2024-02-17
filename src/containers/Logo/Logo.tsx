@@ -7,6 +7,7 @@ import useProfile from '@hooks/useProfile';
 import useCurrentListId from '@hooks/useCurrentListId';
 import useGeneratedUrl from '@hooks/useGeneratedUrl';
 import useHamburgerNav from '@hooks/useHamburgerNav';
+import { getAccessibleAccent } from '@utilities/colors';
 
 function Logo() {
     const [isMobileNavVisible, setMobileNavVisibility] = useHamburgerNav();
@@ -16,8 +17,9 @@ function Logo() {
     const { profile } = useProfile();
     const currentListId = useCurrentListId();
     const { list } = useListDetails(currentListId);
+    const color = getAccessibleAccent(list.color!);
     return (
-        <Container color={list.color}>
+        <Container color={color.toHex()}>
             <Content>
                 <Hamburger
                     open={isMobileNavVisible}

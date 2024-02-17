@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.5.0 - BETA
+
+-   Add support for Safari "Add to Dock" feature
+-   Add support for themed Safari colors
+-   Bump Dependencies (WIP)
+
 ## v6.4.0
 
 -   [Internal] Change Hosting Provider
