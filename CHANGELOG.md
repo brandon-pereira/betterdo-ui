@@ -4,7 +4,7 @@
 
 -   Add support for Safari "Add to Dock" feature
 -   Add support for themed Safari colors
--   Bump Dependencies (WIP)
+-   Bump Dependencies
 
 ## v6.4.0
 
