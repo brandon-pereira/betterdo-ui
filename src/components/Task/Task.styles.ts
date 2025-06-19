@@ -93,6 +93,7 @@ export const Container = styled.button<{
     flex-shrink: 0;
     z-index: 0;
     position: relative;
+    content-visibility: auto;
     ${props =>
         props.$isLoading &&
         `

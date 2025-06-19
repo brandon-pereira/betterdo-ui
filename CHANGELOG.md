@@ -1,5 +1,9 @@
 # Changelog
 
+## v6.5.1
+
+-   Improve performance of large lists by using `content-visibility: auto`
+
 ## 6.5.0
 
 -   Add support for Safari "Add to Dock" feature

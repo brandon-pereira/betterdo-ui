@@ -1,6 +1,6 @@
 {
     "name": "betterdo-ui",
-    "version": "6.5.0",
+    "version": "6.5.1",
     "type": "module",
     "description": "Frontend for BetterDo",
     "repository": "https://github.com/brandon-pereira/betterdo-ui",
