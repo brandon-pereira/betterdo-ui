@@ -1,3 +1,7 @@
+# ⚠️ Deprecated
+
+This repository is no longer maintained. We have migrated to a monorepo containing all BetterDo projects. Please refer to the new repository at [betterdo](https://github.com/brandon-pereira/betterdo).
+
 # betterdo-ui
 
 The frontend for BetterDo. This repository contains the frontend user interface for the app.
